@@ -1,0 +1,21 @@
+- A user should be able to log in
+- A user should be able to sign up
+- A user should be able to view their properties
+- A user should be able to add a new property
+- A user should be able to edit a property
+- A user should be able to delete a property
+- A user should be able to add property notes
+- A user should be able to edit property notes
+- A user should be able to delete property notes
+- A user should be able to upload documents
+- A user should be able to delete documents
+- A user should be able to view properties on a map
+- A user should be able to filter properties
+- A user should be able to drop a pin
+- A user should be able to add a new property via pin
+- A user should be able to create a to-do list
+- A user should be able to add items to a to-do list
+- A user should be able to tag properties in a to-do list
+- A user should be able to set notifications in a to-do list
+- A user should be able to see daily notifications when they log in
+- A user should be able to edit a to-do list
