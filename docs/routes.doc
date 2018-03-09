@@ -22,6 +22,10 @@ get /:id/properties/:prop_id
 patch /:id/properties/:prop_id
 delete /:id/properties/:prop_id
 
+-Property Documents
+get /get /:id/properties/:prop_id/doc
+post /:id/properties/:prop_id/doc
+
 ---------------------------------
 ***Map Properties
 -> API Call
