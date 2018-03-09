@@ -1,0 +1,38 @@
+***User Routes
+-> user signup
+post /signup
+
+-> user login
+post /login
+
+-------------------------------
+***Profile Page
+-> profile page (homepage)
+get /:id
+get /:id/notifications
+
+---------------------------------
+***Property Routes
+-> properties (Side bar list)
+get /:id/properties
+post /:id/properties
+
+-> single property page (API Call for map)
+get /:id/properties/:prop_id
+patch /:id/properties/:prop_id
+delete /:id/properties/:prop_id
+
+---------------------------------
+***Map Properties
+-> API Call
+get /:id/properties/map
+
+---------------------------------
+***To-Do List Routes
+->to-do list items
+get /:id/items
+
+-> single item
+get /:id/items/:item_id
+patch /:id/items/:item_id
+delete /:id/items/:item_id
