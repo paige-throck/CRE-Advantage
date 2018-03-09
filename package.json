@@ -1,0 +1,33 @@
+{
+  "name": "cre-advantage",
+  "version": "1.0.0",
+  "description": "A full-stack application for Commercial Real Estate Brokers that enables them to have advantage in the market and have access to maps using the Google Maps API",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paige-throck/CRE-Advantage.git"
+  },
+  "author": "Paige Throckmorton and Melissa Warren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paige-throck/CRE-Advantage/issues"
+  },
+  "homepage": "https://github.com/paige-throck/CRE-Advantage#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-mailer": "^0.3.1",
+    "knex": "^0.14.4",
+    "morgan": "^1.9.0",
+    "notifyjs": "^3.0.0",
+    "pg": "^7.4.1",
+    "vue": "^2.5.13"
+  }
+}
