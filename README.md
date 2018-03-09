@@ -11,9 +11,12 @@
 <li>Postgresql</li>
 <li>Knex</li>
 <li>Express</li>
-<li>Authentication: Passport</li>
+<li>Authentication: bcrypt</li>
 <li>Vue.js</li>
 <li>Google Places/Maps API</li>
+<li>Amazon S3 Bucket </li>
+<li>Express Mailer</li.
+<li> Notify.js</li>
 </ul>
 
 
