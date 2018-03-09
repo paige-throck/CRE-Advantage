@@ -22,5 +22,12 @@
 
 # Wireframe
 
+![alt tag](screenshots/login.png)
+![alt tag](screenshots/signup.png)
+![alt tag](screenshots/main.png)
+![alt tag](screenshots/property.png)
+![alt tag](screenshots/map.png)
+![alt tag](screenshots/tasks.png)
+
 
 # ERD
