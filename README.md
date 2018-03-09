@@ -8,7 +8,7 @@
 <li>HTML5</li>
 <li>CSS</li>
 <li>Kube</li>
-<li>Postgresql</li>
+<li>PostgreSQL</li>
 <li>Knex</li>
 <li>Express</li>
 <li>Authentication: bcrypt</li>
