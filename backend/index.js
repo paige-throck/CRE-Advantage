@@ -19,6 +19,7 @@ const expressCors = require('express-cors')
 const login = require('./routes/login')
 
 console.log('WTF');
+console.log('is this working');
 
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
