@@ -7,6 +7,9 @@ return knex.schema.createTableIfNotExists('properties', function(table){
     table.text('prop_owner');
     table.integer('num_suites');
     table.integer('prop_size');
+    table.float('lat');
+    table.float('lang');
+    table.boolean('prospective_prop').defaultTo(false);
   })
   .then(function(){
     return knex.schema.createTableIfNotExists('tasks', function(table){
