@@ -71,13 +71,13 @@ app.use(function(req, res, next) {
     next(err)
 })
 
-app.get('/', (req, res, next) => {
-    if (req.session.userID) {
-        res.redirect(`/profiles/${req.session.userID}`);
-    } else {
-        next();
-    }
-});
+// app.get('/', (req, res, next) => {
+//     if (req.session.userID) {
+//         res.redirect(`/profiles/${req.session.userID}`);
+//     } else {
+//         next();
+//     }
+// });
 
 
 app.use(function(err, req, res, next) {
