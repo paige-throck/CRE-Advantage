@@ -1,53 +1,93 @@
 'use strict';
-// Setting up express, express-session, path, and body parser.
+
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 const morgan = require('morgan');
+// const jwt = require("jsonwebtoken");
 const app = express();
-const port = process.env.PORT || 8081;
-
-// Requiring the code for the accounts, profile, properties, tasks and map routes.
-// const accountsRoute = require('./routes/accounts.js');
-// const profileRoute = require('./routes/profile.js');
-// const propertiesRoute = require('./routes/properties.js');
-// const tasksRoute = require('./routes/tasks.js');
-// const mapsRoute = require('./routes/maps.js');
+const port = process.env.PORT || 8881;
+const http = require('http');
 
 
-// Disabling the x-powered-by: Express header, for security.
-app.disable('x-powered-by');
+const cors = require('cors')
+const expressCors = require('express-cors')
 
 
-// Middleware. Body-Parser and Morgan.
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('short'));
 
-// Middleware. Setting up session.
+const login = require('./routes/login')
+
+
+
+app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, '/../', 'node_modules')))
+app.use(morgan("dev"));
+app.use(cors())
+app.use(expressCors({
+    allowedOrigins: [
+        'http://localhost:3000/'
+    ]
+}))
+
+//Setting up session
 app.use(session({
-  secret: 'commerical real estate',
-  resave: false,
-  saveUninitialized: true,
-  cookie : {
-    secure : false
-  }
+    secret: 'drinking all the wine',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: true
+    }
 }));
 
-// app.use('/accounts', accountsRoute);
-// app.use('/profile', profileRoute);
-// app.use('/properties', propertiesRoute);
-// app.use('/tasks', tasksRoute);
-// app.use('/maps', mapsRoute);
+app.all('*', function(req, res, next) {
 
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
 
-console.log('Are you working?');
-
-// Turning on listening on the specified port.
-app.listen(port, () => {
-  console.log('Listening on port', port);
 });
 
 
-module.exports = app;
+
+app.use('/login', login);
+
+
+
+app.set('port', port);
+// Create HTTP server.
+
+const server = http.createServer(app);
+
+// Listen on provided port, on all network interfaces.
+
+server.listen(port);
+
+app.use(function(req, res, next) {
+    var err = new Error('Not Found')
+    err.status = 404
+    next(err)
+})
+
+// app.get('/', (req, res, next) => {
+//     if (req.session.userID) {
+//         res.redirect(`/profiles/${req.session.userID}`);
+//     } else {
+//         next();
+//     }
+// });
+
+
+app.use(function(err, req, res, next) {
+    res.locals.message = err.message
+    res.locals.error = req.app.get('env') === 'development' ? err : {}
+    console.log(err)
+    res.status(err.status || 500)
+    res.json(err)
+})
+
+
+
+module.exports = app
