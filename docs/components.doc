@@ -1,0 +1,44 @@
+*****Views
+
+-login view
+
+-signup view
+
+-profile view
+
+  -profile single property view (edit/delete)
+    -add property
+
+  - profile tasks view (edit/delete)
+    -add task
+
+  -profile map view (all properties)
+    -link to single property (from markers)
+    -add property (current location marker)
+
+
+
+
+
+****Components
+-Login/Signup Component
+
+
+-Profile Component
+  -navbar
+    -Properties (List)
+
+  -Single property
+    -notes
+    -documents
+    -Suites
+
+  -Add property
+
+  -Tasks
+    -Add Task
+
+  -Map page
+    -Add marker/ Save marker
+
+  -Logout
