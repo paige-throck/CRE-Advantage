@@ -17,6 +17,11 @@ const expressCors = require('express-cors')
 
 
 const login = require('./routes/login')
+const signup = require('./routes/signup')
+const profile = require('./routes/profile')
+const properties = require('./routes/properties')
+const tasks = require('./routes/tasks')
+const maps = require('./routes/maps')
 
 
 
@@ -53,6 +58,11 @@ app.all('*', function(req, res, next) {
 
 
 app.use('/login', login);
+app.use('/signup', signup);
+app.use('/profile', profile);
+app.use('/properties', properties);
+app.use('/tasks', tasks);
+app.use('/maps', maps);
 
 
 
