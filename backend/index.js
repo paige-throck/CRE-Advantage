@@ -23,8 +23,7 @@ const properties = require('./routes/properties')
 const tasks = require('./routes/tasks')
 const maps = require('./routes/maps')
 
-console.log('WTF');
-console.log('is this working');
+
 
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
