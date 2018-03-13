@@ -17,6 +17,13 @@ const filterInt = function(value) {
 };
 
 
+router.get('/', function(req, res) {
+  knex('properties')
+    .then(function(results) {
+      res.send(results)
+    })
+})
+
 
 
 module.exports = router;
