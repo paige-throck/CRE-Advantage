@@ -17,8 +17,8 @@ const filterInt = function(value) {
 };
 
 router.post('/', (req, res) => {
-        console.log(req.body);
-        let newUserObj = req.body;
+console.log(req.body, 'body object');
+let newUserObj = req.body;
 
   knex.select('email').from('users').where('email', newUserObj.email)
   .then((result) => {
@@ -36,14 +36,12 @@ router.post('/', (req, res) => {
           .then(() => {
           console.log('did it work?');
           })
-          res.header("Access-Control-Allow-Methods", "*");
-          res.header("Access-Control-Allow-Origin", "*");
           })
           .then(() => {
           res.sendStatus(200);
           });
       })
-    })
+
     .catch((err) => {
     console.error(err);
     res.sendStatus(500);
