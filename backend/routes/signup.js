@@ -20,33 +20,34 @@ router.post('/', (req, res) => {
         console.log(req.body);
         let newUserObj = req.body;
 
-        knex.select('email').from('users').where('email', newUserObj.email)
-            .then((result) => {
-                if (result.length !== 0) {
-                    return res.send('Email exists');
-                }
-                return bcrypt.hash(newUserObj.password, 10, (err, hash) => {
-                        newUserObj.hashpw = hash;
-                        knex('users').returning('*').insert({
-                                name: newUserObj.name,
-                                email: newUserObj.email,
-                                password: newUserObj.hashpw
-                            })
-                            .then(() => {
-                                console.log('did it work?');
-                            })
-                        res.header("Access-Control-Allow-Methods", "*");
-                        res.header("Access-Control-Allow-Origin", "*");
-                    })
-                    .then(() => {
-                        res.sendStatus(200);
-                    });
-            })
+  knex.select('email').from('users').where('email', newUserObj.email)
+  .then((result) => {
+    if (result.length !== 0) {
+      return res.send('Email exists');
+    }
+      return bcrypt.hash(newUserObj.password, 10, (err, hash) => {
+        newUserObj.hashpw = hash;
+          knex('users').returning('*').insert({
+            name: newUserObj.name,
+            city: newUserObj.city,
+            email: newUserObj.email,
+            password: newUserObj.hashpw
+          })
+          .then(() => {
+          console.log('did it work?');
+          })
+          res.header("Access-Control-Allow-Methods", "*");
+          res.header("Access-Control-Allow-Origin", "*");
+          })
+          .then(() => {
+          res.sendStatus(200);
+          });
+      })
     })
     .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-    })
+    console.error(err);
+    res.sendStatus(500);
+  })
 });
 
 
