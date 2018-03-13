@@ -1,5 +1,5 @@
 # CRE Advantage
-<p>A full-stack application for Commercial Real Estate Brokers that enables them to have advantage in the market by keeping track of property information, property notes, daily and weekly tasks and property locations through Google Maps API.</p>
+<p>A full-stack mobile responsive application for Commercial Real Estate Brokers that gives them an advantage in the market by keeping track of property information, property notes, daily and weekly tasks and property locations through Google Maps API.</p>
 
 
 # Build Tools
