@@ -1,6 +1,9 @@
 <template>
-
-<div class="property-map" id="mapId"></div>
+<div>
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+  <div class="property-map" id="mapId">
+  </div>
+</div>
 
 </template>
 
@@ -18,13 +21,83 @@
       let markerCoordinates = []
 
       function initMap() {
+
         // create map
         let mapElement = document.getElementById('mapId')
         let options = {
           center: new google.maps.LatLng(30.2672, -97.7431),
           zoom: 8
         }
+
         let map = new google.maps.Map(mapElement, options);
+
+        // create search box
+        let input = document.getElementById('pac-input');
+        let searchBox = new google.maps.places.SearchBox(input);
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // first search results return based on the map location
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // find location entered in search box
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            //Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+            console.log(markers, 'hey markers');
+
+            // test
+            markerCoordinates.push(new google.maps.Marker({
+              latitude: place.geometry.location.latitude,
+              longitude: place.geometry.location.longitude,
+              content: place.name,
+            }))
+
+            console.log(markerCoordinates, 'MARKER COORDINATES AFTER NEW');
+            // change the map view if the marker is off the screen
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+              } else {
+                bounds.extend(place.geometry.location);
+              }
+              map.fitBounds(bounds)
+          })
+        })
 
         // make api call to get existing property coordinate data
         axios.get('http://localhost:8881/properties/')
@@ -60,7 +133,7 @@
                   scaledSize: new google.maps.Size(25, 30)
                 }
               })
-              marker.addListener('click', function () {
+              marker.addListener('click', function() {
                 infowindow.open(map, marker)
               })
             })
