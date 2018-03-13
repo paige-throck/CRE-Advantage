@@ -72,6 +72,7 @@
             };
 
             //Create a marker for each place.
+
             markers.push(new google.maps.Marker({
               map: map,
               icon: icon,
@@ -80,22 +81,24 @@
             }));
             console.log(markers, 'hey markers');
 
-            // test
-            markerCoordinates.push(new google.maps.Marker({
-              latitude: place.geometry.location.latitude,
-              longitude: place.geometry.location.longitude,
-              content: place.name,
-            }))
+            var infowindow = new google.maps.InfoWindow({
+              content: '<p>' + '<a href="#">' + markers[0].title + '</a>' + '</p>'
+            });
+
+            markers[0].addListener('click', function() {
+              infowindow.open(map, markers[0])
+            })
+
 
             console.log(markerCoordinates, 'MARKER COORDINATES AFTER NEW');
             // change the map view if the marker is off the screen
             if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-              } else {
-                bounds.extend(place.geometry.location);
-              }
-              map.fitBounds(bounds)
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+            map.fitBounds(bounds)
           })
         })
 
@@ -119,7 +122,7 @@
 
               // add property address to info window
               let infowindow = new google.maps.InfoWindow({
-                content: coordinate.address
+                content: '<p>' + '<a href="#">' + coordinate.address + '</p>' + '</h1>'
               })
 
               let position = new google.maps.LatLng(coordinate.latitude, coordinate.longitude)
