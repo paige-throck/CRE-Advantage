@@ -9,101 +9,71 @@
 
 
   export default {
+    name: 'PropertyMap',
     data() {
-      console.log('YOU IN DATA MAN');
-      return {
-
-        test: 'hello',
-        markerCoordinates: [],
-        // markerCoordinates: [{
-        //   latitude: 30.2656,
-        //   longitude: -97.7497
-        // }, {
-        //   latitude: 30.1977,
-        //   longitude: -97.7685
-        // }]
-      }
+      return {}
     },
-    // make api call to get existing property coordinate data
-    created () {
+    mounted: function() {
+      let map;
+      let markerCoordinates = []
 
-      console.log(this.data, 'marker coordinats in mount');
-
-      axios.get('http://localhost:8881/properties/')
-        .then(function(properties) {
-          properties.data.forEach(function(property) {
-            console.log(property, 'property');
-            this.markerCoordinates.push({
-              latitude: property.lat,
-              longitude: property.lang
-            })
-          })
-          console.log(properties.data, "HEY AXIOS WORKED COOL WOW");
-        //  createMap()
-        })
-        .catch(function(error) {
-          console.log(error, 'HEY YOU HAVE AN ERROR');
-        })
-
-    },
-    methods: {
-      createMap: function() {
-        console.log('YOU IN MOUNTED');
-        let bounds = new google.maps.LatLngBounds();
+      function initMap() {
+        // create map
         let mapElement = document.getElementById('mapId')
-        let mapCenter = this.markerCoordinates[0]
         let options = {
-          center: new google.maps.LatLng(mapCenter.latitude, mapCenter.longitude)
+          center: new google.maps.LatLng(30.2672, -97.7431),
+          zoom: 8
         }
         let map = new google.maps.Map(mapElement, options);
 
-        // loop through coordinates in the markerCoordinates array
-        this.markerCoordinates.forEach(function(coordinate) {
-          let position = new google.maps.LatLng(coordinate.latitude, coordinate.longitude)
-          let marker = new google.maps.Marker({
-            position,
-            map,
-            animation: google.maps.Animation.DROP,
-            icon: {
-              url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
-              anchor: new google.maps.Point(30, 30),
-              scaledSize: new google.maps.Size(25, 30)
-            }
-          })
-          map.fitBounds(bounds.extend(position))
-        })
-      }
-    }
+        // make api call to get existing property coordinate data
+        axios.get('http://localhost:8881/properties/')
+          .then(function(properties) {
+            console.log(properties, 'properties');
+            properties.data.forEach(function(property) {
 
-    // change mounted to created...do not use mounted when you need to fetch data on init from the server
-    // mounted: function() {
-    //   console.log('YOU IN MOUNTED');
-    //   let bounds = new google.maps.LatLngBounds();
-    //   let mapElement = document.getElementById('mapId')
-    //   let mapCenter = this.markerCoordinates[0]
-    //   let options = {
-    //     center: new google.maps.LatLng(mapCenter.latitude, mapCenter.longitude)
-    //   }
-    //   let map = new google.maps.Map(mapElement, options);
-    //
-    //   // loop through coordinates in the markerCoordinates array
-    //   this.markerCoordinates.forEach(function(coordinate) {
-    //     let position = new google.maps.LatLng(coordinate.latitude, coordinate.longitude)
-    //     let marker = new google.maps.Marker({
-    //       position,
-    //       map,
-    //       animation: google.maps.Animation.DROP,
-    //       icon: {
-    //         url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
-    //         anchor: new google.maps.Point(30, 30),
-    //         scaledSize: new google.maps.Size(25, 30)
-    //       }
-    //     })
-    //     map.fitBounds(bounds.extend(position))
-    //   })
-    // }
+              // push all property coordinates to array for markers
+              markerCoordinates.push({
+                latitude: property.lat,
+                longitude: property.lang,
+                address: property.address
+              })
+
+            })
+            // loop through existing property coordinates and add markers
+            markerCoordinates.forEach(function(coordinate) {
+              console.log(map, 'COORDINATE');
+
+              // add property address to info window
+              let infowindow = new google.maps.InfoWindow({
+                content: coordinate.address
+              })
+
+              let position = new google.maps.LatLng(coordinate.latitude, coordinate.longitude)
+              let marker = new google.maps.Marker({
+                position,
+                map,
+                animation: google.maps.Animation.DROP,
+                icon: {
+                  url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
+                  anchor: new google.maps.Point(30, 30),
+                  scaledSize: new google.maps.Size(25, 30)
+                }
+              })
+              marker.addListener('click', function () {
+                infowindow.open(map, marker)
+              })
+            })
+          })
+          .catch(function(error) {
+            console.log(error, 'HEY YOU HAVE AN ERROR');
+          })
+      }
+      initMap()
+    },
   }
 </script>
+
 
 <style scoped>
   .property-map {

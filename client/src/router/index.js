@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/login'
+import PropertyMap from '@/components/PropertyMap'
 
 
 Vue.use(Router)
@@ -11,6 +12,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: PropertyMap
     }
 
   ]
