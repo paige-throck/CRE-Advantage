@@ -1,22 +1,13 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <PropertyMap></PropertyMap>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-
+    
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import PropertyMap from './components/PropertyMap.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld,
-    PropertyMap
-  }
+  name: 'App'
 }
 </script>
 
