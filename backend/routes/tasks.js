@@ -70,9 +70,13 @@ router.get('/:id/taskId', (req, res, next)=>{
   })
 
 
-
 //////////////EDIT SINGLE TASK
+router.put('/:id/taskId', (req,res,next)=>{
+  const userId = filterInt(req.params.id);
+  const taskId = filterInt(req.params.taskId);
 
+
+})
 
 
 /////////////DELETE SINGLE TASK
