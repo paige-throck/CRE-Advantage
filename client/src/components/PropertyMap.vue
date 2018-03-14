@@ -69,7 +69,7 @@
         let input = document.getElementById('search-input');
         let searchBox = new google.maps.places.SearchBox(input);
 
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
         // first search results return based on the map location
         map.addListener('bounds_changed', function() {
@@ -116,12 +116,17 @@
         })
       }
 
+
+
       /* -----------------------------------------
         create markers on the map
        -----------------------------------------*/
       function createMarkers(markersArr) {
         let infowindow;
-        let saveButton = '<button type="button">' + 'Save' + '</button>'
+
+        function test() {
+          console.log('OASMGASODIFJNSLDKJ');
+        }
 
         markersArr.forEach(function(individualMarker) {
 
@@ -132,9 +137,20 @@
             })
           } else {
             infowindow = new google.maps.InfoWindow({
-              content: '<h6>' + individualMarker.name + '</h6>' + '<p>' + '<a href="#">' + individualMarker.address + '</p>' + '</h1>' + saveButton
+              content: '<h6>' + individualMarker.name + '</h6>' + '<p>' + '<a href="#">' + individualMarker.address + '</p>' + '</h1>' + '<button type="button" id="savePropertyButton" onclick="addListenerToSaveButton()">' + 'Save' +
+                '</button>'
             })
           }
+
+
+          // event listener for a click on the save propety button
+          let addListenerToSaveButton = setTimeout(function() {
+            document.getElementById('savePropertyButton').addEventListener('click', function() {
+              saveNewProperty(individualMarker)
+              infowindow.close()
+            })
+          }, 2000)
+
 
           let position = new google.maps.LatLng(individualMarker.latitude, individualMarker.longitude)
 
@@ -157,7 +173,28 @@
         createSearchBox()
       }
 
+
+      /* -----------------------------------------
+        save searched marker to the database
+      -----------------------------------------*/
+      function saveNewProperty(newProperty) {
+        console.log(newProperty, 'WHATTTTTTTTTTTT');
+
+        newProperty.prospective_prop = true;
+        console.log(newProperty, 'DID IT ADD THE PROP');
+        axios.post('http://localhost:8881/properties/', newProperty)
+          .then(function(response) {
+            console.log('HEY DID I WORK')
+
+          })
+          .catch(function(error) {
+            console.log(error, 'HEY IM AN ERRRRROR');
+          })
+      }
+
+
       initMap()
+
     }
   }
 </script>
@@ -170,146 +207,15 @@
     margin: 0 auto;
     background: grey;
   }
-</style>
 
-
-
-
-
-
-
-
-
-<!--
-mounted: function() {
-  let map;
-  let markerCoordinates = []
-
-  function initMap() {
-
-    // create map
-    let mapElement = document.getElementById('mapId')
-    let options = {
-      center: new google.maps.LatLng(30.2672, -97.7431),
-      zoom: 8
-    }
-
-    let map = new google.maps.Map(mapElement, options);
-
-    // create search box
-    let input = document.getElementById('pac-input');
-    let searchBox = new google.maps.places.SearchBox(input);
-
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-    // first search results return based on the map location
-    map.addListener('bounds_changed', function() {
-      searchBox.setBounds(map.getBounds());
-    });
-
-    var markers = [];
-    // find location entered in search box
-    searchBox.addListener('places_changed', function() {
-      var places = searchBox.getPlaces();
-
-      if (places.length == 0) {
-        return;
-      }
-
-      // Clear out the old markers.
-      markers.forEach(function(marker) {
-        marker.setMap(null);
-      });
-      markers = [];
-
-      var bounds = new google.maps.LatLngBounds();
-      places.forEach(function(place) {
-        if (!place.geometry) {
-          console.log("Returned place contains no geometry");
-          return;
-        }
-        var icon = {
-          url: place.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(25, 25)
-        };
-
-        //Create a marker for each place.
-
-        markers.push(new google.maps.Marker({
-          map: map,
-          icon: icon,
-          title: place.name,
-          position: place.geometry.location
-        }));
-        console.log(markers, 'hey markers');
-
-        var infowindow = new google.maps.InfoWindow({
-          content: '<p>' + '<a href="#">' + markers[0].title + '</a>' + '</p>'
-        });
-
-        markers[0].addListener('click', function() {
-          infowindow.open(map, markers[0])
-        })
-
-
-        console.log(markerCoordinates, 'MARKER COORDINATES AFTER NEW');
-        // change the map view if the marker is off the screen
-        if (place.geometry.viewport) {
-          // Only geocodes have viewport.
-          bounds.union(place.geometry.viewport);
-        } else {
-          bounds.extend(place.geometry.location);
-        }
-        map.fitBounds(bounds)
-      })
-    })
-
-    // make api call to get existing property coordinate data
-    axios.get('http://localhost:8881/properties/')
-      .then(function(properties) {
-        console.log(properties, 'properties');
-        properties.data.forEach(function(property) {
-
-          // push all property coordinates to array for markers
-          markerCoordinates.push({
-            latitude: property.lat,
-            longitude: property.lang,
-            address: property.address
-          })
-
-        })
-        // loop through existing property coordinates and add markers
-        markerCoordinates.forEach(function(coordinate) {
-          console.log(map, 'COORDINATE');
-
-          // add property address to info window
-          let infowindow = new google.maps.InfoWindow({
-            content: '<p>' + '<a href="#">' + coordinate.address + '</p>' + '</h1>'
-          })
-
-          let position = new google.maps.LatLng(coordinate.latitude, coordinate.longitude)
-          let marker = new google.maps.Marker({
-            position,
-            map,
-            animation: google.maps.Animation.DROP,
-            icon: {
-              url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
-              anchor: new google.maps.Point(30, 30),
-              scaledSize: new google.maps.Size(25, 30)
-            }
-          })
-          marker.addListener('click', function() {
-            infowindow.open(map, marker)
-          })
-        })
-      })
-      .catch(function(error) {
-        console.log(error, 'HEY YOU HAVE AN ERROR');
-      })
+  div {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    text-align: left;
   }
-  initMap()
-},
- -->
+
+  input {
+    margin-bottom: 20px;
+  }
+</style>
