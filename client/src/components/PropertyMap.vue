@@ -27,195 +27,12 @@
         map: null,
         infowindow: null,
         places: null,
-        addListenerToSaveButton: null
-        //map: null
+        addListenerToSaveButton: null,
+        googleMarkerArr: []
       }
     },
     mounted: function() {
       this.initMap()
-
-      //let markerCoordinates = []
-
-      /* -----------------------------------------
-        create map
-       -----------------------------------------*/
-      // function initMap() {
-      //   let self = this
-      //
-      //   let mapElement = document.getElementById('mapId')
-      //   let options = {
-      //     center: new google.maps.LatLng(30.2672, -97.7431),
-      //     zoom: 8
-      //   }
-      //   self.map = new google.maps.Map(mapElement, options);
-      //
-      //   self.getDatabaseProperties()
-      // }
-
-      /* -----------------------------------------
-        get properties from the database
-       -----------------------------------------*/
-      // function getDatabaseProperties() {
-      //
-      //   axios.get('http://localhost:8881/properties/')
-      //     .then(function(properties) {
-      //       console.log(properties, 'properties');
-      //       properties.data.forEach(function(property) {
-      //
-      //         // push all property coordinates to array for markers
-      //         markerCoordinates.push({
-      //           latitude: property.lat,
-      //           longitude: property.lang,
-      //           address: property.address
-      //         })
-      //       })
-      //       createInfoWindow(markerCoordinates)
-      //     })
-      //     .catch(function(error) {
-      //       console.log(error, 'HEY YOU HAVE AN ERROR');
-      //     })
-      // }
-
-      /* -----------------------------------------
-        create the map search box
-       -----------------------------------------*/
-      //function createSearchBox() {
-      //   var searchMarkers = [];
-      //
-      //   let input = document.getElementById('search-input');
-      //   let searchBox = new google.maps.places.SearchBox(input);
-      //
-      //   //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-      //
-      //   // first search results return based on the map location
-      //   map.addListener('bounds_changed', function() {
-      //     searchBox.setBounds(map.getBounds());
-      //   });
-      //
-      //   // find location entered in search box
-      //   searchBox.addListener('places_changed', function() {
-      //     var places = searchBox.getPlaces();
-      //
-      //     if (places.length == 0) {
-      //       return;
-      //     }
-      //
-      //     var bounds = new google.maps.LatLngBounds();
-      //     places.forEach(function(place) {
-      //       if (!place.geometry) {
-      //         console.log("Returned place contains no geometry");
-      //         return;
-      //       }
-      //
-      //       //Create a marker for each place.
-      //       searchMarkers.push({
-      //         latitude: place.geometry.location.lat(),
-      //         longitude: place.geometry.location.lng(),
-      //         address: place.formatted_address,
-      //         name: place.name
-      //       })
-      //       console.log(searchMarkers, 'search markerrsadflkjasdf');
-      //
-      //       // change the map view if the marker is off the screen
-      //       if (place.geometry.viewport) {
-      //         bounds.union(place.geometry.viewport);
-      //       } else {
-      //         bounds.extend(place.geometry.location);
-      //       }
-      //       map.fitBounds(bounds)
-      //
-      //       // empty search box
-      //       input.value = ''
-      //
-      //       createInfoWindow(searchMarkers)
-      //     })
-      //   })
-      // }
-
-
-
-      /* -----------------------------------------
-        set up infowindow for markers
-       -----------------------------------------*/
-      // function createInfoWindow(markersArr) {
-      //   var infowindow;
-      //   console.log(markersArr, 'MARKERS ARRAY');
-      //   markersArr.forEach(function(individualMarker) {
-      //
-      //     if (markersArr.length > 1) {
-      //       // add property address to info window
-      //       infowindow = new google.maps.InfoWindow({
-      //         content: '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>'
-      //       })
-      //       addMarker(infowindow, individualMarker)
-      //     } else {
-      //       infowindow = new google.maps.InfoWindow({
-      //         content: '<h6>' + individualMarker.name + '</h6>' + '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>' + '</h1>' + '<button type="button" id="savePropertyButton" onclick="addListenerToSaveButton()">' + 'Save' +
-      //           '</button>'
-      //       })
-      //       addMarker(infowindow, individualMarker)
-      //     }
-      //   })
-      //   createSearchBox()
-      // }
-
-
-      /* -----------------------------------------
-        add markers on the map with infowindows
-       -----------------------------------------*/
-      // function addMarker(infowindow, individualMarker) {
-      //   let position = new google.maps.LatLng(individualMarker.latitude, individualMarker.longitude)
-      //
-      //   let marker = new google.maps.Marker({
-      //     position,
-      //     map,
-      //     title: individualMarker.address,
-      //     animation: google.maps.Animation.DROP,
-      //     icon: {
-      //       url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
-      //       anchor: new google.maps.Point(30, 30),
-      //       scaledSize: new google.maps.Size(25, 30)
-      //     }
-      //   })
-      //   console.log(marker.position.lat(), 'MARKER BEFORE');
-      //   marker.addListener('click', function() {
-      //     console.log(marker.position.lat(), 'marker inside the click');
-      //     console.log(marker, 'MARKERT CONTENT');
-      //     infowindow.open(map, marker)
-      //   })
-      //
-      //   let addListenerToSaveButton = setTimeout(function() {
-      //     document.getElementById('savePropertyButton').addEventListener('click', function() {
-      //       saveNewProperty(individualMarker)
-      //       infowindow.close()
-      //     })
-      //   }, 2000)
-      //
-      // }
-
-
-      /* -----------------------------------------
-        save searched marker to the database
-      -----------------------------------------*/
-      // function saveNewProperty(newProperty) {
-      //   console.log(newProperty, 'WHATTTTTTTTTTTT');
-      //
-      //   newProperty.prospective_prop = true;
-      //   console.log(newProperty, 'DID IT ADD THE PROP');
-      //
-      //   axios.post('http://localhost:8881/properties/save', newProperty)
-      //     .then(function(response) {
-      //       console.log(response, 'HEY DID I WORK')
-      //       return
-      //     })
-      //     .catch(function(error) {
-      //       console.log(error, 'HEY IM AN ERRRRROR');
-      //     })
-      // }
-
-
-
-
     },
     methods: {
       initMap: function () {
@@ -231,7 +48,17 @@
         self.getDatabaseProperties()
       },
       filterProperties: function () {
-        console.log('HEY CHANGE');
+        let self = this
+        console.log(self.googleMarkerArr, 'google marker array');
+
+        // set filtered values to visibile and others to hidden
+          for(var i = 0; i < self.googleMarkerArr.length; i++)
+
+            if(self.googleMarkerArr[i] && self.googleMarkerArr[i].prop_type === this.filterChosen) {
+              self.googleMarkerArr[i].setVisible(true)
+            } else  {
+              self.googleMarkerArr[i].setVisible(false)
+            }
       },
       getDatabaseProperties: function () {
         let self = this
@@ -245,7 +72,8 @@
                   self.markerCoordinates.push({
                   latitude: property.lat,
                   longitude: property.lang,
-                  address: property.address
+                  address: property.address,
+                  prop_type: property.prop_type
                 })
               })
               console.log(self.markerCoordinates, 'SELF MARKER COORDINATES');
@@ -258,11 +86,8 @@
       createSearchBox: function() {
         let self = this
         var searchMarkers = [];
-        //let places;
         let input = document.getElementById('search-input');
         let searchBox = new google.maps.places.SearchBox(input);
-
-        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
         // first search results return based on the map location
         self.map.addListener('bounds_changed', function() {
@@ -289,7 +114,8 @@
               latitude: place.geometry.location.lat(),
               longitude: place.geometry.location.lng(),
               address: place.formatted_address,
-              name: place.name
+              name: place.name,
+              prop_type: place.prop_type
             })
             console.log(searchMarkers, 'search markerrsadflkjasdf');
 
@@ -303,7 +129,7 @@
 
             // empty search box
             input.value = ''
-            //console.log(markersArr, 'HHHHHHHHHHHHHHHHHHHHHHHHH');
+            self.markerCoordinates.push(searchMarkers)
             self.createInfoWindow(searchMarkers)
           })
         })
@@ -341,12 +167,17 @@
           map: self.map,
           title: individualMarker.address,
           animation: google.maps.Animation.DROP,
+          prop_type: individualMarker.prop_type,
           icon: {
             url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
             anchor: new google.maps.Point(30, 30),
             scaledSize: new google.maps.Size(25, 30)
           }
         })
+
+        // add reference to marker to be able to filter later
+        self.googleMarkerArr.push(marker)
+
         console.log(marker.position.lat(), 'MARKER BEFORE');
         marker.addListener('click', function() {
           console.log(marker.position.lat(), 'marker inside the click');
@@ -363,7 +194,6 @@
       },
       saveNewProperty: function (newProperty) {
         console.log(newProperty, 'WHATTTTTTTTTTTT');
-
         newProperty.prospective_prop = true;
         console.log(newProperty, 'DID IT ADD THE PROP');
 
@@ -376,11 +206,9 @@
             console.log(error, 'HEY IM AN ERRRRROR');
           })
       }
-
     }
-
   }
-//initMap()
+
 </script>
 
 
