@@ -32,39 +32,42 @@ function restrict(req, res, next) {
 
 
 router.post('/', (req, res) => {
-    let userObj = req.body;
-    console.log(userObj);
-    knex.select('*').from('users').where('email', userObj.email)
-        .then((result) => {
-            console.log(result, "login post result");
-            if (result.length === 0) {
-                return res.send('no account with that email');
-            }
-            return bcrypt.compare(userObj.password, result[0].password)
-                .then((loginCheck) => {
-                    if (loginCheck) { // If the passwords match, login and redirect to their bits page.
-                        res.cookie('user', '1', {
-                            maxAge: 900000,
-                            httpOnly: true,
-                            expries: false
-                        });
-                        req.session.user_id = result[0].id;
-                        req.session.email = result[0].email;
+let userObj = req.body;
+console.log(userObj);
+knex.select('*').from('users').where('email', userObj.email)
+.then((result) => {
+console.log(result, "login post result");
+if (result.length === 0) {
+return res.send('no account with that email');
+}
+return bcrypt.compare(userObj.password, result[0].password)
+.then((loginCheck) => {
+if (loginCheck) { // If the passwords match, login and redirect to their bits page.
+  res.cookie('user', '1', {
+      maxAge: 900000,
+      httpOnly: true,
+      expries: false
+  });
+  req.session.user_id = result[0].id;
+  req.session.email = result[0].email;
+  req.session.name = result[0].name;
 
 
-                        console.log('Session id', req.session.id);
+  console.log('Session id', req.session.id);
 
-                        // return res.redirect(`/profiles/${req.session.userID}`);
-                        res.send({
-                            id: req.session.user_id,
-                            email: req.session.email
-                        })
+  // return res.redirect(`/profiles/${req.session.userID}`);
+res.send({
+session: req.session.id,
+id: req.session.user_id,
+email: req.session.email,
+name: req.session.name
+})
 
-                    } else { // If passwords don't match, send a 401.
-                        return res.sendStatus(401);
-                    }
-                })
-        })
+} else { // If passwords don't match, send a 401.
+  return res.sendStatus(401);
+}
+})
+})
 });
 
 
