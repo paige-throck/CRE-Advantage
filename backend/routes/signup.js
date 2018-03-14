@@ -33,23 +33,15 @@ let newUserObj = req.body;
             email: newUserObj.email,
             password: newUserObj.hashpw
           })
-          .then(() => {
-          console.log('did it work?');
-          })
         })
         .then(() => {
           res.sendStatus(200);
-        });
-    })
-
-    .catch((err) => {
-    console.error(err);
-    res.sendStatus(500);
-  })
-});
-
-
-
-
+        })
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      })
+    });
 
 module.exports = router;
