@@ -1,6 +1,13 @@
 <template>
 <div>
   <input id="search-input" class="controls" type="text" placeholder="Search Box">
+  <select v-model="filterChosen">
+    <option value="" disabled selected>Filter Properties</option>
+    <option>Office</option>
+    <option>Retail</option>
+    <option>Industrial</option>
+  </select>
+  <span>{{ filterChosen }} </span>
   <div class="property-map" id="mapId">
   </div>
 </div>
@@ -14,7 +21,9 @@
   export default {
     name: 'PropertyMap',
     data() {
-      return {}
+      return {
+        filterChosen: ''
+      }
     },
     mounted: function() {
 
@@ -124,16 +133,12 @@
       function createMarkers(markersArr) {
         let infowindow;
 
-        function test() {
-          console.log('OASMGASODIFJNSLDKJ');
-        }
-
         markersArr.forEach(function(individualMarker) {
 
           if (markersArr.length > 1) {
             // add property address to info window
             infowindow = new google.maps.InfoWindow({
-              content: '<p>' + '<a href="#">' + individualMarker.address + '</p>' + '</h1>'
+              content: '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>'
             })
           } else {
             infowindow = new google.maps.InfoWindow({
@@ -141,7 +146,6 @@
                 '</button>'
             })
           }
-
 
           // event listener for a click on the save propety button
           let addListenerToSaveButton = setTimeout(function() {
@@ -182,10 +186,11 @@
 
         newProperty.prospective_prop = true;
         console.log(newProperty, 'DID IT ADD THE PROP');
-        axios.post('http://localhost:8881/properties/', newProperty)
-          .then(function(response) {
-            console.log('HEY DID I WORK')
 
+        axios.post('http://localhost:8881/properties/save', newProperty)
+          .then(function(response) {
+            console.log(response, 'HEY DID I WORK')
+            return
           })
           .catch(function(error) {
             console.log(error, 'HEY IM AN ERRRRROR');

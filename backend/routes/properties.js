@@ -24,7 +24,7 @@ router.get('/', function(req, res) {
     })
 })
 
-router.post('/', function(req, res) {
+router.post('/save', function(req, res) {
   console.log(req.body, 'REQ PARAMS IN ROUTE');
   let property = {
     lat: req.body.latitude,
@@ -34,8 +34,9 @@ router.post('/', function(req, res) {
   }
 
   return knex('properties').insert(property)
-    .then(function(){
+    .then(function(results){
       console.log('HEY I INSERTED A PROPERTY');
+      res.send(results)
     })
 })
 
