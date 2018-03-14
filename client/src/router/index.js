@@ -8,6 +8,7 @@ import Profile from '@/components/profile'
 import PropertyMap from '@/components/PropertyMap'
 
 
+
 Vue.use(Router)
 Vue.use(VueSession)
 
@@ -34,6 +35,5 @@ export default new Router({
       name: 'map',
       component: PropertyMap
     }
-
   ]
 });
