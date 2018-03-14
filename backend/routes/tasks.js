@@ -50,7 +50,7 @@ router.get('/:id/taskId', (req, res, next)=>{
 
   /////////CREATE NEW TASK
 
-  router.post('/:id'(req,res,next)=>{
+  router.post('/:id', (req,res,next)=>{
     const task = req.params;
 
     knex('tasks').insert({
@@ -59,7 +59,6 @@ router.get('/:id/taskId', (req, res, next)=>{
       task_date: task.date,
     })
     .returning('*')
-
     .then((task)=>{
       res.json(task);
     })
@@ -78,7 +77,19 @@ router.get('/:id/taskId', (req, res, next)=>{
 
 ////////////DELETE SIGNLE TASK
 
+router.delete('/:id/taskId', (req, res, next)=>{
+  const userId = filterInt(req.params.id);
+  const taskId = filterInt(req.params.taskId);
 
+  knex('tasks').where(taskId, 'id').del('*')
+  .then(() => {
+    res.send(200);
+  })
+  .catch(function(error) {
+      console.log(error);
+      res.sendStatus(500);
+    })
+  })
 
 
 
