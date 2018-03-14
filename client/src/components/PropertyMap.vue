@@ -131,8 +131,8 @@
         create markers on the map
        -----------------------------------------*/
       function createMarkers(markersArr) {
-        let infowindow;
-
+        var infowindow;
+        console.log(markersArr, 'MARKERS ARRAY');
         markersArr.forEach(function(individualMarker) {
 
           if (markersArr.length > 1) {
@@ -142,7 +142,7 @@
             })
           } else {
             infowindow = new google.maps.InfoWindow({
-              content: '<h6>' + individualMarker.name + '</h6>' + '<p>' + '<a href="#">' + individualMarker.address + '</p>' + '</h1>' + '<button type="button" id="savePropertyButton" onclick="addListenerToSaveButton()">' + 'Save' +
+              content: '<h6>' + individualMarker.name + '</h6>' + '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>' + '</h1>' + '<button type="button" id="savePropertyButton" onclick="addListenerToSaveButton()">' + 'Save' +
                 '</button>'
             })
           }
@@ -161,6 +161,7 @@
           let marker = new google.maps.Marker({
             position,
             map,
+            title: individualMarker.address,
             animation: google.maps.Animation.DROP,
             icon: {
               url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
@@ -168,8 +169,9 @@
               scaledSize: new google.maps.Size(25, 30)
             }
           })
-
+          console.log(marker.position.lat(), 'MARKER BEFORE');
           marker.addListener('click', function() {
+            console.log(marker.position.lat(), 'marker inside the click');
             infowindow.open(map, marker)
           })
 
