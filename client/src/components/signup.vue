@@ -46,12 +46,12 @@ export default {
 
     signup() {
       axios.post('http://localhost:8881/signup/', this.user)
-        .then(function(user) {
-          console.log(user, 'this is the user being sent back to us');
-          if (user){
-          this.$router.push('/login')
-          }
-        })
+      .then(function (user) {
+        this.$router.go('/login');
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
       }
 
     }

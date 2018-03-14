@@ -36,11 +36,11 @@ let newUserObj = req.body;
           .then(() => {
           console.log('did it work?');
           })
-          })
-          .then(() => {
+        })
+        .then(() => {
           res.sendStatus(200);
-          });
-      })
+        });
+    })
 
     .catch((err) => {
     console.error(err);
