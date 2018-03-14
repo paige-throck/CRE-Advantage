@@ -16,7 +16,7 @@ const filterInt = function(value) {
     return NaN;
 };
 
-
+///////GET ALL TASKS
 router.get('/:id', (req, res, next)=>{
   const userId = filterInt(req.params.id);
   knex('tasks').where(userId, 'user_id').select('*')
@@ -29,6 +29,26 @@ router.get('/:id', (req, res, next)=>{
       res.sendStatus(500);
     })
   })
+
+///////////GET SINGLE TASK
+
+router.get('/:id/taskId', (req, res, next)=>{
+  const userId = filterInt(req.params.id);
+  const taskId = filterInt(req.params.taskId);
+
+  knex('tasks').where(taskId, 'id').select('*')
+  .then((task) => {
+    console.log(task);
+    res.json(task);
+    })
+    .catch(function(error) {
+      console.log(error);
+      res.sendStatus(500);
+    })
+  })
+
+
+  /////////CREATE NEW TASK
 
   router.post('/:id'(req,res,next)=>{
     const task = req.params;
@@ -48,6 +68,17 @@ router.get('/:id', (req, res, next)=>{
       res.sendStatus(500);
     })
   })
+
+
+
+  /////////////EDIT SINGLE TASK
+
+
+
+
+////////////DELETE SIGNLE TASK
+
+
 
 
 

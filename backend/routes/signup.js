@@ -16,6 +16,10 @@ const filterInt = function(value) {
     return NaN;
 };
 
+
+
+////////SIGNUP USER
+
 router.post('/', (req, res) => {
     console.log(req.body, 'body object');
     let newUserObj = req.body;
