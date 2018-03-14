@@ -4,11 +4,11 @@
       <h2 class="form-login-heading">Please Sign In</h2>
 
       <label for="inputEmail" class="sr-only">Email address</label>
-      <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <input v-model="user.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 
 
       <label for="inputPassword" class="sr-only">Password</label>
-      <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <input v-model="user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
 
 
@@ -25,16 +25,44 @@ export default {
 name: 'Login',
 data () {
   return {
-    email: '',
-    password: ''
+    user:{
+      email: '',
+      password: ''
+    }
   }
 },
 methods: {
-  login () {
-    this.$http.post('/login', { user: this.email, password: this.password })
-    .then(request => this.loginSuccessful(request))
-    .catch(() => this.loginFailed())
+
+  login() {
+    let self = this
+    axios.post('http://localhost:8881/login/', this.user)
+    .then(function (user) {
+      console.log('working on router');
+      self.$router.push('/')
+
+      }).catch(function (error) {
+          console.log(error);
+      });
     }
+
+    // loginSuccessful (req) {
+    //   if (!req.data.token) {
+    //     this.loginFailed()
+    //     return
+    //   }
+    //
+    //   localStorage.token = req.data.token
+    //   this.error = false
+    //
+    //   this.$router.replace(this.$route.query.redirect || '/authors')
+    // }
+    //
+    // loginFailed () {
+    //   this.error = 'Login failed!'
+    //   delete localStorage.token
+    // }
+
+
   }
 }
 
