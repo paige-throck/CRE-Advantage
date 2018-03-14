@@ -45,11 +45,12 @@ export default {
   methods: {
 
     signup() {
+      let self = this
       axios.post('http://localhost:8881/signup/', this.user)
       .then(function (user) {
         console.log('working on router');
-        this.$route.router.go('login')
-            
+        self.$router.push('/login')
+
         }).catch(function (error) {
             console.log(error);
         });
