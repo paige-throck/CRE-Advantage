@@ -17,5 +17,38 @@ const filterInt = function(value) {
 };
 
 
+router.get('/:id', (req, res, next)=>{
+  const userId = filterInt(req.params.id);
+  knex('tasks').where(userId, 'user_id').select('*')
+  .then((tasks) => {
+    console.log(tasks);
+    res.json(tasks);
+    })
+    .catch(function(error) {
+      console.log(error);
+      res.sendStatus(500);
+    })
+  })
+
+  router.post('/:id'(req,res,next)=>{
+    const task = req.params;
+
+    knex('tasks').insert({
+      user_id:task.user_id,
+      item:task.item,
+      task_date: task.date,
+    })
+    .returning('*')
+
+    .then((task)=>{
+      res.json(task);
+    })
+    .catch((error)=>{
+      console.log(error);
+      res.sendStatus(500);
+    })
+  })
+
+
 
 module.exports = router;
