@@ -62,7 +62,7 @@
                 address: property.address
               })
             })
-            createMarkers(markerCoordinates)
+            createInfoWindow(markerCoordinates)
           })
           .catch(function(error) {
             console.log(error, 'HEY YOU HAVE AN ERROR');
@@ -120,7 +120,7 @@
             // empty search box
             input.value = ''
 
-            createMarkers(searchMarkers)
+            createInfoWindow(searchMarkers)
           })
         })
       }
@@ -128,9 +128,9 @@
 
 
       /* -----------------------------------------
-        create markers on the map
+        set up infowindow for markers
        -----------------------------------------*/
-      function createMarkers(markersArr) {
+      function createInfoWindow(markersArr) {
         var infowindow;
         console.log(markersArr, 'MARKERS ARRAY');
         markersArr.forEach(function(individualMarker) {
@@ -140,43 +140,50 @@
             infowindow = new google.maps.InfoWindow({
               content: '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>'
             })
+            addMarker(infowindow, individualMarker)
           } else {
             infowindow = new google.maps.InfoWindow({
               content: '<h6>' + individualMarker.name + '</h6>' + '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>' + '</h1>' + '<button type="button" id="savePropertyButton" onclick="addListenerToSaveButton()">' + 'Save' +
                 '</button>'
             })
-          }
-
-          // event listener for a click on the save propety button
-          let addListenerToSaveButton = setTimeout(function() {
-            document.getElementById('savePropertyButton').addEventListener('click', function() {
-              saveNewProperty(individualMarker)
-              infowindow.close()
-            })
-          }, 2000)
-
-
-          let position = new google.maps.LatLng(individualMarker.latitude, individualMarker.longitude)
-
-          let marker = new google.maps.Marker({
-            position,
-            map,
-            title: individualMarker.address,
-            animation: google.maps.Animation.DROP,
-            icon: {
-              url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
-              anchor: new google.maps.Point(30, 30),
-              scaledSize: new google.maps.Size(25, 30)
-            }
-          })
-          console.log(marker.position.lat(), 'MARKER BEFORE');
-          marker.addListener('click', function() {
-            console.log(marker.position.lat(), 'marker inside the click');
-            infowindow.open(map, marker)
-          })
-
+            addMarker(infowindow, individualMarker)
+          }          
         })
         createSearchBox()
+      }
+
+
+      /* -----------------------------------------
+        add markers on the map with infowindows
+       -----------------------------------------*/
+      function addMarker(infowindow, individualMarker) {
+        let position = new google.maps.LatLng(individualMarker.latitude, individualMarker.longitude)
+
+        let marker = new google.maps.Marker({
+          position,
+          map,
+          title: individualMarker.address,
+          animation: google.maps.Animation.DROP,
+          icon: {
+            url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
+            anchor: new google.maps.Point(30, 30),
+            scaledSize: new google.maps.Size(25, 30)
+          }
+        })
+        console.log(marker.position.lat(), 'MARKER BEFORE');
+        marker.addListener('click', function() {
+          console.log(marker.position.lat(), 'marker inside the click');
+          console.log(marker, 'MARKERT CONTENT');
+          infowindow.open(map, marker)
+        })
+
+        let addListenerToSaveButton = setTimeout(function() {
+          document.getElementById('savePropertyButton').addEventListener('click', function() {
+            saveNewProperty(individualMarker)
+            infowindow.close()
+          })
+        }, 2000)
+
       }
 
 
