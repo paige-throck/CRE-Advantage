@@ -37,6 +37,7 @@ methods: {
     let self = this
     axios.post('http://localhost:8881/login/', this.user)
     .then(function (user) {
+      console.log(user, "is this the session id?");
       console.log('working on router');
       self.$router.push('/')
 
