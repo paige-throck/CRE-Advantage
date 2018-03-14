@@ -47,8 +47,9 @@ export default {
     signup() {
       axios.post('http://localhost:8881/signup/', this.user)
       .then(function (user) {
-        this.$router.go('/login');
-            console.log(response);
+        console.log('working on router');
+        this.$route.router.go('login')
+            
         }).catch(function (error) {
             console.log(error);
         });
