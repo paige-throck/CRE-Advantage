@@ -16,7 +16,8 @@ const filterInt = function(value) {
     return NaN;
 };
 
-///////GET ALL TASKS
+///////////GET ALL TASKS
+
 router.get('/:id', (req, res, next)=>{
   const userId = filterInt(req.params.id);
   knex('tasks').where(userId, 'user_id').select('*')
@@ -48,7 +49,7 @@ router.get('/:id/taskId', (req, res, next)=>{
   })
 
 
-  /////////CREATE NEW TASK
+///////////CREATE NEW TASK
 
   router.post('/:id', (req,res,next)=>{
     const task = req.params;
@@ -70,12 +71,11 @@ router.get('/:id/taskId', (req, res, next)=>{
 
 
 
-  /////////////EDIT SINGLE TASK
+//////////////EDIT SINGLE TASK
 
 
 
-
-////////////DELETE SIGNLE TASK
+/////////////DELETE SINGLE TASK
 
 router.delete('/:id/taskId', (req, res, next)=>{
   const userId = filterInt(req.params.id);
