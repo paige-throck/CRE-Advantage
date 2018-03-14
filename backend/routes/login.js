@@ -30,7 +30,7 @@ function restrict(req, res, next) {
     }
 };
 
-
+//////////////LOGIN USER
 router.post('/', (req, res) => {
 let userObj = req.body;
 console.log(userObj);
