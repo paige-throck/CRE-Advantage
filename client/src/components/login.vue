@@ -36,34 +36,17 @@ methods: {
   login() {
     let self = this
     axios.post('http://localhost:8881/login/', this.user)
-    .then(function (user) {
-      console.log(user, "is this the session id?");
-      console.log('working on router');
+    .then(function (response) {
       self.$router.push('/')
+      localStorage.setItem('sessionData', response.data.session);
+      localStorage.setItem('name', response.data.name);
 
+      console.log(window.localStorage);
+      console.log(response.data)
       }).catch(function (error) {
           console.log(error);
       });
     }
-
-    // loginSuccessful (req) {
-    //   if (!req.data.token) {
-    //     this.loginFailed()
-    //     return
-    //   }
-    //
-    //   localStorage.token = req.data.token
-    //   this.error = false
-    //
-    //   this.$router.replace(this.$route.query.redirect || '/authors')
-    // }
-    //
-    // loginFailed () {
-    //   this.error = 'Login failed!'
-    //   delete localStorage.token
-    // }
-
-
   }
 }
 
