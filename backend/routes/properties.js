@@ -30,7 +30,7 @@ router.post('/save', function(req, res) {
     lat: req.body.latitude,
     lang: req.body.longitude,
     address: req.body.address,
-    prospective_prop: req.body.prospective_prop
+    prospective_prop: req.body.prospective_prop,
   }
 
   return knex('properties').insert(property)
