@@ -24,6 +24,22 @@ router.get('/', function(req, res) {
     })
 })
 
+router.post('/save', function(req, res) {
+  console.log(req.body, 'REQ PARAMS IN ROUTE');
+  let property = {
+    lat: req.body.latitude,
+    lang: req.body.longitude,
+    address: req.body.address,
+    prospective_prop: req.body.prospective_prop
+  }
+
+  return knex('properties').insert(property)
+    .then(function(results){
+      console.log('HEY I INSERTED A PROPERTY');
+      res.send(results)
+    })
+})
+
 
 
 module.exports = router;
