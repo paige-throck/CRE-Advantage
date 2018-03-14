@@ -34,6 +34,7 @@ data () {
 methods: {
 
   login() {
+    
     let self = this
     axios.post('http://localhost:8881/login/', this.user)
     .then(function (response) {

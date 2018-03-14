@@ -2,7 +2,7 @@
   <div class="profile">
 <h1>{{msg}}</h1>
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
+  <button v-on:click="logout" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
 
 
   </div>
@@ -15,6 +15,16 @@ export default {
   data() {
     return {
       msg: window.localStorage.name
+    }
+  },
+  methods: {
+
+    logout: function(){
+      let self =this;
+      localStorage.clear();
+
+      self.$router.push('/login')
+      console.log(window.localStorage);
     }
   }
 }
