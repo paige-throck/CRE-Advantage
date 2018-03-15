@@ -8,7 +8,7 @@ import Signup from '@/components/Signup'
 import Profile from '@/components/Profile'
 import Tasks from '@/components/Tasks'
 import Property from '@/components/Property'
-import map from '@/components/Map'
+import PropMap from '@/components/PropMap'
 
 
 
@@ -40,7 +40,7 @@ export default new Router({
       children: [
         {path:'tasks', component:Tasks},
 
-        {path:'map', component:map},
+        {path:'map', component:PropMap},
 
         {path:'property', component:Property}
       ]
