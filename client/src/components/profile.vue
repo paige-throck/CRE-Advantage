@@ -1,7 +1,7 @@
 <template>
 <div class="profile">
 
-<!--  Navigation Bar-->
+  <!--  Navigation Bar-->
   <div class="wrapper">
     <nav id="sidebar">
 
@@ -39,23 +39,29 @@
 
 
   <div id="content">
-    <div class = "row">
-      <div class ="col-sm-2">
-    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+    <div class="row">
+      <div class="col-sm-2">
+        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
           <i class="glyphicon glyphicon-align-left"></i>
           Toggle Sidebar
       </button>
-  </div>
-  <div class = "col-sm-8">
-    <h3>CRE ADVANTAGE</h3>
-  </div>
-    <div class ="col-sm-2">
+      </div>
+      <div class="col-sm-8">
+        <h3>CRE ADVANTAGE</h3>
+      </div>
+      <div class="col-sm-2">
+      </div>
     </div>
-</div>
-</div>
+  </div>
 
-  <!-- <h1>{{msg}}</h1>
-  <button v-on:click="logout" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button> -->
+  <div></div>
+
+
+  <!--  Interchange pages-->
+  <div class="pageContainer" mt-auto>
+
+    <h1>Goodmoring {{msg}}</h1>
+  </div>
 
 </div>
 </template>
@@ -96,7 +102,6 @@ $(document).ready(function() {
     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
   });
 
-
   // if dismiss or overlay was clicked
   $('#dismiss, .overlay').on('click', function() {
     // hide the sidebar
@@ -110,12 +115,7 @@ console.log(window.localStorage, 'this is the session data in profile');
 </script>
 
 <style>
-/*
-    DEMO STYLE
-*/
-
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
 
 body {
   font-family: 'Poppins', sans-serif;
