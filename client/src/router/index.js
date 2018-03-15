@@ -38,6 +38,7 @@ export default new Router({
       name:'Profile',
       component: Profile,
       children: [
+
         {path:'tasks', component:Tasks},
 
         {path:'map', component:map},
