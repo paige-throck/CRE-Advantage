@@ -34,16 +34,13 @@ data () {
 methods: {
 
   login() {
-    
+
     let self = this
     axios.post('http://localhost:8881/login/', this.user)
     .then(function (response) {
-      self.$router.push('/')
+      self.$router.push('/profile')
       localStorage.setItem('sessionData', response.data.session);
       localStorage.setItem('name', response.data.name);
-
-      console.log(window.localStorage);
-      console.log(response.data)
       }).catch(function (error) {
           console.log(error);
       });
