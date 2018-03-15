@@ -5,7 +5,7 @@
   <div class="wrapper">
     <nav id="sidebar">
 
-      <!-- Close Sidebar Button -->
+      <!-- Close Sideba Button -->
       <div id="dismiss">
         <i class="glyphicon glyphicon-arrow-left"></i>
       </div>
@@ -27,7 +27,7 @@
             <li><a href="#">Prop</a></li>
             <li><a href="#">Prop</a></li>
           </ul>
-          <li> <router-link :to="{ path: 'Tasks' }">Tasks</router-link></li>
+          <li>Map</li>
           <li><router-link to="profile/tasks">Tasks</router-link></li>
       </ul>
       <button v-on:click="logout" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
@@ -87,14 +87,16 @@ export default {
       localStorage.clear();
 
       self.$router.push('/login')
-      console.log(window.localStorage);
+      console.log(window.localStorage, 'storage after logout');
     }
   }
 }
 
 
 function loadShit () {
-  // console.log(req.ression, 'HEY I AM THE SESSION IN LOAD SHIT');
+
+ console.log(window.localStorage, 'HEY I AM THE STORAGE IN LOAD SHIT');
+
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"
       });
