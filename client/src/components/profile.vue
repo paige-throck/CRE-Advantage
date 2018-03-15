@@ -27,8 +27,8 @@
             <li><a href="#">Prop</a></li>
             <li><a href="#">Prop</a></li>
           </ul>
-          <li><a href="#">Map</a></li>
-          <li><a href="#">Tasks</a></li>
+          <li>Map</li>
+          <li><router-link to="profile/tasks">Tasks</router-link></li>
       </ul>
       <button v-on:click="logout" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
     </nav>
@@ -61,6 +61,7 @@
   <div class="pageContainer" mt-auto>
 
     <h1>Goodmoring {{msg}}</h1>
+
      <router-view></router-view>
 
   </div>
