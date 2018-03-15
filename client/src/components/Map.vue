@@ -26,7 +26,7 @@
   //let markerCoordinates;
 
   export default {
-    name: 'PropertyMap',
+    name: 'Map',
     data() {
       return {
         filterChosen: '',
