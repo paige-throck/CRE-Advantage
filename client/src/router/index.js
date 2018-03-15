@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import VueSession from 'vue-session'
 
+import Home from '@/components/home'
 import Login from '@/components/login'
 import Signup from '@/components/signup'
 import Profile from '@/components/profile'
@@ -15,6 +16,11 @@ Vue.use(VueSession)
 export default new Router({
   routes: [
     {
+      path: '/',
+      name: 'Home',
+      component: Home
+    },
+    {
       path: '/login',
       name: 'Login',
       component: Login
@@ -26,7 +32,7 @@ export default new Router({
 
     },
     {
-      path: '/',
+      path: '/profile',
       name:'Profile',
       component: Profile
     },
