@@ -1,13 +1,20 @@
 <template>
+
 <div>
   <input id="search-input" class="controls" type="text" placeholder="Search Box">
+
   <select v-model="filterChosen" v-on:change="filterProperties">
     <option value="" disabled selected>Filter Properties</option>
     <option>Office</option>
     <option>Retail</option>
     <option>Industrial</option>
   </select>
+
   <span>{{ filterChosen }} </span>
+
+  <button v-model="userLocation" @click="pinUserLocation" type="button" class="btn btn-info btn-circle" id="addPin">+</button>
+  <span>{{ userLocation.addresss }}</span>
+
   <div class="property-map" id="mapId">
   </div>
 </div>
@@ -23,6 +30,7 @@
     data() {
       return {
         filterChosen: '',
+        userLocation: '',
         markerCoordinates: [],
         map: null,
         infowindow: null,
@@ -35,6 +43,9 @@
       this.initMap()
     },
     methods: {
+      /* =====================================================
+      Put map on the page and set the center to Austin
+      ===================================================== */
       initMap: function () {
         let self = this
 
@@ -47,20 +58,11 @@
 
         self.getDatabaseProperties()
       },
-      filterProperties: function () {
-        let self = this
-        console.log(self.googleMarkerArr, 'google marker array');
-
-        // set filtered values to visibile and others to hidden
-          for(var i = 0; i < self.googleMarkerArr.length; i++)
-
-            if(self.googleMarkerArr[i] && self.googleMarkerArr[i].prop_type === this.filterChosen) {
-              self.googleMarkerArr[i].setVisible(true)
-            } else  {
-              self.googleMarkerArr[i].setVisible(false)
-            }
-      },
+      /* =====================================================
+      Get properties currently in the database and setup to add to map
+      ====================================================== */
       getDatabaseProperties: function () {
+
         let self = this
           axios.get('http://localhost:8881/properties/')
             .then(function(properties) {
@@ -83,6 +85,9 @@
               console.log(error, 'HEY YOU HAVE AN ERROR');
             })
       },
+      /* =====================================================
+      Add searchbox to map and set up results to add marker to map
+      ====================================================== */
       createSearchBox: function() {
         let self = this
         var searchMarkers = [];
@@ -134,6 +139,9 @@
           })
         })
       },
+      /* =====================================================
+      Add info windows to markers on the map and set content
+      ====================================================== */
       createInfoWindow: function(markersArr) {
         var infowindow;
         let self = this
@@ -148,7 +156,7 @@
               self.addMarker(infowindow, individualMarker)
             } else {
               infowindow = new google.maps.InfoWindow({
-                content: '<h6>' + individualMarker.name + '</h6>' + '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>' + '</h1>' + '<button type="button" id="savePropertyButton" onclick="addListenerToSaveButton()">' + 'Save' +
+                content: '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>' + '</h1>' + '<button type="button" id="savePropertyButton" onclick="addListenerToSaveButton()">' + 'Save' +
                   '</button>'
               })
               self.addMarker(infowindow, individualMarker)
@@ -157,9 +165,12 @@
           self.createSearchBox()
 
       },
+      /* =====================================================
+      Add markers to the map
+      ====================================================== */
       addMarker: function(infowindow, individualMarker) {
         let self = this
-        console.log(individualMarker.latitude, 'HEY THIS IS WHAT YOU ARE LOOKING FOR');
+        console.log(individualMarker, 'HEY THIS IS WHAT YOU ARE LOOKING FOR');
         let position = new google.maps.LatLng(individualMarker.latitude, individualMarker.longitude)
 
         let marker = new google.maps.Marker({
@@ -192,6 +203,9 @@
           })
         }, 2000)
       },
+      /* =====================================================
+      Save a searched property location to the database
+      ====================================================== */
       saveNewProperty: function (newProperty) {
         console.log(newProperty, 'WHATTTTTTTTTTTT');
         newProperty.prospective_prop = true;
@@ -205,6 +219,55 @@
           .catch(function(error) {
             console.log(error, 'HEY IM AN ERRRRROR');
           })
+      },
+      /* =====================================================
+      Filter properties on the map
+      ====================================================== */
+      filterProperties: function () {
+        let self = this
+        console.log(self.googleMarkerArr, 'google marker array');
+
+        // set filtered values to visibile and others to hidden
+          for(var i = 0; i < self.googleMarkerArr.length; i++)
+
+            if(self.googleMarkerArr[i] && self.googleMarkerArr[i].prop_type === this.filterChosen) {
+              self.googleMarkerArr[i].setVisible(true)
+            } else  {
+              self.googleMarkerArr[i].setVisible(false)
+            }
+      },
+      /* =====================================================
+      Get user location and set up to add as marker to the map
+      ====================================================== */
+      pinUserLocation: function () {
+        let self = this
+        let tempUserLocation = []
+        let geocoder = new google.maps.Geocoder;
+        console.log(navigator.geolocation, 'FIND ME');
+
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position.coords, 'COOOOORDS');
+            self.userLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            }
+
+            geocoder.geocode({location: self.userLocation}, function(results, status) {
+              if (status === "OK") {
+                self.userLocation.address = results[0].formatted_address
+                self.userLocation.latitude = self.userLocation.lat
+                self.userLocation.longitude = self.userLocation.lng
+                tempUserLocation.push(self.userLocation)
+                  console.log(tempUserLocation, 'TEMP USER LOCATION');
+                self.createInfoWindow(tempUserLocation)
+              }
+            })
+          })
+        } else {
+        window.alert('no location found')
+        }
       }
     }
   }
@@ -230,4 +293,16 @@
   input {
     margin-bottom: 20px;
   }
+
+  .btn-circle {
+      width: 30px;
+      height: 30px;
+      padding: 1px 1px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.42857;
+      margin-left: 40px;
+  }
+
 </style>
