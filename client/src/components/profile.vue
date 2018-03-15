@@ -27,8 +27,12 @@
             <li><a href="#">Prop</a></li>
             <li><a href="#">Prop</a></li>
           </ul>
-          <li><router-link to="profile/map">Map</router-link></li>
-          <li><router-link to="profile/tasks">Tasks</router-link></li>
+          <li>
+            <router-link to="profile/map">Map</router-link>
+          </li>
+          <li>
+            <router-link to="profile/tasks">Tasks</router-link>
+          </li>
       </ul>
       <button v-on:click="logout" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
     </nav>
@@ -55,15 +59,15 @@
   </div>
 
   <div></div>
+  <!-- <div class ="greetingContainer">
+<h1>Goodmoring {{msg}}</h1>
+</div> -->
 
+<p>hey</p>
 
   <!--  Interchange pages-->
-  <div class="pageContainer" mt-auto>
-
-    <h1>Goodmoring {{msg}}</h1>
-
-     <router-view></router-view>
-
+  <div class="pageContainer">
+    <router-view></router-view>
   </div>
 
 </div>
@@ -93,34 +97,32 @@ export default {
 }
 
 
-function loadShit () {
+function loadShit() {
 
- console.log(window.localStorage, 'HEY I AM THE STORAGE IN LOAD SHIT');
+  console.log(window.localStorage, 'HEY I AM THE STORAGE IN LOAD SHIT');
 
-      $("#sidebar").mCustomScrollbar({
-        theme: "minimal"
-      });
+  $("#sidebar").mCustomScrollbar({
+    theme: "minimal"
+  });
 
-      // when opening the sidebar
-      $('#sidebarCollapse').on('click', function() {
-        // open sidebar
-        $('#sidebar').addClass('active');
-        // fade in the overlay
-        $('.overlay').fadeIn();
-        $('.collapse.in').toggleClass('in');
-        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-      });
+  // when opening the sidebar
+  $('#sidebarCollapse').on('click', function() {
+    // open sidebar
+    $('#sidebar').addClass('active');
+    // fade in the overlay
+    $('.overlay').fadeIn();
+    $('.collapse.in').toggleClass('in');
+    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+  });
 
-      // if dismiss or overlay was clicked
-      $('#dismiss, .overlay').on('click', function() {
-        // hide the sidebar
-        $('#sidebar').removeClass('active');
-        // fade out the overlay
-        $('.overlay').fadeOut();
-      });
+  // if dismiss or overlay was clicked
+  $('#dismiss, .overlay').on('click', function() {
+    // hide the sidebar
+    $('#sidebar').removeClass('active');
+    // fade out the overlay
+    $('.overlay').fadeOut();
+  });
 }
-
-
 </script>
 <style>
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
@@ -313,5 +315,9 @@ a.article:hover {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.pageContainer {
+  margin: 100px;
 }
 </style>
