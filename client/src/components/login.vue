@@ -45,7 +45,7 @@ export default {
           localStorage.setItem('name', response.data.name);
           localStorage.setItem('id', response.data.id);
         }).catch(function(error) {
-          console.log(error);
+          console.log(error, 'Login Error');
         });
     }
   }
