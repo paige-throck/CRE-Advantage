@@ -61,6 +61,8 @@
   <div class="pageContainer" mt-auto>
 
     <h1>Goodmoring {{msg}}</h1>
+     <router-view></router-view>
+
   </div>
 
 </div>
@@ -91,7 +93,9 @@ export default {
 
 
 function loadShit () {
+
  console.log(window.localStorage, 'HEY I AM THE STORAGE IN LOAD SHIT');
+
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"
       });

@@ -26,7 +26,9 @@
   //let markerCoordinates;
 
   export default {
-    name: 'PropertyMap',
+
+    name: 'Map',
+
     data() {
       return {
         filterChosen: '',
@@ -59,6 +61,7 @@
         self.getDatabaseProperties()
       },
       /* =====================================================
+
       Get properties currently in the user database and setup to add to map
       ====================================================== */
       getDatabaseProperties: function () {
@@ -66,6 +69,7 @@
         let self = this
         let id = window.localStorage.id
           axios.get(`http://localhost:8881/properties/${id}`)
+
             .then(function(properties) {
 
               properties.data.forEach(function(property) {
@@ -204,7 +208,9 @@
       ====================================================== */
       saveNewProperty: function (newProperty) {
         newProperty.prospective_prop = true;
+
         newProperty.id = window.localStorage.id
+
 
         axios.post('http://localhost:8881/properties/save', newProperty)
           .then(function(response) {
