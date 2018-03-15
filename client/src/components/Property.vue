@@ -1,7 +1,7 @@
 <template>
   <div class="property">
 
-<p>Property working?</p>
+<p>Property working???</p>
 
 </div>
 </template>
