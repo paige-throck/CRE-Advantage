@@ -35,7 +35,6 @@
         map: null,
         infowindow: null,
         places: null,
-        addListenerToSaveButton: null,
         googleMarkerArr: []
       }
     },
@@ -156,7 +155,7 @@
               self.addMarker(infowindow, individualMarker)
             } else {
               infowindow = new google.maps.InfoWindow({
-                content: '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>' + '</h1>' + '<button type="button" id="savePropertyButton" onclick="addListenerToSaveButton()">' + 'Save' +
+                content: '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>' + '</h1>' + '<button type="button" id="savePropertyButton">' + 'Save' +
                   '</button>'
               })
               self.addMarker(infowindow, individualMarker)
@@ -191,18 +190,31 @@
 
         console.log(marker.position.lat(), 'MARKER BEFORE');
         marker.addListener('click', function() {
-          console.log(marker.position.lat(), 'marker inside the click');
-          console.log(marker, 'MARKERT CONTENT');
           infowindow.open(self.map, marker)
-        })
 
-        self.addListenerToSaveButton = setTimeout(function() {
-          document.getElementById('savePropertyButton').addEventListener('click', function() {
-            self.saveNewProperty(individualMarker)
-            infowindow.close()
-          })
-        }, 2000)
+          if (infowindow.content.includes('<button')){
+            //addListenerToSaveButton()
+            document.getElementById('savePropertyButton')
+            .addEventListener('click', function() {
+              infowindow.close()
+              infowindow.setContent('<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>')
+              self.saveNewProperty(individualMarker)
+            })
+          }
+        })
       },
+    //   addListenerToSaveButton: function (event) {
+    //   //  document.getElementById('savePropertyButton')
+    //   //  .addEventListener('click', function() {
+    //     console.log(event.composedPath(), 'HEY EVENT');
+    //     let path = event.composedPath()
+    //     let infowindow = path[1]
+    //     console.log(infowindow, 'INFO WINDOW THAT SUCKS');
+    //       infowindow.close()
+    //       self.saveNewProperty(individualMarker)
+    //
+    // //  })
+    //   },
       /* =====================================================
       Save a searched property location to the database
       ====================================================== */
