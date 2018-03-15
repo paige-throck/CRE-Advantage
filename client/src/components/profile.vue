@@ -67,13 +67,15 @@
 </template>
 
 <script>
-
 export default {
   name: 'Profile',
   data() {
     return {
       msg: window.localStorage.name
     }
+  },
+  mounted: function() {
+    loadShit()
   },
   methods: {
 
@@ -82,42 +84,36 @@ export default {
       localStorage.clear();
 
       self.$router.push('/login')
-      console.log(window.localStorage, 'localStorage');
+      console.log(window.localStorage);
     }
   }
 }
 
+function loadShit () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
 
+      // when opening the sidebar
+      $('#sidebarCollapse').on('click', function() {
+        // open sidebar
+        $('#sidebar').addClass('active');
+        // fade in the overlay
+        $('.overlay').fadeIn();
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
 
-$(document).ready(function() {
-
-  $("#sidebar").mCustomScrollbar({
-    theme: "minimal"
-  });
-
-  // when opening the sidebar
-  $('#sidebarCollapse').on('click', function() {
-    // open sidebar
-    $('#sidebar').addClass('active');
-    // fade in the overlay
-    $('.overlay').fadeIn();
-    $('.collapse.in').toggleClass('in');
-    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-  });
-
-  // if dismiss or overlay was clicked
-  $('#dismiss, .overlay').on('click', function() {
-    // hide the sidebar
-    $('#sidebar').removeClass('active');
-    // fade out the overlay
-    $('.overlay').fadeOut();
-  });
-});
-
-console.log(window.localStorage, 'this is the session data in profile');
+      // if dismiss or overlay was clicked
+      $('#dismiss, .overlay').on('click', function() {
+        // hide the sidebar
+        $('#sidebar').removeClass('active');
+        // fade out the overlay
+        $('.overlay').fadeOut();
+      });
+}
 
 </script>
-
 <style>
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
