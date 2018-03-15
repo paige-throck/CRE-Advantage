@@ -5,7 +5,7 @@
   <div class="wrapper">
     <nav id="sidebar">
 
-      <!-- Close Sidebar Button -->
+      <!-- Close Sideba Button -->
       <div id="dismiss">
         <i class="glyphicon glyphicon-arrow-left"></i>
       </div>
@@ -86,14 +86,16 @@ export default {
       localStorage.clear();
 
       self.$router.push('/login')
-      console.log(window.localStorage);
+      console.log(window.localStorage, 'storage after logout');
     }
   }
 }
 
 
 function loadShit () {
-  // console.log(req.ression, 'HEY I AM THE SESSION IN LOAD SHIT');
+
+ console.log(window.localStorage, 'HEY I AM THE STORAGE IN LOAD SHIT');
+
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"
       });
