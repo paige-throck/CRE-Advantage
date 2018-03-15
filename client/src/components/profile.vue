@@ -27,7 +27,7 @@
             <li><a href="#">Prop</a></li>
             <li><a href="#">Prop</a></li>
           </ul>
-          <li>Map</li>
+          <li><router-link to="profile/map">Map</router-link></li>
           <li><router-link to="profile/tasks">Tasks</router-link></li>
       </ul>
       <button v-on:click="logout" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
