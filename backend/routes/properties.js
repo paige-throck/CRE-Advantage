@@ -17,20 +17,20 @@ const filterInt = function(value) {
 };
 
 
-router.get('/', function(req, res) {
-  knex('properties')
+router.get('/:id', function(req, res) {
+  knex('properties').where('user_id', req.params.id)
     .then(function(results) {
       res.send(results)
     })
 })
 
 router.post('/save', function(req, res) {
-  console.log(req.body, 'REQ PARAMS IN ROUTE');
   let property = {
     lat: req.body.latitude,
     lang: req.body.longitude,
     address: req.body.address,
     prospective_prop: req.body.prospective_prop,
+    user_id: req.body.id
   }
 
   return knex('properties').insert(property)
