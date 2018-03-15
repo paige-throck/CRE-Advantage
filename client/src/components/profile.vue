@@ -5,7 +5,7 @@
   <div class="wrapper">
     <nav id="sidebar">
 
-      <!-- Close Sidebar Button -->
+      <!-- Close Sideba Button -->
       <div id="dismiss">
         <i class="glyphicon glyphicon-arrow-left"></i>
       </div>
