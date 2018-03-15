@@ -90,6 +90,7 @@ export default {
 }
 
 function loadShit () {
+  console.log(req.ression, 'HEY I AM THE SESSION IN LOAD SHIT');
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"
       });
