@@ -41,9 +41,6 @@ methods: {
       self.$router.push('/profile')
       localStorage.setItem('sessionData', response.data.session);
       localStorage.setItem('name', response.data.name);
-
-      console.log(window.localStorage);
-      console.log(response.data)
       }).catch(function (error) {
           console.log(error);
       });
