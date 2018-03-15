@@ -14,7 +14,7 @@
 
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
-    <div>Don't have an Account, <router-link to="signup">Signup!</router-link></div>
+    <div>Don't have an Account, <router-link to="signup">Signup!!</router-link></div>
   </div>
 </template>
 
