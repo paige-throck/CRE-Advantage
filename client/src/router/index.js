@@ -5,7 +5,7 @@ import VueSession from 'vue-session'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
-import Profile from '@/components/Profile'
+import Profile from '@/components/profile'
 import Tasks from '@/components/Tasks'
 import Property from '@/components/Property'
 import PropMap from '@/components/PropMap'
@@ -38,11 +38,12 @@ export default new Router({
       name:'Profile',
       component: Profile,
       children: [
+
         {path:'tasks', component:Tasks},
 
         {path:'map', component:PropMap},
 
-        {path:'property', component:Property}
+        {path:'property/:id', component:Property}
       ]
     }
   ]
