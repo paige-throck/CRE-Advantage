@@ -262,7 +262,7 @@
       }
     }
   }
-
+console.log(window.localStorage, 'HEY LOCAL STORAGE');
 </script>
 
 
