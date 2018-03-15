@@ -67,7 +67,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Profile',
   data() {
@@ -82,14 +81,12 @@ export default {
       localStorage.clear();
 
       self.$router.push('/login')
-      console.log(window.localStorage, 'localStorage');
+      console.log(window.localStorage);
     }
   }
 }
 
-
-
-$(document).ready(function() {
+$(window).ready(function() {
 
   $("#sidebar").mCustomScrollbar({
     theme: "minimal"
@@ -115,7 +112,6 @@ $(document).ready(function() {
 });
 
 console.log(window.localStorage, 'this is the session data in profile');
-
 </script>
 
 <style>
