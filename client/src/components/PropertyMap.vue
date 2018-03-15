@@ -13,7 +13,7 @@
   <span>{{ filterChosen }} </span>
 
   <button v-model="userLocation" @click="pinUserLocation" type="button" class="btn btn-info btn-circle" id="addPin">+</button>
-  <span>{{ userLocation.addresss }}</span>
+  <span>{{ searchingForUser }}</span>
 
   <div class="property-map" id="mapId">
   </div>
@@ -31,6 +31,7 @@
       return {
         filterChosen: '',
         userLocation: '',
+        searchingForUser: '',
         markerCoordinates: [],
         map: null,
         infowindow: null,
@@ -65,7 +66,6 @@
         let self = this
           axios.get('http://localhost:8881/properties/')
             .then(function(properties) {
-              console.log(properties, 'properties');
 
               properties.data.forEach(function(property) {
 
@@ -77,7 +77,6 @@
                   prop_type: property.prop_type
                 })
               })
-              console.log(self.markerCoordinates, 'SELF MARKER COORDINATES');
               self.createInfoWindow(self.markerCoordinates)
             })
             .catch(function(error) {
@@ -101,7 +100,6 @@
         // find location entered in search box
         searchBox.addListener('places_changed', function() {
           self.places = searchBox.getPlaces();
-          console.log(self.places,'THIS IS SELF PLACES');
           if (self.places.length == 0) {
             return;
           }
@@ -109,7 +107,6 @@
           var bounds = new google.maps.LatLngBounds();
           self.places.forEach(function(place) {
             if (!place.geometry) {
-              console.log("Returned place contains no geometry");
               return;
             }
 
@@ -121,7 +118,6 @@
               name: place.name,
               prop_type: place.prop_type
             })
-            console.log(searchMarkers, 'search markerrsadflkjasdf');
 
             // change the map view if the marker is off the screen
             if (place.geometry.viewport) {
@@ -144,7 +140,7 @@
       createInfoWindow: function(markersArr) {
         var infowindow;
         let self = this
-          console.log(markersArr, 'MARKERS ARRAY');
+
           markersArr.forEach(function(individualMarker) {
 
             if (markersArr.length > 1) {
@@ -169,7 +165,6 @@
       ====================================================== */
       addMarker: function(infowindow, individualMarker) {
         let self = this
-        console.log(individualMarker, 'HEY THIS IS WHAT YOU ARE LOOKING FOR');
         let position = new google.maps.LatLng(individualMarker.latitude, individualMarker.longitude)
 
         let marker = new google.maps.Marker({
@@ -188,7 +183,6 @@
         // add reference to marker to be able to filter later
         self.googleMarkerArr.push(marker)
 
-        console.log(marker.position.lat(), 'MARKER BEFORE');
         marker.addListener('click', function() {
           infowindow.open(self.map, marker)
 
@@ -198,34 +192,20 @@
             .addEventListener('click', function() {
               infowindow.close()
               infowindow.setContent('<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>')
+
               self.saveNewProperty(individualMarker)
             })
           }
         })
       },
-    //   addListenerToSaveButton: function (event) {
-    //   //  document.getElementById('savePropertyButton')
-    //   //  .addEventListener('click', function() {
-    //     console.log(event.composedPath(), 'HEY EVENT');
-    //     let path = event.composedPath()
-    //     let infowindow = path[1]
-    //     console.log(infowindow, 'INFO WINDOW THAT SUCKS');
-    //       infowindow.close()
-    //       self.saveNewProperty(individualMarker)
-    //
-    // //  })
-    //   },
       /* =====================================================
       Save a searched property location to the database
       ====================================================== */
       saveNewProperty: function (newProperty) {
-        console.log(newProperty, 'WHATTTTTTTTTTTT');
         newProperty.prospective_prop = true;
-        console.log(newProperty, 'DID IT ADD THE PROP');
 
         axios.post('http://localhost:8881/properties/save', newProperty)
           .then(function(response) {
-            console.log(response, 'HEY DID I WORK')
             return
           })
           .catch(function(error) {
@@ -237,7 +217,6 @@
       ====================================================== */
       filterProperties: function () {
         let self = this
-        console.log(self.googleMarkerArr, 'google marker array');
 
         // set filtered values to visibile and others to hidden
           for(var i = 0; i < self.googleMarkerArr.length; i++)
@@ -255,16 +234,17 @@
         let self = this
         let tempUserLocation = []
         let geocoder = new google.maps.Geocoder;
-        console.log(navigator.geolocation, 'FIND ME');
-
+        self.searchingForUser = "Finding you..."
 
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
-            console.log(position.coords, 'COOOOORDS');
+            self.searchingForUser = ''
             self.userLocation = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             }
+
+            self.map.setCenter(self.userLocation)
 
             geocoder.geocode({location: self.userLocation}, function(results, status) {
               if (status === "OK") {
@@ -272,13 +252,12 @@
                 self.userLocation.latitude = self.userLocation.lat
                 self.userLocation.longitude = self.userLocation.lng
                 tempUserLocation.push(self.userLocation)
-                  console.log(tempUserLocation, 'TEMP USER LOCATION');
                 self.createInfoWindow(tempUserLocation)
               }
             })
           })
         } else {
-        window.alert('no location found')
+        window.alert('You were not found')
         }
       }
     }
