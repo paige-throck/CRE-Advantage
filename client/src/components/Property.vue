@@ -1,9 +1,13 @@
 <template>
-  <div class="property">
 
+
+<div>
 <p>Property working???</p>
 
 </div>
+
+
+
 </template>
 
 <script>

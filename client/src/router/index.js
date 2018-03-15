@@ -43,7 +43,7 @@ export default new Router({
 
         {path:'map', component:map},
 
-        {path:'property', component:Property}
+        {path:'property/:id', component:Property}
       ]
     }
   ]

@@ -12,6 +12,8 @@
 
   <span>{{ filterChosen }} </span>
 
+<router-link to="profile">hey</router-link>
+
   <button v-model="userLocation" @click="pinUserLocation" type="button" class="btn btn-info btn-circle" id="addPin">+</button>
   <span>{{ searchingForUser }}</span>
 
@@ -69,7 +71,7 @@
           axios.get(`http://localhost:8881/properties/${id}`)
 
             .then(function(properties) {
-
+              console.log(properties, 'properties');
               properties.data.forEach(function(property) {
 
                 // push all property coordinates to array for markers
@@ -77,7 +79,8 @@
                   latitude: property.lat,
                   longitude: property.lang,
                   address: property.address,
-                  prop_type: property.prop_type
+                  prop_type: property.prop_type,
+                  prop_id: property.id
                 })
               })
               self.createInfoWindow(self.markerCoordinates)
@@ -145,11 +148,13 @@
         let self = this
 
           markersArr.forEach(function(individualMarker) {
-
+            console.log(individualMarker, 'markerrrrrrrrrrrrrrrrr');
+            let tempId = individualMarker.prop_id
             if (markersArr.length > 1) {
+              console.log("hey");
               // add property address to info window
               infowindow = new google.maps.InfoWindow({
-                content: '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>'
+                content: '<p>' + '<router-link to="profile/property/${tempId}">' + individualMarker.address + '</router-link>' + '</p>'
               })
               self.addMarker(infowindow, individualMarker)
             } else {

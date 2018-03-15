@@ -66,14 +66,25 @@
 <p>hey</p>
 
   <!--  Interchange pages-->
+
+  <div class="pageContainer" mt-auto>
+
+
+    <h1>Goodmoring {{msg}}</h1>
+
+
   <div class="pageContainer">
     <router-view></router-view>
+
   </div>
+
 
 </div>
 </template>
 
 <script>
+//import Property from 'Property'
+
 export default {
   name: 'Profile',
   data() {
