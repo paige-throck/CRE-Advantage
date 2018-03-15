@@ -34,6 +34,12 @@ export default new Router({
 
     },
     {
+      path: '/map',
+      name: 'PropMap',
+      component: PropMap
+
+    },
+    {
       path: '/profile',
       name:'Profile',
       component: Profile,
