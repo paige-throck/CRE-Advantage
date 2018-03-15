@@ -2,10 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import VueSession from 'vue-session'
 
-import Home from '@/components/home'
-import Login from '@/components/login'
-import Signup from '@/components/signup'
-import Profile from '@/components/profile'
+import Home from '@/components/Home'
+import Login from '@/components/Login'
+import Signup from '@/components/Signup'
+import Profile from '@/components/Profile'
+import Tasks from '@/components/Tasks'
+import Property from '@/components/Property'
 import PropertyMap from '@/components/PropertyMap'
 
 
@@ -34,7 +36,12 @@ export default new Router({
     {
       path: '/profile',
       name:'Profile',
-      component: Profile
+      component: Profile,
+      children: [
+        {path:'tasks', component:Tasks},
+        {path:'map', component:PropertyMap},
+        {path:'property', component:Property}
+      ]
     },
     {
       path: '/map',

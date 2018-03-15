@@ -61,6 +61,8 @@
   <div class="pageContainer" mt-auto>
 
     <h1>Goodmoring {{msg}}</h1>
+     <router-view></router-view>
+
   </div>
 
 </div>
@@ -91,7 +93,7 @@ export default {
 
 
 function loadShit () {
-  console.log(req.ression, 'HEY I AM THE SESSION IN LOAD SHIT');
+  // console.log(req.ression, 'HEY I AM THE SESSION IN LOAD SHIT');
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"
       });
