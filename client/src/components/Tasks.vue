@@ -1,6 +1,6 @@
 <template>
   <div class="tasks">
-
+<Nav></Nav>
 <p>Tasks working?</p>
 
 
