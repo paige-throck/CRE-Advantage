@@ -9,6 +9,8 @@ import Profile from '@/components/profile'
 import Tasks from '@/components/Tasks'
 import Property from '@/components/Property'
 import PropMap from '@/components/PropMap'
+import Nav from '@/components/Nav'
+import App from '@/App'
 
 
 
@@ -16,8 +18,7 @@ Vue.use(Router)
 Vue.use(VueSession)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'Home',
       component: Home
@@ -31,20 +32,34 @@ export default new Router({
       path: '/signup',
       name: 'Signup',
       component: Signup
-
     },
     {
       path: '/profile',
-      name:'Profile',
-      component: Profile,
-      children: [
-
-        {path:'tasks', component:Tasks},
-
-        {path:'map', component:PropMap},
-
-        {path:'property/:id', component:Property}
-      ]
+      name: 'Profile',
+      component: Profile
+      // children: [
+      //
+      //   {path:'tasks', component:Tasks},
+      //
+      //   {path:'map', name: 'PropMap', component:PropMap},
+      //
+      //   {path:'property/:id', component:Property}
+      // ]
+    },
+    {
+      path: '/property/:id',
+      name: 'Property',
+      component: Property
+    },
+    {
+      path: '/map',
+      name: 'PropMap',
+      component: PropMap
+    },
+    {
+      path: '/tasks',
+      name: 'Tasks',
+      component: Tasks
     }
   ]
 });

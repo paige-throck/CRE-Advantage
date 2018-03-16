@@ -1,6 +1,10 @@
 <template>
 
 <div>
+
+<!-- <Nav></Nav> -->
+
+<div>
   <input id="search-input" class="controls" type="text" placeholder="Search Box">
 
   <select v-model="filterChosen" v-on:change="filterProperties">
@@ -12,23 +16,27 @@
 
   <span>{{ filterChosen }} </span>
 
-<router-link to="profile">hey</router-link>
 
   <button v-model="userLocation" @click="pinUserLocation" type="button" class="btn btn-info btn-circle" id="addPin">+</button>
   <span>{{ searchingForUser }}</span>
 
+<router-link :to="{path: '/profile'}">UGHZIES</router-link>
+
+
   <div class="property-map" id="mapId">
   </div>
 </div>
+</div>
+
 
 </template>
 
 <script>
   import axios from 'axios';
-  //let markerCoordinates;
+
 
   export default {
-    name: 'PropMap',
+    // name: 'PropMap',
     data() {
       return {
         filterChosen: '',
@@ -38,11 +46,15 @@
         map: null,
         infowindow: null,
         places: null,
-        googleMarkerArr: []
+        googleMarkerArr: [],
+        searchBox: null,
+        bounds: null,
+        input: null
       }
     },
     mounted: function() {
       this.initMap()
+
     },
     methods: {
       /* =====================================================
@@ -95,22 +107,22 @@
       createSearchBox: function() {
         let self = this
         var searchMarkers = [];
-        let input = document.getElementById('search-input');
-        let searchBox = new google.maps.places.SearchBox(input);
+        self.input = document.getElementById('search-input');
+        self.searchBox = new google.maps.places.SearchBox(self.input);
 
         // first search results return based on the map location
         self.map.addListener('bounds_changed', function() {
-          searchBox.setBounds(self.map.getBounds());
+          self.searchBox.setBounds(self.map.getBounds());
         });
 
         // find location entered in search box
-        searchBox.addListener('places_changed', function() {
-          self.places = searchBox.getPlaces();
+        self.searchBox.addListener('places_changed', function() {
+          self.places = self.searchBox.getPlaces();
           if (self.places.length == 0) {
             return;
           }
 
-          var bounds = new google.maps.LatLngBounds();
+          self.bounds = new google.maps.LatLngBounds();
           self.places.forEach(function(place) {
             if (!place.geometry) {
               return;
@@ -127,11 +139,11 @@
 
             // change the map view if the marker is off the screen
             if (place.geometry.viewport) {
-              bounds.union(place.geometry.viewport);
+              self.bounds.union(place.geometry.viewport);
             } else {
-              bounds.extend(place.geometry.location);
+              self.bounds.extend(place.geometry.location);
             }
-            self.map.fitBounds(bounds)
+            self.map.fitBounds(self.bounds)
 
             // empty search box
             input.value = ''
@@ -154,7 +166,7 @@
               console.log("hey");
               // add property address to info window
               infowindow = new google.maps.InfoWindow({
-                content: '<p>' + '<router-link to="profile/property/${tempId}">' + individualMarker.address + '</router-link>' + '</p>'
+                content: '<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>'
               })
               self.addMarker(infowindow, individualMarker)
             } else {
@@ -273,6 +285,8 @@
       }
     }
   }
+
+
 </script>
 
 
@@ -284,7 +298,7 @@
     background: grey;
   }
 
-  div {
+  .property-map {
     width: 600px;
     height: 600px;
     margin: 0 auto;
