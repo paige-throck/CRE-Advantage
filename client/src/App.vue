@@ -13,16 +13,16 @@ import PropMap from './components/PropMap.vue'
 import Property from './components/Property.vue'
 import Profile from './components/profile.vue'
 import Nav from './components/Nav.vue'
-// import profile from './components/profile.vue'
-//
+import Tasks from './components/Tasks.vue'
 
 export default {
   name: 'App',
   components: {
-    'prop-map': PropMap,
+    'PropMap': PropMap,
     'Property': Property,
     'Profile': Profile,
-    'Nav': Nav
+    'Nav': Nav,
+    'Tasks': Tasks
   }
 }
 </script>

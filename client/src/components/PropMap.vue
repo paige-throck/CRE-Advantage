@@ -33,10 +33,10 @@
 
 <script>
   import axios from 'axios';
-
+  import Nav from './Nav'
 
   export default {
-    // name: 'PropMap',
+    name: 'PropMap',
     data() {
       return {
         filterChosen: '',

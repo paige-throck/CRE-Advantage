@@ -3,11 +3,10 @@
 
   <Nav></Nav>
 
-  <h3>CRE ADVANTAGE</h3>
+  <!-- <h3>CRE ADVANTAGE</h3> -->
 
   <h1>Goodmoring {{msg}}</h1>
-  <router-view></router-view>
-
+  <!-- <router-view></router-view> -->
 
 </div>
 </template>
@@ -16,13 +15,16 @@
 
 import Property from './Property.vue'
 import Nav from './Nav.vue'
+import Tasks from './Tasks.vue'
+import PropMap from './PropMap.vue'
 
 
 export default {
   name: 'Profile',
   components: {
     'property': Property,
-    'Nav': Nav
+    'Nav': Nav,
+    'Tasks': Tasks
   },
   data() {
     return {
