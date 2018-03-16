@@ -1,17 +1,17 @@
 <template>
-  <div class="tasks">
+<div class="tasks">
+
+<router-link to="/profile">CRE Advanatage</router-link>
 <Nav></Nav>
-<p>Tasks working?</p>
-
-
-
 </div>
+
+
 </template>
 
 <script>
 
 import axios from 'axios';
-
+import Nav from './Nav'
 
 export default {
   name: 'Tasks',

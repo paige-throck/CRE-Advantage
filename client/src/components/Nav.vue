@@ -9,14 +9,15 @@
       </div>
 
       <!-- Sidebar Header -->
-      <div class="sidebar-header">
-        <h3>Collapsible Sidebar</h3>
-      </div>
 
       <!-- Sidebar Links -->
       <ul class="list-unstyled components">
         <!-- <li class="active"><a href="#">Properties</a></li>
         <li><a href="#">Map</a></li> -->
+
+        <li>
+          <router-link to="/profile">CRE Advantage</router-link>
+        </li>
         <li>
           <!-- Link with dropdown items -->
           <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Properties</a>
@@ -35,74 +36,77 @@
       <button v-on:click="logout" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
     </nav>
 
-    <div class="overlay"></div>
 
 
+    <!-- <div class="overlay"></div> -->
 
 
-  <div id="content">
-    <div class="row">
-      <div class="col-sm-2">
-        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+    <div id="content" class="row">
+
+        <div class="col-sm-2">
+          <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
           <i class="glyphicon glyphicon-align-left"></i>
           Toggle Sidebar
-      </button>
-</div>
-</div>
-</div>
-</div>
-<!-- 
+        </button>
+        </div>
+        <div class="col-sm-8">
+          <h3>CRE Advantage</h3>
+        </div>
+        <div class="col-sm-2">
+        </div>
+
+    </div>
+
+
+  </div>
+  <!--
 <router-view></router-view> -->
 </div>
-
-
-
 </template>
 
 <script>
-
 import axios from 'axios';
 
 
 export default {
   name: 'Nav',
-  mounted: function () {
+  mounted: function() {
     loadShit()
   }
-  }
+}
 
 
-  function loadShit() {
+function loadShit() {
 
-    console.log(window.localStorage, 'HEY I AM THE STORAGE IN LOAD SHIT');
+  console.log(window.localStorage, 'HEY I AM THE STORAGE IN LOAD SHIT');
 
-    $("#sidebar").mCustomScrollbar({
-      theme: "minimal"
-    });
+  $("#sidebar").mCustomScrollbar({
+    theme: "minimal"
+  });
 
-    // when opening the sidebar
-    $('#sidebarCollapse').on('click', function() {
-      // open sidebar
-      $('#sidebar').addClass('active');
-      // fade in the overlay
-      $('.overlay').fadeIn();
-      $('.collapse.in').toggleClass('in');
-      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-    });
+  // when opening the sidebar
+  $('#sidebarCollapse').on('click', function() {
+    // open sidebar
+    $('#sidebar').addClass('active');
+    // fade in the overlay
+    // $('.overlay').fadeIn();
+    $('.collapse.in').toggleClass('in');
+    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+  });
 
-    // if dismiss or overlay was clicked
-    $('#dismiss, .overlay').on('click', function() {
-      // hide the sidebar
-      $('#sidebar').removeClass('active');
-      // fade out the overlay
-      $('.overlay').fadeOut();
-    });
-  }
-
+  // if dismiss or overlay was clicked
+  $('#dismiss, .overlay').on('click', function() {
+    // hide the sidebar
+    // $('#sidebar').style.display = 'none';
+    $('#sidebar').removeClass('active');
+    // fade out the overlay
+    // $('.overlay').fadeOut();
+  });
+}
 </script>
 
 
-<style>
+<style scoped>
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 body {
@@ -287,8 +291,8 @@ a.article:hover {
 
 #content {
   width: 100%;
-  padding: 20px;
-  min-height: 100vh;
+  /*padding: 20px;*/
+  /*min-height: 100vh;*/
   transition: all 0.3s;
   position: absolute;
   top: 0;
