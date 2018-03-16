@@ -16,7 +16,7 @@ return knex.schema.createTableIfNotExists('properties', function(table){
       table.increments('id');
       table.integer('user_id').references('users.id').onDelete('cascade');
       table.text('item').notNullable();
-      table.timestamp('task_date');
+      table.date('task_date');
       table.boolean('completed').defaultTo(false);
     })
   })

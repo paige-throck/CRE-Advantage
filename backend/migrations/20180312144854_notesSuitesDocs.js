@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
     table.text('tenant');
     table.integer('suite_size');
     table.float('rental_rate');
-    table.timestamp('lease_date');
+    table.string('lease_date');
   })
   .then(function(){
     return knex.schema.createTableIfNotExists('property_notes', function(table) {
