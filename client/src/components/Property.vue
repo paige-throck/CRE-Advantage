@@ -1,8 +1,6 @@
 <template>
 
 <div>
-<Nav></Nav>
-
 
 <div>
 <p>Property working???</p>
@@ -15,7 +13,6 @@
 
 
 <script>
-
 import axios from 'axios';
 import Nav from './Nav.vue'
 
@@ -24,16 +21,12 @@ export default {
   components: {
     'Nav': Nav
   }
-  }
-
+}
 
 </script>
 
 
 <style>
-
-
-
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
