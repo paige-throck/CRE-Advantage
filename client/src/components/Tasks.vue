@@ -1,8 +1,9 @@
 
 <template>
-<div class=" row tasks">
+<div class="row tasks">
 <Nav></Nav>
 
+<div class = "row tasksContent">
 {{ tasksArr }}
 
 <ul id="taskList">
@@ -60,6 +61,7 @@
 </div>
 
 </div>
+</div>
 </template>
 
 <script>
@@ -89,7 +91,8 @@ export default {
   }
 }
 </script>
-local
-<style>
 
+
+
+<style>
 </style>

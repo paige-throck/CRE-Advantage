@@ -1,14 +1,12 @@
 <template>
+<div class="row property">
+<Nav></Nav>
 
-<div>
-
-<div>
-<p>Property working???</p>
-<router-link to="/profile">You suck</router-link>
+<div class = "row propertyContent">
+  <p>Testing property spacing</p>
 </div>
 
 </div>
-
 </template>
 
 
@@ -27,21 +25,5 @@ export default {
 
 
 <style>
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
 
-#content {
-  width: 100%;
-  padding: 20px;
-  min-height: 100vh;
-  transition: all 0.3s;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.pageContainer {
-  margin: 100px;
-}
 </style>
