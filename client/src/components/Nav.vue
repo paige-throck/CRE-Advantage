@@ -1,15 +1,12 @@
 <template>
-<div>
-  <div class="wrapper">
+  <div class="row navbar">
     <nav id="sidebar">
-
       <!-- Close Sideba Button -->
       <div id="dismiss">
         <i class="glyphicon glyphicon-arrow-left"></i>
       </div>
 
       <!-- Sidebar Header -->
-
       <!-- Sidebar Links -->
       <ul class="list-unstyled components">
         <!-- <li class="active"><a href="#">Properties</a></li>
@@ -37,48 +34,51 @@
     </nav>
 
 
-
-    <!-- <div class="overlay"></div> -->
-
-
     <div id="content" class="row">
-
-        <div class="col-sm-2">
-          <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+      <div class="col-sm-2">
+        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
           <i class="glyphicon glyphicon-align-left"></i>
           Toggle Sidebar
         </button>
-        </div>
-        <div class="col-sm-8">
-          <h3>CRE Advantage</h3>
-        </div>
-        <div class="col-sm-2">
-        </div>
-
+      </div>
+      <div class="col-sm-8">
+        <h3>CRE Advantage</h3>
+      </div>
+      <div class="col-sm-2">
+      </div>
     </div>
 
-
-  </div>
-  <!--
-<router-view></router-view> -->
 </div>
 </template>
 
+
 <script>
 import axios from 'axios';
-
-
 export default {
   name: 'Nav',
   mounted: function() {
     loadShit()
+  },
+  data() {
+    return {
+      msg: window.localStorage.name
+    }
+  },
+  methods: {
+
+    logout: function() {
+      let self = this;
+      localStorage.clear();
+
+      self.$router.push('/login')
+      console.log(window.localStorage, 'storage after logout');
+    }
   }
 }
 
 
 function loadShit() {
-
-  console.log(window.localStorage, 'HEY I AM THE STORAGE IN LOAD SHIT');
+  console.log(window.localStorage, 'Local Storage');
 
   $("#sidebar").mCustomScrollbar({
     theme: "minimal"
@@ -290,13 +290,14 @@ a.article:hover {
 ----------------------------------------------------- */
 
 #content {
-  width: 100%;
-  /*padding: 20px;*/
+  /*margin-top: 1%;*/
+  /*width: 100%;
+  padding: 20px;*/
   /*min-height: 100vh;*/
-  transition: all 0.3s;
-  position: absolute;
-  top: 0;
-  right: 0;
+  /*transition: all 0.3s;*/
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*right: 0;*/
 }
 
 .pageContainer {

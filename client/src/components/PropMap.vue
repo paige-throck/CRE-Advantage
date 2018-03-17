@@ -1,8 +1,8 @@
 <template>
 
 <div>
+<Nav></Nav>
 
-<!-- <Nav></Nav> -->
 
 <div>
   <input id="search-input" class="controls" type="text" placeholder="Search Box">
