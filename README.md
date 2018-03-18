@@ -35,6 +35,5 @@
 
 <div>
 Created by:
-Paige Throckmorton
-Melissa Warren
+Paige Throckmorton and Melissa Warren
 </div>
