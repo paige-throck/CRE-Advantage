@@ -5,7 +5,7 @@
 
 <div class="form">
     <div class="input-group">
-      <input type="text" class="form-control" ng-model="task">
+      <input type="text" class="form-control" v-model="task.item">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button" v-on:click="addTask()"><span
           class="glyphicon glyphicon-plus"></span> Add Task</button>
@@ -47,7 +47,12 @@ export default {
   name: 'Tasks',
   data() {
     return {
-      tasksArr: []
+      tasksArr: [],
+      task:{
+        user_id: window.localStorage.id,
+        item: '',
+        task_date:''
+      }
     }
   },
   mounted: function() {
@@ -57,9 +62,21 @@ export default {
       .then(function(results) {
         console.log(results.data[0], 'results from get tassks');
         self.tasksArr.push(results.data);
-
       })
+  },
+  methods: {
+    addTask() {
+      let self = this;
+      let id = window.localStorage.id;
+      axios.post(`http://localhost:8881/tasks/${id}`, this.task)
+      .then(function (task) {
+        console.log('Add task working');
+        }).catch(function (error) {
+            console.log(error);
+        });
+      }
   }
+
 }
 </script>
 

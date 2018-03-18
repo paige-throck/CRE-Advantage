@@ -53,10 +53,11 @@ router.get('/:id/taskId', (req, res, next)=>{
 ///////////CREATE NEW TASK
 
   router.post('/:id', (req,res,next)=>{
-    const task = req.params;
-
+    console.log(req.body, 'body object');
+    const task = req.body;
+    const userId = filterInt(req.body.user_id)
     knex('tasks').insert({
-      user_id:task.user_id,
+      user_id:userId,
       item:task.item,
       task_date: task.date,
     })
