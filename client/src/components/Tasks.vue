@@ -8,18 +8,16 @@
 
     <div class="row">
       <div class="col-sm-10">
-        <!-- <div class="input-group"> -->
         <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
-        <!-- </div> -->
       </div>
 
       <div class="col-sm-2">
         <div class='input-group date' ref="datetimepicker">
-                <input type='text' class="form-control" :value="value" @change="updateTime($event)" />
-                <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
+          <input type="text" class="form-control" v-model="newTask.task_date"/>
+          <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
       </div>
     </div>
 
@@ -44,7 +42,7 @@
         <div>
           <span class="pull-right">
         <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
-          v-on:click="editTask(task)"></span></button>
+          v-on:click="editTask($event, task)"></span></button>
           <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
           v-on:click="doneTask($index)"></span></button>
           <button class="btn btn-primary btn-xs" v-show="task.done"><span class="glyphicon glyphicon-repeat"
@@ -56,7 +54,7 @@
       </li>
     </ul>
   </div>
-</div>
+
 </div>
 </template>
 
@@ -86,9 +84,8 @@ export default {
   },
   methods: {
     updateTime(event){
-
       this.$emit('input', event.target.value);
-        },
+    },
 
     getTasks() {
       let self = this;
@@ -102,6 +99,7 @@ export default {
         })
     },
     addTask() {
+      console.log(this.newTask, "New Task being created!!");
       let self = this;
       let id = window.localStorage.id;
       axios.post(`http://localhost:8881/tasks/${id}`, this.newTask)

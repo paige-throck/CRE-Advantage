@@ -56,10 +56,17 @@ router.get('/:id/taskId', (req, res, next)=>{
     console.log(req.body, 'body object');
     const task = req.body;
     const userId = filterInt(req.body.user_id)
+
+    if (task.task_date === ""){
+      task.task_date =  null
+    } else {
+      task.task_date = req.body.task_date;
+    }
+
     knex('tasks').insert({
       user_id:userId,
       item:task.item,
-      task_date: task.date,
+      task_date: task.task_date,
     })
     .returning('*')
     .then((task)=>{
