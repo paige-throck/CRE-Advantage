@@ -20,13 +20,13 @@
         <div>
           <span class="pull-right">
         <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
-          v-on:click="editTask($index)"></span></button>
+          v-on:click="editTask(task)"></span></button>
           <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
           v-on:click="doneTask($index)"></span></button>
           <button class="btn btn-primary btn-xs" v-show="task.done"><span class="glyphicon glyphicon-repeat"
           v-on:click="unDoneTask($index)"></span></button>
           <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
-          v-on:click="deleteTask($index)"></span></button>
+          v-on:click="deleteTask(task.id)"></span></button>
           </span>
         </div>
       </li>
@@ -74,6 +74,30 @@ export default {
         }).catch(function (error) {
             console.log(error);
         });
+      },
+
+      deleteTask(){
+        let self = this;
+        let id = window.localStorage.id;
+
+        axios.delete(`http://localhost:8881/tasks/${id}/${taskId}`, this.deleteTask)
+        .then(function () {
+
+          }).catch(function (error) {
+              console.log(error);
+          });
+      },
+
+      editTask(){
+        let self = this;
+        let id = window.localStorage.id;
+
+        axios.put(`http://localhost:8881/tasks/${id}/${taskId}`, this.task)
+        .then(function () {
+
+          }).catch(function (error) {
+              console.log(error);
+          });
       }
   }
 
