@@ -26,7 +26,7 @@
           <button class="btn btn-primary btn-xs" v-show="task.done"><span class="glyphicon glyphicon-repeat"
           v-on:click="unDoneTask($index)"></span></button>
           <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
-          v-on:click="deleteTask(task.id)"></span></button>
+          v-on:click="deleteTask($event, task.id)"></span></button>
           </span>
         </div>
       </li>
@@ -58,9 +58,10 @@ export default {
   mounted: function() {
     let self = this;
     let id = window.localStorage.id;
+
     axios.get(`http://localhost:8881/tasks/${id}`)
       .then(function(results) {
-        console.log(results.data[0], 'results from get tassks');
+        console.log(results.data, 'results from get tassks');
         self.tasksArr.push(results.data);
       })
   },
@@ -76,11 +77,14 @@ export default {
         });
       },
 
-      deleteTask(){
+      deleteTask(event, taskId){
         let self = this;
         let id = window.localStorage.id;
 
-        axios.delete(`http://localhost:8881/tasks/${id}/${taskId}`, this.deleteTask)
+        console.log(taskId, "the task id");
+        console.log(id, 'user id');
+
+        axios.delete(`http://localhost:8881/tasks/${id}/${taskId}`)
         .then(function () {
 
           }).catch(function (error) {

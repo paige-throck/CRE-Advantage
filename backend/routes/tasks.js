@@ -83,11 +83,13 @@ router.put('/:id/taskId', (req,res,next)=>{
 
 /////////////DELETE SINGLE TASK
 
-router.delete('/:id/taskId', (req, res, next)=>{
+router.delete('/:id/:taskId', (req, res, next)=>{
   const userId = filterInt(req.params.id);
   const taskId = filterInt(req.params.taskId);
 
-  knex('tasks').where(taskId, 'id').del('*')
+  console.log(userId, 'vkbwnkgjr3b3gr', taskId, 'b3vrgb3hynbhetbg5gt4e');
+
+  knex('tasks').where('id', taskId).del('*')
   .then(() => {
     res.send(200);
   })
