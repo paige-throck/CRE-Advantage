@@ -2,7 +2,7 @@
 <template>
 <div class="row tasks">
   <Nav></Nav>
-
+<p>Date: <input type="text" id="datepicker"></p>
 <div class="form">
     <div class="input-group">
       <input type="text" class="form-control" v-model="task.item">
@@ -40,8 +40,11 @@
 import axios from 'axios';
 import Nav from './Nav'
 
-console.log(localStorage.id, "User id");
 
+
+ function() {
+    $( "#datepicker" ).datepicker();
+  } );
 export default {
 
   name: 'Tasks',
