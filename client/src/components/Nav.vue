@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class = "row nav">
   <div class="wrapper">
     <nav id="sidebar">
       <!-- Close Sideba Button -->
@@ -47,6 +47,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 </template>
 <script>
@@ -257,7 +258,7 @@ a.article:hover {
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
-  
+
 }
 .pageContainer {
   margin: 100px;

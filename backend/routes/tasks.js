@@ -21,7 +21,7 @@ const filterInt = function(value) {
 router.get('/:id', (req, res, next)=>{
   const userId = filterInt(req.params.id);
   console.log(userId);
-  knex('tasks').where('user_id', userId).select('*')
+  knex('tasks').where('user_id', userId).select('*').orderBy('task_date', 'asc')
   .then((tasks) => {
     console.log(tasks);
     res.json(tasks);

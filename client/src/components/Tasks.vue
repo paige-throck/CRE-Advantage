@@ -3,38 +3,62 @@
 <div class="row tasks">
   <Nav></Nav>
 
-  <form class="form-tasks" @submit.prevent="addTask">
-    <div class="input-group">
-      <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
-      <div></div>
 
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="submit"><span
+  <form class="form-tasks" @submit.prevent="addTask">
+
+    <div class="row">
+      <div class="col-sm-10">
+        <!-- <div class="input-group"> -->
+        <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
+        <!-- </div> -->
+      </div>
+
+      <div class="col-sm-2">
+        <div class="form-group">
+          <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control"></input>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-2">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><span
           class="glyphicon glyphicon-plus"></span> Add Task</button>
-      </span>
+        </span>
+      </div>
+      <div class="col-sm-10">
+      </div>
     </div>
   </form>
 
 
-  <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
-    <li class="list-group-item clearfix task" >
-      <p class="lead">{{task.item}}</p>
-      <div>
-        <span class="pull-right">
+
+  <div class="row taskList">
+    <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
+      <li class="list-group-item clearfix task">
+        <p class="lead">{{task.item}}</p>
+        <div>
+          <span class="pull-right">
         <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
           v-on:click="editTask(task)"></span></button>
-        <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
+          <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
           v-on:click="doneTask($index)"></span></button>
-        <button class="btn btn-primary btn-xs" v-show="task.done"><span class="glyphicon glyphicon-repeat"
+          <button class="btn btn-primary btn-xs" v-show="task.done"><span class="glyphicon glyphicon-repeat"
           v-on:click="unDoneTask($index)"></span></button>
-        <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+          <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
           v-on:click="deleteTask($event, task.id)"></span></button>
-        </span>
-      </div>
-    </li>
-  </ul>
-
-
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 </div>
 </template>
 
@@ -46,7 +70,6 @@ import Nav from './Nav'
 
 
 export default {
-
   name: 'Tasks',
   data() {
     return {
