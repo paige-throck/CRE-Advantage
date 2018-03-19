@@ -14,14 +14,12 @@
       </div>
 
       <div class="col-sm-2">
-        <div class="form-group">
-          <div class='input-group date' id='datetimepicker1'>
-            <input type='text' class="form-control"></input>
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-          </div>
-        </div>
+        <div class='input-group date' ref="datetimepicker">
+                <input type='text' class="form-control" :value="value" @change="updateTime($event)" />
+                <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
       </div>
     </div>
 
@@ -82,9 +80,16 @@ export default {
     }
   },
   mounted: function() {
-    this.getTasks();
+    this.getTasks()
+    $(this.$refs.datetimepicker).datetimepicker()
+
   },
   methods: {
+    updateTime(event){
+
+      this.$emit('input', event.target.value);
+        },
+
     getTasks() {
       let self = this;
       let id = window.localStorage.id;
