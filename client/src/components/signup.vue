@@ -20,7 +20,7 @@
   </form>
 
   <div>Already have an account?
-    <router-link to="login">Login!</router-link>
+    <router-link to="login">Login</router-link>
   </div>
 </div>
 </template>

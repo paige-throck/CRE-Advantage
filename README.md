@@ -1,5 +1,5 @@
 # CRE Advantage
-<p>A full-stack mobile responsive application for Commercial Real Estate Brokers that gives them an advantage in the market by keeping track of property information, property notes, daily and weekly tasks and property locations through Google Maps API.</p>
+<p>CRE Advantage is a full-stack mobile responsive application for Commercial Real Estate Brokers. The application gives Brokers an advantage in the market by helping them to keep track of property information, property notes, daily and weekly tasks and property locations through Google Maps API.</p>
 
 
 # Build Tools
@@ -7,7 +7,7 @@
 <li>Javascript</li>
 <li>HTML5</li>
 <li>CSS</li>
-<li>Kube</li>
+<li>Bootstrap</li>
 <li>PostgreSQL</li>
 <li>Knex</li>
 <li>Express</li>
@@ -16,7 +16,7 @@
 <li>Google Places/Maps API</li>
 <li>Amazon S3 Bucket </li>
 <li>Express Mailer</li>
-<li> Notify.js</li>
+<li>Notify.js</li>
 </ul>
 
 
@@ -32,3 +32,8 @@
 
 # ERD
 ![alt tag](screenshots/erd.png)
+
+<div>
+Created by:
+Paige Throckmorton and Melissa Warren
+</div>

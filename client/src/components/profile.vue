@@ -1,12 +1,11 @@
 <template>
-<div class="profile">
+<div class="row profile">
 
-  <Nav></Nav>
+<Nav></Nav>
 
-  <!-- <h3>CRE ADVANTAGE</h3> -->
-
-  <h1>Goodmoring {{msg}}</h1>
-  <!-- <router-view></router-view> -->
+<div class = "row profileContent">
+<h1>Goodmoring {{msg}}</h1>
+</div>
 
 </div>
 </template>

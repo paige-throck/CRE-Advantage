@@ -1,4 +1,5 @@
 <template>
+
 <div>
   <Nav></Nav>
 
@@ -224,6 +225,15 @@
       </div>
     </div>
   </div>
+
+<div class="row property">
+<Nav></Nav>
+
+<div class = "row propertyContent">
+  <p>Testing property spacing</p>
+</div>
+
+
 </div>
 </template>
 
@@ -236,6 +246,7 @@ export default {
   name: 'Property',
   components: {
     'Nav': Nav
+
   },
   data() {
     return {
@@ -273,11 +284,16 @@ export default {
       let prop_id = this.$route.params.id
       let user_id = window.localStorage.id
 
+  }
+}
+
+
       axios.get(`http://localhost:8881/properties/${user_id}/${prop_id}`)
         .then(function(result) {
           self.property.push(result.data[0][0])
           self.suites.push(result.data[1])
           self.notes.push(result.data[2][0].notes)
+
 
 
 
@@ -392,4 +408,5 @@ export default {
 .rightCol {
   background-color: red;
 } */
+
 </style>

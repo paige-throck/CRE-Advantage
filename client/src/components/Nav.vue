@@ -1,15 +1,12 @@
 <template>
-<div>
-  <div class="wrapper">
+  <div class="row navbar">
     <nav id="sidebar">
-
       <!-- Close Sideba Button -->
       <div id="dismiss">
         <i class="glyphicon glyphicon-arrow-left"></i>
       </div>
 
       <!-- Sidebar Header -->
-
       <!-- Sidebar Links -->
       <ul class="list-unstyled components">
         <!-- <li class="active"><a href="#">Properties</a></li>
@@ -40,10 +37,6 @@
     </nav>
 
 
-
-    <!-- <div class="overlay"></div> -->
-
-
     <div id="content" class="row">
 
       <div class="col-sm-2">
@@ -55,6 +48,7 @@
       <div class="col-sm-8">
         <h3>CRE Advantage</h3>
 
+
       </div>
       <div class="col-sm-2">
       </div>
@@ -64,13 +58,13 @@
 
   </div>
 
+
 </div>
 </template>
 
+
 <script>
 import axios from 'axios';
-
-
 export default {
   name: 'Nav',
   data() {
@@ -79,8 +73,10 @@ export default {
     }
   },
   mounted: function() {
+
     this.loadNav()
     this.getProperties()
+
   },
   methods: {
 
@@ -90,6 +86,7 @@ export default {
 
       self.$router.push('/login')
       console.log(window.localStorage, 'storage after logout');
+
     },
     loadNav() {
       $("#sidebar").mCustomScrollbar({
@@ -129,6 +126,39 @@ export default {
     }
   }
 }
+
+    }
+  }
+}
+
+
+function loadShit() {
+  console.log(window.localStorage, 'Local Storage');
+
+  $("#sidebar").mCustomScrollbar({
+    theme: "minimal"
+  });
+
+  // when opening the sidebar
+  $('#sidebarCollapse').on('click', function() {
+    // open sidebar
+    $('#sidebar').addClass('active');
+    // fade in the overlay
+    // $('.overlay').fadeIn();
+    $('.collapse.in').toggleClass('in');
+    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+  });
+
+  // if dismiss or overlay was clicked
+  $('#dismiss, .overlay').on('click', function() {
+    // hide the sidebar
+    // $('#sidebar').style.display = 'none';
+    $('#sidebar').removeClass('active');
+    // fade out the overlay
+    // $('.overlay').fadeOut();
+  });
+}
+
 </script>
 
 
@@ -316,13 +346,14 @@ a.article:hover {
 ----------------------------------------------------- */
 
 #content {
-  width: 100%;
-  /*padding: 20px;*/
+  /*margin-top: 1%;*/
+  /*width: 100%;
+  padding: 20px;*/
   /*min-height: 100vh;*/
-  transition: all 0.3s;
-  position: absolute;
-  top: 0;
-  right: 0;
+  /*transition: all 0.3s;*/
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*right: 0;*/
 }
 
 .pageContainer {
