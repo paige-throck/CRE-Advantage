@@ -53,10 +53,11 @@ router.get('/:id/taskId', (req, res, next)=>{
 ///////////CREATE NEW TASK
 
   router.post('/:id', (req,res,next)=>{
-    const task = req.params;
-
+    console.log(req.body, 'body object');
+    const task = req.body;
+    const userId = filterInt(req.body.user_id)
     knex('tasks').insert({
-      user_id:task.user_id,
+      user_id:userId,
       item:task.item,
       task_date: task.date,
     })
@@ -82,11 +83,13 @@ router.put('/:id/taskId', (req,res,next)=>{
 
 /////////////DELETE SINGLE TASK
 
-router.delete('/:id/taskId', (req, res, next)=>{
+router.delete('/:id/:taskId', (req, res, next)=>{
   const userId = filterInt(req.params.id);
   const taskId = filterInt(req.params.taskId);
 
-  knex('tasks').where(taskId, 'id').del('*')
+  console.log(userId, 'vkbwnkgjr3b3gr', taskId, 'b3vrgb3hynbhetbg5gt4e');
+
+  knex('tasks').where('id', taskId).del('*')
   .then(() => {
     res.send(200);
   })
