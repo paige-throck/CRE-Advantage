@@ -3,19 +3,21 @@
 <div class="row tasks">
   <Nav></Nav>
 
-  <div class="form">
+  <form class="form-tasks" @submit.prevent="addTask">
     <div class="input-group">
-      <input type="text" class="form-control" v-model="task.item">
+      <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
+      <div></div>
+
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" v-on:click="addTask()"><span
+        <button class="btn btn-default" type="submit"><span
           class="glyphicon glyphicon-plus"></span> Add Task</button>
       </span>
     </div>
-  </div>
-  <hr/>
+  </form>
 
-  <ul class="list-group" v-show="tasksArr[0].length > 0">
-    <li class="list-group-item clearfix task" v-for="task in tasksArr[0]" v-bind:class="{disabled: task.done}">
+
+  <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
+    <li class="list-group-item clearfix task" >
       <p class="lead">{{task.item}}</p>
       <div>
         <span class="pull-right">
@@ -49,7 +51,7 @@ export default {
   data() {
     return {
       tasksArr: [],
-      task: {
+      newTask: {
         user_id: window.localStorage.id,
         item: '',
         task_date: ''
@@ -57,22 +59,26 @@ export default {
     }
   },
   mounted: function() {
-    let self = this;
-    let id = window.localStorage.id;
-
-    axios.get(`http://localhost:8881/tasks/${id}`)
-      .then(function(results) {
-        console.log(results.data, 'results from get tassks');
-        self.tasksArr.push(results.data);
-      })
+    this.getTasks();
   },
   methods: {
+    getTasks() {
+      let self = this;
+      let id = window.localStorage.id;
+
+      axios.get(`http://localhost:8881/tasks/${id}`)
+        .then(function(results) {
+          console.log(results.data, 'Results from Get Tasks');
+          self.tasksArr = [];
+          self.tasksArr.push(results.data);
+        })
+    },
     addTask() {
       let self = this;
       let id = window.localStorage.id;
-      axios.post(`http://localhost:8881/tasks/${id}`, this.task)
-        .then(function(task) {
-          console.log('Add task working');
+      axios.post(`http://localhost:8881/tasks/${id}`, this.newTask)
+        .then(function() {
+          self.getTasks();
         }).catch(function(error) {
           console.log(error);
         });
@@ -87,7 +93,7 @@ export default {
 
       axios.delete(`http://localhost:8881/tasks/${id}/${taskId}`)
         .then(function() {
-
+          self.getTasks();
         }).catch(function(error) {
           console.log(error);
         });
