@@ -1,9 +1,6 @@
 <template>
-<div>
+<div class = "row mapPage">
 <Nav></Nav>
-
-
-
 
 
   <div>
@@ -28,6 +25,7 @@
     <div class="property-map" id="mapId">
     </div>
   </div>
+</div>
 </div>
 </template>
 

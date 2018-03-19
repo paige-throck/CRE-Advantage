@@ -1,8 +1,6 @@
 <template>
-
-<div>
+<div class = "row property">
   <Nav></Nav>
-
   <div class="container">
     <div class="row">
       <div class="col-sm-6 offset-sm-4 text-left">
@@ -16,27 +14,17 @@
         <p>HEY! I'm where the map would be.</p>
       </div>
     </div>
-
     <div class="row">
       <div class="col">
-
         <!-- PROPERTY MENU BUTTONS -->
-
         <p>
           <a class="btn btn-primary" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">Suites</a>
-
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">Notes</button>
-
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#documents" aria-expanded="false" aria-controls="documents">Documents</button>
-
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-property" aria-expanded="false" aria-controls="edit-property">Edit Property</button>
-
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#delete-property" aria-expanded="false" aria-controls="delete-property">Delete Property</button>
         </p>
-
-
           <!-- SUITES -->
-
         <div class="row">
           <div class="col">
             <div class="collapse multi-collapse" id="suites">
@@ -73,15 +61,11 @@
               </div>
             </div>
           </div>
-
-
           <!-- EDIT PROPERTY FORM -->
-
           <div class="col">
             <div class="collapse multi-collapse" id="edit-property">
               <div class="card card-body">
                 <form @submit.prevent="formatEditedProperty">
-
                   <div class="form-row">
                     <div class="form-group col-md-8">
                       <label for="prop-owner">Property Owner</label>
@@ -107,9 +91,7 @@
                       </select>
                     </div>
                   </div>
-
                   <div class="form-row">
-
                     <div class="form-group col-md-4">
                       <label for="prop-size">Property Size</label>
                       <input
@@ -135,7 +117,6 @@
                         :placeholder="property[0].num_suites" v-model="editedPropInfo.num_suites">
                     </div>
                   </div>
-
                   <div class="form-group col-md-12">
                     <label for="propStreetAddress">Street Address</label>
                     <input
@@ -144,7 +125,6 @@
                       id="propStreetAddress"
                       :placeholder="propStreetAddress" v-model="editedPropInfo.streetAddress">
                   </div>
-
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="propCity">City</label>
@@ -179,7 +159,6 @@
                         v-model="editedPropInfo.zip">
                     </div>
                   </div>
-
                   <div class="form-group">
                     <div class="form-check">
                       <input
@@ -193,16 +172,12 @@
                       </label>
                     </div>
                   </div>
-
                   <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
               </div>
             </div>
           </div>
-
-
           <!-- DOCUMENTS -->
-
           <div class="col">
             <div class="collapse multi-collapse" id="documents">
               <div class="card card-body">
@@ -211,8 +186,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="col">
             <div class="collapse multi-collapse" id="delete-property">
               <div class="card card-body">
@@ -221,32 +194,19 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
-<div class="row property">
-<Nav></Nav>
-
-<div class = "row propertyContent">
-  <p>Testing property spacing</p>
 </div>
-
-
 </div>
 </template>
-
-
 <script>
 import axios from 'axios';
 import Nav from './Nav.vue'
-
 export default {
   name: 'Property',
   components: {
     'Nav': Nav
-
   },
   data() {
     return {
@@ -280,23 +240,13 @@ export default {
   methods: {
     getPropertyData: function() {
       let self = this
-
       let prop_id = this.$route.params.id
       let user_id = window.localStorage.id
-
-  }
-}
-
-
       axios.get(`http://localhost:8881/properties/${user_id}/${prop_id}`)
         .then(function(result) {
           self.property.push(result.data[0][0])
           self.suites.push(result.data[1])
           self.notes.push(result.data[2][0].notes)
-
-
-
-
           self.splitAddress()
         })
         .catch(function(error) {
@@ -308,7 +258,6 @@ export default {
       let self = this
       let splitAddress = self.property[0].address.split(',')
       let splitStateZip = splitAddress[2].split(' ')
-
       self.propStreetAddress = splitAddress[0]
       self.propCity = splitAddress[1]
       self.propState = splitStateZip[1]
@@ -316,21 +265,17 @@ export default {
     },
     formatEditedProperty: function () {
       // prepare edited values for database
-
       let self = this
       let editedPropInfoKeys = Object.keys(this.editedPropInfo)
       console.log(self.editedData, 'edited data in formatted');
-
       // loop through editedPropInfo and check to see if there are changed values...if values then add to new object to send to database
       for (let i = 0; i < editedPropInfoKeys.length; i++) {
         if (self.editedPropInfo[editedPropInfoKeys[i]].length > 0) {
           self.editedData[editedPropInfoKeys[i]] = self.editedPropInfo[editedPropInfoKeys[i]]
         }
       }
-
       // loop through new object and check to see if any part of the address has changed...if it has call the format address function
       let editedDataKeys = Object.keys(self.editedData)
-
       if (editedDataKeys.includes('streetAddress') ||
           editedDataKeys.includes('city') ||
           editedDataKeys.includes('state') ||
@@ -342,7 +287,6 @@ export default {
     },
     formatAddress: function () {
       // join edited individual address components to insert into database
-
       if (!this.editedData.streetAddress) {
         this.editedData.streetAddress = this.propStreetAddress
       }
@@ -356,13 +300,11 @@ export default {
         this.editedData.zip = this.propZip
       }
       this.editedData.address = this.editedData.streetAddress + ', ' + this.editedData.city + ', ' + this.editedData.state + ' ' + this.editedData.zip
-
       // delete unnecessary address keys in object being sent to database
       delete this.editedData.streetAddress
       delete this.editedData.city
       delete this.editedData.state
       delete this.editedData.zip
-
       this.savePropertyEdits()
     },
     savePropertyEdits: function () {
@@ -390,8 +332,6 @@ export default {
   }
 }
 </script>
-
-
 <style>
 /* .property-container {
   margin-left: 250px;
@@ -408,5 +348,4 @@ export default {
 .rightCol {
   background-color: red;
 } */
-
 </style>
