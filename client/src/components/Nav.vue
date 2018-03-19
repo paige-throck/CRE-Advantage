@@ -21,11 +21,14 @@
         <li>
           <!-- Link with dropdown items -->
           <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Properties</a>
+
           <ul class="collapse list-unstyled" id="homeSubmenu">
-            <li><a href="#">Prop</a></li>
-            <li><a href="#">Prop</a></li>
-            <li><a href="#">Prop</a></li>
+            <li v-for="property in properties[0]">
+              <router-link :to="{name: 'Property', params: {id: property.id}}">{{property.address}}
+              </router-link>
+            </li>
           </ul>
+
           <li>
             <router-link to="/map">Map</router-link>
           </li>
@@ -43,24 +46,24 @@
 
     <div id="content" class="row">
 
-        <div class="col-sm-2">
-          <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+      <div class="col-sm-2">
+        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
           <i class="glyphicon glyphicon-align-left"></i>
           Toggle Sidebar
         </button>
-        </div>
-        <div class="col-sm-8">
-          <h3>CRE Advantage</h3>
-        </div>
-        <div class="col-sm-2">
-        </div>
+      </div>
+      <div class="col-sm-8">
+        <h3>CRE Advantage</h3>
+
+      </div>
+      <div class="col-sm-2">
+      </div>
 
     </div>
 
 
   </div>
-  <!--
-<router-view></router-view> -->
+
 </div>
 </template>
 
@@ -70,38 +73,61 @@ import axios from 'axios';
 
 export default {
   name: 'Nav',
+  data() {
+    return {
+      properties: []
+    }
+  },
   mounted: function() {
-    loadShit()
+    this.loadNav()
+    this.getProperties()
+  },
+  methods: {
+
+    logout: function() {
+      let self = this;
+      localStorage.clear();
+
+      self.$router.push('/login')
+      console.log(window.localStorage, 'storage after logout');
+    },
+    loadNav() {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      // when opening the sidebar
+      $('#sidebarCollapse').on('click', function() {
+        // open sidebar
+        $('#sidebar').addClass('active');
+        // fade in the overlay
+        // $('.overlay').fadeIn();
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // if dismiss or overlay was clicked
+      $('#dismiss, .overlay').on('click', function() {
+        // hide the sidebar
+        // $('#sidebar').style.display = 'none';
+        $('#sidebar').removeClass('active');
+        // fade out the overlay
+        // $('.overlay').fadeOut();
+      });
+    },
+    getProperties() {
+      let id = window.localStorage.id
+      let self = this
+
+      axios.get(`http://localhost:8881/properties/${id}`)
+        .then(function(result) {
+          console.log(result.data, 'results in the nav menu');
+          self.properties.push(result.data)
+          console.log(self.properties, 'SELF PROPERTIES');
+
+        })
+    }
   }
-}
-
-
-function loadShit() {
-
-  console.log(window.localStorage, 'HEY I AM THE STORAGE IN LOAD SHIT');
-
-  $("#sidebar").mCustomScrollbar({
-    theme: "minimal"
-  });
-
-  // when opening the sidebar
-  $('#sidebarCollapse').on('click', function() {
-    // open sidebar
-    $('#sidebar').addClass('active');
-    // fade in the overlay
-    // $('.overlay').fadeIn();
-    $('.collapse.in').toggleClass('in');
-    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-  });
-
-  // if dismiss or overlay was clicked
-  $('#dismiss, .overlay').on('click', function() {
-    // hide the sidebar
-    // $('#sidebar').style.display = 'none';
-    $('#sidebar').removeClass('active');
-    // fade out the overlay
-    // $('.overlay').fadeOut();
-  });
 }
 </script>
 
@@ -167,7 +193,7 @@ a:focus {
   color: #fff;
   transition: all 0.3s;
   overflow-y: scroll;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2); */
 }
 
 #sidebar.active {

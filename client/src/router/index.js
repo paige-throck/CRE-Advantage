@@ -43,25 +43,13 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
-      // children: [
-      //
-      //   {path:'tasks', component:Tasks},
-      //
-      //   {path:'map', name: 'PropMap', component:PropMap},
-      //
-      //   {path:'property/:id', component:Property}
-      // ]
     },
     {
       path: '/property/:id',
       name: 'Property',
       component: Property
     },
-    {
-      path: '/map',
-      name: 'PropMap',
-      component: PropMap
-    },
+
     {
       path: '/tasks',
       name: 'Tasks',
