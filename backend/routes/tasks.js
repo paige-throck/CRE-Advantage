@@ -135,7 +135,7 @@ router.delete('/:id/:taskId', (req, res, next)=>{
 
 /////////////////////////Clear All Tasks
   router.delete('/clearCompletedTasks', (req, res, next)=>{
-    const userId = filterInt(req.params.id);
+    console.log(req.body, "clear tasks");
 
     knex('tasks').where('completed', true).del('*')
     .then(() => {
