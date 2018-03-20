@@ -263,7 +263,7 @@ a.article:hover {
     CONTENT STYLE
 ----------------------------------------------------- */
 .nav{
-  background-color: aliceblue;
+  
 }
 .pageContainer {
   margin: 100px;

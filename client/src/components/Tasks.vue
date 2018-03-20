@@ -70,35 +70,37 @@
 
   <!--  Task List Edit Form -->
 
+<form class="collapse multi-collapse" id="edit-task">
+<br></br>
+  <div class = "col-sm-2">
+  </div>
 
-    <div class="collapse multi-collapse" id="edit-task">
-      <div class="card card-body">
-        <form class="form-tasks" @submit.prevent="editTask">
+<div class = "col-sm-8">
 
-          <div class="row">
-            <div class="col-sm-8">
-              <input type="text" class="form-control" v-model="newTask.item" placeholder="" required autofocus>
-            </div>
-
-            <div class="col-sm-2">
-              <div class='input-group date' ref="datetimepicker">
-                <input type="text" class="form-control" v-model="newTask.task_date" />
-                <span class="input-group-addon">
-      <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-              </div>
-            </div>
-
-            <div class="col-sm-2">
-              <span class="input-group-btn">
+<div class = "row">
+          <span class="input-group-btn">
         <button class="btn btn-default" type="submit"><span
-      class="glyphicon glyphicon-plus"></span> Add Task</button>
-              </span>
-            </div>
+      class="glyphicon glyphicon-plus"></span> Update Task</button>
+          </span>
+
+</div>
+<div class ="row">
+          <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
+</div>
+
+<div class = "row">
+          <div class='input-group date' ref="datetimepicker">
+            <input type="text" class="form-control" v-model="newTask.task_date" />
+            <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+            </span>
           </div>
-        </form>
-      </div>
-    </div>
+</div>
+
+</div>
+<div class = "col-sm-2">
+</div>
+</form>
 
 
 
@@ -241,7 +243,17 @@ ul {
   margin-left:-37.5%;
   width:75%;
   height:75%;
-  background-color: blue;
+  background-color: grey;
   z-index:10;
 }
+
+.edit-task-form{
+  position: fixed;
+  top:25%;
+  left:25%;
+
+  background-color: blue;
+}
+
+
 </style>
