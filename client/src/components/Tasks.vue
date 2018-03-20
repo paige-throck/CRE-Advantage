@@ -7,28 +7,26 @@
   <form class="form-tasks" @submit.prevent="addTask">
 
     <div class="row">
-      <div class="col-sm-10">
+      <div class="col-sm-8">
         <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
       </div>
 
       <div class="col-sm-2">
-        <div class='input-group date' ref="datetimepicker">
+        <!-- <div class='input-group date' ref="datetimepicker">
           <input type="text" class="form-control" v-model="newTask.task_date"/>
           <span class="input-group-addon">
           <span class="glyphicon glyphicon-calendar"></span>
           </span>
-        </div>
+        </div> -->
+        <date-picker v-model="value"></date-picker>
       </div>
-    </div>
 
-    <div class="row">
+
       <div class="col-sm-2">
         <span class="input-group-btn">
             <button class="btn btn-default" type="submit"><span
           class="glyphicon glyphicon-plus"></span> Add Task</button>
         </span>
-      </div>
-      <div class="col-sm-10">
       </div>
     </div>
   </form>
@@ -36,6 +34,7 @@
 
 
   <div class="row taskList">
+    <ListBox>
     <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
       <li class="list-group-item clearfix task">
         <p class="lead">{{task.item}}</p>
@@ -53,6 +52,7 @@
         </div>
       </li>
     </ul>
+  </ListBox>
   </div>
 
 </div>
@@ -141,9 +141,12 @@ export default {
 }
 </script>
 
-
-
 <style scoped>
+.tasks{
+  margin:5%;
+}
 
-
+.form-tasks{
+    margin-bottom:2%;
+}
 </style>

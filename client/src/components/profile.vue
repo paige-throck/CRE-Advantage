@@ -35,6 +35,8 @@ export default {
 
 
 </script>
-<style>
-
+<style scoped>
+.profile{
+  margin:5%;
+}
 </style>

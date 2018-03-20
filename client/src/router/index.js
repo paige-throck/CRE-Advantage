@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueSession from 'vue-session'
+import datePicker from 'vue-bootstrap-datetimepicker';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
+
+
 
 import Home from '@/components/Home'
 import Login from '@/components/Login'
@@ -16,6 +21,7 @@ import App from '@/App'
 
 Vue.use(Router)
 Vue.use(VueSession)
+Vue.use(datePicker);
 
 export default new Router({
   routes: [{
