@@ -29,8 +29,14 @@
           <li>
             <router-link to="/tasks">Tasks</router-link>
           </li>
+          <li>
+            <div>--------------------------------------</div>
+          </li>
+          <li>
+            <router-link to="/update-account">Account Settings</router-link>
+          </li>
       </ul>
-      <button v-on:click="logout" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
+      <button v-on:click="logout" class="btn btn-lg btn-dark btn-block" type="submit">Logout</button>
     </nav>
     <!-- <div class="overlay"></div> -->
     <div id="content" class="row">

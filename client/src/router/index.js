@@ -14,6 +14,7 @@ import Profile from '@/components/profile'
 import Tasks from '@/components/Tasks'
 import Property from '@/components/Property'
 import PropMap from '@/components/PropMap'
+import UpdateUser from '@/components/UpdateUser'
 import Nav from '@/components/Nav'
 import App from '@/App'
 
@@ -60,6 +61,11 @@ export default new Router({
       path: '/tasks',
       name: 'Tasks',
       component: Tasks
+    },
+    {
+      path: '/update-account',
+      name: 'UpdateUser',
+      component: UpdateUser
     }
   ]
 });
