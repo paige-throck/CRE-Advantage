@@ -426,6 +426,9 @@ export default {
 
 
 <style scoped>
+.property{
+  margin:5%;
+}
 .editInput {
   background-color: lightyellow !important
 }
