@@ -11,7 +11,7 @@
         <p>Suites: {{ property[0].num_suites}}</p>
       </div>
       <div class="col-sm-6 rightCol">
-        <p>HEY! I'm where the map would be.</p>
+        <SmallMap :property="property"></SmallMap>
       </div>
     </div>
     <div class="row">

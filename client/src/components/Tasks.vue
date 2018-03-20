@@ -154,7 +154,7 @@ export default {
           console.log(error);
         });
     },
-    editTask() {
+    editTask(event, taskId) {
       let self = this;
       let id = window.localStorage.id;
 
@@ -233,4 +233,3 @@ aside {
 }
 
 </style>
-
