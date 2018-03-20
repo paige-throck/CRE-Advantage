@@ -1,21 +1,23 @@
 <template>
-<div class="login-wrapper border border-light">
-  <form class="form-login" @submit.prevent="login">
-    <h2 class="form-login-heading">Please Sign In</h2>
+<div class="row login">
+  <div class="login-wrapper border border-light">
+    <form class="form-login" @submit.prevent="login">
+      <h2 class="form-login-heading">Please Sign In</h2>
+      <br></br>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input v-model="user.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input v-model="user.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <br></br>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input v-model="user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
 
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input v-model="user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
-
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  </form>
-  <div>Don't have an Account?
-    <router-link to="signup">Signup</router-link>
+      <br></br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+    <div>Don't have an Account?
+      <router-link to="signup">Signup</router-link>
+    </div>
   </div>
 </div>
 </template>
@@ -51,3 +53,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.login{
+  margin:5%;
+}
+</style>

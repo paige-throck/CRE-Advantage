@@ -1,5 +1,5 @@
 <template>
-<div class = "row nav">
+<div>
   <div class="wrapper">
     <nav id="sidebar">
       <!-- Close Sideba Button -->
@@ -29,8 +29,14 @@
           <li>
             <router-link to="/tasks">Tasks</router-link>
           </li>
+          <li>
+            <div>--------------------------------------</div>
+          </li>
+          <li>
+            <router-link to="/update-account">Account Settings</router-link>
+          </li>
       </ul>
-      <button v-on:click="logout" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
+      <button v-on:click="logout" class="btn btn-primary btn-block" type="submit">Logout</button>
     </nav>
     <!-- <div class="overlay"></div> -->
     <div id="content" class="row">
@@ -49,12 +55,15 @@
   </div>
 
 </div>
+
+</div>
 </template>
 <script>
 import axios from 'axios';
 export default {
   name: 'Nav',
-  // props: ['searchMarkers'],
+
+
   data() {
     return {
       properties: []
@@ -104,6 +113,7 @@ export default {
           console.log(self.properties, 'SELF PROPERTIES');
         })
     }
+
   },
   // watch: {
   //   searchMarkers: function () {
@@ -113,12 +123,9 @@ export default {
   //
   //   }
   // }
+
 }
 </script>
-
-
-
-
 <style scoped>
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
@@ -272,7 +279,7 @@ a.article:hover {
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
-
+  
 }
 .pageContainer {
   margin: 100px;

@@ -1,9 +1,8 @@
 <template>
-<div class="row property">
+<div class = "row property">
   <Nav></Nav>
   <div class="container">
     <div class="row">
-
       <div class="col-sm-6 offset-sm-4 text-left">
         <h3>{{ property[0].address }}</h3>
         <p>Property Owner: {{ property[0].prop_owner}}</p>
@@ -12,13 +11,12 @@
         <p>Suites: {{ property[0].num_suites}}</p>
       </div>
       <div class="col-sm-6 rightCol">
-        <SmallMap :property="property"></SmallMap>
+        <p>HEY! I'm where the map would be.</p>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <!-- PROPERTY MENU BUTTONS -->
-
         <p>
           <a class="btn btn-primary" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">Suites</a>
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">Notes</button>
@@ -26,7 +24,7 @@
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-property" aria-expanded="false" aria-controls="edit-property">Edit Property</button>
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#delete-property" aria-expanded="false" aria-controls="delete-property">Delete Property</button>
         </p>
-        <!-- SUITES -->
+          <!-- SUITES -->
         <div class="row">
           <div class="col">
             <div class="collapse multi-collapse" id="suites">
@@ -54,65 +52,15 @@
               </div>
             </div>
           </div>
-
-          <!-- NOTES -->
-
           <div class="col">
             <div class="collapse multi-collapse text-left" id="notes">
               <div class="card card-body">
-
-                <form class="form-tasks" @submit.prevent="addNote">
-                  <div class="input-group">
-                    <input type="text" class="form-control" v-model="newNote.content" placeholder="Add a note" required autofocus>
-                    <div></div>
-
-                    <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><span
-                  class="glyphicon glyphicon-plus"></span> Add Note</button>
-                    </span>
-                  </div>
-                </form>
-
-<!-- :class="{active: index === activeItem}" -->
-                <ul class="list-group" v-for="(note, index) in notes.content[0]">
-                  <li class="list-group-item clearfix" >
-                    <p class="lead">{{ note }}</p>
-                    <div>
-                      <span class="pull-right">
-                <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
-                  v-on:click="editNoteClick(index)"></span></button>
-
-                      <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
-                  v-on:click="deleteNoteClick(index)"></span></button>
-                      </span>
-                    </div>
-                  </li>
-
-                  <!-- EDITNOTE FORM -->
-
-                  <form class="form-tasks" @submit.prevent="editNoteFunction" v-if="index == activeItem && showEditNoteForm" id="editnotetest">
-                    <div class="input-group">
-                      <input type="text" class="form-control editInput"  :value="note" required autofocus id="editNoteText">
-                      <div></div>
-
-                      <span class="input-group-btn">
-                  <button class="btn btn-default" type="submit"><span
-                    class="glyphicon glyphicon-plus"></span>Save Changes</button>
-                      </span>
-                    </div>
-                  </form>
+                <ul v-for="note in notes[0]">
+                  <li>{{ note }}</li>
                 </ul>
-
-
-
               </div>
             </div>
           </div>
-
-
-
-
-
           <!-- EDIT PROPERTY FORM -->
           <div class="col">
             <div class="collapse multi-collapse" id="edit-property">
@@ -121,11 +69,18 @@
                   <div class="form-row">
                     <div class="form-group col-md-8">
                       <label for="prop-owner">Property Owner</label>
-                      <input type="text" class="form-control" id="prop-owner" :placeholder="property[0].prop_owner" v-model="editedPropInfo.prop_owner">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="prop-owner"
+                        :placeholder="property[0].prop_owner" v-model="editedPropInfo.prop_owner">
                     </div>
                     <div class="form-group col-md-4">
                       <label for="prop-type">Property Type</label>
-                      <select id="prop-type" class="form-control" v-model="editedPropInfo.prop_type">
+                      <select
+                        id="prop-type"
+                        class="form-control"
+                        v-model="editedPropInfo.prop_type">
                         <option selected value="">{{ property[0].prop_type }}</option>
                         <option
                           v-for="type in propTypes"
@@ -139,29 +94,53 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="prop-size">Property Size</label>
-                      <input type="text" class="form-control" id="prop-size" :placeholder="property[0].prop_size" v-model="editedPropInfo.prop_size">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="prop-size"
+                        :placeholder="property[0].prop_size" v-model="editedPropInfo.prop_size">
                     </div>
                     <div class="form-group col-md-4">
                       <label for="prop-range">Property Range</label>
-                      <input type="text" class="form-control" id="prop-range" :placeholder="property[0].prop_range" v-model="editedPropInfo.prop_range">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="prop-range"
+                        :placeholder="property[0].prop_range" v-model="editedPropInfo.prop_range">
                     </div>
                     <div class="form-group col-md-4">
                       <label for="num-suites">Number of Suites</label>
-                      <input type="text" class="form-control" id="suite-num" :placeholder="property[0].num_suites" v-model="editedPropInfo.num_suites">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="suite-num"
+                        :placeholder="property[0].num_suites" v-model="editedPropInfo.num_suites">
                     </div>
                   </div>
                   <div class="form-group col-md-12">
                     <label for="propStreetAddress">Street Address</label>
-                    <input type="text" class="form-control" id="propStreetAddress" :placeholder="propStreetAddress" v-model="editedPropInfo.streetAddress">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="propStreetAddress"
+                      :placeholder="propStreetAddress" v-model="editedPropInfo.streetAddress">
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="propCity">City</label>
-                      <input type="text" class="form-control" id="propCity" :placeholder="propCity" v-model="editedPropInfo.city">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="propCity"
+                        :placeholder="propCity"
+                        v-model="editedPropInfo.city">
                     </div>
                     <div class="form-group col-md-4">
                       <label for="prop-state">State</label>
-                      <select id="prop-state" class="form-control" v-model="editedPropInfo.state">
+                      <select
+                        id="prop-state"
+                        class="form-control"
+                        v-model="editedPropInfo.state">
                         <option selected value="">{{ propState }}</option>
                         <option
                           v-for="state in states"
@@ -172,12 +151,22 @@
                     </div>
                     <div class="form-group col-md-2">
                       <label for="propZip">Zip</label>
-                      <input type="text" class="form-control" id="propZip" :placeholder="propZip" v-model="editedPropInfo.zip">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="propZip"
+                        :placeholder="propZip"
+                        v-model="editedPropInfo.zip">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="prospective-prop" :value="editedPropInfo.prospective_prop" v-model="editedPropInfo.prospective_prop">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="prospective-prop"
+                        value=""
+                        v-model="editedPropInfo.prospective_prop">
                       <label class="form-check-label" for="prospective-prop">
                         Prospective Property {{ editedPropInfo.prospective_prop }}
                       </label>
@@ -216,30 +205,22 @@
 <script>
 import axios from 'axios';
 import Nav from './Nav.vue'
-import SmallMap from './SmallMap.vue'
-
 export default {
   name: 'Property',
   components: {
-    'Nav': Nav,
-    'SmallMap': SmallMap
+    'Nav': Nav
   },
   data() {
     return {
       property: [],
       suites: [],
-      notes: {
-        content: [],
-        id: ""
-      },
+      notes: [],
       propTypes: ["Retail", "Office", "Industrial"],
       propStreetAddress: "",
       propCity: "",
       propState: "",
       propZip: "",
-      states: ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA",
-        "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"
-      ],
+      states: [ "AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"],
       editedPropInfo: {
         streetAddress: "",
         city: "",
@@ -252,12 +233,7 @@ export default {
         prop_range: "",
         num_suites: ""
       },
-      editedData: {},
-      newNote: {
-        content: ""
-      },
-      showEditNoteForm: false,
-      activeItem: -1
+      editedData: {}
     }
   },
   created: function() {
@@ -272,17 +248,14 @@ export default {
         .then(function(result) {
           self.property.push(result.data[0][0])
           self.suites.push(result.data[1])
-          self.notes.content.push(result.data[2][0].notes)
-          self.notes.id = result.data[2][0].id
+          self.notes.push(result.data[2][0].notes)
           self.splitAddress()
-
-          self.editedPropInfo.prospective_prop = self.property[0].prospective_prop
         })
         .catch(function(error) {
           console.log(error, 'ERROR WARNING');
         })
     },
-    splitAddress: function() {
+    splitAddress: function () {
       // split address to go into individual form fields
       let self = this
       let splitAddress = self.property[0].address.split(',')
@@ -292,11 +265,11 @@ export default {
       self.propState = splitStateZip[1]
       self.propZip = splitStateZip[2]
     },
-    formatEditedProperty: function() {
+    formatEditedProperty: function () {
       // prepare edited values for database
       let self = this
       let editedPropInfoKeys = Object.keys(this.editedPropInfo)
-
+      console.log(self.editedData, 'edited data in formatted');
       // loop through editedPropInfo and check to see if there are changed values...if values then add to new object to send to database
       for (let i = 0; i < editedPropInfoKeys.length; i++) {
         if (self.editedPropInfo[editedPropInfoKeys[i]].length > 0) {
@@ -306,15 +279,15 @@ export default {
       // loop through new object and check to see if any part of the address has changed...if it has call the format address function
       let editedDataKeys = Object.keys(self.editedData)
       if (editedDataKeys.includes('streetAddress') ||
-        editedDataKeys.includes('city') ||
-        editedDataKeys.includes('state') ||
-        editedDataKeys.includes('zip')) {
-        self.formatAddress()
-      } else {
-        self.savePropertyEdits()
-      }
+          editedDataKeys.includes('city') ||
+          editedDataKeys.includes('state') ||
+          editedDataKeys.includes('zip')) {
+            self.formatAddress()
+          } else {
+            self.savePropertyEdits()
+          }
     },
-    formatAddress: function() {
+    formatAddress: function () {
       // join edited individual address components to insert into database
       if (!this.editedData.streetAddress) {
         this.editedData.streetAddress = this.propStreetAddress
@@ -336,14 +309,12 @@ export default {
       delete this.editedData.zip
       this.savePropertyEdits()
     },
-    savePropertyEdits: function() {
+    savePropertyEdits: function () {
       // save edited property to database
       let self = this
       let prop_id = this.$route.params.id
       let user_id = window.localStorage.id
-
-      self.editedData.prospective_prop = self.editedPropInfo.prospective_prop
-
+      console.log(self.editedData, 'DATA BEFORE IT IS SENT');
       axios.patch(`http://localhost:8881/properties/${user_id}/${prop_id}`, self.editedData)
         .then(function(result) {
           console.log(result, 'HEY I PATCHED');
@@ -351,93 +322,23 @@ export default {
         .catch(function(error) {
           console.log(error, 'YOU HAD AN ERROR WHEN TRYING TO UPDATE A PROPERTY IN THE SAVE PROPERTY EDIT FUNCTION');
         })
-    },
-    addNote: function () {
-      let self = this
-      let id = self.notes.id
-      let user_id = window.localStorage.id
-
-      axios.post(`http://localhost:8881/properties/note/${id}`, self.newNote)
-        .then(function(results) {
-          self.notes.content = []
-
-          self.getPropertyData()
-          self.newNote.content = ""
-        })
-        .catch(function(error){
-          console.log('Hey, you have an error from adding a note!');
-        })
-    },
-    editNoteClick: function(indexClicked) {
-      this.activeItem = indexClicked
-      this.showEditNoteForm = !this.showEditNoteForm
-    },
-    editNoteFunction: function () {
-      let self = this
-      let id = self.notes.id
-      let newNote = document.getElementById('editNoteText').value
-      let editNote = {
-        noteIndex: self.activeItem,
-        content: newNote
-      }
-      self.notes.content[0][self.activeItem] = editNote.content
-
-      axios.patch(`http://localhost:8881/properties/note/${id}`, editNote)
-        .then(function(results) {
-          console.log('HEY YOU PATCHED A NOTE');
-
-          self.activeItem = -1
-
-          self.getPropertyData()
-        })
-    },
-    deleteNoteClick: function (indexClicked) {
-      let self = this
-      let notes_id = self.notes.id
-      let note_index = indexClicked
-
-      self.notes.content[0].splice(indexClicked, 1)
-
-      axios.delete(`http://localhost:8881/properties/note/${notes_id}/${note_index}`)
-        .then(function(results) {
-          console.log('HEY I DELETED A NOTE');
-        })
-        .catch(function(error) {
-          console.log(error, 'HEY THERE WAS AN ERROR WHEN YOU DELETED A NOTE');
-        })
     }
   },
   watch: {
     '$route' () {
       this.property = []
       this.suites = []
-      this.notes = {
-        content: [],
-        id: ""
-      }
+      this.notes = []
       this.getPropertyData()
     }
   }
 }
 </script>
+
+
 <style scoped>
-.editInput {
-  background-color: lightyellow !important
+.property{
+  margin:5%;
 }
 
-/* .property-container {
-  margin-left: 250px;
-  background-color: blue;
-}
-.address {
-  font-size: 24px;
-  margin: 0;
-  text-align: left;
-}
-.leftCol {
-  background-color: blue;
-}
-.rightCol {
-  background-color: red;
-} */
 </style>

@@ -1,7 +1,7 @@
 <template>
 <div class = "row mapPage">
 <Nav></Nav>
- <!-- :searchMarkers="searchMarkers" -->
+
 
   <div>
     <input id="search-input" class="controls" type="text" placeholder="Search Box">
@@ -49,8 +49,7 @@ export default {
       googleMarkerArr: [],
       searchBox: null,
       bounds: null,
-      input: null,
-      searchMarkers: []
+      input: null
     }
   },
   mounted: function() {
@@ -107,7 +106,7 @@ export default {
     ====================================================== */
     createSearchBox: function() {
       let self = this
-
+      var searchMarkers = [];
       self.input = document.getElementById('search-input');
       self.searchBox = new google.maps.places.SearchBox(self.input);
 
@@ -130,7 +129,7 @@ export default {
           }
 
           //Create a marker for each place.
-          self.searchMarkers.push({
+          searchMarkers.push({
             latitude: place.geometry.location.lat(),
             longitude: place.geometry.location.lng(),
             address: place.formatted_address,
@@ -148,8 +147,8 @@ export default {
 
           // empty search box
           self.input.value = ''
-          self.markerCoordinates.push(self.searchMarkers)
-          self.createInfoWindow(self.searchMarkers)
+          self.markerCoordinates.push(searchMarkers)
+          self.createInfoWindow(searchMarkers)
         })
       })
     },
@@ -295,6 +294,11 @@ export default {
 
 
 <style scoped>
+
+.mapPage{
+  margin:5%;
+}
+
 .property-map {
   width: 600px;
   height: 600px;

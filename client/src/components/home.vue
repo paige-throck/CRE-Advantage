@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="row home">
 <h3>CRE ADVANTAGE</h3>
 
 
@@ -23,3 +23,9 @@ export default {
 
 
 </script>
+
+<style scoped>
+.home{
+  margin:5%;
+}
+</style>
