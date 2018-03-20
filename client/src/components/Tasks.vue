@@ -3,7 +3,7 @@
   <Nav></Nav>
 
   <span class="pull-right">
-  <button class="btn btn-danger" on:click="clearList"><span
+  <button class="btn btn-danger" v-on:click="clearList($event, tasksArr[0])"><span
 ></span>Clear Tasks</button>
   </span>
 
@@ -42,7 +42,7 @@
     <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
 
       <!--  Non completed Tasks-->
-      <li class="list-group-false clearfix task" v-if="task.completed === false">
+      <li class="list-group-items clearfix task" v-bind:class="{complete:task.completed, notComplete: !task.completed}">
         <span class="pull-left">
           <div class="lead">{{task.item}} </div>
       </span>
@@ -55,33 +55,8 @@
 <button class="btn btn-default btn-xs" data-toggle="collapse" href="#edit-task" role="button" aria-expanded="false" aria-controls="suites"><span class="glyphicon glyphicon-pencil"
   v-on:click="updateTask()"></span></button>
 
-          <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
-  v-on:click="completeTask($event, task.id)"></span></button>
-
-
-
-          <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
-  v-on:click="deleteTask($event, task.id)"></span></button>
-          </span>
-        </div>
-      </li>
-
-  <!--  Completed Tasks-->
-      <li class="list-group-true clearfix task" v-if="task.completed === true">
-        <span class="pull-left">
-          <div class="lead">{{task.item}} </div>
-      </span>
-        <span class="pull-left">
-          <div class="lead">  {{task.task_date}}</div>
-      </span>
-        <div>
-          <span class="pull-right">
-
-<button class="btn btn-default btn-xs" data-toggle="collapse" href="#edit-task" role="button" aria-expanded="false" aria-controls="suites"><span class="glyphicon glyphicon-pencil"
-  v-on:click="updateTask()"></span></button>
-
-          <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
-  v-on:click="completeTask($event, task.id)"></span></button>
+    <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
+    v-on:click="completeTask($event, task.id)"></span></button>
 
 
 
@@ -143,7 +118,10 @@ export default {
         user_id: window.localStorage.id,
         item: '',
         task_date: ''
-      }
+      },
+      completed: false
+      // t:true,
+      // f:false
     }
   },
   mounted: function() {
@@ -191,6 +169,7 @@ export default {
     },
 
     completeTask(event, taskId) {
+      console.log(taskId, 'task id in complete task');
       let self = this;
       let id = window.localStorage.id;
 
@@ -217,7 +196,7 @@ export default {
         });
     },
 
-    clearList: function() {
+    clearList: function(event, tasks) {
 
     }
 
@@ -240,10 +219,19 @@ ul{
   list-style: none;
 }
 
-.list-group-true {
+.complete {
   background-color:gainsboro;
-  list-style: none;
 }
+
+.notComplete {
+  background-color:white;
+}
+
+.list-group-true {
+  list-style: none;
+  border-radius: 5px;
+}
+
 
 
 </style>
