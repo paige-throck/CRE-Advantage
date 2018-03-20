@@ -241,12 +241,9 @@ ul{
 }
 
 .list-group-true {
-  background-color:lightgrey;
+  background-color:gainsboro;
   list-style: none;
 }
 
-.list-group-true {
-  background-color: grey;
-  list-style: none;
-}
+
 </style>
