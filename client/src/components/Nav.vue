@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class = "row nav">
   <div class="wrapper">
     <nav id="sidebar">
       <!-- Close Sideba Button -->
@@ -43,7 +43,6 @@
       <div class="col-sm-2">
         <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
           <i class="glyphicon glyphicon-align-left"></i>
-          Toggle Sidebar
         </button>
       </div>
       <div class="col-sm-8">
@@ -263,8 +262,8 @@ a.article:hover {
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
-#content {
-  
+.nav{
+  background-color: aliceblue;
 }
 .pageContainer {
   margin: 100px;

@@ -41,21 +41,21 @@
   <div class="row taskList">
     <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
 
-      <!--  Non completed Tasks-->
       <li class="list-group-items clearfix task" v-bind:class="{complete:task.completed, notComplete: !task.completed}">
+        <div class = "list-items">
         <span class="pull-left">
           <div class="lead">{{task.item}} </div>
       </span>
         <span class="pull-left">
           <div class="lead">  {{task.task_date}}</div>
       </span>
-        <div>
-      <span class="pull-right">
-
+    </div>
+      <div>
+          <span class="pull-right">
 <button class="btn btn-default btn-xs" data-toggle="collapse" href="#edit-task" role="button" aria-expanded="false" aria-controls="suites"><span class="glyphicon glyphicon-pencil"
-  v-on:click="updateTask()"></span></button>
+  v-on:click="updateTask($event, task.id, task.item)"></span></button>
 
-    <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
+          <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
     v-on:click="completeTask($event, task.id)"></span></button>
 
 
@@ -65,42 +65,43 @@
           </span>
         </div>
       </li>
-
     </ul>
   </div>
 
+  <!--  Task List Edit Form -->
 
-  <!-- Edit Task Form -->
-  <div class="col">
+
     <div class="collapse multi-collapse" id="edit-task">
       <div class="card card-body">
         <form class="form-tasks" @submit.prevent="editTask">
 
           <div class="row">
             <div class="col-sm-8">
-              <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
+              <input type="text" class="form-control" v-model="newTask.item" placeholder="" required autofocus>
             </div>
 
             <div class="col-sm-2">
               <div class='input-group date' ref="datetimepicker">
                 <input type="text" class="form-control" v-model="newTask.task_date" />
                 <span class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
+      <span class="glyphicon glyphicon-calendar"></span>
                 </span>
               </div>
             </div>
 
             <div class="col-sm-2">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><span
-              class="glyphicon glyphicon-plus"></span> Add Task</button>
+        <button class="btn btn-default" type="submit"><span
+      class="glyphicon glyphicon-plus"></span> Add Task</button>
               </span>
             </div>
           </div>
         </form>
       </div>
     </div>
-  </div>
+
+
+
 </div>
 </template>
 
@@ -215,16 +216,16 @@ export default {
   margin-bottom: 2%;
 }
 
-ul{
+ul {
   list-style: none;
 }
 
 .complete {
-  background-color:gainsboro;
+  background-color: gainsboro;
 }
 
 .notComplete {
-  background-color:white;
+  background-color: white;
 }
 
 .list-group-true {
@@ -232,6 +233,15 @@ ul{
   border-radius: 5px;
 }
 
-
-
+#edit-task{
+  position: fixed;
+  top:50%;
+  left:50%;
+  margin-top:-37.5%;
+  margin-left:-37.5%;
+  width:75%;
+  height:75%;
+  background-color: blue;
+  z-index:10;
+}
 </style>
