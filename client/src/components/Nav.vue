@@ -47,14 +47,14 @@
       </div>
     </div>
   </div>
-  {{ searchMarkers[0] }}
+
 </div>
 </template>
 <script>
 import axios from 'axios';
 export default {
   name: 'Nav',
-  props: ['searchMarkers'],
+  // props: ['searchMarkers'],
   data() {
     return {
       properties: []
@@ -72,6 +72,7 @@ export default {
       console.log(window.localStorage, 'storage after logout');
     },
     loadNav() {
+      console.log("I AM LOADING");
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"
       });
@@ -104,14 +105,14 @@ export default {
         })
     }
   },
-  watch: {
-    searchMarkers: function () {
-      console.log('AM I HERE');
-      this.loadNav()
-      this.getProperties()
-
-    }
-  }
+  // watch: {
+  //   searchMarkers: function () {
+  //     console.log('AM I HERE');
+  //     this.loadNav()
+  //     this.getProperties()
+  //
+  //   }
+  // }
 }
 </script>
 

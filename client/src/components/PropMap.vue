@@ -1,7 +1,7 @@
 <template>
 <div class = "row mapPage">
-<Nav :searchMarkers="searchMarkers"></Nav>
-
+<Nav></Nav>
+ <!-- :searchMarkers="searchMarkers" -->
 
   <div>
     <input id="search-input" class="controls" type="text" placeholder="Search Box">
@@ -25,8 +25,10 @@
     <div class="property-map" id="mapId">
     </div>
   </div>
+  <Nav></Nav>
 </div>
-</div>
+
+
 </template>
 
 <script>
