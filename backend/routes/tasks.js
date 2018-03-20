@@ -88,13 +88,26 @@ router.put('/:id/taskId', (req,res,next)=>{
 })
 
 
+///////////////////Complete-Uncomplete TASK
+
+router.put('/:id/:taskId/completeTask', (req,res,next)=>{
+  const userId = filterInt(req.params.id);
+  const taskId = filterInt(req.params.taskId);
+
+
+  knex('tasks').where('id', taskId).select('*')
+  .then(function(task){
+    console.log(task, 'complete tasks');
+  })
+
+})
+
+
 /////////////DELETE SINGLE TASK
 
 router.delete('/:id/:taskId', (req, res, next)=>{
   const userId = filterInt(req.params.id);
   const taskId = filterInt(req.params.taskId);
-
-  console.log(userId, 'vkbwnkgjr3b3gr', taskId, 'b3vrgb3hynbhetbg5gt4e');
 
   knex('tasks').where('id', taskId).del('*')
   .then(() => {
@@ -107,7 +120,7 @@ router.delete('/:id/:taskId', (req, res, next)=>{
   })
 
 
-  router.delete('/deleteCompleted', (req, res, next)=>{
+  router.delete('/clearCompletedTasks', (req, res, next)=>{
     const userId = filterInt(req.params.id);
 
     knex('tasks').where('completed', true).del('*')

@@ -34,14 +34,14 @@
           </span>
       </div>
     </div>
-
-
-
     </div>
   </form>
 
 <!-- Tasks List -->
+
+
 <div class="row taskList">
+
   <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
     <li class="list-group-item clearfix task">
       <span class="pull-left">
@@ -52,12 +52,15 @@
       </span>
       <div>
         <span class="pull-right">
+
 <button class="btn btn-default btn-xs" data-toggle="collapse" href="#edit-task" role="button" aria-expanded="false" aria-controls="suites"><span class="glyphicon glyphicon-pencil"
   v-on:click="updateTask()"></span></button>
+
         <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
-  v-on:click="doneTask($event, true)"></span></button>
-        <button class="btn btn-primary btn-xs" v-show="task.done"><span class="glyphicon glyphicon-repeat"
-  v-on:click="unDoneTask($event, false)"></span></button>
+  v-on:click="completeTask($event, task.id)"></span></button>
+
+
+
         <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
   v-on:click="deleteTask($event, task.id)"></span></button>
         </span>
@@ -65,6 +68,8 @@
     </li>
   </ul>
 </div>
+
+
 <!-- Edit Task Form -->
 <div class="col">
   <div class="collapse multi-collapse" id="edit-task">
@@ -118,13 +123,13 @@ export default {
   },
   mounted: function() {
     this.getTasks()
-    $(this.$refs.datetimepicker).datetimepicker()
+    // $(this.$refs.datetimepicker).datetimepicker()
 
   },
   methods: {
-    updateTime(event) {
-      this.$emit('input', event.target.value);
-    },
+    // updateTime(event) {
+    //   this.$emit('input', event.target.value);
+    // },
 
     getTasks() {
       let self = this;
@@ -148,6 +153,29 @@ export default {
           console.log(error);
         });
     },
+    editTask() {
+      let self = this;
+      let id = window.localStorage.id;
+
+      axios.put(`http://localhost:8881/tasks/${id}/${taskId}`, this.task)
+        .then(function() {
+          self.getTasks();
+        }).catch(function(error) {
+          console.log(error);
+        });
+    },
+
+    completeTask(event , taskId){
+      let self = this;
+      let id = window.localStorage.id;
+
+      axios.put(`http://localhost:8881/tasks/${id}/${taskId}/completeTask`)
+        .then(function() {
+          self.getTasks();
+        }).catch(function(error) {
+          console.log(error);
+        });
+    },
 
     deleteTask(event, taskId) {
       let self = this;
@@ -164,24 +192,8 @@ export default {
         });
     },
 
-    editTask() {
-      let self = this;
-      let id = window.localStorage.id;
-
-      axios.put(`http://localhost:8881/tasks/${id}/${taskId}`, this.task)
-        .then(function() {
-          self.getTasks();
-        }).catch(function(error) {
-          console.log(error);
-        });
-    },
-
     clearList: function() {
-      for (var i = this.tasks.length - 1; i > -1; i--) {
-        if (this.tasks[i].done) {
-          this.tasks.splice(i, 1);
-        }
-      }
+
     }
 
 
@@ -198,4 +210,25 @@ export default {
 .form-tasks {
   margin-bottom: 2%;
 }
+
+.wrap {
+  height: 50vh;
+  display: flex;
+}
+
+main {
+  flex: 1;
+  display: flex;
+}
+
+aside {
+  overflow-y: scroll;
+  padding: 2em;
+}
+
+
+aside {
+  flex: 1;
+}
+
 </style>
