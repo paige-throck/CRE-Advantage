@@ -53,17 +53,13 @@
       </div>
     </div>
   </div>
-
 </div>
-
 </div>
 </template>
 <script>
 import axios from 'axios';
 export default {
   name: 'Nav',
-
-
   data() {
     return {
       properties: []
@@ -81,7 +77,6 @@ export default {
       console.log(window.localStorage, 'storage after logout');
     },
     loadNav() {
-      console.log("I AM LOADING");
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"
       });
@@ -113,17 +108,7 @@ export default {
           console.log(self.properties, 'SELF PROPERTIES');
         })
     }
-
-  },
-  // watch: {
-  //   searchMarkers: function () {
-  //     console.log('AM I HERE');
-  //     this.loadNav()
-  //     this.getProperties()
-  //
-  //   }
-  // }
-
+  }
 }
 </script>
 <style scoped>
