@@ -36,7 +36,7 @@
             <router-link to="/update-account">Account Settings</router-link>
           </li>
       </ul>
-      <button v-on:click="logout" class="btn btn-lg btn-dark btn-block" type="submit">Logout</button>
+      <button v-on:click="logout" class="btn btn-primary btn-block" type="submit">Logout</button>
     </nav>
     <!-- <div class="overlay"></div> -->
     <div id="content" class="row">
