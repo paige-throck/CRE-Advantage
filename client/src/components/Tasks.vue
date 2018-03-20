@@ -1,5 +1,3 @@
-
-
 <template>
 <div class="row tasks">
   <Nav></Nav>

@@ -21,7 +21,7 @@ const filterInt = function(value) {
 router.get('/:id', (req, res, next)=>{
   const userId = filterInt(req.params.id);
   console.log(userId);
-  knex('tasks').where('user_id', userId).select('*')
+  knex('tasks').where('user_id', userId).select('*').orderBy('task_date', 'asc')
   .then((tasks) => {
     console.log(tasks);
     res.json(tasks);
@@ -56,10 +56,17 @@ router.get('/:id/taskId', (req, res, next)=>{
     console.log(req.body, 'body object');
     const task = req.body;
     const userId = filterInt(req.body.user_id)
+
+    if (task.task_date === ""){
+      task.task_date =  null
+    } else {
+      task.task_date = req.body.task_date;
+    }
+
     knex('tasks').insert({
       user_id:userId,
       item:task.item,
-      task_date: task.date,
+      task_date: task.task_date,
     })
     .returning('*')
     .then((task)=>{
@@ -81,13 +88,38 @@ router.put('/:id/taskId', (req,res,next)=>{
 })
 
 
+///////////////////Complete-Uncomplete TASK
+
+router.put('/:id/:taskId/completeTask', (req,res,next)=>{
+  const userId = filterInt(req.params.id);
+  const taskId = filterInt(req.params.taskId);
+
+  knex('tasks').where('id', taskId).select('*')
+  .then(function(task){
+    console.log(task[0], 'complete tasks');
+    if (task[0].completed === true){
+
+      return knex('tasks').where('id', task[0].id).update({completed: false})
+    } else {
+      console.log("Is my ifffff working");
+      return knex('tasks').where('id', task[0].id).update({completed: true})
+    }
+  }).then(() => {
+    res.sendStatus(200);
+  })
+  .catch(function(error) {
+      console.log(error);
+      res.sendStatus(500);
+    })
+
+})
+
+
 /////////////DELETE SINGLE TASK
 
 router.delete('/:id/:taskId', (req, res, next)=>{
   const userId = filterInt(req.params.id);
   const taskId = filterInt(req.params.taskId);
-
-  console.log(userId, 'vkbwnkgjr3b3gr', taskId, 'b3vrgb3hynbhetbg5gt4e');
 
   knex('tasks').where('id', taskId).del('*')
   .then(() => {
@@ -98,6 +130,21 @@ router.delete('/:id/:taskId', (req, res, next)=>{
       res.sendStatus(500);
     })
   })
+
+
+/////////////////////////Clear All Tasks
+  router.delete('/clearCompletedTasks', (req, res, next)=>{
+    const userId = filterInt(req.params.id);
+
+    knex('tasks').where('completed', true).del('*')
+    .then(() => {
+      res.send(200);
+    })
+    .catch(function(error) {
+        console.log(error);
+        res.sendStatus(500);
+      })
+    })
 
 
 
