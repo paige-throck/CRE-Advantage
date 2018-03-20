@@ -1,6 +1,6 @@
 <template>
 <div class = "row mapPage">
-+<Nav :searchMarkers="searchMarkers"></Nav>
+<Nav :searchMarkers="searchMarkers"></Nav>
 
 
   <div>
