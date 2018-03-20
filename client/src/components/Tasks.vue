@@ -5,9 +5,9 @@
   <span class="pull-right">
   <button class="btn btn-danger" on:click="clearList"><span
 ></span>Clear Tasks</button>
-</span>
+  </span>
 
-<br></br>
+  <br></br>
 
 
   <!--  New Task Form-->
@@ -31,75 +31,101 @@
           <span class="input-group-addon">
           <span class="glyphicon glyphicon-calendar"></span>
           </span>
+        </div>
       </div>
-    </div>
     </div>
   </form>
 
-<!-- Tasks List -->
+  <!-- Tasks List -->
 
+  <div class="row taskList">
+    <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
 
-<div class="row taskList">
-
-  <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
-    <li class="list-group-item clearfix task">
-      <span class="pull-left">
+      <!--  Non completed Tasks-->
+      <li class="list-group-false clearfix task" v-if="task.completed === false">
+        <span class="pull-left">
           <div class="lead">{{task.item}} </div>
       </span>
-      <span class="pull-left">
+        <span class="pull-left">
           <div class="lead">  {{task.task_date}}</div>
       </span>
-      <div>
-        <span class="pull-right">
+        <div>
+      <span class="pull-right">
 
 <button class="btn btn-default btn-xs" data-toggle="collapse" href="#edit-task" role="button" aria-expanded="false" aria-controls="suites"><span class="glyphicon glyphicon-pencil"
   v-on:click="updateTask()"></span></button>
 
-        <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
+          <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
   v-on:click="completeTask($event, task.id)"></span></button>
 
 
 
-        <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+          <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
   v-on:click="deleteTask($event, task.id)"></span></button>
-        </span>
-      </div>
-    </li>
-  </ul>
-</div>
+          </span>
+        </div>
+      </li>
+
+  <!--  Completed Tasks-->
+      <li class="list-group-true clearfix task" v-if="task.completed === true">
+        <span class="pull-left">
+          <div class="lead">{{task.item}} </div>
+      </span>
+        <span class="pull-left">
+          <div class="lead">  {{task.task_date}}</div>
+      </span>
+        <div>
+          <span class="pull-right">
+
+<button class="btn btn-default btn-xs" data-toggle="collapse" href="#edit-task" role="button" aria-expanded="false" aria-controls="suites"><span class="glyphicon glyphicon-pencil"
+  v-on:click="updateTask()"></span></button>
+
+          <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
+  v-on:click="completeTask($event, task.id)"></span></button>
 
 
-<!-- Edit Task Form -->
-<div class="col">
-  <div class="collapse multi-collapse" id="edit-task">
-    <div class="card card-body">
-      <form class="form-tasks" @submit.prevent="editTask">
 
-        <div class="row">
-          <div class="col-sm-8">
-            <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
-          </div>
+          <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+  v-on:click="deleteTask($event, task.id)"></span></button>
+          </span>
+        </div>
+      </li>
 
-          <div class="col-sm-2">
-            <div class='input-group date' ref="datetimepicker">
-              <input type="text" class="form-control" v-model="newTask.task_date" />
-              <span class="input-group-addon">
+    </ul>
+  </div>
+
+
+  <!-- Edit Task Form -->
+  <div class="col">
+    <div class="collapse multi-collapse" id="edit-task">
+      <div class="card card-body">
+        <form class="form-tasks" @submit.prevent="editTask">
+
+          <div class="row">
+            <div class="col-sm-8">
+              <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
+            </div>
+
+            <div class="col-sm-2">
+              <div class='input-group date' ref="datetimepicker">
+                <input type="text" class="form-control" v-model="newTask.task_date" />
+                <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span
+              class="glyphicon glyphicon-plus"></span> Add Task</button>
               </span>
             </div>
           </div>
-
-          <div class="col-sm-2">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><span
-              class="glyphicon glyphicon-plus"></span> Add Task</button>
-            </span>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </template>
 
@@ -164,7 +190,7 @@ export default {
         });
     },
 
-    completeTask(event , taskId){
+    completeTask(event, taskId) {
       let self = this;
       let id = window.localStorage.id;
 
@@ -210,24 +236,17 @@ export default {
   margin-bottom: 2%;
 }
 
-.wrap {
-  height: 50vh;
-  display: flex;
+ul{
+  list-style: none;
 }
 
-main {
-  flex: 1;
-  display: flex;
+.list-group-true {
+  background-color:lightgrey;
+  list-style: none;
 }
 
-aside {
-  overflow-y: scroll;
-  padding: 2em;
+.list-group-true {
+  background-color: grey;
+  list-style: none;
 }
-
-
-aside {
-  flex: 1;
-}
-
 </style>
