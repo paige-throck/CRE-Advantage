@@ -1,5 +1,5 @@
 <template>
-<div class = "row nav">
+<div>
   <div class="wrapper">
     <nav id="sidebar">
       <!-- Close Sideba Button -->
@@ -47,14 +47,12 @@
       </div>
     </div>
   </div>
-  {{ searchMarkers[0] }}
 </div>
 </template>
 <script>
 import axios from 'axios';
 export default {
   name: 'Nav',
-  props: ['searchMarkers'],
   data() {
     return {
       properties: []
@@ -103,21 +101,9 @@ export default {
           console.log(self.properties, 'SELF PROPERTIES');
         })
     }
-  },
-  watch: {
-    searchMarkers: function () {
-      console.log('AM I HERE');
-      this.loadNav()
-      this.getProperties()
-
-    }
   }
 }
 </script>
-
-
-
-
 <style scoped>
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
@@ -271,7 +257,7 @@ a.article:hover {
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
-
+  
 }
 .pageContainer {
   margin: 100px;

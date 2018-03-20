@@ -45,41 +45,13 @@ router.get('/:id/:prop_id', function(req, res) {
     knex('property_notes').where('prop_id', req.params.prop_id)
     .then(function(results) {
       resultsArr.push(results);
-      console.log(resultsArr, 'RESULTS PROPERTY NOTES');
+      console.log(resultsArr, 'RESULTS FROM SUITES');
       res.send(resultsArr);
     });
   });
 });
 
 
-// edit existing note
-router.patch('/note/:id', function(req, res) {
-  let editNote = req.body;
-  console.log(req.body, 'THE BODY THE BODY');
-
-  knex('property_notes').where('id', req.params.id)
-    .then(function(results){
-      results[0].notes[editNote.noteIndex] = editNote.content;
-
-      knex('property_notes').where('id', req.params.id)
-        .update({
-          notes: results[0].notes
-        })
-        .then(function(results) {
-          console.log(results, 'hey results in the note patch');
-          if(results == 1) {
-            res.sendStatus(200);
-          } else {
-            res.sendStatus(404);
-          }
-        });
-    }).catch(function(error){
-      console.log('THERE BE AN ERROR IN YOUR NOTE PATCH');
-    });
-});
-
-
-// edit existing property
 router.patch('/:id/:prop_id', function(req, res) {
   console.log(req.body, 'HEY REQ BODY IN THE PATCH');
   console.log(req.params, 'HEY REQ PARAMS IN THE PATCH');
@@ -114,61 +86,6 @@ router.post('/save', function(req, res) {
       res.send(results);
     });
 });
-
-
-// save a new note for a property
-router.post('/note/:id', function(req, res) {
-  let newNote = req.body.content;
-
-  // check to see if property id exists in the table
-  knex('property_notes').where('id', req.params.id)
-    .then(function(results) {
-      if (results) {
-        let existingNotes = results[0].notes;
-        existingNotes.push(newNote);
-        return knex('property_notes').where('id', req.params.id)
-        .update({
-          notes: existingNotes
-        });
-      } else {
-        return knex('property_notes').insert({
-          id: req.params.id,
-          notes: newNote
-        });
-      }
-    })
-    .then(function(results) {
-      console.log('WOO YOU FINALLY WORKED');
-      res.sendStatus(200);
-    });
-});
-
-
-// delte a note
-router.delete('/note/:notes_id/:note_index', function(req, res) {
-console.log(req.params.note_index, 'NOTE INDEX');
-  knex('property_notes').where('id', req.params.notes_id)
-    .then(function(results){
-      results[0].notes.splice(req.params.note_index, 1)
-
-      knex('property_notes').where('id', req.params.notes_id)
-        .update({
-          notes: results[0].notes
-        })
-        .then(function(results) {
-          console.log(results, 'hey results in the note patch');
-          if(results == 1) {
-            res.sendStatus(200);
-          } else {
-            res.sendStatus(404);
-          }
-        });
-    }).catch(function(error){
-      console.log('THERE BE AN ERROR IN YOUR NOTE PATCH');
-    });
-});
-
-
 
 
 
