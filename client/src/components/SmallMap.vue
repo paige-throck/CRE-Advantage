@@ -1,5 +1,5 @@
 <template>
-<div class="row mapPage">
+<div class="row MapPage">
   <div class="property-map" id="mapId">
   </div>
 </div>
