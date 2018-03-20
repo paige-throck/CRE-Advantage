@@ -203,10 +203,12 @@
 <script>
 import axios from 'axios';
 import Nav from './Nav.vue'
+import SmallMap from './SmallMap.vue'
 export default {
   name: 'Property',
   components: {
-    'Nav': Nav
+    'Nav': Nav,
+    'SmallMap': SmallMap
   },
   data() {
     return {

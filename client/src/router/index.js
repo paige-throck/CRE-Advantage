@@ -15,6 +15,7 @@ import Tasks from '@/components/Tasks'
 import Property from '@/components/Property'
 import PropMap from '@/components/PropMap'
 import UpdateUser from '@/components/UpdateUser'
+import SmallMap from '@/components/SmallMap'
 import Nav from '@/components/Nav'
 import App from '@/App'
 

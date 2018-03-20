@@ -1,5 +1,5 @@
 <template>
-<div class="row MapPage">
+<div class="row SmallMapPage">
   <div class="property-map" id="mapId">
   </div>
 </div>
@@ -65,7 +65,7 @@ export default {
 
 
 <style scoped>
-.mapPage {
+.SmallMapPage {
   width: 250px;
   height: 250px;
 }
