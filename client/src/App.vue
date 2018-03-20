@@ -15,6 +15,7 @@ import Profile from './components/profile.vue'
 import Nav from './components/Nav.vue'
 import Tasks from './components/Tasks.vue'
 import SmallMap from './components/SmallMap.vue'
+
 export default {
   name: 'App',
   components: {
