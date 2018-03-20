@@ -25,8 +25,10 @@
     <div class="property-map" id="mapId">
     </div>
   </div>
+  <Nav></Nav>
 </div>
-</div>
+
+
 </template>
 
 <script>
