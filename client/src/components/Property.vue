@@ -332,20 +332,11 @@ export default {
   }
 }
 </script>
-<style>
-/* .property-container {
-  margin-left: 250px;
-  background-color: blue;
+
+
+<style scoped>
+.property{
+  margin:5%;
 }
-.address {
-  font-size: 24px;
-  margin: 0;
-  text-align: left;
-}
-.leftCol {
-  background-color: blue;
-}
-.rightCol {
-  background-color: red;
-} */
+
 </style>

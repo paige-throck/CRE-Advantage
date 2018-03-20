@@ -4,7 +4,7 @@
 <Nav></Nav>
 
 <div class = "row profileContent">
-<h1>Goodmoring {{msg}}</h1>
+<h1>Hello {{msg}}</h1>
 </div>
 
 </div>
@@ -35,6 +35,8 @@ export default {
 
 
 </script>
-<style>
-
+<style scoped>
+.profile{
+  margin:5%;
+}
 </style>

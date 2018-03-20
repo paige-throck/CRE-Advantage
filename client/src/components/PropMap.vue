@@ -292,6 +292,11 @@ export default {
 
 
 <style scoped>
+
+.mapPage{
+  margin:5%;
+}
+
 .property-map {
   width: 600px;
   height: 600px;
