@@ -1,6 +1,7 @@
+
+
 <template>
 <div class="row tasks">
-
   <Nav></Nav>
 
   <span class="pull-right">
@@ -69,40 +70,6 @@
   </ul>
 </div>
 
- <Nav></Nav>
-
- <form class="form-tasks" @submit.prevent="addTask">
-   <div class="input-group">
-     <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
-     <div></div>
-
-     <span class="input-group-btn">
-       <button class="btn btn-default" type="submit"><span
-         class="glyphicon glyphicon-plus"></span> Add Task</button>
-     </span>
-   </div>
- </form>
-
-
- <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
-   <li class="list-group-item clearfix task" >
-     <p class="lead">{{task.item}}</p>
-     <div>
-       <span class="pull-right">
-       <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
-         v-on:click="editTask(task)"></span></button>
-       <button class="btn btn-primary btn-xs" v-show="!task.done"><span class="glyphicon glyphicon-ok"
-         v-on:click="doneTask($index)"></span></button>
-       <button class="btn btn-primary btn-xs" v-show="task.done"><span class="glyphicon glyphicon-repeat"
-         v-on:click="unDoneTask($index)"></span></button>
-       <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
-         v-on:click="deleteTask($event, task.id)"></span></button>
-       </span>
-     </div>
-   </li>
- </ul>
-
-
 
 <!-- Edit Task Form -->
 <div class="col">
@@ -144,7 +111,6 @@ import Nav from './Nav'
 
 
 export default {
-
   name: 'Tasks',
   data() {
     return {
@@ -234,7 +200,6 @@ export default {
 
   }
 
-
 }
 </script>
 
@@ -268,3 +233,4 @@ aside {
 }
 
 </style>
+
