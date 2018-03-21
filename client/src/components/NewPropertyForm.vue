@@ -103,15 +103,42 @@ export default {
         city: '',
         state: '',
         zip: '',
-        prospective_prop: ''
+        prospective_prop: '',
+        lat: '',
+        lang: '',
+        address: ''
       }
     }
   },
   methods: {
     addNewProperty: function() {
-    //  console.log(newPropInfo, 'new prop info')
-      this.$emit('addNewProperty', this.newPropInfo)
-      // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
+      //console.log(newPropInfo, 'new prop info')
+
+      let self = this
+
+      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.newPropInfo.streetAddress}+,+${this.newPropInfo.city},+${this.newPropInfo.state}&key=AIzaSyAh3fU5DauF9fgnwi1IdF8OZccHONkPBRM`)
+        .then(function(results) {
+          console.log(results,'OMG YOU GEOCODED');
+          console.log(self.newPropInfo, 'NEW PROP INFO INSIDE');
+
+
+          self.newPropInfo.lat = results.data.results[0].geometry.location.lat
+          self.newPropInfo.lang = results.data.results[0].geometry.location.lng
+          self.newPropInfo.address = results.data.results[0].formatted_address
+
+          if(self.newPropInfo.prospective_prop == "") {
+            self.newPropInfo.prospective_prop = false
+          }
+
+          delete self.newPropInfo.streetAddress
+          delete self.newPropInfo.city
+          delete self.newPropInfo.state
+          delete self.newPropInfo.zip
+
+          self.$emit('addNewProperty', self.newPropInfo)
+        })
+
+
     }
 
 

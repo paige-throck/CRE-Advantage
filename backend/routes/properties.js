@@ -131,7 +131,7 @@ router.patch('/:id/:prop_id', function(req, res) {
 });
 
 
-// save a new property to a user's database
+// save a new property to a user's database from map
 router.post('/save', function(req, res) {
   let property = {
     lat: req.body.latitude,
@@ -147,6 +147,19 @@ router.post('/save', function(req, res) {
       res.send(results);
     });
 });
+
+
+
+// save a new property to a user's database from form
+router.post('/new', function(req, res) {
+  console.log(req.body, 'ASFLKJASFL;KAFSKLJSFKJLSFADKLJAFSLJKAFSLKJASFLKJ');
+  return knex('properties').insert(req.body)
+    .then(function(results) {
+      console.log('HEY I INSERTED A PROPERTY in the newwwww');
+      res.send(results);
+    });
+});
+
 
 
 
