@@ -21,7 +21,8 @@ const filterInt = function(value) {
 router.get('/:id', (req, res, next)=>{
   const userId = filterInt(req.params.id);
   console.log(userId);
-  knex('tasks').where('user_id', userId).select('*').orderBy('task_date', 'asc')
+  knex('tasks').where('user_id', userId).select('*')
+  .orderBy('id', 'asc')
   .then((tasks) => {
     console.log(tasks);
     res.json(tasks);
@@ -134,7 +135,7 @@ router.delete('/:id/:taskId', (req, res, next)=>{
 
 /////////////////////////Clear All Tasks
   router.delete('/clearCompletedTasks', (req, res, next)=>{
-    const userId = filterInt(req.params.id);
+    console.log(req.body, "clear tasks");
 
     knex('tasks').where('completed', true).del('*')
     .then(() => {

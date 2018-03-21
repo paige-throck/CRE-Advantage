@@ -1,5 +1,7 @@
 <template>
-<div class="row nav">
+
+<div class = "row nav">
+
   <div class="wrapper">
     <nav id="sidebar">
       <!-- Close Sidebar Button -->
@@ -43,7 +45,6 @@
       <div class="col-sm-2">
         <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
           <i class="glyphicon glyphicon-align-left"></i>
-          Toggle Sidebar
         </button>
       </div>
       <div class="col-sm-8">
@@ -109,6 +110,7 @@ export default {
           console.log(self.properties, 'SELF PROPERTIES');
         })
     }
+
   },
     watch: {
     searchMarkers: function () {
@@ -118,6 +120,7 @@ export default {
 
     }
   }  
+
 }
 
 </script>
@@ -273,9 +276,7 @@ a.article:hover {
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
-#content {
 
-}
 .pageContainer {
   margin: 100px;
 }

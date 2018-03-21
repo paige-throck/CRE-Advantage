@@ -17,6 +17,67 @@ const filterInt = function(value) {
 };
 
 
+router.get('/:id', (req, res, next)=>{
+  const id = filterInt(req.params.id);
 
+  knex('users').where('id', id).select('*')
+  .then((user) => {
+    res.json(user);
+    })
+    .catch(function(error) {
+      console.log(error);
+      res.sendStatus(500);
+    })
+  });
+
+  router.put('/:id/email', (req, res, next)=>{
+    const id = filterInt(req.params.id);
+    const email = req.body.email
+    knex('users').where('id', id).update({email: email})
+    .then(() => {
+      res.sendStatus(200);
+      })
+      .catch(function(error) {
+        console.log(error);
+        res.sendStatus(500);
+      })
+    });
+
+  router.put('/:id/info', (req, res, next)=>{
+    const id = filterInt(req.params.id);
+
+    knex('users').where('id', id).select('*')
+    .then((user) => {
+      res.json(user);
+      })
+      .catch(function(error) {
+        console.log(error);
+        res.sendStatus(500);
+      })
+    });
+
+      router.put('/:id/password', (req, res, next)=>{
+        console.log(req.body, "body");
+        const id = filterInt(req.params.id);
+
+        const oldPass = req.body.oldPassword;
+
+        const newPass = req.body.newPass;
+
+        knex('users').where('id', id).select('*')
+        .then(function(user){
+          if (bcrypt.compare(user.password, oldPass)){
+            console.log("Old pass check??");
+            knex('users').where('id', id).update({password:newPass})
+          }
+        })
+        .then(() => {
+          res.sendStatus(200);
+          })
+          .catch(function(error) {
+            console.log(error);
+            res.sendStatus(500);
+          })
+        });
 
 module.exports = router;
