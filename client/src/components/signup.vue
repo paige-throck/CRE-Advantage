@@ -14,9 +14,9 @@
           <input v-model="user.city" type="city" id="inputCity" class="form-control" placeholder="City" required autofocus>
         </div>
 
-        <div class="col-sm-6">
-          <select name="state" id="state" class="form-control">
-  <option value="" selected="selected">Select a State</option>
+    <div class="col-sm-6">
+    <select name="state" id="state" class="form-control" v-model="user.state">
+  <option selected="selected">Select a State</option>
   <option value="AL">Alabama</option>
   <option value="AK">Alaska</option>
   <option value="AZ">Arizona</option>
@@ -102,6 +102,7 @@ export default {
       user: {
         name: '',
         city: '',
+        state: '',
         email: '',
         password: ''
       }
@@ -113,9 +114,7 @@ export default {
       let self = this
       axios.post('http://localhost:8881/signup/', this.user)
         .then(function(user) {
-          console.log('working on router');
           self.$router.push('/login')
-
         }).catch(function(error) {
           console.log(error);
         });

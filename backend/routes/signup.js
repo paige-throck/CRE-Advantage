@@ -22,7 +22,12 @@ const filterInt = function(value) {
 
 router.post('/', (req, res) => {
     console.log(req.body, 'body object');
+    console.log(req.body.city, req.body.state);
+
+
     let newUserObj = req.body;
+    let city = req.body.city + ", " + req.body.state;
+    console.log(city, "city and state");
 
     knex.select('email').from('users').where('email', newUserObj.email)
         .then((result) => {
@@ -33,18 +38,18 @@ router.post('/', (req, res) => {
                     newUserObj.hashpw = hash;
                     knex('users').returning('*').insert({
                             name: newUserObj.name,
-                            city: newUserObj.city,
+                            city: city,
                             email: newUserObj.email,
                             password: newUserObj.hashpw
                         })
-                        .then(() => {
+                  .then(() => {
                             console.log('did it work?');
-                        })
+                  })
                 })
                 .then(() => {
                     res.sendStatus(200);
                 });
-        })
+              })
 
         .catch((err) => {
             console.error(err);

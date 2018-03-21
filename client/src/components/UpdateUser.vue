@@ -68,7 +68,7 @@
         </div>
 
         <div class="col-sm-6">
-          <select name="state" id="state" class="form-control">
+      <select id="state" class="form-control" v-model="newInfo.state">
   <option value="" selected="selected">Select a State</option>
   <option value="AL">Alabama</option>
   <option value="AK">Alaska</option>
@@ -154,7 +154,8 @@ export default {
       },
       newInfo:{
         name:'',
-        city:''
+        city:'',
+        state:''
       }
     }
   },
