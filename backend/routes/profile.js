@@ -32,18 +32,21 @@ router.get('/:id', (req, res, next)=>{
 
 
   /////Update Email
-  router.put('/:id/email', (req, res, next)=>{
+  router.patch('/:id/email', (req, res, next)=>{
     const id = filterInt(req.params.id);
     const email = req.body.email
     knex('users').where('id', id).update({email: email})
-    .then(() => {
-      res.sendStatus(200);
-      })
-      .catch(function(error) {
-        console.log(error);
-        res.sendStatus(500);
-      })
+    .then(function(results) {
+      console.log(results, 'results in update email');
+      if(results == 1) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    }).catch(function(error){
+      console.log('THERE BE AN ERROR IN YOUR NOTE PUT');
     });
+});
 
 
 
@@ -69,18 +72,16 @@ router.get('/:id', (req, res, next)=>{
         console.log(req.body, "body");
         const id = filterInt(req.params.id);
 
-        const oldPass = req.body.oldPassword;
+        const passObj = req.body
 
-        const newPass = req.body.newPass;
+       let oldHash = bcrypt.hashSync(passObj.oldPassword, 10)
 
+        console.log(oldHash, "old hash");
 
-        // .then(() => {
-        //   res.sendStatus(200);
-        //   })
-        //   .catch(function(error) {
-        //     console.log(error);
-        //     res.sendStatus(500);
-        //   })
-        });
+        let newHash = bcrypt.hashSync(passObj.oldPassword, 10)
+
+        console.log(newHash, "new hash");
+
+      });
 
 module.exports = router;

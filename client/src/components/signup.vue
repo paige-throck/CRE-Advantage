@@ -11,12 +11,12 @@
       <div class="row">
         <div class="col-sm-6">
           <label for="inputCity" class="sr-only">City</label>
-          <input v-model="user.city" type="city" id="inputCity" class="form-control" placeholder="City" required autofocus>
+          <input v-model="user.city" type="city" id="inputCity" class="form-control" placeholder="Please enter your city of business" required autofocus>
         </div>
 
     <div class="col-sm-6">
     <select name="state" id="state" class="form-control" v-model="user.state">
-  <option selected="selected">Select a State</option>
+  <option value = "" selected="selected">Select your State</option>
   <option value="AL">Alabama</option>
   <option value="AK">Alaska</option>
   <option value="AZ">Arizona</option>
