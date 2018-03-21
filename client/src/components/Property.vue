@@ -309,7 +309,7 @@ import Nav from './Nav.vue'
 import SmallMap from './SmallMap.vue'
 import NewSuiteForm from './NewSuiteForm.vue'
 import NewPropertyForm from './NewPropertyForm.vue'
-import router from '../router';
+// import router from '../router';
 
 
 export default {
@@ -455,7 +455,10 @@ export default {
       self.editedData.prospective_prop = self.editedPropInfo.prospective_prop
 
       axios.patch(`http://localhost:8881/properties/${user_id}/${prop_id}`, self.editedData)
-        .then(function(result) {})
+        .then(function(result) {
+          console.log('HEY');
+          self.getPropertyData()
+        })
         .catch(function(error) {
           console.log(error, 'YOU HAD AN ERROR WHEN TRYING TO UPDATE A PROPERTY IN THE SAVE PROPERTY EDIT FUNCTION');
         })
@@ -572,7 +575,20 @@ export default {
         })
     },
     addProperty: function (event) {
-      console.log(event, 'HEYYY EVENT IN ADD PROPERTY');
+     console.log(event, 'HEYYY EVENT IN ADD PROPERTY');
+
+      // let newProperty = {
+      //   prop_owner: event.prop_owner,
+      //   prop_range: event.prop_range,
+      //   prop_size: event.prop_size,
+      //   prop_type: event.prop_type,
+      //   prospective_prop: event.prospective_prop,
+      //   address
+      // }
+
+
+
+      //axios.post(`http://localhost:8881/properties/suite/new`, event)
     }
   },
   watch: {

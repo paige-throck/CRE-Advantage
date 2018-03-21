@@ -18,6 +18,7 @@ const filterInt = function(value) {
 
 
 
+
 // get all properties that a user has saved
 router.get('/:id', function(req, res) {
   knex('properties').where('user_id', req.params.id)
@@ -28,8 +29,10 @@ router.get('/:id', function(req, res) {
 });
 
 
+
 // get individual property info
 router.get('/:id/:prop_id', function(req, res) {
+  console.log('WTF');
   let resultsArr = [];
   knex('properties').where('user_id', req.params.id)
     .andWhere('properties.id', req.params.prop_id)
@@ -51,6 +54,14 @@ router.get('/:id/:prop_id', function(req, res) {
         });
     });
 });
+
+
+
+
+
+
+
+
 
 
 // edit suite
