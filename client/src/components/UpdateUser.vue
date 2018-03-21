@@ -26,11 +26,11 @@
 
 
 <!-- Email Form -->
-    <form class="collapse multi-collapse" id="update-email" @submit.prevent="signup">
+    <form class="collapse multi-collapse" id="update-email" @submit.prevent="updateEmail">
       <h3 class="update-account-header">Update Email</h3>
 
 
-      <input type="oldPassword" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
+      <input type="email" v-model="newEmail.email" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
 
       <br></br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Update Email</button>
@@ -39,27 +39,29 @@
     <!-- Update Password -->
 
 
-    <form class="collapse multi-collapse" id="update-password" @submit.prevent="signup">
+    <form class="collapse multi-collapse" id="update-password" @submit.prevent="updatePassword">
 
       <h3 class="update-account-header">Update Password</h3>
 
-      <input type="name" id="oldPassword" class="form-control" placeholder="Current Password" required autofocus>
+      <input type="password" v-model="newPassword.oldPassword" id="oldPassword" class="form-control" placeholder="Current Password" required autofocus>
       <br></br>
 
-      <input type="city" id="newPassword" class="form-control" placeholder="New Password" required autofocus>
+      <input type="password" v-model="newPassword.newPassword" id="newPassword" class="form-control" placeholder="New Password" required autofocus>
 
       <br></br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
     </form>
 
 <!-- Info Form -->
-    <form class="collapse multi-collapse" id="update-info" @submit.prevent="signup">
+    <form class="collapse multi-collapse" id="update-info" @submit.prevent="updateInfo">
 
       <h3 class="update-account-header">Update Name and City</h3>
 
-      <input type="name" id="inputName" class="form-control" placeholder="Update name" required autofocus>
+      <input type="text" v-model="newInfo.name" id="inputName" class="form-control" placeholder="Update Name" required autofocus>
+
       <br></br>
-      <input type="city" id="inputCity" class="form-control" placeholder="Update name" required autofocus>
+
+      <input type="text" v-model="newInfo.city" id="inputCity" class="form-control" placeholder="Update City" required autofocus>
 
       <br></br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
@@ -80,7 +82,18 @@ export default {
   },
   data() {
     return {
-      userArr: []
+      userArr: [],
+      newEmail:{
+        email:''
+      },
+      newPassword:{
+        oldPassword:'',
+        newPassword:''
+      },
+      newInfo:{
+        name:'',
+        city:''
+      }
     }
   },
 
@@ -98,6 +111,38 @@ export default {
           self.userArr.push(results.data);
         })
         .catch(function(error) {
+          console.log(error);
+        });
+    },
+    updateEmail(){
+      console.log(this.newEmail);
+      let self = this;
+      let id = window.localStorage.id;
+
+      axios.put(`http://localhost:8881/profile/${id}/email`, this.newEmail)
+        .then(function() {
+          self.getUser();
+        }).catch(function(error) {
+          console.log(error);
+        });
+    },
+
+    updateInfo(){
+      let self = this;
+      let id = window.localStorage.id;
+
+
+    },
+
+    updatePassword(){
+      let self = this;
+      let id = window.localStorage.id;
+
+      axios.put(`http://localhost:8881/profile/${id}/password`, this.newPassword)
+        .then(function() {
+          self.getUser();
+          // self.$router.push('/login')
+        }).catch(function(error) {
           console.log(error);
         });
     }
