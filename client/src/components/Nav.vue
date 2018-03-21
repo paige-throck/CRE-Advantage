@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
 <div class = "row nav">
-=======
-<div class="row nav">
->>>>>>> 0e98d7101c2cf6da472c84f16a7eba4545236dde
   <div class="wrapper">
     <nav id="sidebar">
       <!-- Close Sidebar Button -->
@@ -112,10 +108,6 @@ export default {
           console.log(self.properties, 'SELF PROPERTIES');
         })
     }
-<<<<<<< HEAD
-    
-  }
-=======
   },
     watch: {
     searchMarkers: function () {
@@ -124,8 +116,7 @@ export default {
       this.getProperties()
 
     }
-  }  
->>>>>>> 0e98d7101c2cf6da472c84f16a7eba4545236dde
+  }
 }
 
 </script>
@@ -278,14 +269,8 @@ a.article:hover {
   background: #6d7fcc !important;
   color: #fff !important;
 }
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
-<<<<<<< HEAD
+
 .nav{
-=======
-#content {
->>>>>>> 0e98d7101c2cf6da472c84f16a7eba4545236dde
 
 }
 .pageContainer {

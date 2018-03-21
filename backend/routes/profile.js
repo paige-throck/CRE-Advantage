@@ -64,12 +64,10 @@ router.get('/:id', (req, res, next)=>{
 
         const newPass = req.body.newPass;
 
-        knex('users').where('id', id).select('*')
-        .then(function(user){
-          if (bcrypt.compare(user.password, oldPass)){
-            console.log("old pass check??");
-            knex('users').where('id', id).update({password:newPass})
-          }
+        knex('users').where('id', id).select('password')
+        .then(function(password){
+            return  bcrypt.compare(password, oldPass)
+            console.log(bcrypt.compare(password, oldPass));
         })
         .then(() => {
           res.sendStatus(200);
