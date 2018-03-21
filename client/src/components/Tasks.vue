@@ -39,7 +39,7 @@
 <!-- Tasks List -->
 
 <div class="row taskList">
-  <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
+  <ul class="list-group" v-for="(task, index) in tasksArr[0]" v-model="tasksArr">
 
 
     <li class="list-group-items clearfix task" v-bind:class="{complete:task.completed, notComplete: !task.completed}">
@@ -56,7 +56,7 @@
       <div>
         <span class="pull-right">
 
-<button class="btn btn-default btn-xs" type="button" v-on:click="showEditForm = !showEditForm"><span class="glyphicon glyphicon-pencil"></span></button>
+<button class="btn btn-default btn-xs" type="button" v-on:click="updateTask(index)"><span class="glyphicon glyphicon-pencil"></span></button>
 
         <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
   v-on:click="completeTask($event, task.id)"></span></button>
@@ -70,8 +70,8 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 
       <!-- Edit Task Form inside List -->
       <div class = "col">
-        <div v-if="showEditForm">
-      <form  id="edit-task" @submit.prevent="editTask">
+        <div>
+      <form  id="edit-task" v-if="index == activeTask && showEditForm">
         <br></br>
         <div class="col-sm-2">
         </div>
@@ -80,15 +80,13 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 
           <div class="row">
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit"><span
+              <button v-on:click="editTask($event, editedTask, task.id)" class="btn btn-default" type="submit"><span
             class="glyphicon glyphicon-plus"></span> Update Task</button>
             </span>
 
           </div>
           <div class="row">
             <input type="text" class="form-control" id="edited-email" :placeholder="task.item" v-model="editedTask.item">
-            {{task.item}}
-            {{editedTask.item}}
           </div>
 
           <div class="row">
@@ -109,7 +107,7 @@ v-on:click="deleteTask($event, task.id)"></span></button>
   </ul>
 </div>
 
-{{tasksArr[0]}}
+
 </div>
 </template>
 
@@ -131,7 +129,8 @@ data() {
     editedTask:{
       item: ""
     },
-    showEditForm: false
+    showEditForm: false,
+    activeTask: -1
 
   }
 },
@@ -168,16 +167,22 @@ methods: {
       });
   },
 
-  editTask() {
+  updateTask:function(indexClicked){
+    let self = this;
+    self.activeTask = indexClicked;
+    self.showEditForm = !self.showEditForm;
+  },
+
+  editTask(event, editedTask, taskId) {
+    console.log(editedTask, "edit task", taskId, "taskid");
 
     let self = this;
     let id = window.localStorage.id;
 
-    self.showEditForm = !self.showEditForm;
 
-    axios.put(`http://localhost:8881/tasks/${id}/${taskId}`, this.task)
+    axios.put(`http://localhost:8881/tasks/${id}/${taskId}/update`, this.editedTask)
       .then(function() {
-        // self.getTasks();
+        self.getTasks();
       }).catch(function(error) {
         console.log(error);
       });
