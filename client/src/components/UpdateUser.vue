@@ -1,22 +1,23 @@
 <template>
 <div class="row update-user">
   <Nav></Nav>
-<br></br>
-  <div class = "row" v-for="person in userArr[0]">
-    <div class = "col-sm-2">
+  <br></br>
+  <div class="row" v-for="person in userArr[0]">
+    <div class="col-sm-2">
     </div>
-    <div class = "col-sm-8">
+    <div class="col-sm-8">
 
-    <p><label>Name:</label> {{person.name}}</p>
-    <p><label>Email:</label> {{person.email}}</p>
-    <p><label>Current City:</label> {{person.city}}</p>
+      <p><label>Name:</label> {{person.name}}</p>
+      <p><label>Email:</label> {{person.email}}</p>
+      <p><label>Current City:</label> {{person.city}}</p>
 
     </div>
-<div class = "col-sm-2">
-</div>
+    <div class="col-sm-2">
+    </div>
   </div>
 
-  <button class="btn btn-primary" type="submit" data-toggle="collapse" href="#update-email" role="button" aria-expanded="false" aria-controls="email">Update Email</button>
+  <div class = "row">
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#update-email" aria-expanded="false" aria-controls="update-email">Update Email</button>
 
 
   <button class="btn btn-primary" type="submit" data-toggle="collapse" href="#update-password" role="button" aria-expanded="false" aria-controls="password">Update Password</button>
@@ -25,49 +26,116 @@
 
 
 
-<!-- Email Form -->
-    <form class="collapse multi-collapse" id="update-email" @submit.prevent="updateEmail">
-      <h3 class="update-account-header">Update Email</h3>
+  <!-- Edit Email Form -->
+  <div class="col">
+    <div class="collapse multi-collapse" id="update-email">
+      <div class="card card-body">
+        <form @submit.prevent="updateEmail">
+          <h3 class="update-account-header">Update Email</h3>
+
+          <div class="form-group">
+            <input type="email" v-model="newEmail.email" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
+          </div>
+
+          <button type="submit" class="btn btn-lg btn-primary btn-block">Update Email</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
 
-      <input type="email" v-model="newEmail.email" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
+  <!-- Update Password -->
+  <form class="collapse multi-collapse" id="update-password" @submit.prevent="updatePassword">
 
-      <br></br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Update Email</button>
-    </form>
+    <h3 class="update-account-header">Update Password</h3>
 
-    <!-- Update Password -->
+    <input type="password" v-model="newPassword.oldPassword" id="oldPassword" class="form-control" placeholder="Current Password" required autofocus>
+    <br></br>
 
+    <input type="password" v-model="newPassword.newPassword" id="newPassword" class="form-control" placeholder="New Password" required autofocus>
 
-    <form class="collapse multi-collapse" id="update-password" @submit.prevent="updatePassword">
+    <br></br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
+  </form>
 
-      <h3 class="update-account-header">Update Password</h3>
+  <!-- Info Form -->
+  <form class="collapse multi-collapse" id="update-info" @submit.prevent="updateInfo">
 
-      <input type="password" v-model="newPassword.oldPassword" id="oldPassword" class="form-control" placeholder="Current Password" required autofocus>
-      <br></br>
+    <h3 class="update-account-header">Update Name and City</h3>
 
-      <input type="password" v-model="newPassword.newPassword" id="newPassword" class="form-control" placeholder="New Password" required autofocus>
+    <input type="text" v-model="newInfo.name" id="inputName" class="form-control" placeholder="Update Name" required autofocus>
 
-      <br></br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
-    </form>
+    <br></br>
 
-<!-- Info Form -->
-    <form class="collapse multi-collapse" id="update-info" @submit.prevent="updateInfo">
+    <div class="row">
+      <div class="col-sm-6">
+        <label for="inputCity" class="sr-only">City</label>
+        <input v-model="newInfo.city" type="city" id="inputCity" class="form-control" placeholder="City" required autofocus>
+      </div>
 
-      <h3 class="update-account-header">Update Name and City</h3>
+      <div class="col-sm-6">
+        <select id="state" class="form-control" v-model="newInfo.state">
+  <option value="" selected="selected">Select a State</option>
+  <option value="AL">Alabama</option>
+  <option value="AK">Alaska</option>
+  <option value="AZ">Arizona</option>
+  <option value="AR">Arkansas</option>
+  <option value="CA">California</option>
+  <option value="CO">Colorado</option>
+  <option value="CT">Connecticut</option>
+  <option value="DE">Delaware</option>
+  <option value="DC">District Of Columbia</option>
+  <option value="FL">Florida</option>
+  <option value="GA">Georgia</option>
+  <option value="HI">Hawaii</option>
+  <option value="ID">Idaho</option>
+  <option value="IL">Illinois</option>
+  <option value="IN">Indiana</option>
+  <option value="IA">Iowa</option>
+  <option value="KS">Kansas</option>
+  <option value="KY">Kentucky</option>
+  <option value="LA">Louisiana</option>
+  <option value="ME">Maine</option>
+  <option value="MD">Maryland</option>
+  <option value="MA">Massachusetts</option>
+  <option value="MI">Michigan</option>
+  <option value="MN">Minnesota</option>
+  <option value="MS">Mississippi</option>
+  <option value="MO">Missouri</option>
+  <option value="MT">Montana</option>
+  <option value="NE">Nebraska</option>
+  <option value="NV">Nevada</option>
+  <option value="NH">New Hampshire</option>
+  <option value="NJ">New Jersey</option>
+  <option value="NM">New Mexico</option>
+  <option value="NY">New York</option>
+  <option value="NC">North Carolina</option>
+  <option value="ND">North Dakota</option>
+  <option value="OH">Ohio</option>
+  <option value="OK">Oklahoma</option>
+  <option value="OR">Oregon</option>
+  <option value="PA">Pennsylvania</option>
+  <option value="RI">Rhode Island</option>
+  <option value="SC">South Carolina</option>
+  <option value="SD">South Dakota</option>
+  <option value="TN">Tennessee</option>
+  <option value="TX">Texas</option>
+  <option value="UT">Utah</option>
+  <option value="VT">Vermont</option>
+  <option value="VA">Virginia</option>
+  <option value="WA">Washington</option>
+  <option value="WV">West Virginia</option>
+  <option value="WI">Wisconsin</option>
+  <option value="WY">Wyoming</option>
+  </select>
+      </div>
+    </div>
 
-      <input type="text" v-model="newInfo.name" id="inputName" class="form-control" placeholder="Update Name" required autofocus>
+    <br></br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
+  </form>
 
-      <br></br>
-
-      <input type="text" v-model="newInfo.city" id="inputCity" class="form-control" placeholder="Update City" required autofocus>
-
-      <br></br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
-    </form>
-
-
+</div>
 </div>
 </template>
 
@@ -83,16 +151,17 @@ export default {
   data() {
     return {
       userArr: [],
-      newEmail:{
-        email:''
+      newEmail: {
+        email: ''
       },
-      newPassword:{
-        oldPassword:'',
-        newPassword:''
+      newPassword: {
+        oldPassword: '',
+        newPassword: ''
       },
-      newInfo:{
-        name:'',
-        city:''
+      newInfo: {
+        name: '',
+        city: '',
+        state: ''
       }
     }
   },
@@ -114,33 +183,44 @@ export default {
           console.log(error);
         });
     },
-    updateEmail(){
+    updateEmail() {
       console.log(this.newEmail);
       let self = this;
       let id = window.localStorage.id;
 
-      axios.put(`http://localhost:8881/profile/${id}/email`, this.newEmail)
+      axios.patch(`http://localhost:8881/profile/${id}/email`, this.newEmail)
+        .then(function(results) {
+          console.log(results, 'HEY I PATCHED');
+          self.getUser();
+        }).catch(function(error) {
+          console.log(error, "There was an error when you tired to update your email");
+        });
+    },
+
+    updateInfo() {
+      console.log(this.newInfo);
+      let self = this;
+      let id = window.localStorage.id;
+
+
+      axios.put(`http://localhost:8881/profile/${id}/info`, this.newInfo)
         .then(function() {
           self.getUser();
         }).catch(function(error) {
           console.log(error);
         });
-    },
-
-    updateInfo(){
-      let self = this;
-      let id = window.localStorage.id;
-
 
     },
 
-    updatePassword(){
+    updatePassword() {
       let self = this;
       let id = window.localStorage.id;
 
       axios.put(`http://localhost:8881/profile/${id}/password`, this.newPassword)
         .then(function() {
+          this.fields.setPristine()
           self.getUser();
+          // localStorage.clear();
           // self.$router.push('/login')
         }).catch(function(error) {
           console.log(error);

@@ -16,7 +16,7 @@ const filterInt = function(value) {
     return NaN;
 };
 
-
+//// Get user for update account
 router.get('/:id', (req, res, next)=>{
   const id = filterInt(req.params.id);
 
@@ -30,10 +30,33 @@ router.get('/:id', (req, res, next)=>{
     })
   });
 
-  router.put('/:id/email', (req, res, next)=>{
+
+  /////Update Email
+  router.patch('/:id/email', (req, res, next)=>{
     const id = filterInt(req.params.id);
     const email = req.body.email
     knex('users').where('id', id).update({email: email})
+    .then(function(results) {
+      console.log(results, 'results in update email');
+      if(results == 1) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    }).catch(function(error){
+      console.log('THERE BE AN ERROR IN YOUR NOTE PUT');
+    });
+});
+
+
+
+    ///////Update info
+  router.put('/:id/info', (req, res, next)=>{
+    const id = filterInt(req.params.id);
+    let name = req.body.name;
+    let city = req.body.city + ", " + req.body.state;
+
+    knex('users').where('id', id).update({name:name, city:city})
     .then(() => {
       res.sendStatus(200);
       })
@@ -43,41 +66,22 @@ router.get('/:id', (req, res, next)=>{
       })
     });
 
-  router.put('/:id/info', (req, res, next)=>{
-    const id = filterInt(req.params.id);
 
-    knex('users').where('id', id).select('*')
-    .then((user) => {
-      res.json(user);
-      })
-      .catch(function(error) {
-        console.log(error);
-        res.sendStatus(500);
-      })
-    });
-
+///////////Update Password
       router.put('/:id/password', (req, res, next)=>{
         console.log(req.body, "body");
         const id = filterInt(req.params.id);
 
-        const oldPass = req.body.oldPassword;
+        const passObj = req.body
 
-        const newPass = req.body.newPass;
+       let oldHash = bcrypt.hashSync(passObj.oldPassword, 10)
 
-        knex('users').where('id', id).select('*')
-        .then(function(user){
-          if (bcrypt.compare(user.password, oldPass)){
-            console.log("Old pass check??");
-            knex('users').where('id', id).update({password:newPass})
-          }
-        })
-        .then(() => {
-          res.sendStatus(200);
-          })
-          .catch(function(error) {
-            console.log(error);
-            res.sendStatus(500);
-          })
-        });
+        console.log(oldHash, "old hash");
+
+        let newHash = bcrypt.hashSync(passObj.oldPassword, 10)
+
+        console.log(newHash, "new hash");
+
+      });
 
 module.exports = router;

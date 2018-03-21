@@ -1,7 +1,5 @@
 <template>
-
 <div class = "row nav">
-
   <div class="wrapper">
     <nav id="sidebar">
       <!-- Close Sidebar Button -->
@@ -110,7 +108,6 @@ export default {
           console.log(self.properties, 'SELF PROPERTIES');
         })
     }
-
   },
     watch: {
     searchMarkers: function () {
@@ -119,8 +116,7 @@ export default {
       this.getProperties()
 
     }
-  }  
-
+  }
 }
 
 </script>
@@ -273,10 +269,10 @@ a.article:hover {
   background: #6d7fcc !important;
   color: #fff !important;
 }
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
 
+.nav{
+
+}
 .pageContainer {
   margin: 100px;
 }
