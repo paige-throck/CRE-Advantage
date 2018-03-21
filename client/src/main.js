@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import VueSweetalert2 from 'vue-sweetalert2';
 
 import Nav from './components/Nav.vue'
 Vue.component('Nav', Nav)

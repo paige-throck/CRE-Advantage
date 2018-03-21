@@ -42,11 +42,14 @@ export default {
       let self = this
       axios.post('http://localhost:8881/login/', this.user)
         .then(function(response) {
+          self.user.email = ""
+          self.user.password = ""
           self.$router.push('/profile')
           localStorage.setItem('sessionData', response.data.session);
           localStorage.setItem('name', response.data.name);
           localStorage.setItem('id', response.data.id);
         }).catch(function(error) {
+          self.$router.push('/login')
           console.log(error, 'Login Error');
         });
     }
