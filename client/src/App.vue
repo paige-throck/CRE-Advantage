@@ -15,6 +15,8 @@ import Profile from './components/profile.vue'
 import Nav from './components/Nav.vue'
 import Tasks from './components/Tasks.vue'
 import SmallMap from './components/SmallMap.vue'
+import NewSuiteForm from './components/NewSuiteForm.vue'
+import NewPropertyForm from './components/NewPropertyForm.vue'
 
 export default {
   name: 'App',
@@ -24,7 +26,9 @@ export default {
     'Profile': Profile,
     'Nav': Nav,
     'Tasks': Tasks,
-    'SmallMap': SmallMap
+    'SmallMap': SmallMap,
+    'NewSuiteForm': NewSuiteForm,
+    'NewPropertyForm': NewPropertyForm
   }
 }
 </script>

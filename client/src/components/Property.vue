@@ -19,39 +19,123 @@
         <!-- PROPERTY MENU BUTTONS -->
         <p>
           <a class="btn btn-primary" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">Suites</a>
+
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">Notes</button>
+
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#documents" aria-expanded="false" aria-controls="documents">Documents</button>
+
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-property" aria-expanded="false" aria-controls="edit-property">Edit Property</button>
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#delete-property" aria-expanded="false" aria-controls="delete-property">Delete Property</button>
+
+          <button class="btn btn-primary" type="button" @click="deleteProperty">Delete Property</button>
+
+          <button class="btn btn-primary" type="button" @click="showNewPropertyForm = !showNewPropertyForm">New Property</button>
         </p>
+
+
+        <NewPropertyForm v-if="showNewPropertyForm" v-on:addNewProperty="addProperty($event)" :propTypes="propTypes" :states="states"></NewPropertyForm>
+
+
+
         <!-- SUITES -->
         <div class="row">
+
           <div class="col">
-            <div class="collapse multi-collapse" id="suites">
+            <div class="collapse multi-collapse text-left" id="suites">
+
+              <button class="btn btn-primary" @click="showNewSuiteForm = !showNewSuiteForm" type="button">New Suite</button>
+
+              <NewSuiteForm v-if="showNewSuiteForm" v-on:addNewSuite="addSuite($event)"></NewSuiteForm>
+
+
               <div class="card card-body">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Suite Number</th>
-                      <th scope="col">Suite Size</th>
-                      <th scope="col">Tenant</th>
-                      <th scope="col">Rental Rate</th>
-                      <th scope="col">Lease Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="suite in suites[0]">
-                      <th scope="row">{{ suite.suite_num}}</th>
-                      <td>{{ suite.suite_size }}</td>
-                      <td>{{ suite.tenant }}</td>
-                      <td>{{ suite.rental_rate }}</td>
-                      <td>{{ suite.lease_date }}</td>
-                    </tr>
-                  </tbody>
-                </table>
+
+                <div v-for="(suite, index) in suites[0]">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Suite Number</th>
+                        <th scope="col">Suite Size</th>
+                        <th scope="col">Tenant</th>
+                        <th scope="col">Rental Rate</th>
+                        <th scope="col">Lease Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr>
+                        <th scope="row">{{ suite.suite_num}}</th>
+                        <td>{{ suite.suite_size }}</td>
+                        <td>{{ suite.tenant }}</td>
+                        <td>{{ suite.rental_rate }}</td>
+                        <td>{{ suite.lease_date }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div>
+                    <span class="pull-right">
+            <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
+              v-on:click="editSuiteClick(index)"></span></button>
+
+                    <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+              v-on:click="deleteSuiteClick(index)"></span></button>
+                    </span>
+                  </div>
+
+
+
+                  <!-- EDIT SUITE FORM -->
+
+
+                  <div class="card card-body suiteEditFormMargin">
+                    <form @submit.prevent="editSuite" v-if="index == activeSuiteItem && showEditSuiteForm" id="editSuite">
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="suite-num">Suite Number</label>
+                          <input type="text" class="form-control" id="suite-num" :placeholder="suite.suite_num" v-model="editedSuiteInfo.suite_num">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="lease-date">Lease Date</label>
+                          <input type="text" class="form-control" id="lease-date" :placeholder="suite.lease_date" v-model="editedSuiteInfo.lease_date">
+                        </div>
+
+                      </div>
+                      <div class="form-group col-md-12">
+                        <label for="tenant">Tenant</label>
+                        <input type="text" class="form-control" id="tenant" :placeholder="suite.tenant" v-model="editedSuiteInfo.tenant">
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="suite-size">Suite Size</label>
+                          <input type="text" class="form-control" id="suite-size" :placeholder="suite.suite_size" v-model="editedSuiteInfo.suite_size">
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="rental-rate">Rental Rate</label>
+                          <input type="text" class="form-control" id="rental-rate" :placeholder="suite.rental_rate" v-model="editedSuiteInfo.rental_rate">
+
+                        </div>
+
+                      </div>
+
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                  </div>
+                </div>
               </div>
+
             </div>
+
+            <!-- </div>
+            </div> -->
           </div>
+
+
+
+
 
           <!-- NOTES -->
 
@@ -216,15 +300,25 @@
 </div>
 </div>
 </template>
+
+
+
 <script>
 import axios from 'axios';
 import Nav from './Nav.vue'
 import SmallMap from './SmallMap.vue'
+import NewSuiteForm from './NewSuiteForm.vue'
+import NewPropertyForm from './NewPropertyForm.vue'
+import router from '../router';
+
+
 export default {
   name: 'Property',
   components: {
     'Nav': Nav,
-    'SmallMap': SmallMap
+    'SmallMap': SmallMap,
+    'NewSuiteForm': NewSuiteForm,
+    'NewPropertyForm': NewPropertyForm
   },
   data() {
     return {
@@ -259,10 +353,22 @@ export default {
         content: ""
       },
       showEditNoteForm: false,
-      activeItem: -1
+      activeItem: -1,
+      activeSuiteItem: -1,
+      showEditSuiteForm: false,
+      editedSuiteInfo: {
+        suite_num: '',
+        tenant: '',
+        lease_date: '',
+        suite_size: '',
+        rental_rate: ''
+      },
+      showNewSuiteForm: false,
+      showNewPropertyForm: false
     }
   },
   created: function() {
+    console.log('wtf');
     this.getPropertyData()
   },
   methods: {
@@ -280,6 +386,7 @@ export default {
           self.splitAddress()
 
           self.editedPropInfo.prospective_prop = self.property[0].prospective_prop
+
         })
         .catch(function(error) {
           console.log(error, 'ERROR WARNING');
@@ -348,9 +455,7 @@ export default {
       self.editedData.prospective_prop = self.editedPropInfo.prospective_prop
 
       axios.patch(`http://localhost:8881/properties/${user_id}/${prop_id}`, self.editedData)
-        .then(function(result) {
-          console.log(result, 'HEY I PATCHED');
-        })
+        .then(function(result) {})
         .catch(function(error) {
           console.log(error, 'YOU HAD AN ERROR WHEN TRYING TO UPDATE A PROPERTY IN THE SAVE PROPERTY EDIT FUNCTION');
         })
@@ -387,10 +492,7 @@ export default {
 
       axios.patch(`http://localhost:8881/properties/note/${id}`, editNote)
         .then(function(results) {
-          console.log('HEY YOU PATCHED A NOTE');
-
           self.activeItem = -1
-
           self.getPropertyData()
         })
     },
@@ -402,12 +504,75 @@ export default {
       self.notes.content[0].splice(indexClicked, 1)
 
       axios.delete(`http://localhost:8881/properties/note/${notes_id}/${note_index}`)
+        .then(function(results) {})
+        .catch(function(error) {
+          console.log(error, 'HEY THERE WAS AN ERROR WHEN YOU DELETED A NOTE');
+        })
+    },
+    editSuiteClick: function(indexClicked) {
+      this.activeSuiteItem = indexClicked
+      this.showEditSuiteForm = !this.showEditSuiteForm
+    },
+    editSuite: function() {
+      let self = this
+      let editedSuiteInfoKeys = Object.keys(self.editedSuiteInfo)
+      let suiteId = self.suites[0][self.activeSuiteItem].id
+      let editedSuiteData = {}
+
+      for (let i = 0; i < editedSuiteInfoKeys.length; i++) {
+        if (self.editedSuiteInfo[editedSuiteInfoKeys[i]].length > 0) {
+          editedSuiteData[editedSuiteInfoKeys[i]] = self.editedSuiteInfo[editedSuiteInfoKeys[i]]
+        } else {
+          editedSuiteData[editedSuiteInfoKeys[i]] = self.suites[0][self.activeSuiteItem][editedSuiteInfoKeys[i]]
+          console.log(self.suites[0][self.activeSuiteItem][editedSuiteInfoKeys[i]], 'WHAT AM I LOGGING');
+        }
+      }
+      self.suites[0][self.activeSuiteItem] = editedSuiteData
+
+      axios.patch(`http://localhost:8881/properties/suite/${suiteId}`, editedSuiteData)
         .then(function(results) {
-          console.log('HEY I DELETED A NOTE');
+          self.activeSuiteItem = -1
+          self.getPropertyData()
+        })
+    },
+    deleteSuiteClick: function(indexClicked) {
+      let self = this
+      let suite_id = self.suites[0][indexClicked].id
+
+      axios.delete(`http://localhost:8881/properties/suite/${suite_id}`)
+        .then(function(results) {
+          //self.property[0].num_suites--
+          self.suites[0].splice(indexClicked, 1)
         })
         .catch(function(error) {
           console.log(error, 'HEY THERE WAS AN ERROR WHEN YOU DELETED A NOTE');
         })
+    },
+    addSuite: function(event) {
+      let self = this
+      event.prop_id = this.property[0].id
+
+      axios.post(`http://localhost:8881/properties/suite/new`, event)
+        .then(function(results) {
+          self.suites[0].push(event)
+          //self.property[0].num_suites++
+          self.getPropertyData()
+          self.showNewSuiteForm = false;
+        })
+        .catch(function(error) {
+          console.log(error, 'YOU HAVE AN ERROR POSTING A NEW SUITE');
+        })
+    },
+    deleteProperty: function () {
+      let prop_id = this.property[0].id
+
+      axios.delete(`http://localhost:8881/properties/${prop_id}`)
+        .then(function(results){
+           router.push({ path: '/profile' })
+        })
+    },
+    addProperty: function (event) {
+      console.log(event, 'HEYYY EVENT IN ADD PROPERTY');
     }
   },
   watch: {
@@ -426,10 +591,15 @@ export default {
 
 
 <style scoped>
-.property{
-  margin:5%;
+.property {
+  margin: 5%;
 }
+
 .editInput {
   background-color: lightyellow !important
+}
+
+.suiteEditFormMargin {
+  margin-top: 50px;
 }
 </style>

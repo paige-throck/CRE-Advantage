@@ -11,9 +11,9 @@ const session = require('express-session');
 
 // filterInt - The function from MDN that confirms a particular value is actually an integer. Because parseInt isn't quite strict enough.
 const filterInt = function(value) {
-    if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
-        return Number(value);
-    return NaN;
+  if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
+    return Number(value);
+  return NaN;
 };
 
 
@@ -22,6 +22,7 @@ const filterInt = function(value) {
 router.get('/:id', function(req, res) {
   knex('properties').where('user_id', req.params.id)
     .then(function(results) {
+      console.log(results, 'MMMMMM');
       res.send(results);
     });
 });
@@ -31,25 +32,45 @@ router.get('/:id', function(req, res) {
 router.get('/:id/:prop_id', function(req, res) {
   let resultsArr = [];
   knex('properties').where('user_id', req.params.id)
-  .andWhere('properties.id', req.params.prop_id)
-  .then(function(results) {
-    resultsArr.push(results);
-  })
-  .then(function() {
-    knex('suites').where('prop_id', req.params.prop_id)
+    .andWhere('properties.id', req.params.prop_id)
     .then(function(results) {
       resultsArr.push(results);
+    })
+    .then(function() {
+      knex('suites').where('prop_id', req.params.prop_id)
+        .then(function(results) {
+          resultsArr.push(results);
+        });
+    })
+    .then(function() {
+      knex('property_notes').where('prop_id', req.params.prop_id)
+        .then(function(results) {
+          resultsArr.push(results);
+          console.log(resultsArr, 'RESULTS FROM SUITES');
+          res.send(resultsArr);
+        });
     });
-  })
-  .then(function() {
-    knex('property_notes').where('prop_id', req.params.prop_id)
-    .then(function(results) {
-      resultsArr.push(results);
-      console.log(resultsArr, 'RESULTS FROM SUITES');
-      res.send(resultsArr);
-    });
-  });
 });
+
+
+// edit suite
+router.patch('/suite/:suite_id', function(req, res) {
+  console.log(req.body, 'HEY SUITE REQ BODY IN THE SUITE PATCH');
+  console.log(req.params, 'HEY SUITE REQ PARAMS IN THE SUITE PATCH');
+
+
+  knex('suites').where('id', req.params.suite_id)
+    .update(req.body)
+    .then(function(results) {
+      if (results == 1) {
+        console.log('HEY SUITE PATCH WORKED');
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    });
+});
+
 
 // edit existing note
 router.patch('/note/:id', function(req, res) {
@@ -57,7 +78,7 @@ router.patch('/note/:id', function(req, res) {
   console.log(req.body, 'THE BODY THE BODY');
 
   knex('property_notes').where('id', req.params.id)
-    .then(function(results){
+    .then(function(results) {
       results[0].notes[editNote.noteIndex] = editNote.content;
 
       knex('property_notes').where('id', req.params.id)
@@ -66,13 +87,13 @@ router.patch('/note/:id', function(req, res) {
         })
         .then(function(results) {
           console.log(results, 'hey results in the note patch');
-          if(results == 1) {
+          if (results == 1) {
             res.sendStatus(200);
           } else {
             res.sendStatus(404);
           }
         });
-    }).catch(function(error){
+    }).catch(function(error) {
       console.log('THERE BE AN ERROR IN YOUR NOTE PATCH');
     });
 });
@@ -91,12 +112,12 @@ router.patch('/:id/:prop_id', function(req, res) {
     .update(req.body)
     .then(function(results) {
       if (results == 1) {
-        res.sendStatus(200)
+        res.sendStatus(200);
       } else {
-        res.sendStatus(404)
+        res.sendStatus(404);
       }
-    })
-})
+    });
+});
 
 
 // save a new property to a user's database
@@ -110,11 +131,14 @@ router.post('/save', function(req, res) {
   };
 
   return knex('properties').insert(property)
-    .then(function(results){
+    .then(function(results) {
       console.log('HEY I INSERTED A PROPERTY');
       res.send(results);
     });
 });
+
+
+
 
 // save a new note for a property
 router.post('/note/:id', function(req, res) {
@@ -127,9 +151,9 @@ router.post('/note/:id', function(req, res) {
         let existingNotes = results[0].notes;
         existingNotes.push(newNote);
         return knex('property_notes').where('id', req.params.id)
-        .update({
-          notes: existingNotes
-        });
+          .update({
+            notes: existingNotes
+          });
       } else {
         return knex('property_notes').insert({
           id: req.params.id,
@@ -143,12 +167,79 @@ router.post('/note/:id', function(req, res) {
     });
 });
 
+
+router.post('/suite/new', function(req, res) {
+  console.log(req.body, 'hey i am the body in your new suite post')
+
+  return knex('suites').insert(req.body)
+    .then(function(results) {
+      console.log(results, 'HEY RESULTS IN THE POST BODY SUITE');
+
+      // knex('properties').where('id', req.body.prop_id)
+      //   .then(function(results) {
+      //     console.log(results, 'HEY RESULTS');
+      //
+      //     knex('properties').where('id', req.body.prop_id)
+      //       .update({
+      //         num_suites: results[0].num_suites + 1
+      //       })
+      //       .then(function(results) {
+              if (results) {
+                res.sendStatus(200);
+              } else {
+                res.sendStatus(404);
+              }
+        //     });
+        // });
+    });
+});
+
+
+// delete a property
+router.delete('/:prop_id', function(req, res) {
+  knex('properties').where('id', req.params.prop_id)
+  .del()
+  .then(function(results) {
+    console.log('heyyyy delete');
+    if (results == 1) {
+      console.log('HEY SUITE DELETE WORKED');
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(404);
+    }
+  });
+});
+
+
+
+
+// delete suite
+router.delete('/suite/:suite_id', function(req, res) {
+  console.log(req.body, 'HEY SUITE REQ BODY IN THE SUITE DELETE');
+  console.log(req.params, 'HEY SUITE REQ PARAMS IN THE SUITE DELETE');
+
+
+  knex('suites').where('id', req.params.suite_id)
+    .del()
+    .then(function(results) {
+      if (results == 1) {
+        console.log('HEY SUITE DELETE WORKED');
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    });
+});
+
+
+
+
 // delete a note
 router.delete('/note/:notes_id/:note_index', function(req, res) {
-console.log(req.params.note_index, 'NOTE INDEX');
+  console.log(req.params.note_index, 'NOTE INDEX');
   knex('property_notes').where('id', req.params.notes_id)
-    .then(function(results){
-      results[0].notes.splice(req.params.note_index, 1)
+    .then(function(results) {
+      results[0].notes.splice(req.params.note_index, 1);
 
       knex('property_notes').where('id', req.params.notes_id)
         .update({
@@ -156,16 +247,17 @@ console.log(req.params.note_index, 'NOTE INDEX');
         })
         .then(function(results) {
           console.log(results, 'hey results in the note patch');
-          if(results == 1) {
+          if (results == 1) {
             res.sendStatus(200);
           } else {
             res.sendStatus(404);
           }
         });
-    }).catch(function(error){
+    }).catch(function(error) {
       console.log('THERE BE AN ERROR IN YOUR NOTE PATCH');
     });
 });
+
 
 
 
