@@ -24,7 +24,7 @@
 
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#documents" aria-expanded="false" aria-controls="documents">Documents</button>
 
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-property" aria-expanded="false" aria-controls="edit-property">Edit Property</button>
+          <button class="btn btn-primary" type="button" @click="showEditPropertyForm = ! showEditPropertyForm">Edit Property</button>
 
           <button class="btn btn-primary" type="button" @click="deleteProperty">Delete Property</button>
 
@@ -190,7 +190,7 @@
           </div>
           <!-- EDIT PROPERTY FORM -->
           <div class="col">
-            <div class="collapse multi-collapse" id="edit-property">
+            <div v-if="showEditPropertyForm" id="edit-property">
               <div class="card card-body">
                 <form @submit.prevent="formatEditedProperty">
                   <div class="form-row">
@@ -364,7 +364,8 @@ export default {
         rental_rate: ''
       },
       showNewSuiteForm: false,
-      showNewPropertyForm: false
+      showNewPropertyForm: false,
+      showEditPropertyForm: false
     }
   },
   created: function() {
@@ -384,7 +385,6 @@ export default {
           self.notes.id = result.data[2][0].id
 
           self.splitAddress()
-
           self.editedPropInfo.prospective_prop = self.property[0].prospective_prop
 
         })
@@ -411,6 +411,9 @@ export default {
       for (let i = 0; i < editedPropInfoKeys.length; i++) {
         if (self.editedPropInfo[editedPropInfoKeys[i]].length > 0) {
           self.editedData[editedPropInfoKeys[i]] = self.editedPropInfo[editedPropInfoKeys[i]]
+
+          // update property object to reflect changes
+          self.property[0][editedPropInfoKeys[i]] = self.editedPropInfo[editedPropInfoKeys[i]]
         }
       }
       // loop through new object and check to see if any part of the address has changed...if it has call the format address function
@@ -439,6 +442,7 @@ export default {
         this.editedData.zip = this.propZip
       }
       this.editedData.address = this.editedData.streetAddress + ', ' + this.editedData.city + ', ' + this.editedData.state + ' ' + this.editedData.zip
+
       // delete unnecessary address keys in object being sent to database
       delete this.editedData.streetAddress
       delete this.editedData.city
@@ -453,6 +457,15 @@ export default {
       let user_id = window.localStorage.id
 
       self.editedData.prospective_prop = self.editedPropInfo.prospective_prop
+      console.log(self.editedData, 'EDITED DATA IN PROPERTY EDIT');
+      self.showEditPropertyForm = !self.showEditPropertyForm
+
+      // update property address on property object
+      if (self.editedData.address) {
+          self.property[0].address = self.editedData.address
+      }
+
+
 
       axios.patch(`http://localhost:8881/properties/${user_id}/${prop_id}`, self.editedData)
         .then(function(result) {
@@ -576,19 +589,13 @@ export default {
     },
     addProperty: function (event) {
      console.log(event, 'HEYYY EVENT IN ADD PROPERTY');
+     event.user_id = window.localStorage.id
 
-      // let newProperty = {
-      //   prop_owner: event.prop_owner,
-      //   prop_range: event.prop_range,
-      //   prop_size: event.prop_size,
-      //   prop_type: event.prop_type,
-      //   prospective_prop: event.prospective_prop,
-      //   address
-      // }
+      axios.post(`http://localhost:8881/properties/new`, event)
+        .then(function(results) {
+          console.log('OMG YOU HAVE A NEW PROPERTY');
 
-
-
-      //axios.post(`http://localhost:8881/properties/suite/new`, event)
+        })
     }
   },
   watch: {
