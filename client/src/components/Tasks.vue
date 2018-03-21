@@ -159,6 +159,7 @@ export default {
       let id = window.localStorage.id;
       axios.post(`http://localhost:8881/tasks/${id}`, this.newTask)
         .then(function() {
+          self.newTask.item = ""
           self.getTasks();
         }).catch(function(error) {
           console.log(error);

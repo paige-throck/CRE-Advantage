@@ -82,6 +82,8 @@ router.get('/:id', (req, res, next)=>{
 
         console.log(newHash, "new hash");
 
+        res.send(200);
+
       });
 
 module.exports = router;

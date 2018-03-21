@@ -32,6 +32,7 @@ router.post('/', (req, res) => {
     knex.select('email').from('users').where('email', newUserObj.email)
         .then((result) => {
             if (result.length !== 0) {
+              console.log("Are you checking the email");
                 return res.send('Email exists');
             }
             return bcrypt.hash(newUserObj.password, 10, (err, hash) => {
@@ -42,13 +43,11 @@ router.post('/', (req, res) => {
                             email: newUserObj.email,
                             password: newUserObj.hashpw
                         })
-                  .then(() => {
-                            console.log('did it work?');
-                  })
+                        .then(() => {
+                            res.sendStatus(200);
+                        });
                 })
-                .then(() => {
-                    res.sendStatus(200);
-                });
+
               })
 
         .catch((err) => {
