@@ -107,6 +107,7 @@ export default {
           console.log(self.properties, 'SELF PROPERTIES');
         })
     }
+    
   }
 }
 </script>
@@ -263,7 +264,7 @@ a.article:hover {
     CONTENT STYLE
 ----------------------------------------------------- */
 .nav{
-  
+
 }
 .pageContainer {
   margin: 100px;

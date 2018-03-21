@@ -3,7 +3,7 @@
   <Nav></Nav>
 
   <span class="pull-right">
-  <button class="btn btn-danger" v-on:click="clearList($event, tasksArr[0])"><span
+  <button class="btn btn-danger" v-on:click="clearList($event)"><span
 ></span>Clear Tasks</button>
   </span>
 
@@ -52,10 +52,10 @@
 
         <span class="pull-left">
 
-          <div class="lead"> &nbsp; {{task.item}} </div>
+          <div class="lead">  {{task.item}} </div>
       </span>
         <span class="pull-left">
-          <div class="lead">  {{task.task_date}}</div>
+          <div class="lead">  &nbsp; {{task.task_date}}</div>
       </span>
     </div>
       <div>
@@ -136,7 +136,6 @@ export default {
   mounted: function() {
     this.getTasks()
     // $(this.$refs.datetimepicker).datetimepicker()
-
   },
   methods: {
     // updateTime(event) {
@@ -210,19 +209,9 @@ export default {
         });
     },
 
-    clearList: function(event, tasks) {
-      console.log(tasks, "clearing tasks");
-
-      let trueTasks = [];
-
-    for (let task = 0; task < tasks.length; task++){
-        if (tasks[task].completed === true){
-          console.log("hey girl hey");
-          trueTasks.push(tasks[task])
-        }
-      }
-      console.log(trueTasks, "truuuuue tasks");
-      axios.delete(`http://localhost:8881/tasks/clearCompletedTasks`, this.trueTasks)
+    clearList: function(event) {
+      let self = this;
+      axios.delete(`http://localhost:8881/tasks/clearCompletedTasks`)
       .then(function() {
         self.getTasks();
       }).catch(function(error) {

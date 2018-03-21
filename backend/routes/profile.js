@@ -17,6 +17,17 @@ const filterInt = function(value) {
 };
 
 
-
+router.get('/:id', (req, res, next)=>{
+  const id = filterInt(req.params.id);
+  
+  knex('users').where('id', id).select('*')
+  .then((user) => {
+    res.json(user);
+    })
+    .catch(function(error) {
+      console.log(error);
+      res.sendStatus(500);
+    })
+  })
 
 module.exports = router;

@@ -7,6 +7,22 @@
 <h1>Hello {{msg}}</h1>
 </div>
 
+<div class ="container">
+<div class = "row">
+
+
+<div class = "col-sm-4 newprop-square">
+</div>
+
+<div class = "col-sm-4 map-square">
+</div>
+
+<div class = "col-sm-4 tasks-square">
+</div>
+
+</div>
+</div>
+
 </div>
 </template>
 
@@ -32,11 +48,30 @@ export default {
   },
 }
 
-
-
 </script>
+
+
 <style scoped>
+
 .profile{
   margin:5%;
+}
+
+.newprop-square{
+  background:blue;
+    width: 15vw;
+    height: 15vw;
+}
+
+.map-square{
+  background-color: green;
+  width: 15vw;
+  height: 15vw;
+}
+
+.tasks-square{
+  background-color: purple;
+  width: 15vw;
+  height: 15vw;
 }
 </style>
