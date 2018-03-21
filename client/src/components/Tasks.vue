@@ -178,10 +178,11 @@ methods: {
 
     let self = this;
     let id = window.localStorage.id;
-
+    self.showEditForm = false;
 
     axios.put(`http://localhost:8881/tasks/${id}/${taskId}/update`, this.editedTask)
       .then(function() {
+        self.editedTask.item = "";
         self.getTasks();
       }).catch(function(error) {
         console.log(error);
