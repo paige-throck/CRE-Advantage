@@ -1,8 +1,12 @@
 <template>
+<<<<<<< HEAD
 <div class = "row nav">
+=======
+<div class="row nav">
+>>>>>>> 0e98d7101c2cf6da472c84f16a7eba4545236dde
   <div class="wrapper">
     <nav id="sidebar">
-      <!-- Close Sideba Button -->
+      <!-- Close Sidebar Button -->
       <div id="dismiss">
         <i class="glyphicon glyphicon-arrow-left"></i>
       </div>
@@ -59,6 +63,7 @@
 import axios from 'axios';
 export default {
   name: 'Nav',
+  // props: ['searchMarkers'],
   data() {
     return {
       properties: []
@@ -107,9 +112,22 @@ export default {
           console.log(self.properties, 'SELF PROPERTIES');
         })
     }
+<<<<<<< HEAD
     
   }
+=======
+  },
+    watch: {
+    searchMarkers: function () {
+      console.log('AM I HERE');
+      this.loadNav()
+      this.getProperties()
+
+    }
+  }  
+>>>>>>> 0e98d7101c2cf6da472c84f16a7eba4545236dde
 }
+
 </script>
 <style scoped>
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
@@ -263,7 +281,11 @@ a.article:hover {
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
+<<<<<<< HEAD
 .nav{
+=======
+#content {
+>>>>>>> 0e98d7101c2cf6da472c84f16a7eba4545236dde
 
 }
 .pageContainer {
