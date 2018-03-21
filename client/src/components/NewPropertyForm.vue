@@ -118,9 +118,6 @@ export default {
 
       axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.newPropInfo.streetAddress}+,+${this.newPropInfo.city},+${this.newPropInfo.state}&key=AIzaSyAh3fU5DauF9fgnwi1IdF8OZccHONkPBRM`)
         .then(function(results) {
-          console.log(results,'OMG YOU GEOCODED');
-          console.log(self.newPropInfo, 'NEW PROP INFO INSIDE');
-
 
           self.newPropInfo.lat = results.data.results[0].geometry.location.lat
           self.newPropInfo.lang = results.data.results[0].geometry.location.lng
