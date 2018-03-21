@@ -89,16 +89,27 @@ router.put('/:id/password', (req, res, next) => {
     const id = filterInt(req.params.id);
 
     const passObj = req.body
+    const newHash = bcrypt.hashSync(passObj.newPassword, 10)
 
-    let oldHash = bcrypt.hashSync(passObj.oldPassword, 10)
-
-    console.log(oldHash, "old hash");
-
-    let newHash = bcrypt.hashSync(passObj.oldPassword, 10)
-
-    console.log(newHash, "new hash");
-
-    res.send(200);
+    knex('users').select('*').where('id', id)
+    .then(function(result){
+      return bcrypt.compare(passObj.oldPassword, result[0].password)
+      .then(function(passCheck){
+        console.log(passCheck, "what is this thing?");
+        if (passCheck){
+          return knex('users').where('id', id).update({password:newHash})
+        } else { // If passwords don't match, send a 401.
+          return res.sendStatus(401);
+        }
+      })
+      .then(function(){
+        res.sendStatus(200)
+      })
+      .catch(function(error) {
+          console.log(error);
+          res.sendStatus(500);
+      })
+    })
 
 });
 

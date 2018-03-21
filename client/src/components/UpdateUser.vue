@@ -147,6 +147,7 @@ export default {
   name: 'UpdateUser',
   components: {
     'Nav': Nav,
+
   },
   data() {
     return {
@@ -220,12 +221,13 @@ export default {
       let id = window.localStorage.id;
 
       axios.put(`http://localhost:8881/profile/${id}/password`, this.newPassword)
-        .then(function() {
-          self.newPassword.oldPassword = ""
-          self.newPassword.newPassword = ""
-          self.getUser();
+        .then(function(response) {
+          console.log(response, "nckadsbnfckwqjdanscjkdsm");
+          localStorage.clear();
+          self.$router.push('/login')
+          // self.getUser();
           // localStorage.clear();
-          // self.$router.push('/login')
+
         }).catch(function(error) {
           console.log(error);
         });
