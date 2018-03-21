@@ -590,6 +590,7 @@ export default {
     addProperty: function (event) {
      console.log(event, 'HEYYY EVENT IN ADD PROPERTY');
      event.user_id = window.localStorage.id
+     showNewPropertyForm = !showNewPropertyForm
 
       axios.post(`http://localhost:8881/properties/new`, event)
         .then(function(results) {
