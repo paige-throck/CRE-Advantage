@@ -379,11 +379,13 @@ export default {
       let user_id = window.localStorage.id
       axios.get(`http://localhost:8881/properties/${user_id}/${prop_id}`)
         .then(function(result) {
+          console.log(result, 'RESULTTTTT');
           self.property.push(result.data[0][0])
           self.suites.push(result.data[1])
-          self.notes.content.push(result.data[2][0].notes)
-          self.notes.id = result.data[2][0].id
-
+          if(result.data[2][0]) {
+            self.notes.content.push(result.data[2][0].notes)
+            self.notes.id = result.data[2][0].id
+          }
           self.splitAddress()
           self.editedPropInfo.prospective_prop = self.property[0].prospective_prop
 
@@ -401,6 +403,7 @@ export default {
       self.propCity = splitAddress[1]
       self.propState = splitStateZip[1]
       self.propZip = splitStateZip[2]
+console.log(self.property[0], 'PROPERTY ZEROOOOO');
     },
     formatEditedProperty: function() {
       // prepare edited values for database
