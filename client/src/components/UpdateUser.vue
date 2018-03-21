@@ -147,6 +147,7 @@ export default {
   name: 'UpdateUser',
   components: {
     'Nav': Nav,
+
   },
   data() {
     return {
@@ -191,6 +192,7 @@ export default {
       axios.patch(`http://localhost:8881/profile/${id}/email`, this.newEmail)
         .then(function(results) {
           console.log(results, 'HEY I PATCHED');
+          self.newEmail.email = ""
           self.getUser();
         }).catch(function(error) {
           console.log(error, "There was an error when you tired to update your email");
@@ -202,9 +204,11 @@ export default {
       let self = this;
       let id = window.localStorage.id;
 
-
       axios.put(`http://localhost:8881/profile/${id}/info`, this.newInfo)
         .then(function() {
+          self.newInfo.name = ""
+          self.newInfo.city = ""
+          self.newInfo.state = ""
           self.getUser();
         }).catch(function(error) {
           console.log(error);
@@ -217,11 +221,13 @@ export default {
       let id = window.localStorage.id;
 
       axios.put(`http://localhost:8881/profile/${id}/password`, this.newPassword)
-        .then(function() {
-          this.fields.setPristine()
-          self.getUser();
+        .then(function(response) {
+          console.log(response, "nckadsbnfckwqjdanscjkdsm");
+          localStorage.clear();
+          self.$router.push('/login')
+          // self.getUser();
           // localStorage.clear();
-          // self.$router.push('/login')
+
         }).catch(function(error) {
           console.log(error);
         });
