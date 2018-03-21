@@ -67,7 +67,7 @@ router.get('/:id', (req, res, next)=>{
         knex('users').where('id', id).select('*')
         .then(function(user){
           if (bcrypt.compare(user.password, oldPass)){
-            console.log("Old pass check??");
+            console.log("old pass check??");
             knex('users').where('id', id).update({password:newPass})
           }
         })
