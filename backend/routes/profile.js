@@ -16,7 +16,7 @@ const filterInt = function(value) {
     return NaN;
 };
 
-
+//// Get user for update account
 router.get('/:id', (req, res, next)=>{
   const id = filterInt(req.params.id);
 
@@ -30,6 +30,8 @@ router.get('/:id', (req, res, next)=>{
     })
   });
 
+
+  /////Update Email
   router.put('/:id/email', (req, res, next)=>{
     const id = filterInt(req.params.id);
     const email = req.body.email
@@ -43,12 +45,17 @@ router.get('/:id', (req, res, next)=>{
       })
     });
 
+
+
+    ///////Update info
   router.put('/:id/info', (req, res, next)=>{
     const id = filterInt(req.params.id);
+    let name = req.body.name;
+    let city = req.body.city + ", " + req.body.state;
 
-    knex('users').where('id', id).select('*')
-    .then((user) => {
-      res.json(user);
+    knex('users').where('id', id).update({name:name, city:city})
+    .then(() => {
+      res.sendStatus(200);
       })
       .catch(function(error) {
         console.log(error);
@@ -56,6 +63,8 @@ router.get('/:id', (req, res, next)=>{
       })
     });
 
+
+///////////Update Password
       router.put('/:id/password', (req, res, next)=>{
         console.log(req.body, "body");
         const id = filterInt(req.params.id);
@@ -64,18 +73,14 @@ router.get('/:id', (req, res, next)=>{
 
         const newPass = req.body.newPass;
 
-        knex('users').where('id', id).select('password')
-        .then(function(password){
-            return  bcrypt.compare(password, oldPass)
-            console.log(bcrypt.compare(password, oldPass));
-        })
-        .then(() => {
-          res.sendStatus(200);
-          })
-          .catch(function(error) {
-            console.log(error);
-            res.sendStatus(500);
-          })
+
+        // .then(() => {
+        //   res.sendStatus(200);
+        //   })
+        //   .catch(function(error) {
+        //     console.log(error);
+        //     res.sendStatus(500);
+        //   })
         });
 
 module.exports = router;

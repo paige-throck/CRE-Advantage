@@ -191,9 +191,16 @@ export default {
     },
 
     updateInfo(){
+      console.log(this.newInfo);
       let self = this;
       let id = window.localStorage.id;
 
+      axios.put(`http://localhost:8881/profile/${id}/info`, this.newInfo)
+        .then(function() {
+          self.getUser();
+        }).catch(function(error) {
+          console.log(error);
+        });
 
     },
 
