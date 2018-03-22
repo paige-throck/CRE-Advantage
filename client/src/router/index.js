@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import VueSession from 'vue-session';
 import VueSweetalert2 from 'vue-sweetalert2';
 import Datepicker from 'vuejs-datepicker';
+import moment from 'moment';
 
 
 import Home from '@/components/Home'
@@ -18,9 +19,6 @@ import AllProp from '@/components/AllProp'
 import DatePicker from '@/components/DatePicker'
 import Nav from '@/components/Nav'
 import App from '@/App'
-
-
-
 
 
 Vue.use(Router)

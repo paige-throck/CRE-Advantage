@@ -19,14 +19,16 @@ const filterInt = function(value) {
 ///////////GET ALL TASKS
 
 router.get('/:id', (req, res, next)=>{
+  let taskArr = [];
+  let DateArr = [];
   const userId = filterInt(req.params.id);
   console.log(userId);
   knex('tasks').where('user_id', userId).select('*')
   .orderBy('id', 'asc')
   .then((tasks) => {
-    console.log(tasks);
-    res.json(tasks);
-    })
+  taskArr.push(tasks)
+    res.json(taskArr);
+  })
     .catch(function(error) {
       console.log(error);
       res.sendStatus(500);
