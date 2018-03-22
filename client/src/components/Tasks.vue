@@ -26,7 +26,7 @@
       </div>
 
       <div class="col-sm-2">
-        <datepicker format="yyyy dd MMM " type="date" v-model="newTask.task_date" placeholder="Select a Date"></datepicker>
+        <datepicker format="MMM dd yyyy" type="date" v-model="newTask.task_date" placeholder="Select a Date"></datepicker>
       </div>
     </div>
   </form>
@@ -74,20 +74,19 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 
                 <div class="row">
                   <span class="input-group-btn">
-              <button v-on:click="editTask($event, editedTask, task.id)" class="btn btn-default" type="submit"><span
+              <button v-on:click="editTask($event, editedTask.item, editedTask.task_date, task)" class="btn btn-default" type="submit"><span
             class="glyphicon glyphicon-plus"></span> Update Task</button>
                   </span>
 
                 </div>
                 <div class="row">
-                  <input type="text" class="form-control" id="edited-email" :placeholder="task.item" :value="editedTask.item">
+                  <input type="text" class="form-control" id="edited-email" :placeholder="task.item" v-model="editedTask.item">
                 </div>
 
                 <div class="row">
-                  <div class="col-sm-2">
-                    <datepicker format="YYYY-MM-DD" v-model="editedTask.task_date"></datepicker>
+                  <datepicker format="MMM dd yyyy" type="date" v-model="editedTask.task_date" :placeholder="task.task_date"></datepicker>
                   </div>
-                </div>
+
               </div>
               <div class="col-sm-2">
               </div>
@@ -122,8 +121,8 @@ export default {
         task_date: ''
       },
       editedTask: {
-        item: "",
-        task_date:""
+        item: '',
+        task_date:''
       },
       showEditForm: false,
       activeTask: -1
@@ -168,15 +167,31 @@ export default {
       self.showEditForm = !self.showEditForm;
     },
 
-    editTask(event, editedTask, taskId) {
+    editTask(event, item, date, task) {
+      console.log(item, date, 'data being sent over from edit task');
 
       let self = this;
       let id = window.localStorage.id;
+      let taskId = task.id;
       self.showEditForm = false;
 
-      axios.put(`http://localhost:8881/tasks/${id}/${taskId}/update`, this.editedTask)
+      if (date === ''){
+        console.log('what up');
+        date = task.task_date
+
+      }if (item === ''){
+        console.log('what up');
+        item = task.item
+      }
+
+      let updateTask = {item:item, task_date:date}
+      console.log(updateTask, 'task being sent over to backend');
+
+
+      axios.put(`http://localhost:8881/tasks/${id}/${taskId}/update`, updateTask)
         .then(function() {
           self.editedTask.item = "";
+          self.editedTask.task_date = "";
           self.getTasks();
         }).catch(function(error) {
           console.log(error);
