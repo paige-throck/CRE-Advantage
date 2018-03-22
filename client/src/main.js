@@ -4,9 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueSweetalert2 from 'vue-sweetalert2';
-import datePicker from 'vue-bootstrap-datetimepicker';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
+
 
 import Nav from './components/Nav.vue'
 Vue.component('Nav', Nav)

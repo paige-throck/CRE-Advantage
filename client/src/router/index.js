@@ -1,11 +1,8 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import VueSession from 'vue-session'
+import Vue from 'vue';
+import Router from 'vue-router';
+import VueSession from 'vue-session';
 import VueSweetalert2 from 'vue-sweetalert2';
-import datePicker from 'vue-bootstrap-datetimepicker';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
-
+import datepicker from 'vue-date-picker';
 
 
 import Home from '@/components/Home'
@@ -17,16 +14,20 @@ import Property from '@/components/Property'
 import PropMap from '@/components/PropMap'
 import UpdateUser from '@/components/UpdateUser'
 import SmallMap from '@/components/SmallMap'
+import DatePicker from '@/components/DatePicker'
 import Nav from '@/components/Nav'
 import App from '@/App'
 
 
 
+
+
 Vue.use(Router)
 Vue.use(VueSession)
-Vue.use(datePicker);
+
 
 export default new Router({
+  mode: 'history',
   routes: [{
       path: '/',
       name: 'Home',
