@@ -1,6 +1,8 @@
 <template>
 <div class="row property">
-  <Nav></Nav>
+  <Nav v-on:getPropertyData="updateProperties($event)"></Nav>
+
+
   <div class="container">
     <div class="row">
       <div class="col-sm-6 offset-sm-4 text-left">
@@ -11,11 +13,14 @@
         <p>Suites: {{ property[0].num_suites}}</p>
       </div>
       <div class="col-sm-6 rightCol">
+
         <SmallMap :property="property"></SmallMap>
       </div>
     </div>
+
     <div class="row">
       <div class="col">
+
         <!-- PROPERTY MENU BUTTONS -->
         <p>
           <a class="btn btn-primary" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">Suites</a>
@@ -201,8 +206,10 @@
                     <div class="form-group col-md-4">
                       <label for="prop-type">Property Type</label>
                       <select id="prop-type" class="form-control" v-model="editedPropInfo.prop_type">
+                        <option v-if="property[0].prop_type == null" selected value="">
+                        Choose Property Type...</option>
 
-                        <option selected value="">{{ property[0].prop_type }}</option>
+                        <option v-else selected value="">{{ property[0].prop_type }}</option>
                         <option
                           v-for="type in propTypes"
                           v-if="type !== property[0].prop_type"
@@ -309,7 +316,6 @@ import Nav from './Nav.vue'
 import SmallMap from './SmallMap.vue'
 import NewSuiteForm from './NewSuiteForm.vue'
 import NewPropertyForm from './NewPropertyForm.vue'
-// import router from '../router';
 
 
 export default {
@@ -368,9 +374,9 @@ export default {
       showEditPropertyForm: false
     }
   },
-  created: function() {
+  mounted: function() {
     console.log('wtf');
-    this.getPropertyData()
+      this.getPropertyData()
   },
   methods: {
     getPropertyData: function() {
@@ -393,6 +399,7 @@ export default {
         .catch(function(error) {
           console.log(error, 'ERROR WARNING');
         })
+
     },
     splitAddress: function() {
       // split address to go into individual form fields
@@ -403,7 +410,7 @@ export default {
       self.propCity = splitAddress[1]
       self.propState = splitStateZip[1]
       self.propZip = splitStateZip[2]
-console.log(self.property[0], 'PROPERTY ZEROOOOO');
+
     },
     formatEditedProperty: function() {
       // prepare edited values for database
@@ -478,6 +485,19 @@ console.log(self.property[0], 'PROPERTY ZEROOOOO');
         .catch(function(error) {
           console.log(error, 'YOU HAD AN ERROR WHEN TRYING TO UPDATE A PROPERTY IN THE SAVE PROPERTY EDIT FUNCTION');
         })
+
+        self.editedPropInfo = {
+          streetAddress: "",
+          city: "",
+          state: "",
+          zip: "",
+          prop_owner: "",
+          prop_size: "",
+          prospective_prop: "",
+          prop_type: "",
+          prop_range: "",
+          num_suites: ""
+        }
     },
     addNote: function() {
       let self = this
@@ -538,12 +558,12 @@ console.log(self.property[0], 'PROPERTY ZEROOOOO');
       let suiteId = self.suites[0][self.activeSuiteItem].id
       let editedSuiteData = {}
 
+      // loop through edited suite info keys and add edited values to edited suite data
       for (let i = 0; i < editedSuiteInfoKeys.length; i++) {
         if (self.editedSuiteInfo[editedSuiteInfoKeys[i]].length > 0) {
           editedSuiteData[editedSuiteInfoKeys[i]] = self.editedSuiteInfo[editedSuiteInfoKeys[i]]
         } else {
           editedSuiteData[editedSuiteInfoKeys[i]] = self.suites[0][self.activeSuiteItem][editedSuiteInfoKeys[i]]
-          console.log(self.suites[0][self.activeSuiteItem][editedSuiteInfoKeys[i]], 'WHAT AM I LOGGING');
         }
       }
       self.suites[0][self.activeSuiteItem] = editedSuiteData
@@ -583,22 +603,24 @@ console.log(self.property[0], 'PROPERTY ZEROOOOO');
         })
     },
     deleteProperty: function () {
+      let self = this
       let prop_id = this.property[0].id
 
       axios.delete(`http://localhost:8881/properties/${prop_id}`)
         .then(function(results){
-           router.push({ path: '/profile' })
+           self.$router.push('/profile')
         })
     },
     addProperty: function (event) {
      console.log(event, 'HEYYY EVENT IN ADD PROPERTY');
+     let self = this
      event.user_id = window.localStorage.id
-     showNewPropertyForm = !showNewPropertyForm
+     self.showNewPropertyForm = !self.showNewPropertyForm
 
       axios.post(`http://localhost:8881/properties/new`, event)
         .then(function(results) {
           console.log('OMG YOU HAVE A NEW PROPERTY');
-
+          self.$router.push('/profile')
         })
     }
   },

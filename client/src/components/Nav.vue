@@ -18,7 +18,12 @@
           <!-- Link with dropdown items -->
           <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Properties</a>
           <ul class="collapse list-unstyled" id="homeSubmenu">
-            <li v-for="property in properties[0]">
+            <li v-for="prop in searchedProp">
+              <router-link :to="{name: 'Property', params: {id: prop.id}}">{{prop.address}}
+              </router-link>
+            </li>
+              </router-link>
+            <li v-for="property in properties[0]" @click="updateProperties">
               <router-link :to="{name: 'Property', params: {id: property.id}}">{{property.address}}
               </router-link>
             </li>
@@ -47,6 +52,9 @@
       </div>
       <div class="col-sm-8">
         <h3>CRE Advantage</h3>
+
+
+
       </div>
       <div class="col-sm-2">
       </div>
@@ -59,7 +67,7 @@
 import axios from 'axios';
 export default {
   name: 'Nav',
-  // props: ['searchMarkers'],
+   props: ['searchedProp'],
   data() {
     return {
       properties: []
@@ -91,7 +99,7 @@ export default {
       });
       // if dismiss or overlay was clicked
       $('#dismiss, .overlay').on('click', function() {
-        // hide the sidebar
+      //  hide the sidebar
         // $('#sidebar').style.display = 'none';
         $('#sidebar').removeClass('active');
         // fade out the overlay
@@ -107,16 +115,21 @@ export default {
           self.properties.push(result.data)
           console.log(self.properties, 'SELF PROPERTIES');
         })
-    }
+    },
+    updateProperties: function () {
+        $('#sidebar').removeClass('active');
+      console.log('DID I UPDATE?!?');
+      let self = this
+      $self.forceUpdate()
+    },
+    // watch: {
+    //   searchMarkers: {
+    //     getProperties()
+    //     console.log('HEY I GOT PROPERTIES');
+    //   }
+    // }
   },
-    watch: {
-    searchMarkers: function () {
-      console.log('AM I HERE');
-      this.loadNav()
-      this.getProperties()
 
-    }
-  }
 }
 
 </script>
