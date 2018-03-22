@@ -17,6 +17,7 @@ import Tasks from './components/Tasks.vue'
 import SmallMap from './components/SmallMap.vue'
 import NewSuiteForm from './components/NewSuiteForm.vue'
 import NewPropertyForm from './components/NewPropertyForm.vue'
+import AllProp from './components/AllProp.vue'
 
 export default {
   name: 'App',
@@ -28,7 +29,8 @@ export default {
     'Tasks': Tasks,
     'SmallMap': SmallMap,
     'NewSuiteForm': NewSuiteForm,
-    'NewPropertyForm': NewPropertyForm
+    'NewPropertyForm': NewPropertyForm,
+    'AllProp': AllProp
   }
 }
 </script>

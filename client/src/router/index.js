@@ -14,6 +14,7 @@ import Property from '@/components/Property'
 import PropMap from '@/components/PropMap'
 import UpdateUser from '@/components/UpdateUser'
 import SmallMap from '@/components/SmallMap'
+import AllProp from '@/components/AllProp'
 import DatePicker from '@/components/DatePicker'
 import Nav from '@/components/Nav'
 import App from '@/App'
@@ -69,6 +70,11 @@ export default new Router({
       path: '/update-account',
       name: 'UpdateUser',
       component: UpdateUser
+    },
+    {
+      path: '/allprop',
+      name: 'AllProp',
+      component: AllProp
     }
   ]
 });
