@@ -1,5 +1,5 @@
 <template>
-<div class="row login">
+<div class="login">
   <div class="login-wrapper border border-light">
     <form class="form-login" @submit.prevent="login">
       <h2 class="form-login-heading">Please Sign In</h2>
@@ -59,6 +59,10 @@ export default {
 
 <style scoped>
 .login{
-  margin:5%;
+  height: 100vh;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../img/bigcity.jpg");
 }
 </style>

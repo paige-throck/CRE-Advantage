@@ -1,5 +1,5 @@
 <template>
-<div class="row signup">
+<div class="signup">
   <div class="login-wrapper border border-light">
     <form class="form-signup" @submit.prevent="signup">
       <h2 class="form-signup-heading">Please Create an Account</h2>
@@ -126,6 +126,10 @@ export default {
 
 <style scoped>
 .signup {
-  margin: 5%;
+  height: 100vh;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../img/bigcity.jpg");
 }
 </style>
