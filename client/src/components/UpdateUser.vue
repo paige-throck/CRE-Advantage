@@ -14,7 +14,7 @@
     </div>
     <div class="col-sm-2">
     </div>
-  </div>
+
 
   <div class = "row">
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#update-email" aria-expanded="false" aria-controls="update-email">Update Email</button>
@@ -63,16 +63,18 @@
 
     <h3 class="update-account-header">Update Name and City</h3>
 
-    <input type="text" v-model="newInfo.name" id="inputName" class="form-control" placeholder="Update Name" required autofocus>
+    <input type="text" v-model="newInfo.name" placeholder="Enter a New Name" id="inputName" class="form-control" required autofocus>
 
     <br></br>
 
     <div class="row">
       <div class="col-sm-6">
         <label for="inputCity" class="sr-only">City</label>
-        <input v-model="newInfo.city" type="city" id="inputCity" class="form-control" placeholder="City" required autofocus>
+        <input v-model="newInfo.city"
+        placeholder="Enter a New City"
+         type="city" id="inputCity" class="form-control" required autofocus>
       </div>
-
+      <br></br>
       <div class="col-sm-6">
         <select id="state" class="form-control" v-model="newInfo.state">
   <option value="" selected="selected">Select a State</option>
@@ -135,6 +137,7 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
   </form>
 
+</div>
 </div>
 </div>
 </template>

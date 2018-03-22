@@ -137,7 +137,7 @@ export default {
   methods: {
 
     formatDate: function(date) {
-            return moment(date).format("MMM DD YY");
+            return moment(date).format("ddd MMM DD YY");
         },
 
     getTasks() {
