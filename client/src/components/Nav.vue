@@ -29,6 +29,9 @@
             </li>
           </ul>
           <li>
+            <router-link to="/allprop">Properties</router-link>
+          </li>
+          <li>
             <router-link to="/map">Map</router-link>
           </li>
           <li>

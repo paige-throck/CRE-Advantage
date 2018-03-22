@@ -180,7 +180,7 @@ export default {
         if (markersArr.length > 1) {
           // add property address to info window
           infowindow = new google.maps.InfoWindow({
-            content: `<p><a href="#/property/${tempId}">  ${individualMarker.address}</a></p>`
+            content: `<p><a href="/property/${tempId}">  ${individualMarker.address}</a></p>`
           })
           self.addMarker(infowindow, individualMarker)
         } else {
