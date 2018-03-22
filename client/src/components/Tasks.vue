@@ -34,7 +34,7 @@
   <!-- Tasks List -->
 
   <div class="row taskList">
-    <ul class="list-group" v-for="(task, index) in tasksArr[0]" v-model="tasksArr">
+    <ul class="list-group" v-for="(task, index) in tasksArr[0][0]" v-model="tasksArr">
 
 
       <li class="list-group-items clearfix task" v-bind:class="{complete:task.completed, notComplete: !task.completed}">
@@ -42,10 +42,10 @@
         <div class="list-items">
           <span class="pull-left">
 
-        <div class="lead"> {{task.item}} </div>
+      <div class="lead"><b>{{task.item}}</b></div>
     </span>
           <span class="pull-left">
-        <div class="lead">  &nbsp; {{task.task_date}}</div>
+        <div class="lead">  &nbsp; {{ formatDate(task.task_date)}}</div>
     </span>
         </div>
         <div>
@@ -84,7 +84,7 @@ v-on:click="deleteTask($event, task.id)"></span></button>
                 </div>
 
                 <div class="row">
-                  <datepicker format="MMM dd yyyy" type="date" v-model="editedTask.task_date" :placeholder="task.task_date"></datepicker>
+                  <datepicker format="MMM dd yyyy" type="date" v-model="editedTask.task_date" :placeholder="formatDate(task.task_date)"></datepicker>
                   </div>
 
               </div>
@@ -105,7 +105,7 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 import axios from 'axios';
 import Nav from './Nav'
 import Datepicker from 'vuejs-datepicker';
-
+import moment from 'moment';
 
 export default {
   name: 'Tasks',
@@ -129,12 +129,16 @@ export default {
 
     }
   },
+
   mounted: function() {
     this.getTasks()
 
   },
   methods: {
 
+    formatDate: function(date) {
+            return moment(date).format("ddd MMM DD YY");
+        },
 
     getTasks() {
       let self = this;
@@ -145,6 +149,8 @@ export default {
           console.log(results.data, 'Results from Get Tasks');
           self.tasksArr = [];
           self.tasksArr.push(results.data);
+
+
         })
     },
     addTask() {
@@ -232,7 +238,6 @@ export default {
         });
 
     }
-
 
   }
 

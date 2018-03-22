@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "moment": "^2.21.0",
     "simple-vue-datepicker": "0.0.14",
     "uninstall": "0.0.0",
     "vue": "^2.5.2",
