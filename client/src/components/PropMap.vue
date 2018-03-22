@@ -189,6 +189,7 @@ export default {
                 <button type="button" id="savePropertyButton">Save
                   </button>`
           })
+
           self.addMarker(infowindow, individualMarker)
         }
       })
@@ -227,7 +228,7 @@ export default {
           document.getElementById('savePropertyButton')
             .addEventListener('click', function() {
               infowindow.close()
-              infowindow.setContent('<p>' + '<a href="#">' + individualMarker.address + '</a>' + '</p>')
+              infowindow.setContent('<p>' + '<a href="/allprop">' + individualMarker.address + '</a>' + '</p>')
 
               self.saveNewProperty(individualMarker)
             })
