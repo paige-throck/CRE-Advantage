@@ -26,7 +26,7 @@
       </div>
 
       <div class="col-sm-2">
-        <datepicker format="YYYY-MM-DD" v-model="newTask.task_date"></datepicker>
+        <datepicker format="yyyy dd MMM " type="date" v-model="newTask.task_date" placeholder="Select a Date"></datepicker>
       </div>
     </div>
   </form>
@@ -80,15 +80,12 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 
                 </div>
                 <div class="row">
-                  <input type="text" class="form-control" id="edited-email" :placeholder="task.item" v-model="editedTask.item">
+                  <input type="text" class="form-control" id="edited-email" :placeholder="task.item" :value="editedTask.item">
                 </div>
 
                 <div class="row">
-                  <div class='input-group date' ref="datetimepicker">
-                    <input type="text" class="form-control" v-model="newTask.task_date" />
-                    <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                  <div class="col-sm-2">
+                    <datepicker format="YYYY-MM-DD" v-model="editedTask.task_date"></datepicker>
                   </div>
                 </div>
               </div>
@@ -108,13 +105,13 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 <script>
 import axios from 'axios';
 import Nav from './Nav'
-import datepicker from 'vue-date-picker';
+import Datepicker from 'vuejs-datepicker';
 
 
 export default {
   name: 'Tasks',
   components: {
-    datepicker
+    Datepicker
   },
   data() {
     return {
@@ -125,7 +122,8 @@ export default {
         task_date: ''
       },
       editedTask: {
-        item: ""
+        item: "",
+        task_date:""
       },
       showEditForm: false,
       activeTask: -1
@@ -152,6 +150,7 @@ export default {
     },
     addTask() {
       console.log(this.newTask, "New Task being created!!");
+
       let self = this;
       let id = window.localStorage.id;
       axios.post(`http://localhost:8881/tasks/${id}`, this.newTask)
@@ -170,7 +169,6 @@ export default {
     },
 
     editTask(event, editedTask, taskId) {
-      console.log(editedTask, "edit task", taskId, "taskid");
 
       let self = this;
       let id = window.localStorage.id;
@@ -186,7 +184,6 @@ export default {
     },
 
     completeTask(event, taskId) {
-      console.log(taskId, 'task id in complete task');
       let self = this;
       let id = window.localStorage.id;
 
@@ -201,9 +198,6 @@ export default {
     deleteTask(event, taskId) {
       let self = this;
       let id = window.localStorage.id;
-
-      console.log(taskId, "the task id");
-      console.log(id, 'user id');
 
       axios.delete(`http://localhost:8881/tasks/${id}/${taskId}`)
         .then(function() {

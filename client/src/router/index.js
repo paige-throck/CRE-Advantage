@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import VueSession from 'vue-session';
 import VueSweetalert2 from 'vue-sweetalert2';
-import datepicker from 'vue-date-picker';
+import Datepicker from 'vuejs-datepicker';
 
 
 import Home from '@/components/Home'
