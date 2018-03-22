@@ -112,20 +112,25 @@ export default {
   },
   methods: {
     addNewProperty: function() {
-      //console.log(newPropInfo, 'new prop info')
 
       let self = this
 
       axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.newPropInfo.streetAddress}+,+${this.newPropInfo.city},+${this.newPropInfo.state}&key=AIzaSyAh3fU5DauF9fgnwi1IdF8OZccHONkPBRM`)
         .then(function(results) {
 
+          let usa = results.data.results[0].formatted_address.split(',')
+          let usaSlice = usa.slice(0, usa.length-1).join(', ')
+
           self.newPropInfo.lat = results.data.results[0].geometry.location.lat
           self.newPropInfo.lang = results.data.results[0].geometry.location.lng
-          self.newPropInfo.address = results.data.results[0].formatted_address
+          self.newPropInfo.address = usaSlice
+
+
 
           if(self.newPropInfo.prospective_prop == "") {
             self.newPropInfo.prospective_prop = false
           }
+            console.log(self.newPropInfo, 'HEY ZIP');
 
           delete self.newPropInfo.streetAddress
           delete self.newPropInfo.city
@@ -133,6 +138,7 @@ export default {
           delete self.newPropInfo.zip
 
           self.$emit('addNewProperty', self.newPropInfo)
+
         })
 
 

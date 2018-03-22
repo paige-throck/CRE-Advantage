@@ -1,6 +1,6 @@
 <template>
 <div class = "row mapPage">
-<Nav :searchMarkers="searchMarkers"></Nav>
+<Nav :searchedProp="searchedProp"></Nav>
 
 
   <div>
@@ -18,8 +18,6 @@
 
     <button v-model="userLocation" @click="pinUserLocation" type="button" class="btn btn-info btn-circle" id="addPin">+</button>
     <span>{{ searchingForUser }}</span>
-
-    <router-link :to="{path: '/profile'}">UGHZIES</router-link>
 
 
     <div class="property-map" id="mapId">
@@ -48,7 +46,8 @@ export default {
       searchBox: null,
       bounds: null,
       input: null,
-      searchMarkers: []
+      searchMarkers: [],
+      searchedProp: []
     }
   },
   mounted: function() {
@@ -62,14 +61,28 @@ export default {
     initMap: function() {
       let self = this
 
-      let mapElement = document.getElementById('mapId')
-      let options = {
-        center: new google.maps.LatLng(30.2672, -97.7431),
-        zoom: 8
-      }
-      self.map = new google.maps.Map(mapElement, options);
+      axios.get(`http://localhost:8881/properties/user/${window.localStorage.id}`)
+        .then(function(results){
+          let splitCity = results.data[0].city.split(',')
 
-      self.getDatabaseProperties()
+          axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${splitCity[0]},+${splitCity[1]}&key=AIzaSyAh3fU5DauF9fgnwi1IdF8OZccHONkPBRM`)
+
+          .then(function(results) {
+            let userCoords = results.data.results[0].geometry.location
+            let mapElement = document.getElementById('mapId')
+            let options = {
+              center: new google.maps.LatLng(userCoords.lat, userCoords.lng),
+              zoom: 8
+            }
+            self.map = new google.maps.Map(mapElement, options);
+
+            self.getDatabaseProperties()
+
+          })
+
+        })
+
+
     },
     /* =====================================================
 
@@ -105,7 +118,7 @@ export default {
     ====================================================== */
     createSearchBox: function() {
       let self = this
-
+      console.log(self.searchMarkers, 'SEARCH MARKERS');
       self.input = document.getElementById('search-input');
       self.searchBox = new google.maps.places.SearchBox(self.input);
 
@@ -126,12 +139,15 @@ export default {
           if (!place.geometry) {
             return;
           }
+          // take usa off the end of the address
+          let usa = place.formatted_address.split(',')
+          let usaSlice = usa.slice(0, usa.length-1).join(', ')
 
           //Create a marker for each place.
           self.searchMarkers.push({
             latitude: place.geometry.location.lat(),
             longitude: place.geometry.location.lng(),
-            address: place.formatted_address,
+            address: usaSlice,
             name: place.name,
             prop_type: place.prop_type
           })
@@ -177,7 +193,8 @@ export default {
         }
       })
       self.createSearchBox()
-
+      // clear out the search array for next search
+      self.searchMarkers = []
     },
     /* =====================================================
     Add markers to the map
@@ -198,9 +215,6 @@ export default {
           scaledSize: new google.maps.Size(25, 30)
         }
       })
-      console.log(marker, 'HEY IM THE MARKER');
-      console.log(infowindow, 'HEY IM THE INFO WINDOW');
-      console.log(individualMarker, 'HEY IM THE INDIVIDUAL MARKER');
 
       // add reference to marker to be able to filter later
       self.googleMarkerArr.push(marker)
@@ -227,7 +241,8 @@ export default {
       newProperty.prospective_prop = true;
 
       newProperty.id = window.localStorage.id
-
+      //set variable to send to nav bar so nav can update
+      this.searchedProp.push(newProperty)
 
       axios.post('http://localhost:8881/properties/save', newProperty)
         .then(function(response) {
