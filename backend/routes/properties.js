@@ -29,6 +29,15 @@ router.get('/:id', function(req, res) {
 });
 
 
+// get user location
+router.get('/user/:id', function(req, res) {
+  knex('users').where('id', req.params.id).select('city')
+    .then(function(results) {
+      console.log(results, 'i am a userrrrrrrr');
+      res.send(results);
+    });
+});
+
 
 // get individual property info
 router.get('/:id/:prop_id', function(req, res) {

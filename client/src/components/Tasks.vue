@@ -3,7 +3,9 @@
   <Nav></Nav>
 
   <span class="pull-right">
+
 <button class="btn btn-danger" v-on:click="clearList($event)"><span
+
 ></span>Clear Tasks</button>
   </span>
 
@@ -16,8 +18,10 @@
 
       <div class="col-sm-2">
         <span class="input-group-btn">
+
     <button class="btn btn-default" type="submit"><span
   class="glyphicon glyphicon-plus"></span> Add Task</button>
+
         </span>
       </div>
 
@@ -26,6 +30,7 @@
       </div>
 
       <div class="col-sm-2">
+
         <datepicker format="MMM dd yyyy" type="date" v-model="newTask.task_date" placeholder="Select a Date"></datepicker>
       </div>
     </div>
@@ -33,8 +38,10 @@
 
   <!-- Tasks List -->
 
+
   <div class="row taskList">
     <ul class="list-group" v-for="(task, index) in tasksArr[0]" v-model="tasksArr">
+
 
 
       <li class="list-group-items clearfix task" v-bind:class="{complete:task.completed, notComplete: !task.completed}">
@@ -70,6 +77,58 @@ v-on:click="deleteTask($event, task.id)"></span></button>
               <div class="col-sm-2">
               </div>
 
+
+      <li class="list-group-items clearfix task" v-bind:class="{complete:task.completed, notComplete: !task.completed}">
+
+        <div class = "list-items">
+          <!-- <span class="pull-left">
+          <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
+    v-on:click="completeTask($event, task.id)"></span></button>
+  </span> -->
+
+        <span class="pull-left">
+
+          <div class="lead">  {{task.item}} </div>
+      </span>
+        <span class="pull-left">
+          <div class="lead">  &nbsp; {{task.task_date}}</div>
+      </span>
+    </div>
+      <div>
+          <span class="pull-right">
+<button class="btn btn-default btn-xs" data-toggle="collapse" href="#edit-task" role="button" aria-expanded="false" aria-controls="suites"><span class="glyphicon glyphicon-pencil"
+  v-on:click="updateTask($event, task.id, task.item)"></span></button>
+
+
+<button class="btn btn-default btn-xs" type="button" v-on:click="updateTask(index)"><span class="glyphicon glyphicon-pencil"></span></button>
+
+
+
+
+          <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+  v-on:click="deleteTask($event, task.id)"></span></button>
+          </span>
+        </div>
+
+
+        <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+v-on:click="deleteTask($event, task.id)"></span></button>
+        </span>
+      </div>
+
+      <!-- Edit Task Form inside List -->
+      <div class = "col">
+        <div>
+      <form  id="edit-task" v-if="index == activeTask && showEditForm">
+
+        <br></br>
+          <div class = "col-sm-2">
+          </div>
+
+        <div class = "col-sm-8">
+
+
+
               <div class="col-sm-8">
 
                 <div class="row">
@@ -83,6 +142,7 @@ v-on:click="deleteTask($event, task.id)"></span></button>
                   <input type="text" class="form-control" id="edited-email" :placeholder="task.item" v-model="editedTask.item">
                 </div>
 
+
                 <div class="row">
                   <datepicker format="MMM dd yyyy" type="date" v-model="editedTask.task_date" :placeholder="task.task_date"></datepicker>
                   </div>
@@ -93,6 +153,9 @@ v-on:click="deleteTask($event, task.id)"></span></button>
             </form>
           </div>
         </div>
+
+
+  
       </li>
     </ul>
   </div>
@@ -108,6 +171,7 @@ import Datepicker from 'vuejs-datepicker';
 
 
 export default {
+
   name: 'Tasks',
   components: {
     Datepicker
@@ -131,6 +195,79 @@ export default {
   },
   mounted: function() {
     this.getTasks()
+=======
+
+name: 'Tasks',
+data() {
+  return {
+    tasksArr: [],
+    newTask: {
+      user_id: window.localStorage.id,
+      item: '',
+      task_date: ''
+    },
+    editedTask:{
+      item: ""
+    },
+    showEditForm: false,
+    activeTask: -1
+
+  }
+},
+mounted: function() {
+  this.getTasks()
+  // $(this.$refs.datetimepicker).datetimepicker()
+},
+methods: {
+  // updateTime(event) {
+  //   this.$emit('input', event.target.value);
+  // },
+
+  getTasks() {
+    let self = this;
+    let id = window.localStorage.id;
+
+    axios.get(`http://localhost:8881/tasks/${id}`)
+      .then(function(results) {
+        console.log(results.data, 'Results from Get Tasks');
+        self.tasksArr = [];
+        self.tasksArr.push(results.data);
+      })
+
+  },
+  mounted: function() {
+    this.getTasks()
+    // $(this.$refs.datetimepicker).datetimepicker()
+  },
+  methods: {
+    // updateTime(event) {
+    //   this.$emit('input', event.target.value);
+    // },
+
+    getTasks() {
+      let self = this;
+      let id = window.localStorage.id;
+
+      axios.get(`http://localhost:8881/tasks/${id}`)
+        .then(function(results) {
+          console.log(results.data, 'Results from Get Tasks');
+          self.tasksArr = [];
+          self.tasksArr.push(results.data);
+        })
+    },
+    addTask() {
+      console.log(this.newTask, "New Task being created!!");
+      let self = this;
+      let id = window.localStorage.id;
+      axios.post(`http://localhost:8881/tasks/${id}`, this.newTask)
+        .then(function() {
+          self.getTasks();
+        }).catch(function(error) {
+          console.log(error);
+        });
+    },
+
+
 
   },
   methods: {
@@ -167,6 +304,7 @@ export default {
       self.showEditForm = !self.showEditForm;
     },
 
+
     editTask(event, item, date, task) {
       console.log(item, date, 'data being sent over from edit task');
 
@@ -188,19 +326,52 @@ export default {
       console.log(updateTask, 'task being sent over to backend');
 
 
-      axios.put(`http://localhost:8881/tasks/${id}/${taskId}/update`, updateTask)
+  completeTask(event, taskId) {
+    console.log(taskId, 'task id in complete task');
+    let self = this;
+    let id = window.localStorage.id;
+
+
+    completeTask(event, taskId) {
+      console.log(taskId, 'task id in complete task');
+      let self = this;
+      let id = window.localStorage.id;
+
+      axios.put(`http://localhost:8881/tasks/${id}/${taskId}/completeTask`)
         .then(function() {
-          self.editedTask.item = "";
-          self.editedTask.task_date = "";
           self.getTasks();
         }).catch(function(error) {
           console.log(error);
         });
     },
 
-    completeTask(event, taskId) {
+    deleteTask(event, taskId) {
       let self = this;
       let id = window.localStorage.id;
+
+      console.log(taskId, "the task id");
+      console.log(id, 'user id');
+
+      axios.delete(`http://localhost:8881/tasks/${id}/${taskId}`)
+        .then(function() {
+          self.getTasks();
+        }).catch(function(error) {
+          console.log(error);
+        });
+    },
+
+    clearList: function(event) {
+      let self = this;
+      axios.delete(`http://localhost:8881/tasks/clearCompletedTasks`)
+      .then(function() {
+        self.getTasks();
+      }).catch(function(error) {
+        console.log(error);
+      });
+
+    }
+
+
 
       axios.put(`http://localhost:8881/tasks/${id}/${taskId}/completeTask`)
         .then(function() {
@@ -234,6 +405,7 @@ export default {
     }
 
 
+
   }
 
 }
@@ -265,6 +437,7 @@ ul {
   border-radius: 5px;
 }
 
+
 #edit-task {
   position: fixed;
   top: 50%;
@@ -282,6 +455,9 @@ ul {
   top: 25%;
   left: 25%;
 
+
   background-color: blue;
 }
+
+
 </style>

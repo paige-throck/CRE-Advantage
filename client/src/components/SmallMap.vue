@@ -17,6 +17,7 @@ export default {
     }
   },
   mounted: function() {
+  //  this.$forceUpdate();
     this.initMap()
   },
   methods: {
@@ -31,6 +32,7 @@ export default {
       this.getDatabaseProperties()
     },
     getDatabaseProperties: function() {
+
       this.markerCoordinates.push({
         latitude: this.property[0].lat,
         longitude: this.property[0].lang,
@@ -39,13 +41,13 @@ export default {
       this.addMarker(this.markerCoordinates[0])
     },
     addMarker: function(individualMarker) {
+      console.log('YO MARKERRRRRS');
       let self = this
       let position = new google.maps.LatLng(individualMarker.latitude, individualMarker.longitude)
       let marker = new google.maps.Marker({
         position: position,
         map: self.map,
         title: individualMarker.address,
-        animation: google.maps.Animation.DROP,
         prop_type: individualMarker.prop_type,
         icon: {
           url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
