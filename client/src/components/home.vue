@@ -1,13 +1,17 @@
 <template>
-  <div class="row home">
+  <div class="home">
 <h3>CRE ADVANTAGE</h3>
+
+<!-- <div class = "bg">
+</div> -->
+
+
 
 
     <router-link to="login">Login</router-link>
     <router-link to="signup">Signup</router-link>
 
 
-</div>
 </div>
 </template>
 
@@ -26,6 +30,12 @@ export default {
 
 <style scoped>
 .home{
-  margin:5%;
+  height: 100vh;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../img/bigcity.jpg");
 }
+
+
 </style>
