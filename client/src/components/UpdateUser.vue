@@ -2,6 +2,7 @@
 <div class="row update-user">
   <Nav></Nav>
   <br></br>
+  <div class = "row">
   <div class="row" v-for="person in userArr[0]">
     <div class="col-sm-2">
     </div>
@@ -14,7 +15,7 @@
     </div>
     <div class="col-sm-2">
     </div>
-
+</div>
 
   <div class = "row">
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#update-email" aria-expanded="false" aria-controls="update-email">Update Email</button>
