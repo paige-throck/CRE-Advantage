@@ -38,8 +38,10 @@
 
   <!-- Tasks List -->
 
-  <div class="row taskList">
-    <ul class="list-group" v-for="task in tasksArr[0]" v-model="tasksArr">
+
+<div class="row taskList">
+  <ul class="list-group" v-for="(task, index) in tasksArr[0]" v-model="tasksArr">
+
 
 
       <li class="list-group-items clearfix task" v-bind:class="{complete:task.completed, notComplete: !task.completed}">
@@ -63,8 +65,9 @@
 <button class="btn btn-default btn-xs" data-toggle="collapse" href="#edit-task" role="button" aria-expanded="false" aria-controls="suites"><span class="glyphicon glyphicon-pencil"
   v-on:click="updateTask($event, task.id, task.item)"></span></button>
 
-          <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
-    v-on:click="completeTask($event, task.id)"></span></button>
+
+<button class="btn btn-default btn-xs" type="button" v-on:click="updateTask(index)"><span class="glyphicon glyphicon-pencil"></span></button>
+
 
 
 
@@ -73,24 +76,35 @@
           </span>
         </div>
 
-  <!-- Edit Task Form inside List -->
-        <form class="collapse multi-collapse" id="edit-task">
+
+        <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+v-on:click="deleteTask($event, task.id)"></span></button>
+        </span>
+      </div>
+
+      <!-- Edit Task Form inside List -->
+      <div class = "col">
+        <div>
+      <form  id="edit-task" v-if="index == activeTask && showEditForm">
+
         <br></br>
           <div class = "col-sm-2">
           </div>
 
         <div class = "col-sm-8">
 
-        <div class = "row">
-                  <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><span
-              class="glyphicon glyphicon-plus"></span> Update Task</button>
-                  </span>
 
-        </div>
-        <div class ="row">
-                  <input type="text" class="form-control"  :placeholder="task.item"  required autofocus>
-        </div>
+          <div class="row">
+            <span class="input-group-btn">
+              <button v-on:click="editTask($event, editedTask, task.id)" class="btn btn-default" type="submit"><span
+            class="glyphicon glyphicon-plus"></span> Update Task</button>
+            </span>
+
+          </div>
+          <div class="row">
+            <input type="text" class="form-control" id="edited-email" :placeholder="task.item" v-model="editedTask.item">
+          </div>
+
 
         <div class = "row">
                   <div class='input-group date' ref="datetimepicker">
@@ -119,19 +133,44 @@ import Nav from './Nav'
 
 
 export default {
-  name: 'Tasks',
-  data() {
-    return {
-      tasksArr: [],
-      newTask: {
-        user_id: window.localStorage.id,
-        item: '',
-        task_date: ''
-      },
-      completed: false
-      // t:true,
-      // f:false
-    }
+
+name: 'Tasks',
+data() {
+  return {
+    tasksArr: [],
+    newTask: {
+      user_id: window.localStorage.id,
+      item: '',
+      task_date: ''
+    },
+    editedTask:{
+      item: ""
+    },
+    showEditForm: false,
+    activeTask: -1
+
+  }
+},
+mounted: function() {
+  this.getTasks()
+  // $(this.$refs.datetimepicker).datetimepicker()
+},
+methods: {
+  // updateTime(event) {
+  //   this.$emit('input', event.target.value);
+  // },
+
+  getTasks() {
+    let self = this;
+    let id = window.localStorage.id;
+
+    axios.get(`http://localhost:8881/tasks/${id}`)
+      .then(function(results) {
+        console.log(results.data, 'Results from Get Tasks');
+        self.tasksArr = [];
+        self.tasksArr.push(results.data);
+      })
+
   },
   mounted: function() {
     this.getTasks()
@@ -165,21 +204,33 @@ export default {
         });
     },
 
-    updateTask(event, editTaskId, editItem){
-      console.log(editTaskId, 'task id', editItem, 'item');
-    },
 
-    editTask(event, taskId) {
-      let self = this;
-      let id = window.localStorage.id;
+  updateTask:function(indexClicked){
+    let self = this;
+    self.activeTask = indexClicked;
+    self.showEditForm = !self.showEditForm;
+  },
 
-      axios.put(`http://localhost:8881/tasks/${id}/${taskId}`, this.task)
-        .then(function() {
-          self.getTasks();
-        }).catch(function(error) {
-          console.log(error);
-        });
-    },
+  editTask(event, editedTask, taskId) {
+    console.log(editedTask, "edit task", taskId, "taskid");
+
+    let self = this;
+    let id = window.localStorage.id;
+
+
+    axios.put(`http://localhost:8881/tasks/${id}/${taskId}/update`, this.editedTask)
+      .then(function() {
+        self.getTasks();
+      }).catch(function(error) {
+        console.log(error);
+      });
+  },
+
+  completeTask(event, taskId) {
+    console.log(taskId, 'task id in complete task');
+    let self = this;
+    let id = window.localStorage.id;
+
 
     completeTask(event, taskId) {
       console.log(taskId, 'task id in complete task');

@@ -81,17 +81,28 @@ router.get('/:id/taskId', (req, res, next)=>{
 
 
 //////////////EDIT SINGLE TASK
-router.put('/:id/taskId', (req,res,next)=>{
+router.put('/:id/:taskId/update', (req,res,next)=>{
+
   const userId = filterInt(req.params.id);
   const taskId = filterInt(req.params.taskId);
 
+  const item = req.body.item;
 
+  knex('tasks').where('id', taskId).update({'item':item})
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(function(error) {
+      console.log(error);
+      res.sendStatus(500);
+    })
 })
 
 
 ///////////////////Complete-Uncomplete TASK
 
 router.put('/:id/:taskId/completeTask', (req,res,next)=>{
+
   const userId = filterInt(req.params.id);
   const taskId = filterInt(req.params.taskId);
 
