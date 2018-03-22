@@ -85,10 +85,11 @@ router.put('/:id/:taskId/update', (req,res,next)=>{
 
   const userId = filterInt(req.params.id);
   const taskId = filterInt(req.params.taskId);
-
+console.log(req.body);
   const item = req.body.item;
+  const date = req.body.task_date;
 
-  knex('tasks').where('id', taskId).update({'item':item})
+  knex('tasks').where('id', taskId).update({'item':item, 'task_date':date})
   .then(() => {
     res.sendStatus(200);
   })
