@@ -1,5 +1,13 @@
 <template>
-<div class="row tasks">
+<div class="tasks">
+
+  <div class="row">
+    <div class="col-md-12">
+      <sideNav></sideNav>
+    </div>
+  </div>
+
+
   <Nav></Nav>
 
   <span class="pull-right">
@@ -106,11 +114,13 @@ import axios from 'axios';
 import Nav from './Nav'
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
+import sideNav from './sideNav.vue'
 
 export default {
   name: 'Tasks',
   components: {
-    Datepicker
+    Datepicker,
+    sideNav
   },
   data() {
     return {
@@ -257,9 +267,9 @@ export default {
 </script>
 
 <style scoped>
-.tasks {
+/* .tasks {
   margin: 5%;
-}
+} */
 
 .form-tasks {
   margin-bottom: 2%;

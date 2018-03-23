@@ -1,83 +1,119 @@
 <template>
-<div class="row update-user">
-  <Nav></Nav>
-  <br></br>
-  <div class = "row">
-  <div class="row" v-for="person in userArr[0]">
-    <div class="col-sm-2">
-    </div>
-    <div class="col-sm-8">
+<div class="update-user">
+  <!-- <Nav></Nav> -->
 
-      <p><label>Name:</label> {{person.name}}</p>
-      <p><label>Email:</label> {{person.email}}</p>
-      <p><label>Current City:</label> {{person.city}}</p>
-
-    </div>
-    <div class="col-sm-2">
-    </div>
-</div>
-
-  <div class = "row">
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#update-email" aria-expanded="false" aria-controls="update-email">Update Email</button>
-
-
-  <button class="btn btn-primary" type="submit" data-toggle="collapse" href="#update-password" role="button" aria-expanded="false" aria-controls="password">Update Password</button>
-
-  <button type="submit" class="btn btn-primary" data-toggle="collapse" href="#update-info" role="button" aria-expanded="false" aria-controls="info">Update Info</button>
-
-
-
-  <!-- Edit Email Form -->
-  <div class="col">
-    <div class="collapse multi-collapse" id="update-email">
-      <div class="card card-body">
-        <form @submit.prevent="updateEmail">
-          <h3 class="update-account-header">Update Email</h3>
-
-          <div class="form-group">
-            <input type="email" v-model="newEmail.email" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
-          </div>
-
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Update Email</button>
-        </form>
-      </div>
+  <div class="row">
+    <div class="col-md-12">
+      <sideNav></sideNav>
     </div>
   </div>
 
 
-  <!-- Update Password -->
-  <form class="collapse multi-collapse" id="update-password" @submit.prevent="updatePassword">
 
-    <h3 class="update-account-header">Update Password</h3>
+    <div class="row" v-for="person in userArr[0]">
 
-    <input type="password" v-model="newPassword.oldPassword" id="oldPassword" class="form-control" placeholder="Current Password" required autofocus>
-    <br></br>
+      <div class="row">
+        <div class = "col-sm-2">
+        </div>
+        <div class = "col-sm-8">
+        <p><label>Name:</label> {{person.name}}</p>
+        <p><label>Email:</label> {{person.email}}</p>
+        <p><label>Current City:</label> {{person.city}}</p>
 
-    <input type="password" v-model="newPassword.newPassword" id="newPassword" class="form-control" placeholder="New Password" required autofocus>
 
-    <br></br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
-  </form>
 
-  <!-- Info Form -->
-  <form class="collapse multi-collapse" id="update-info" @submit.prevent="updateInfo">
-
-    <h3 class="update-account-header">Update Name and City</h3>
-
-    <input type="text" v-model="newInfo.name" placeholder="Enter a New Name" id="inputName" class="form-control" required autofocus>
-
-    <br></br>
 
     <div class="row">
-      <div class="col-sm-6">
-        <label for="inputCity" class="sr-only">City</label>
-        <input v-model="newInfo.city"
-        placeholder="Enter a New City"
-         type="city" id="inputCity" class="form-control" required autofocus>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#update-email" aria-expanded="false" aria-controls="update-email">Update Email</button>
+
+
+      <button class="btn btn-primary" type="submit" data-toggle="collapse" href="#update-password" role="button" aria-expanded="false" aria-controls="password">Update Password</button>
+
+      <button type="submit" class="btn btn-primary" data-toggle="collapse" href="#update-info" role="button" aria-expanded="false" aria-controls="info">Update Info</button>
+
+    </div>
+    <div class = "col-sm-2">
+    </div>
+    </div>
+
+      <!-- Edit Email Form -->
+      <div class="row">
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6 container-box">
+          <div class="col">
+            <div class="collapse multi-collapse" id="update-email">
+
+
+              <div class="row">
+                <div class="col-md-3"></div>
+
+                <div class="col-md-6 ">
+                  <form @submit.prevent="updateEmail">
+                    <h3 class="update-account-header">Update Email</h3>
+
+                    <div class="form-group">
+                      <input type="email" v-model="newEmail.email" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
+                    </div>
+
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">Update Email</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="row-md-3"></div>
+          </div>
+
+        </div>
       </div>
-      <br></br>
-      <div class="col-sm-6">
-        <select id="state" class="form-control" v-model="newInfo.state">
+
+
+      <!-- Update Password -->
+      <div class="row">
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6 container-box">
+          <form class="collapse multi-collapse" id="update-password" @submit.prevent="updatePassword">
+
+            <h3 class="update-account-header">Update Password</h3>
+
+            <input type="password" v-model="newPassword.oldPassword" id="oldPassword" class="form-control" placeholder="Current Password" required autofocus>
+            <br></br>
+
+            <input type="password" v-model="newPassword.newPassword" id="newPassword" class="form-control" placeholder="New Password" required autofocus>
+
+            <br></br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
+          </form>
+        </div>
+
+        <div class="row-md-3"></div>
+      </div>
+
+    </div>
+
+    <!-- Info Form -->
+    <div class="row">
+      <div class="col-md-3"></div>
+
+      <div class="col-md-6 container-box">
+        <form class="collapse multi-collapse" id="update-info" @submit.prevent="updateInfo">
+
+          <h3 class="update-account-header">Update Name and City</h3>
+
+          <input type="text" v-model="newInfo.name" placeholder="Enter a New Name" id="inputName" class="form-control" required autofocus>
+
+          <br></br>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="inputCity" class="sr-only">City</label>
+              <input v-model="newInfo.city" placeholder="Enter a New City" type="city" id="inputCity" class="form-control" required autofocus>
+
+            </div>
+            <div class="col-sm-6">
+              <select id="state" class="form-control" v-model="newInfo.state">
   <option value="" selected="selected">Select a State</option>
   <option value="AL">Alabama</option>
   <option value="AK">Alaska</option>
@@ -131,14 +167,19 @@
   <option value="WI">Wisconsin</option>
   <option value="WY">Wyoming</option>
   </select>
+            </div>
+          </div>
+
+          <br></br>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
+        </form>
       </div>
+
+      <div class="row-md-3"></div>
     </div>
 
-    <br></br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
-  </form>
-
 </div>
+  </div>
 </div>
 </div>
 </template>
@@ -146,12 +187,13 @@
 <script>
 import axios from 'axios';
 import Nav from './Nav.vue'
+import sideNav from './sideNav.vue'
 
 export default {
   name: 'UpdateUser',
   components: {
     'Nav': Nav,
-
+    'sideNav': sideNav,
   },
   data() {
     return {
@@ -177,9 +219,9 @@ export default {
   },
 
   methods: {
-    checkSession: function(){
+    checkSession: function() {
       let self = this;
-      if (!localStorage.sessionData){
+      if (!localStorage.sessionData) {
         console.log("is it getting in here");
         self.$router.push('/login')
       }
@@ -197,11 +239,11 @@ export default {
         });
     },
     updateEmail() {
-      console.log(this.newEmail);
+      console.log(this.newEmail, "new email being sent");
       let self = this;
       let id = window.localStorage.id;
 
-      axios.patch(`http://localhost:8881/profile/${id}/email`, this.newEmail)
+      axios.patch(`http://localhost:8881/profile/email/${id}`, this.newEmail)
         .then(function(results) {
           console.log(results, 'HEY I PATCHED');
           self.newEmail.email = ""
@@ -249,7 +291,12 @@ export default {
 </script>
 
 <style scoped>
-.update-user {
-  margin: 5%;
-}
+/* .container-box {
+  margin-top: 9%;
+  padding: 3%;
+  border-radius: 1%;
+  background-color: white;
+  opacity: .96;
+  box-shadow: 2px 2px 8px black;
+} */
 </style>

@@ -1,7 +1,12 @@
 <template>
-<div class = "row mapPage">
-<Nav :searchedProp="searchedProp"></Nav>
+<div class = "mapPage">
+<!-- <Nav :searchedProp="searchedProp"></Nav> -->
 
+<div class="row">
+  <div class="col-md-12">
+    <sideNav></sideNav>
+  </div>
+</div>
 
   <div>
     <input id="search-input" class="controls" type="text" placeholder="Search Box">
@@ -30,9 +35,13 @@
 <script>
 import axios from 'axios';
 import Nav from './Nav'
+import sideNav from './sideNav.vue'
 
 export default {
   name: 'PropMap',
+  components:{
+    'sideNav': sideNav,
+  },
   data() {
     return {
       filterChosen: '',
@@ -316,10 +325,6 @@ export default {
 
 
 <style scoped>
-
-.mapPage{
-  margin:5%;
-}
 
 .property-map {
   width: 600px;

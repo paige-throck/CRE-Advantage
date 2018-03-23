@@ -111,7 +111,7 @@
         </form>
 
         <p class="text-center">Already have an account?
-          <router-link to="login">Login</router-link>
+          <router-link to="login">Sign In</router-link>
         </p>
 
       </div>

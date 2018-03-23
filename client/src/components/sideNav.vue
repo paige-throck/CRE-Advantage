@@ -1,12 +1,14 @@
 <template>
-<div class="header">
-  <div class="row">
+<div class="sideNav">
 
+  <div class = "row row2">
+  </div>
+  <div class="row row1">
     <div class="col-md-12">
       <h1>CRE <span class="advantage">Advantage</span></h1>
     </div>
 
-  </div>
+</div>
 </div>
 </template>
 
@@ -15,23 +17,38 @@ import axios from 'axios';
 
 
 export default {
-  name: 'headerTopper',
+  name: 'sideNav',
   data() {
     return {
-      msg:window.localStorage.name
+
     }
   }
 }
 </script>
 
 <style scoped>
-.row {
+
+.row1 {
   height: 10%;
   background-color: black;
   position: relative;
   top: 0;
   width: 100%;
   margin: 0;
+  z-index: 2;
+
+}
+
+.row2 {
+  height: 100%;
+  background-color: #136a8a;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 10%;
+  margin: 0;
+  position: fixed;
+  z-index:1;
 }
 
 h1 {
@@ -44,4 +61,5 @@ h1 {
   font-weight: 200;
   font-style: italic;
 }
+
 </style>

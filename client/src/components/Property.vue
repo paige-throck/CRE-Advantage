@@ -5,7 +5,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <headerTopper></headerTopper>
+      <sideNav></sideNav>
     </div>
   </div>
 
@@ -365,6 +365,7 @@ import SmallMap from './SmallMap.vue'
 import NewSuiteForm from './NewSuiteForm.vue'
 import NewPropertyForm from './NewPropertyForm.vue'
 import headerTopper from './headerTopper'
+import sideNav from './sideNav.vue'
 
 
 export default {
@@ -374,7 +375,8 @@ export default {
     'SmallMap': SmallMap,
     'NewSuiteForm': NewSuiteForm,
     'NewPropertyForm': NewPropertyForm,
-    'headerTopper': headerTopper
+    'headerTopper': headerTopper,
+    'sideNav': sideNav,
   },
   data() {
     return {

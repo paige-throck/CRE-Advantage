@@ -7,11 +7,8 @@
     </div>
   </div>
 
-<!-- <Nav></Nav> -->
-<!-- <div class = "col-sm-4">
-<h1>Hello {{msg}}</h1>
-</div> -->
-<!-- <i class="material-icons">donut_small</i> -->
+
+
 <br></br>
 <div class = "row">
 <div id="mainDash" class = "col-sm-10">
@@ -77,21 +74,21 @@
 <script>
 
 import Property from './Property.vue'
-import Nav from './Nav.vue'
 import Tasks from './Tasks.vue'
 import PropMap from './PropMap.vue'
 import ProTasks from './profileTasks.vue'
-import headerTopper from './headerTopper'
+import headerTopper from './headerTopper.vue'
+
 
 
 export default {
   name: 'Profile',
   components: {
     'property': Property,
-    'Nav': Nav,
+    'headerTopper': headerTopper,
     'Tasks': Tasks,
     'ProTasks': ProTasks,
-    'HeaderTopper':headerTopper,
+
 
   },
   data() {
