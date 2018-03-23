@@ -132,9 +132,16 @@ export default {
 
   mounted: function() {
     this.getTasks()
-
+    this.checkSession();
   },
   methods: {
+    checkSession: function(){
+      let self = this;
+      if (!localStorage.sessionData){
+        console.log("is it getting in here");
+        self.$router.push('/login')
+      }
+    },
 
     formatDate: function(date) {
       if (date === null){

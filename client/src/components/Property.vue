@@ -427,8 +427,16 @@ export default {
   mounted: function() {
     console.log('wtf');
     this.getPropertyData()
+    this.checkSession()
   },
   methods: {
+    checkSession: function(){
+      let self = this;
+      if (!localStorage.sessionData){
+        console.log("is it getting in here");
+        self.$router.push('/login')
+      }
+    },
     getPropertyData: function() {
       let self = this
       let prop_id = this.$route.params.id

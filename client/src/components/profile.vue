@@ -70,11 +70,6 @@
 
 
 
-
-
-
-
-
 </div>
 </div>
 </template>
@@ -96,19 +91,31 @@ export default {
     'Nav': Nav,
     'Tasks': Tasks,
     'ProTasks': ProTasks,
-    'HeaderTopper':headerTopper
+    'HeaderTopper':headerTopper,
+
   },
   data() {
     return {
       msg: window.localStorage.name
     }
   },
+  mounted: function() {
+    this.checkSession();
+
+  },
+
   methods:{
     logout: function() {
       let self = this;
       localStorage.clear();
+  },
 
-      console.log(window.localStorage, 'storage after logout');
+  checkSession: function(){
+    let self = this;
+    if (!localStorage.sessionData){
+      console.log("is it getting in here");
+      self.$router.push('/login')
+    }
   }
 }
 }

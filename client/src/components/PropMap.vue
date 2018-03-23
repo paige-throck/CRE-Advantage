@@ -52,9 +52,16 @@ export default {
   },
   mounted: function() {
     this.initMap()
-
+    this.checkSession();
   },
   methods: {
+    checkSession: function(){
+      let self = this;
+      if (!localStorage.sessionData){
+        console.log("is it getting in here");
+        self.$router.push('/login')
+      }
+    },
     /* =====================================================
     Put map on the page and set the center to Austin
     ===================================================== */

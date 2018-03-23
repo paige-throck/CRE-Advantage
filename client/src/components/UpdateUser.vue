@@ -173,9 +173,17 @@ export default {
 
   mounted: function() {
     this.getUser()
+    this.checkSession();
   },
 
   methods: {
+    checkSession: function(){
+      let self = this;
+      if (!localStorage.sessionData){
+        console.log("is it getting in here");
+        self.$router.push('/login')
+      }
+    },
     getUser() {
       let id = window.localStorage.id
       let self = this
