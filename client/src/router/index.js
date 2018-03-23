@@ -74,11 +74,6 @@ export default new Router({
       path: '/allprop',
       name: 'AllProp',
       component: AllProp
-    },
-    {
-      path: '/protasks',
-      name: 'ProTasks',
-      component: ProTasks
     }
   ]
 });

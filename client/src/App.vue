@@ -17,6 +17,7 @@ import NewSuiteForm from './components/NewSuiteForm.vue'
 import NewPropertyForm from './components/NewPropertyForm.vue'
 import headerTopper from './components/headerTopper.vue'
 import AllProp from './components/AllProp.vue'
+import ProTasks from '@/components/profileTasks'
 
 export default {
   name: 'App',
@@ -30,7 +31,8 @@ export default {
     'NewSuiteForm': NewSuiteForm,
     'NewPropertyForm': NewPropertyForm,
     'AllProp': AllProp,
-    'headerTopper': headerTopper
+    'headerTopper': headerTopper,
+    'ProTasks': ProTasks
   }
 }
 </script>

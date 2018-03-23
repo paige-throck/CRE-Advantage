@@ -5,7 +5,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <headerTopper></headerTopper>
+      <sideNav></sideNav>
     </div>
   </div>
 
@@ -413,6 +413,7 @@ import SmallMap from './SmallMap.vue'
 import NewSuiteForm from './NewSuiteForm.vue'
 import NewPropertyForm from './NewPropertyForm.vue'
 import headerTopper from './headerTopper'
+import sideNav from './sideNav.vue'
 
 
 export default {
@@ -422,7 +423,8 @@ export default {
     'SmallMap': SmallMap,
     'NewSuiteForm': NewSuiteForm,
     'NewPropertyForm': NewPropertyForm,
-    'headerTopper': headerTopper
+    'headerTopper': headerTopper,
+    'sideNav': sideNav,
   },
   data() {
     return {
@@ -478,8 +480,16 @@ export default {
   mounted: function() {
     console.log('wtf');
     this.getPropertyData()
+    this.checkSession()
   },
   methods: {
+    checkSession: function(){
+      let self = this;
+      if (!localStorage.sessionData){
+        console.log("is it getting in here");
+        self.$router.push('/login')
+      }
+    },
     getPropertyData: function() {
       let self = this
       let prop_id = this.$route.params.id

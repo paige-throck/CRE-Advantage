@@ -53,33 +53,20 @@ router.get('/:id', (req, res, next) => {
 
 
 /////Update Email
-router.patch('/:id/email', (req, res, next) => {
+router.patch('/email/:id', (req, res, next) => {
     const id = filterInt(req.params.id);
     const email = req.body.email;
-
-    knex.select('email').from('users').where('email', email)
-        .then((result) => {
-            if (email !== 0) {
-                return res.send('Email exists');
-            } else {
                 knex('users').where('id', id).update({
                         email: email
                     })
-
                     .then(function(results) {
-                        console.log(results, 'results in update email');
+                        res.sendStatus(200)
+                        })
+                        .catch(function(error) {
+                            console.log(error);
+                            res.sendStatus(500);
+                          })
 
-                        if (results == 1) {
-                            res.sendStatus(200);
-                        } else {
-                            res.sendStatus(404);
-                        }
-
-                    }).catch(function(error) {
-                        console.log('THERE BE AN ERROR IN YOUR NOTE PUT');
-                    })
-            }
-        });
 });
 
 

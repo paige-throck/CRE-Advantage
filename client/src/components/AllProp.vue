@@ -1,6 +1,11 @@
 <template>
-<div class="row allProp">
-  <Nav></Nav>
+<div class="allProp">
+
+  <div class="row">
+    <div class="col-md-12">
+      <sideNav></sideNav>
+    </div>
+  </div>
 
   <div class="col">
 
@@ -32,11 +37,14 @@
 
 <script>
 import axios from 'axios';
-import Nav from './Nav'
+import sideNav from './sideNav.vue'
 
 
 export default {
   name: 'AllProp',
+  components: {
+    'sideNav': sideNav
+  },
   data() {
     return {
       properties: [],
@@ -46,8 +54,16 @@ export default {
   },
   mounted: function() {
     this.getProperties()
+    this.checkSession()
   },
   methods: {
+    checkSession: function(){
+      let self = this;
+      if (!localStorage.sessionData){
+        console.log("is it getting in here");
+        self.$router.push('/login')
+      }
+    },
     getProperties() {
       let id = window.localStorage.id
       let self = this
@@ -101,7 +117,5 @@ export default {
 </script>
 
 <style scoped>
-.home {
-  margin: 5%;
-}
+
 </style>

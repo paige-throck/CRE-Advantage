@@ -34,6 +34,6 @@
 ![alt tag](screenshots/erd.png)
 
 <div>
-Created by:
+<b>Created by:
 Paige Throckmorton and Melissa Warren
-</div>
+</b></div>

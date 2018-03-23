@@ -1,31 +1,20 @@
 <template>
-<div class="row proTasks">
+<div class="col proTasks">
 
-  <div class="row taskList">
+    <div class = "row">
     <ul class="list-group" v-for="protask in protasksArr" v-model="protasksArr">
       <li class="list-group-items clearfix task">
-
-        <div class="list-items">
-
-
-          <div class="lead"><b>{{protask.item}}</b></div>
-
-        </div>
-
-        <div>
-        <span class="pull-right">
+        <div class="lead"><b>{{protask.item}}</b>
+          
           <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
   v-on:click="proCompleteTask($event, protask.id)"></span></button>
 
-
-
-          </span>
-        </div>
-
+</div>
       </li>
     </ul>
+</div>
 
-  </div>
+
 </div>
 </template>
 
@@ -66,8 +55,7 @@ export default {
           for (let i = 0; i < results.data.length; i++) {
 
             taskDate = self.formatDate(results.data[i].task_date)
-            console.log(newDate);
-            console.log(taskDate);
+
 
             if (taskDate === newDate) {
               console.log("is this working?");
@@ -75,7 +63,7 @@ export default {
             }
           }
 
-          console.log(self.protasksArr, "Array");
+
 
         })
     },
