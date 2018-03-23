@@ -19,6 +19,7 @@ import AllProp from '@/components/AllProp'
 import DatePicker from '@/components/DatePicker'
 import Nav from '@/components/Nav'
 import App from '@/App'
+import ProTasks from '@/components/profileTasks'
 
 
 Vue.use(Router)
@@ -73,6 +74,11 @@ export default new Router({
       path: '/allprop',
       name: 'AllProp',
       component: AllProp
+    },
+    {
+      path: '/protasks',
+      name: 'ProTasks',
+      component: ProTasks
     }
   ]
 });
