@@ -9,6 +9,9 @@
     </div>
   </div>
 
+
+  <!-- ============= nav buttons =====================-->
+
   <div class="row text-center buttonRow">
     <div class="col-md-12">
       <div class="btn-group" role="group" aria-label="Property Nav">
@@ -41,17 +44,18 @@
   </div>
 
 
+  <!-- ============= left map column =====================-->
 
   <div class="row">
     <div class="col-sm-3 text-left mapColumn">
 
-      <SmallMap :property="property"></SmallMap>
+      <SmallMap :property="property" class="centerMap"></SmallMap>
 
       <h3>{{ property[0].address }}</h3>
-      <p>Property Owner: {{ property[0].prop_owner}}</p>
-      <p>Property Size: {{ property[0].prop_size}}</p>
-      <p>Type: {{ property[0].prop_type}}</p>
-      <p>Suites: {{ property[0].num_suites}}</p>
+      <p><span class="propHeader">Property Owner:</span> {{ property[0].prop_owner}}</p>
+      <p><span class="propHeader">Property Size:</span> {{ property[0].prop_size}}</p>
+      <p><span class="propHeader">Type:</span> {{ property[0].prop_type}}</p>
+      <p><span class="propHeader">Suites:</span> {{ property[0].num_suites}}</p>
     </div>
     <div class="col-sm-8 rightCol">
 
@@ -713,10 +717,17 @@ color: #136a8a;
   margin-top: 50px;
 }
 .mapColumn {
-  padding-left: 3%;
-  padding-top: 3%;
-  background: whitesmoke;
+  padding: 2%;
   border-right: 1px solid gainsboro;
+}
+.mapColumn > h3 {
+  margin: 5% 5%;
+}
+.mapColumn > p {
+  margin: 5% 5%;
+}
+.propHeader {
+  font-weight: 500;
 }
 .rightCol {
   padding-left: 3%;
@@ -725,6 +736,10 @@ color: #136a8a;
 .newPropFormMargin {
   padding: 5% 3%;
   margin-bottom: 5%;
+}
+.centerMap {
+  margin-left: auto;
+  margin-right: auto;
 }
 /* .smallRightCol {
     background-color: darkgrey;
