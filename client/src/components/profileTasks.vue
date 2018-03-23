@@ -13,9 +13,9 @@
         </div>
 
         <div>
-          <span class="pull-right">
+        <span class="pull-right">
           <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
-  v-on:click="completeTask($event, task.id)"></span></button>
+  v-on:click="proCompleteTask($event, protask.id)"></span></button>
 
 
 
@@ -78,8 +78,22 @@ export default {
           console.log(self.protasksArr, "Array");
 
         })
+    },
+
+    proCompleteTask(event, taskId) {
+      console.log('is this working??');
+      console.log(taskId);
+      let self = this;
+      let id = window.localStorage.id;
+
+      axios.put(`http://localhost:8881/profile/updateTask/${id}/${taskId}`)
+        .then(function() {
+          self.getProTasks();
+        }).catch(function(error) {
+          console.log(error);
+        });
+      }
     }
-  }
 }
 </script>
 
