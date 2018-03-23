@@ -4,6 +4,12 @@
     <div class="col-md-12">
       <h1>CRE <span class="advantage">Advantage</span></h1>
 
+
+      <!-- <div>
+          {{msg}}
+      </div> -->
+
+
     </div>
   </div>
 </div>
@@ -16,7 +22,9 @@ import axios from 'axios';
 export default {
   name: 'headerTopper',
   data() {
-    return {}
+    return {
+      msg: "Hello" + " " + window.localStorage.name
+    }
   }
 }
 </script>
