@@ -16,6 +16,27 @@ const filterInt = function(value) {
     return NaN;
 };
 
+////Get Tasks for profile
+
+router.get('/:id/tasks', (req, res, next)=>{
+console.log("Are you working???");
+  const userId = filterInt(req.params.id);
+
+  console.log(userId);
+  knex('tasks').where('user_id', userId)
+  .whereIn('completed', false)
+  .select('*')
+  .orderBy('id', 'asc')
+  .then((tasks) => {
+    res.json(tasks);
+  })
+    .catch(function(error) {
+      console.log(error);
+      res.sendStatus(500);
+    })
+  })
+
+
 //// Get user for update account
 router.get('/:id', (req, res, next) => {
     const id = filterInt(req.params.id);
@@ -110,7 +131,24 @@ router.put('/:id/password', (req, res, next) => {
           res.sendStatus(500);
       })
     })
-
 });
+////////////// Update Task
+
+router.put('/updateTask/:id/:taskId', (req,res,next)=>{
+
+  const userId = filterInt(req.params.id);
+  const taskId = filterInt(req.params.taskId);
+  const complete = req.body.completed;
+
+  knex('tasks').where('id', taskId).update({'completed':true})
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch(function(error) {
+      console.log(error);
+      res.sendStatus(500);
+    })
+  })
+
 
 module.exports = router;
