@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="propForm">
   <form @submit.prevent="addNewProperty">
     <div class="form-row">
       <div class="form-group col-md-8">
@@ -69,8 +69,8 @@
 
       </div>
     </div>
-    <div class="form-group">
-      <div class="form-check">
+    <div class="form-group col-md-12">
+      <div class="form-check text-center">
         <input class="form-check-input" type="checkbox" id="prospective-prop" v-model="newPropInfo.prospective_prop">
 
 
@@ -79,7 +79,9 @@
         </label>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="text-center">
+    <button type="submit" class="btn btn-info btn-lg">Submit</button>
+  </div>
   </form>
 </div>
 </template>
@@ -150,5 +152,21 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+label {
+  font-weight: 500;
+
+}
+.btn {
+  margin-top: 3%;
+}
+.form-check {
+  margin-top: 3%;
+}
+.propForm {
+  border-radius: 1%;
+  background-color: white;
+  margin-top: 5%;
+}
+
 </style>

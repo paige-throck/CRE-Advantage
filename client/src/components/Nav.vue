@@ -53,14 +53,14 @@
           <i class="glyphicon glyphicon-align-left"></i>
         </button>
       </div>
-      <div class="col-sm-8">
+      <!-- <div class="col-sm-8">
         <h3>CRE Advantage</h3>
 
 
 
       </div>
       <div class="col-sm-2">
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

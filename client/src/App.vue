@@ -1,9 +1,7 @@
 <template>
 <div id="app">
-<!-- <profile></profile> -->
 
 <router-view></router-view>
-<!-- <profile></profile> -->
 
 </div>
 </template>
@@ -17,6 +15,7 @@ import Tasks from './components/Tasks.vue'
 import SmallMap from './components/SmallMap.vue'
 import NewSuiteForm from './components/NewSuiteForm.vue'
 import NewPropertyForm from './components/NewPropertyForm.vue'
+import headerTopper from './components/headerTopper.vue'
 import AllProp from './components/AllProp.vue'
 
 export default {
@@ -30,18 +29,30 @@ export default {
     'SmallMap': SmallMap,
     'NewSuiteForm': NewSuiteForm,
     'NewPropertyForm': NewPropertyForm,
-    'AllProp': AllProp
+    'AllProp': AllProp,
+    'headerTopper': headerTopper
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
+  font-family: 'Fira Sans Condensed', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 0;
+  height: 100%;
+
 }
+
+
+
+html {
+  font-size: 1rem;
+}
+
+
+
 </style>
