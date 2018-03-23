@@ -1,211 +1,254 @@
 <template>
-<div class="row property">
-  <Nav v-on:getPropertyData="updateProperties($event)"></Nav>
+<div class="property">
 
+  <!-- <Nav v-on:getPropertyData="updateProperties($event)"></Nav> -->
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 offset-sm-4 text-left">
-        <h3>{{ property[0].address }}</h3>
-        <p>Property Owner: {{ property[0].prop_owner}}</p>
-        <p>Property Size: {{ property[0].prop_size}}</p>
-        <p>Type: {{ property[0].prop_type}}</p>
-        <p>Suites: {{ property[0].num_suites}}</p>
-      </div>
-      <div class="col-sm-6 rightCol">
+  <div class="row">
+    <div class="col-md-12">
+      <headerTopper></headerTopper>
+    </div>
+  </div>
 
-        <SmallMap :property="property"></SmallMap>
+  <div class="row text-center buttonRow">
+    <div class="col-md-12">
+      <div class="btn-group" role="group" aria-label="Property Nav">
+        <button type="button" class="btn btn-lg btn-light" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">
+          <i class="material-icons md-48">view_module</i>
+          <p>Suites</p>
+        </button>
+
+        <button type="button" class="btn btn-lg btn-light" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">
+          <i class="material-icons md-48">note</i>
+          <p>Notes</p>
+        </button>
+
+        <button type="button" class="btn btn-light btn-lg" @click="showEditPropertyForm = ! showEditPropertyForm">
+          <i class="material-icons md-48">mode_edit</i>
+          <p>Edit Property</p>
+        </button>
+
+        <button type="button" class="btn btn-light btn-lg" @click="showNewPropertyForm = !showNewPropertyForm">
+        <i class="material-icons md-48">add</i>
+        <p>New Property</p>
+      </button>
+
+        <button type="button" class="btn btn-light btn-lg" @click="deleteProperty">
+          <i class="material-icons md-48">clear</i>
+          <p>Delete Property</p>
+        </button>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col">
-
-        <!-- PROPERTY MENU BUTTONS -->
-        <p>
-          <a class="btn btn-primary" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">Suites</a>
-
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">Notes</button>
-
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#documents" aria-expanded="false" aria-controls="documents">Documents</button>
-
-          <button class="btn btn-primary" type="button" @click="showEditPropertyForm = ! showEditPropertyForm">Edit Property</button>
-
-          <button class="btn btn-primary" type="button" @click="deleteProperty">Delete Property</button>
-
-          <button class="btn btn-primary" type="button" @click="showNewPropertyForm = !showNewPropertyForm">New Property</button>
-        </p>
-
-
-        <NewPropertyForm v-if="showNewPropertyForm" v-on:addNewProperty="addProperty($event)" :propTypes="propTypes" :states="states"></NewPropertyForm>
+  </div>
 
 
 
-        <!-- SUITES -->
-        <div class="row">
+  <div class="row">
+    <div class="col-sm-3 text-left mapColumn">
 
-          <div class="col">
-            <div class="collapse multi-collapse text-left" id="suites">
+      <SmallMap :property="property"></SmallMap>
 
-              <button class="btn btn-primary" @click="showNewSuiteForm = !showNewSuiteForm" type="button">New Suite</button>
+      <h3>{{ property[0].address }}</h3>
+      <p>Property Owner: {{ property[0].prop_owner}}</p>
+      <p>Property Size: {{ property[0].prop_size}}</p>
+      <p>Type: {{ property[0].prop_type}}</p>
+      <p>Suites: {{ property[0].num_suites}}</p>
+    </div>
+    <div class="col-sm-8 rightCol">
 
-              <NewSuiteForm v-if="showNewSuiteForm" v-on:addNewSuite="addSuite($event)"></NewSuiteForm>
 
 
-              <div class="card card-body">
+  <!-- </div> -->
 
-                <div v-for="(suite, index) in suites[0]">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Suite Number</th>
-                        <th scope="col">Suite Size</th>
-                        <th scope="col">Tenant</th>
-                        <th scope="col">Rental Rate</th>
-                        <th scope="col">Lease Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
 
-                      <tr>
-                        <th scope="row">{{ suite.suite_num}}</th>
-                        <td>{{ suite.suite_size }}</td>
-                        <td>{{ suite.tenant }}</td>
-                        <td>{{ suite.rental_rate }}</td>
-                        <td>{{ suite.lease_date }}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
 
-                  <div>
-                    <span class="pull-right">
+  <!-- <div class="row"> -->
+    <!-- <div class="col"> -->
+
+      <!-- PROPERTY MENU BUTTONS -->
+      <!-- <p> -->
+        <!-- <a class="btn btn-primary" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">Suites</a> -->
+
+        <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">Notes</button> -->
+
+        <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#documents" aria-expanded="false" aria-controls="documents">Documents</button> -->
+
+        <!-- <button class="btn btn-primary" type="button" @click="showEditPropertyForm = ! showEditPropertyForm">Edit Property</button> -->
+
+        <!-- <button class="btn btn-primary" type="button" @click="deleteProperty">Delete Property</button> -->
+
+        <!-- <button class="btn btn-primary" type="button" @click="showNewPropertyForm = !showNewPropertyForm">New Property</button> -->
+      <!-- </p> -->
+
+
+      <NewPropertyForm v-if="showNewPropertyForm" v-on:addNewProperty="addProperty($event)" :propTypes="propTypes" :states="states" class="newPropFormMargin"></NewPropertyForm>
+
+
+
+      <!-- SUITES -->
+      <div class="row">
+
+        <div class="col">
+          <div class="collapse multi-collapse text-left" id="suites">
+
+            <button class="btn btn-primary" @click="showNewSuiteForm = !showNewSuiteForm" type="button">New Suite</button>
+
+            <NewSuiteForm v-if="showNewSuiteForm" v-on:addNewSuite="addSuite($event)"></NewSuiteForm>
+
+
+            <div class="card card-body">
+
+              <div v-for="(suite, index) in suites[0]">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Suite Number</th>
+                      <th scope="col">Suite Size</th>
+                      <th scope="col">Tenant</th>
+                      <th scope="col">Rental Rate</th>
+                      <th scope="col">Lease Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                      <th scope="row">{{ suite.suite_num}}</th>
+                      <td>{{ suite.suite_size }}</td>
+                      <td>{{ suite.tenant }}</td>
+                      <td>{{ suite.rental_rate }}</td>
+                      <td>{{ suite.lease_date }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div>
+                  <span class="pull-right">
             <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
               v-on:click="editSuiteClick(index)"></span></button>
 
-                    <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+                  <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
               v-on:click="deleteSuiteClick(index)"></span></button>
-                    </span>
-                  </div>
+                  </span>
+                </div>
 
 
 
-                  <!-- EDIT SUITE FORM -->
+                <!-- EDIT SUITE FORM -->
 
 
-                  <div class="card card-body suiteEditFormMargin">
-                    <form @submit.prevent="editSuite" v-if="index == activeSuiteItem && showEditSuiteForm" id="editSuite">
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="suite-num">Suite Number</label>
-                          <input type="text" class="form-control" id="suite-num" :placeholder="suite.suite_num" v-model="editedSuiteInfo.suite_num">
-                        </div>
+                <div class="card card-body suiteEditFormMargin">
+                  <form @submit.prevent="editSuite" v-if="index == activeSuiteItem && showEditSuiteForm" id="editSuite">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="suite-num">Suite Number</label>
+                        <input type="text" class="form-control" id="suite-num" :placeholder="suite.suite_num" v-model="editedSuiteInfo.suite_num">
+                      </div>
 
-                        <div class="form-group col-md-6">
-                          <label for="lease-date">Lease Date</label>
-                          <input type="text" class="form-control" id="lease-date" :placeholder="suite.lease_date" v-model="editedSuiteInfo.lease_date">
-                        </div>
+                      <div class="form-group col-md-6">
+                        <label for="lease-date">Lease Date</label>
+                        <input type="text" class="form-control" id="lease-date" :placeholder="suite.lease_date" v-model="editedSuiteInfo.lease_date">
+                      </div>
+
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="tenant">Tenant</label>
+                      <input type="text" class="form-control" id="tenant" :placeholder="suite.tenant" v-model="editedSuiteInfo.tenant">
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="suite-size">Suite Size</label>
+                        <input type="text" class="form-control" id="suite-size" :placeholder="suite.suite_size" v-model="editedSuiteInfo.suite_size">
+
 
                       </div>
-                      <div class="form-group col-md-12">
-                        <label for="tenant">Tenant</label>
-                        <input type="text" class="form-control" id="tenant" :placeholder="suite.tenant" v-model="editedSuiteInfo.tenant">
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="suite-size">Suite Size</label>
-                          <input type="text" class="form-control" id="suite-size" :placeholder="suite.suite_size" v-model="editedSuiteInfo.suite_size">
-
-
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="rental-rate">Rental Rate</label>
-                          <input type="text" class="form-control" id="rental-rate" :placeholder="suite.rental_rate" v-model="editedSuiteInfo.rental_rate">
-
-                        </div>
+                      <div class="form-group col-md-6">
+                        <label for="rental-rate">Rental Rate</label>
+                        <input type="text" class="form-control" id="rental-rate" :placeholder="suite.rental_rate" v-model="editedSuiteInfo.rental_rate">
 
                       </div>
 
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                  </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </form>
                 </div>
               </div>
-
             </div>
 
-            <!-- </div>
-            </div> -->
           </div>
 
+          <!-- </div>
+            </div> -->
+        </div>
 
 
 
 
-          <!-- NOTES -->
 
-          <div class="col">
-            <div class="collapse multi-collapse text-left" id="notes">
-              <div class="card card-body">
-                <form class="form-tasks" @submit.prevent="addNote">
-                  <div class="input-group">
-                    <input type="text" class="form-control" v-model="newNote.content" placeholder="Add a note" required autofocus>
-                    <div></div>
+        <!-- NOTES -->
 
-                    <span class="input-group-btn">
+        <div class="col">
+          <div class="collapse multi-collapse text-left" id="notes">
+            <div class="card card-body">
+              <form class="form-tasks" @submit.prevent="addNote">
+                <div class="input-group">
+                  <input type="text" class="form-control" v-model="newNote.content" placeholder="Add a note" required autofocus>
+                  <div></div>
+
+                  <span class="input-group-btn">
                 <button class="btn btn-default" type="submit"><span
                   class="glyphicon glyphicon-plus"></span> Add Note</button>
-                    </span>
-                  </div>
-                </form>
+                  </span>
+                </div>
+              </form>
 
-                <!-- :class="{active: index === activeItem}" -->
-                <ul class="list-group" v-for="(note, index) in notes.content[0]">
-                  <li class="list-group-item clearfix">
-                    <p class="lead">{{ note }}</p>
-                    <div>
-                      <span class="pull-right">
+              <!-- :class="{active: index === activeItem}" -->
+              <ul class="list-group" v-for="(note, index) in notes.content[0]">
+                <li class="list-group-item clearfix">
+                  <p class="lead">{{ note }}</p>
+                  <div>
+                    <span class="pull-right">
                 <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
                   v-on:click="editNoteClick(index)"></span></button>
 
-                      <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+                    <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
                   v-on:click="deleteNoteClick(index)"></span></button>
-                      </span>
-                    </div>
-                  </li>
+                    </span>
+                  </div>
+                </li>
 
-                  <!-- EDITNOTE FORM -->
+                <!-- EDITNOTE FORM -->
 
-                  <form class="form-tasks" @submit.prevent="editNoteFunction" v-if="index == activeItem && showEditNoteForm" id="editnotetest">
-                    <div class="input-group">
-                      <input type="text" class="form-control editInput" :value="note" required autofocus id="editNoteText">
-                      <div></div>
+                <form class="form-tasks" @submit.prevent="editNoteFunction" v-if="index == activeItem && showEditNoteForm" id="editnotetest">
+                  <div class="input-group">
+                    <input type="text" class="form-control editInput" :value="note" required autofocus id="editNoteText">
+                    <div></div>
 
-                      <span class="input-group-btn">
+                    <span class="input-group-btn">
                      <button class="btn btn-default" type="submit"><span
                        class="glyphicon glyphicon-plus"></span>Save Changes</button>
-                      </span>
-                    </div>
-                  </form>
-                </ul>
+                    </span>
+                  </div>
+                </form>
+              </ul>
 
 
-              </div>
             </div>
           </div>
-          <!-- EDIT PROPERTY FORM -->
-          <div class="col">
-            <div v-if="showEditPropertyForm" id="edit-property">
-              <div class="card card-body">
-                <form @submit.prevent="formatEditedProperty">
-                  <div class="form-row">
-                    <div class="form-group col-md-8">
-                      <label for="prop-owner">Property Owner</label>
-                      <input type="text" class="form-control" id="prop-owner" :placeholder="property[0].prop_owner" v-model="editedPropInfo.prop_owner">
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for="prop-type">Property Type</label>
-                      <select id="prop-type" class="form-control" v-model="editedPropInfo.prop_type">
+        </div>
+        <!-- EDIT PROPERTY FORM -->
+        <div class="col">
+          <div v-if="showEditPropertyForm" id="edit-property">
+            <div class="card card-body">
+              <form @submit.prevent="formatEditedProperty">
+                <div class="form-row">
+                  <div class="form-group col-md-8">
+                    <label for="prop-owner">Property Owner</label>
+                    <input type="text" class="form-control" id="prop-owner" :placeholder="property[0].prop_owner" v-model="editedPropInfo.prop_owner">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="prop-type">Property Type</label>
+                    <select id="prop-type" class="form-control" v-model="editedPropInfo.prop_type">
                         <option v-if="property[0].prop_type == null" selected value="">
                         Choose Property Type...</option>
 
@@ -217,43 +260,43 @@
                             {{ type }}
                         </option>
                       </select>
-                    </div>
                   </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for="prop-size">Property Size</label>
-                      <input type="text" class="form-control" id="prop-size" :placeholder="property[0].prop_size" v-model="editedPropInfo.prop_size">
-
-
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for="prop-range">Property Range</label>
-                      <input type="text" class="form-control" id="prop-range" :placeholder="property[0].prop_range" v-model="editedPropInfo.prop_range">
-
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for="num-suites">Number of Suites</label>
-                      <input type="text" class="form-control" id="suite-num" :placeholder="property[0].num_suites" v-model="editedPropInfo.num_suites">
-
-
-                    </div>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="propStreetAddress">Street Address</label>
-                    <input type="text" class="form-control" id="propStreetAddress" :placeholder="propStreetAddress" v-model="editedPropInfo.streetAddress">
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="prop-size">Property Size</label>
+                    <input type="text" class="form-control" id="prop-size" :placeholder="property[0].prop_size" v-model="editedPropInfo.prop_size">
 
 
                   </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="propCity">City</label>
-                      <input type="text" class="form-control" id="propCity" :placeholder="propCity" v-model="editedPropInfo.city">
+                  <div class="form-group col-md-4">
+                    <label for="prop-range">Property Range</label>
+                    <input type="text" class="form-control" id="prop-range" :placeholder="property[0].prop_range" v-model="editedPropInfo.prop_range">
 
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for="prop-state">State</label>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="num-suites">Number of Suites</label>
+                    <input type="text" class="form-control" id="suite-num" :placeholder="property[0].num_suites" v-model="editedPropInfo.num_suites">
 
-                      <select id="prop-state" class="form-control" v-model="editedPropInfo.state">
+
+                  </div>
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="propStreetAddress">Street Address</label>
+                  <input type="text" class="form-control" id="propStreetAddress" :placeholder="propStreetAddress" v-model="editedPropInfo.streetAddress">
+
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="propCity">City</label>
+                    <input type="text" class="form-control" id="propCity" :placeholder="propCity" v-model="editedPropInfo.city">
+
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="prop-state">State</label>
+
+                    <select id="prop-state" class="form-control" v-model="editedPropInfo.state">
                         <option selected value="">{{ propState }}</option>
                         <option
                           v-for="state in states"
@@ -261,51 +304,52 @@
                             {{ state }}
                         </option>
                       </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                      <label for="propZip">Zip</label>
-                      <input type="text" class="form-control" id="propZip" :placeholder="propZip" v-model="editedPropInfo.zip">
-
-
-                    </div>
                   </div>
-                  <div class="form-group">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="prospective-prop" :value="editedPropInfo.prospective_prop" v-model="editedPropInfo.prospective_prop">
+                  <div class="form-group col-md-2">
+                    <label for="propZip">Zip</label>
+                    <input type="text" class="form-control" id="propZip" :placeholder="propZip" v-model="editedPropInfo.zip">
 
 
-                      <label class="form-check-label" for="prospective-prop">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="prospective-prop" :value="editedPropInfo.prospective_prop" v-model="editedPropInfo.prospective_prop">
+
+
+                    <label class="form-check-label" for="prospective-prop">
                         Prospective Property {{ editedPropInfo.prospective_prop }}
                       </label>
-                    </div>
                   </div>
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-              </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+              </form>
             </div>
           </div>
-          <!-- DOCUMENTS -->
-          <div class="col">
-            <div class="collapse multi-collapse" id="documents">
-              <div class="card card-body">
-                <p>Hey I'm really cool documents.</p>
-                <p>BTW you're awesome for rockin the AWS</p>
-              </div>
+        </div>
+        <!-- DOCUMENTS -->
+        <div class="col">
+          <div class="collapse multi-collapse" id="documents">
+            <div class="card card-body">
+              <p>Hey I'm really cool documents.</p>
+              <p>BTW you're awesome for rockin the AWS</p>
             </div>
           </div>
-          <div class="col">
-            <div class="collapse multi-collapse" id="delete-property">
-              <div class="card card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-              </div>
+        </div>
+        <div class="col">
+          <div class="collapse multi-collapse" id="delete-property">
+            <div class="card card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
+  </div>
+  <div class="col-sm-1 smallRightCol"></div>
 </div>
-</div>
+<!-- </div> -->
 </template>
 
 
@@ -316,6 +360,7 @@ import Nav from './Nav.vue'
 import SmallMap from './SmallMap.vue'
 import NewSuiteForm from './NewSuiteForm.vue'
 import NewPropertyForm from './NewPropertyForm.vue'
+import headerTopper from './headerTopper'
 
 
 export default {
@@ -324,7 +369,8 @@ export default {
     'Nav': Nav,
     'SmallMap': SmallMap,
     'NewSuiteForm': NewSuiteForm,
-    'NewPropertyForm': NewPropertyForm
+    'NewPropertyForm': NewPropertyForm,
+    'headerTopper': headerTopper
   },
   data() {
     return {
@@ -376,7 +422,7 @@ export default {
   },
   mounted: function() {
     console.log('wtf');
-      this.getPropertyData()
+    this.getPropertyData()
   },
   methods: {
     getPropertyData: function() {
@@ -388,7 +434,7 @@ export default {
           console.log(result, 'RESULTTTTT');
           self.property.push(result.data[0][0])
           self.suites.push(result.data[1])
-          if(result.data[2][0]) {
+          if (result.data[2][0]) {
             self.notes.content.push(result.data[2][0].notes)
             self.notes.id = result.data[2][0].id
           }
@@ -472,7 +518,7 @@ export default {
 
       // update property address on property object
       if (self.editedData.address) {
-          self.property[0].address = self.editedData.address
+        self.property[0].address = self.editedData.address
       }
 
 
@@ -486,18 +532,18 @@ export default {
           console.log(error, 'YOU HAD AN ERROR WHEN TRYING TO UPDATE A PROPERTY IN THE SAVE PROPERTY EDIT FUNCTION');
         })
 
-        self.editedPropInfo = {
-          streetAddress: "",
-          city: "",
-          state: "",
-          zip: "",
-          prop_owner: "",
-          prop_size: "",
-          prospective_prop: "",
-          prop_type: "",
-          prop_range: "",
-          num_suites: ""
-        }
+      self.editedPropInfo = {
+        streetAddress: "",
+        city: "",
+        state: "",
+        zip: "",
+        prop_owner: "",
+        prop_size: "",
+        prospective_prop: "",
+        prop_type: "",
+        prop_range: "",
+        num_suites: ""
+      }
     },
     addNote: function() {
       let self = this
@@ -602,20 +648,20 @@ export default {
           console.log(error, 'YOU HAVE AN ERROR POSTING A NEW SUITE');
         })
     },
-    deleteProperty: function () {
+    deleteProperty: function() {
       let self = this
       let prop_id = this.property[0].id
 
       axios.delete(`http://localhost:8881/properties/${prop_id}`)
-        .then(function(results){
-           self.$router.push('/profile')
+        .then(function(results) {
+          self.$router.push('/profile')
         })
     },
-    addProperty: function (event) {
-     console.log(event, 'HEYYY EVENT IN ADD PROPERTY');
-     let self = this
-     event.user_id = window.localStorage.id
-     self.showNewPropertyForm = !self.showNewPropertyForm
+    addProperty: function(event) {
+      console.log(event, 'HEYYY EVENT IN ADD PROPERTY');
+      let self = this
+      event.user_id = window.localStorage.id
+      self.showNewPropertyForm = !self.showNewPropertyForm
 
       axios.post(`http://localhost:8881/properties/new`, event)
         .then(function(results) {
@@ -641,7 +687,22 @@ export default {
 
 <style scoped>
 .property {
-  margin: 5%;
+  background-color: white;
+}
+.btn-group > .btn {
+margin-left: auto;
+margin-right: auto;
+width: 150px;
+background: whitesmoke;
+color: #136a8a;
+/* background: linear-gradient(to right, whitesmoke, #ffffff) */
+}
+.btn-group > .btn:hover {
+  background: linear-gradient(to right, whitesmoke, #ffffff);
+}
+.buttonRow {
+  background: whitesmoke;
+  border-bottom: 1px solid gainsboro;
 }
 
 .editInput {
@@ -651,4 +712,22 @@ export default {
 .suiteEditFormMargin {
   margin-top: 50px;
 }
+.mapColumn {
+  padding-left: 3%;
+  padding-top: 3%;
+  background: whitesmoke;
+  border-right: 1px solid gainsboro;
+}
+.rightCol {
+  padding-left: 3%;
+  /* background-color: darkgrey; */
+}
+.newPropFormMargin {
+  padding: 5% 3%;
+  margin-bottom: 5%;
+}
+/* .smallRightCol {
+    background-color: darkgrey;
+    margin: 0;
+} */
 </style>
