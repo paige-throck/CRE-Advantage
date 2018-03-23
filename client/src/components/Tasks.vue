@@ -137,7 +137,12 @@ export default {
   methods: {
 
     formatDate: function(date) {
-            return moment(date).format("ddd MMM DD YY");
+      if (date === null){
+        return "";
+      }else {
+        return moment(date).format("ddd MMM DD YY");
+      }
+
         },
 
     getTasks() {
