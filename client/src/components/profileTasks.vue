@@ -66,8 +66,7 @@ export default {
           for (let i = 0; i < results.data.length; i++) {
 
             taskDate = self.formatDate(results.data[i].task_date)
-            console.log(newDate);
-            console.log(taskDate);
+          
 
             if (taskDate === newDate) {
               console.log("is this working?");
@@ -75,7 +74,7 @@ export default {
             }
           }
 
-          console.log(self.protasksArr, "Array");
+
 
         })
     },
