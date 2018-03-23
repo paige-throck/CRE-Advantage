@@ -15,27 +15,40 @@
   <div class="row text-center buttonRow">
     <div class="col-md-12">
       <div class="btn-group" role="group" aria-label="Property Nav">
-        <button type="button" class="btn btn-lg btn-light" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">
+
+        <button type="button" class="btn btn-light" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">
           <i class="material-icons md-48">view_module</i>
           <p>Suites</p>
         </button>
 
-        <button type="button" class="btn btn-lg btn-light" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">
+
+
+        <button type="button" class="btn btn-light" data-toggle="collapse" href="#newSuites" role="button" aria-expanded="false" aria-controls="newSuites" @click="showNewSuiteForm = !showNewSuiteForm">
+          <i class="material-icons md-48">view_module</i>
+          <p>New Suite</p>
+        </button>
+
+        <button type="button" class="btn btn btn-light" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">
           <i class="material-icons md-48">note</i>
           <p>Notes</p>
         </button>
 
-        <button type="button" class="btn btn-light btn-lg" @click="showEditPropertyForm = ! showEditPropertyForm">
+        <button type="button" class="btn btn btn-light" data-toggle="collapse" data-target="#newNotes" aria-expanded="false" aria-controls="newNotes">
+          <i class="material-icons md-48">note</i>
+          <p>New Note</p>
+        </button>
+
+        <button type="button" class="btn btn-light" @click="showEditPropertyForm = ! showEditPropertyForm">
           <i class="material-icons md-48">mode_edit</i>
           <p>Edit Property</p>
         </button>
 
-        <button type="button" class="btn btn-light btn-lg" @click="showNewPropertyForm = !showNewPropertyForm">
+        <button type="button" class="btn btn-light" @click="showNewPropertyForm = !showNewPropertyForm">
         <i class="material-icons md-48">add</i>
         <p>New Property</p>
       </button>
 
-        <button type="button" class="btn btn-light btn-lg" @click="deleteProperty">
+        <button type="button" class="btn btn-light" @click="deleteProperty">
           <i class="material-icons md-48">clear</i>
           <p>Delete Property</p>
         </button>
@@ -51,7 +64,8 @@
 
       <SmallMap :property="property" class="centerMap"></SmallMap>
 
-      <h3>{{ property[0].address }}</h3>
+      <h3>{{ propStreetAddress }}</h3>
+      <h3> {{ propCity}}, {{ propState}} {{ propZip }}</h3>
       <p><span class="propHeader">Property Owner:</span> {{ property[0].prop_owner}}</p>
       <p><span class="propHeader">Property Size:</span> {{ property[0].prop_size}}</p>
       <p><span class="propHeader">Type:</span> {{ property[0].prop_type}}</p>
@@ -61,140 +75,174 @@
 
 
 
-  <!-- </div> -->
+      <!-- </div> -->
 
 
 
-  <!-- <div class="row"> -->
-    <!-- <div class="col"> -->
+      <!-- <div class="row"> -->
+      <!-- <div class="col"> -->
 
       <!-- PROPERTY MENU BUTTONS -->
       <!-- <p> -->
-        <!-- <a class="btn btn-primary" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">Suites</a> -->
+      <!-- <a class="btn btn-primary" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">Suites</a> -->
 
-        <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">Notes</button> -->
+      <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">Notes</button> -->
 
-        <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#documents" aria-expanded="false" aria-controls="documents">Documents</button> -->
+      <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#documents" aria-expanded="false" aria-controls="documents">Documents</button> -->
 
-        <!-- <button class="btn btn-primary" type="button" @click="showEditPropertyForm = ! showEditPropertyForm">Edit Property</button> -->
+      <!-- <button class="btn btn-primary" type="button" @click="showEditPropertyForm = ! showEditPropertyForm">Edit Property</button> -->
 
-        <!-- <button class="btn btn-primary" type="button" @click="deleteProperty">Delete Property</button> -->
+      <!-- <button class="btn btn-primary" type="button" @click="deleteProperty">Delete Property</button> -->
 
-        <!-- <button class="btn btn-primary" type="button" @click="showNewPropertyForm = !showNewPropertyForm">New Property</button> -->
+      <!-- <button class="btn btn-primary" type="button" @click="showNewPropertyForm = !showNewPropertyForm">New Property</button> -->
       <!-- </p> -->
 
 
-      <NewPropertyForm v-if="showNewPropertyForm" v-on:addNewProperty="addProperty($event)" :propTypes="propTypes" :states="states" class="newPropFormMargin"></NewPropertyForm>
+      <NewPropertyForm v-if="showNewPropertyForm"  v-on:addNewProperty="addProperty($event)" :propTypes="propTypes" :states="states" class="newPropFormMargin"></NewPropertyForm>
 
 
 
-      <!-- SUITES -->
+      <!-- ============= suites =====================-->
+
+      <NewSuiteForm v-if="showNewSuiteForm" id="newSuites" v-on:addNewSuite="addSuite($event)"></NewSuiteForm>
+
+
       <div class="row">
 
         <div class="col">
           <div class="collapse multi-collapse text-left" id="suites">
 
-            <button class="btn btn-primary" @click="showNewSuiteForm = !showNewSuiteForm" type="button">New Suite</button>
+            <!-- <button class="btn btn-primary" @click="showNewSuiteForm = !showNewSuiteForm" type="button">New Suite</button> -->
 
-            <NewSuiteForm v-if="showNewSuiteForm" v-on:addNewSuite="addSuite($event)"></NewSuiteForm>
 
 
             <div class="card card-body">
 
-              <div v-for="(suite, index) in suites[0]">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Suite Number</th>
-                      <th scope="col">Suite Size</th>
-                      <th scope="col">Tenant</th>
-                      <th scope="col">Rental Rate</th>
-                      <th scope="col">Lease Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+              <!-- <div v-for="(suite, index) in suites[0]"> -->
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Suite Number</th>
+                    <th scope="col">Suite Size</th>
+                    <th scope="col">Tenant</th>
+                    <th scope="col">Rental Rate</th>
+                    <th scope="col">Lease Date</th>
 
-                    <tr>
-                      <th scope="row">{{ suite.suite_num}}</th>
-                      <td>{{ suite.suite_size }}</td>
-                      <td>{{ suite.tenant }}</td>
-                      <td>{{ suite.rental_rate }}</td>
-                      <td>{{ suite.lease_date }}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                  </tr>
+                </thead>
+                <tbody>
 
-                <div>
-                  <span class="pull-right">
-            <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
-              v-on:click="editSuiteClick(index)"></span></button>
+                  <tr v-for="(suite, index) in suites[0]" class="rowHover"
+                  v-on:mouseover="mouseover($event, suite.id)">
+                    <th scope="row">{{ suite.suite_num}}</th>
+                    <td>{{ suite.suite_size }}</td>
+                    <td>{{ suite.tenant }}</td>
+                    <td>{{ suite.rental_rate }}</td>
+                    <td>{{ suite.lease_date }}
 
-                  <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
-              v-on:click="deleteSuiteClick(index)"></span></button>
-                  </span>
-                </div>
+                      <div class="showSuiteButtons" v-if="activeSuiteIndex && activeSuiteIndex == suite.id">
 
+                        <span class="pull-right">
+                    <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
+                      v-on:click="editSuiteClick($event, index)"></span></button>
 
-
-                <!-- EDIT SUITE FORM -->
-
-
-                <div class="card card-body suiteEditFormMargin">
-                  <form @submit.prevent="editSuite" v-if="index == activeSuiteItem && showEditSuiteForm" id="editSuite">
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="suite-num">Suite Number</label>
-                        <input type="text" class="form-control" id="suite-num" :placeholder="suite.suite_num" v-model="editedSuiteInfo.suite_num">
+                        <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+                      v-on:click="deleteSuiteClick(index)"></span></button>
+                        </span>
                       </div>
 
-                      <div class="form-group col-md-6">
-                        <label for="lease-date">Lease Date</label>
-                        <input type="text" class="form-control" id="lease-date" :placeholder="suite.lease_date" v-model="editedSuiteInfo.lease_date">
-                      </div>
+                    </td>
 
-                    </div>
-                    <div class="form-group col-md-12">
-                      <label for="tenant">Tenant</label>
-                      <input type="text" class="form-control" id="tenant" :placeholder="suite.tenant" v-model="editedSuiteInfo.tenant">
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="suite-size">Suite Size</label>
-                        <input type="text" class="form-control" id="suite-size" :placeholder="suite.suite_size" v-model="editedSuiteInfo.suite_size">
+                  </tr>
+                </tbody>
+              </table>
+</div>
 
 
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="rental-rate">Rental Rate</label>
-                        <input type="text" class="form-control" id="rental-rate" :placeholder="suite.rental_rate" v-model="editedSuiteInfo.rental_rate">
 
-                      </div>
+              <!-- EDIT SUITE FORM -->
 
+
+              <div class="card card-body suiteEditFormMargin">
+                <form @submit.prevent="editSuite" v-if="showEditSuiteForm" id="editSuite">
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="suite-num">Suite Number</label>
+                      <input type="text" class="form-control" id="suite-num" :placeholder="activeSuiteItem[0].suite_num" v-model="editedSuiteInfo.suite_num">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                  </form>
-                </div>
+                    <div class="form-group col-md-6">
+                      <label for="lease-date">Lease Date</label>
+                      <input type="text" class="form-control" id="lease-date" :placeholder="activeSuiteItem[0].lease_date" v-model="editedSuiteInfo.lease_date">
+                    </div>
+
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="tenant">Tenant</label>
+                    <input type="text" class="form-control" id="tenant" :placeholder="activeSuiteItem[0].tenant" v-model="editedSuiteInfo.tenant">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="suite-size">Suite Size</label>
+                      <input type="text" class="form-control" id="suite-size" :placeholder="activeSuiteItem[0].suite_size" v-model="editedSuiteInfo.suite_size">
+
+
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="rental-rate">Rental Rate</label>
+                      <input type="text" class="form-control" id="rental-rate" :placeholder="activeSuiteItem[0].rental_rate" v-model="editedSuiteInfo.rental_rate">
+
+                    </div>
+
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
               </div>
+              <!-- </div>
             </div>
 
-          </div>
+          </div>v-->
 
-          <!-- </div>
-            </div> -->
+
+           </div>
         </div>
 
 
 
 
+        <!-- NEW NOTES -->
 
-        <!-- NOTES -->
+
+
+        <div class="col">
+          <div class="collapse multi-collapse text-left" id="newNotes">
+            <div class="card card-body">
+              <form class="form-tasks" @submit.prevent="addNote">
+
+                <label for="newNoteArea">Add a note</label>
+                  <textarea class="form-control" v-model="newNote.content" placeholder="Add a note" required autofocus id="newNoteArea" rows="3">
+                  </textarea>
+                  <div></div>
+
+                  <span class="input-group-btn">
+                <button class="btn btn-info" type="submit"><span
+                  class="glyphicon glyphicon-plus"></span> Add Note</button>
+                  </span>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+<!-- NOTES -->
+
+
 
         <div class="col">
           <div class="collapse multi-collapse text-left" id="notes">
             <div class="card card-body">
-              <form class="form-tasks" @submit.prevent="addNote">
+              <!-- <form class="form-tasks" @submit.prevent="addNote">
                 <div class="input-group">
                   <input type="text" class="form-control" v-model="newNote.content" placeholder="Add a note" required autofocus>
                   <div></div>
@@ -204,7 +252,7 @@
                   class="glyphicon glyphicon-plus"></span> Add Note</button>
                   </span>
                 </div>
-              </form>
+              </form> -->
 
               <!-- :class="{active: index === activeItem}" -->
               <ul class="list-group" v-for="(note, index) in notes.content[0]">
@@ -348,8 +396,8 @@
           </div>
         </div>
       </div>
-    <!-- </div> -->
-  </div>
+      <!-- </div> -->
+    </div>
   </div>
   <div class="col-sm-1 smallRightCol"></div>
 </div>
@@ -410,7 +458,7 @@ export default {
       },
       showEditNoteForm: false,
       activeItem: -1,
-      activeSuiteItem: -1,
+      activeSuiteItem: [],
       showEditSuiteForm: false,
       editedSuiteInfo: {
         suite_num: '',
@@ -421,7 +469,10 @@ export default {
       },
       showNewSuiteForm: false,
       showNewPropertyForm: false,
-      showEditPropertyForm: false
+      showEditPropertyForm: false,
+      suiteHovered: false,
+      activeSuiteIndex: ''
+
     }
   },
   mounted: function() {
@@ -566,6 +617,7 @@ export default {
         })
     },
     editNoteClick: function(indexClicked) {
+
       this.activeItem = indexClicked
       this.showEditNoteForm = !this.showEditNoteForm
     },
@@ -598,8 +650,9 @@ export default {
           console.log(error, 'HEY THERE WAS AN ERROR WHEN YOU DELETED A NOTE');
         })
     },
-    editSuiteClick: function(indexClicked) {
-      this.activeSuiteItem = indexClicked
+    editSuiteClick: function(event, indexClicked) {
+      this.activeSuiteItem = []
+      this.activeSuiteItem.push(this.suites[0][indexClicked])
       this.showEditSuiteForm = !this.showEditSuiteForm
     },
     editSuite: function() {
@@ -672,6 +725,12 @@ export default {
           console.log('OMG YOU HAVE A NEW PROPERTY');
           self.$router.push('/profile')
         })
+    },
+    mouseover: function (event, index) {
+      console.log(index,'HEYYYY EVENT');
+      this.activeSuiteIndex = index
+      this.suiteHovered = !this.suiteHovered
+
     }
   },
   watch: {
@@ -686,6 +745,8 @@ export default {
     }
   }
 }
+
+
 </script>
 
 
@@ -693,21 +754,31 @@ export default {
 .property {
   background-color: white;
 }
-.btn-group > .btn {
-margin-left: auto;
-margin-right: auto;
-width: 150px;
-background: whitesmoke;
-color: #136a8a;
-/* background: linear-gradient(to right, whitesmoke, #ffffff) */
+
+.btn-group>.btn {
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  background: whitesmoke;
+  color: #136a8a;
+  /* background: linear-gradient(to right, whitesmoke, #ffffff) */
 }
-.btn-group > .btn:hover {
+
+
+.btn-group>.btn:hover {
   background: linear-gradient(to right, whitesmoke, #ffffff);
+
+}
+.btn-group > .btn:focus,
+.btn-group > .butn:active {
+  outline: none !important;
+  background: white;
 }
 .buttonRow {
   background: whitesmoke;
   border-bottom: 1px solid gainsboro;
 }
+
 
 .editInput {
   background-color: lightyellow !important
@@ -716,33 +787,47 @@ color: #136a8a;
 .suiteEditFormMargin {
   margin-top: 50px;
 }
+
 .mapColumn {
   padding: 2%;
   border-right: 1px solid gainsboro;
 }
-.mapColumn > h3 {
+
+.mapColumn>h3 {
   margin: 5% 5%;
 }
-.mapColumn > p {
+
+.mapColumn>p {
   margin: 5% 5%;
 }
+
 .propHeader {
   font-weight: 500;
 }
+
 .rightCol {
   padding-left: 3%;
   /* background-color: darkgrey; */
 }
+
 .newPropFormMargin {
   padding: 5% 3%;
   margin-bottom: 5%;
 }
+
 .centerMap {
   margin-left: auto;
   margin-right: auto;
 }
-/* .smallRightCol {
-    background-color: darkgrey;
-    margin: 0;
-} */
+.rowHover {
+  height: 75px;
+}
+.rowHover:hover {
+  background-color: whitesmoke;
+}
+.showSuiteButtons {
+  margin-left: 4%;
+
+}
+
 </style>
