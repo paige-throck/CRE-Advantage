@@ -13,7 +13,7 @@
     <div class="col-md-6 container-box">
       <h3 class="welcome">Welcome</h3>
 
-      <p class="lead">The place where realtors come to get ahead</p>
+      <p class="lead">The place where brokers come to get ahead</p>
 
       <router-link to="login"><button class="button btn btn-info">Login</button></router-link>
 
