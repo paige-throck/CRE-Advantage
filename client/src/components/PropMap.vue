@@ -1,14 +1,10 @@
 <template>
 <div class = "mapPage">
 <!-- <Nav :searchedProp="searchedProp"></Nav> -->
-
-<div class="row">
-  <div class="col-sm-12">
     <sideNav></sideNav>
-  </div>
-</div>
 
-  <div>
+
+  <div class = "searchBar">
     <input id="search-input" class="controls" type="text" placeholder="Search Box">
 
     <select v-model="filterChosen" v-on:change="filterProperties">
@@ -24,10 +20,11 @@
     <button v-model="userLocation" @click="pinUserLocation" type="button" class="btn btn-info btn-circle" id="addPin">+</button>
     <span>{{ searchingForUser }}</span>
 
-
-    <div class="property-map" id="mapId">
-    </div>
   </div>
+
+  <div class="property-map" id="mapId">
+  </div>
+
 </div>
 </div>
 </template>
@@ -327,6 +324,15 @@ export default {
 
 
 <style scoped>
+.mapPage{
+  margin-top: 10%;
+}
+
+.searchBar{
+  margin-left:10%;
+  margin-right:10%;
+  text-align: center;
+}
 
 .property-map {
   width: 600px;
