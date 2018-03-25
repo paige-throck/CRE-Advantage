@@ -7,9 +7,10 @@
     </div>
   </div>
 
-
-  <Nav></Nav>
-
+<div class = "row">
+  <div class = "col-sm-2">
+  </div>
+  <div class = "taskContainer col-sm-10">
   <span class="pull-right">
 <button class="btn btn-danger" v-on:click="clearList($event)"><span
 ></span>Clear Tasks</button>
@@ -105,7 +106,12 @@ v-on:click="deleteTask($event, task.id)"></span></button>
     </ul>
   </div>
 
+</div>
 
+<div class = "col-sm-1">
+</div>
+
+</div>
 </div>
 </template>
 
@@ -267,8 +273,8 @@ export default {
 </script>
 
 <style scoped>
-/* .tasks {
-  margin: 5%;
+/* .taskContainer{
+  margin-left: 1%;
 } */
 
 .form-tasks {

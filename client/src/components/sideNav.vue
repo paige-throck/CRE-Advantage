@@ -2,7 +2,20 @@
 <div class="sideNav">
 
   <div class = "row row2">
+
+      <br></br>
+      <br></br>
+    <div class = "icons">
+    <i class="material-icons" style="font-size:10vh">add_location</i>
+    <i class="material-icons" style="font-size:10vh">location_city</i>
+    <i class="material-icons" style="font-size:10vh">account_box</i>
+    <i class="material-icons" style="font-size:10vh">satellite</i>
+    <i class="material-icons" style="font-size:10vh">close</i>
+    <i class="material-icons"style="font-size:10vh">home</i>
+</div>
   </div>
+
+
   <div class="row row1">
     <div class="col-md-12">
       <h1>CRE <span class="advantage">Advantage</span></h1>
@@ -49,7 +62,12 @@ export default {
   margin: 0;
   position: fixed;
   z-index:1;
+
 }
+
+/* .icons{
+  position: relative;
+} */
 
 h1 {
   font-family: 'Fira Sans Condensed', sans-serif;
