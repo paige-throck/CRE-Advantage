@@ -7,30 +7,53 @@
     </div>
   </div>
 
-  <div class="col">
+  <div class="row mainContent">
+    <div class="col-md-2"></div>
+    <div class="col-md-10">
 
-    <form @submit.prevent="searchProperties">
-      <input type="text" v-model="search" placeholder="Search Properties..." id="searchBox">
-      <button type="submit" class="btn btn-info">Search</button>
-    </form>
 
-    <button type="submit" class="btn btn-info" @click="revertProperties">All Properties</button>
 
-    <div class="card card-body">
-      <ul class="list-group" v-for="(property, index) in properties[0]">
-        <li class="list-group-item clearfix">
+      <div class="row">
+        <div class="col-md-7">
+          <form @submit.prevent="searchProperties">
+            <input type="text" v-model="search" placeholder="Search Properties..." id="searchBox">
+            <button type="submit" class="btn btn-info" title="Search">Search</button>
+            <i class="material-icons btn" title="All Properties" @click="revertProperties">replay</i>
+          </form>
+        </div>
+
+
+
+
+        <div class="col-md-5">
+          <label for="filterProperties">Property Type</label>
+          <select v-model="filterChosen" v-on:change="filterProperties" id="filterProperties">
+          <option value="" deselected selected>Filter Properties...</option>
+          <option>All Properties</option>
+          <option>Office</option>
+          <option>Retail</option>
+          <option>Industrial</option>
+        </select>
+        </div>
+
+      </div>
+
+
+
+
+
+      <div class="card card-body">
+        <ul class="list-group" v-for="(property, index) in properties[0]">
           <router-link :to="{name: 'Property', params: {id: property.id}}">
-            <p class="lead">{{ property.address }}</p>
+            <li class="list-group-item clearfix">
+              <p class="lead">{{ property.address }}</p>
+            </li>
           </router-link>
-          <div>
-
-          </div>
-        </li>
-      </ul>
+        </ul>
 
 
+      </div>
     </div>
-
   </div>
 </div>
 </template>
@@ -49,7 +72,8 @@ export default {
     return {
       properties: [],
       originalProperties: [],
-      search: ''
+      search: '',
+      filterChosen: ''
     }
   },
   mounted: function() {
@@ -57,9 +81,9 @@ export default {
     this.checkSession()
   },
   methods: {
-    checkSession: function(){
+    checkSession: function() {
       let self = this;
-      if (!localStorage.sessionData){
+      if (!localStorage.sessionData) {
         console.log("is it getting in here");
         self.$router.push('/login')
       }
@@ -78,44 +102,92 @@ export default {
       let self = this
       let searchArr = []
       self.properties[0].forEach(function(property) {
-        console.log(property, 'PROPERTYYYYYYY');
-          if (property.address.includes(self.search)) {
-              self.properties = []
-              searchArr.push(property)
-              self.properties.push(searchArr)
-              console.log('WHATWHATWHATWHAT');
-            }
+
+        if (property.address.includes(self.search)) {
+          self.properties = []
+          searchArr.push(property)
+          self.properties.push(searchArr)
+        }
 
 
-          })
-          console.log(self.properties, 'PROPASLDFKJAS;LFKJASF;LKJ');
-      },
-      revertProperties() {
-        let self = this
+      })
+    },
+    filterProperties: function() {
+      let self = this
+      let filterArr = []
 
+      // reset properties on filter change so it filters all properties and not the previously filtered
+      self.revertProperties()
+
+      self.properties[0].forEach(function(property) {
+        if (property.prop_type == self.filterChosen ) {
+          self.properties = []
+          filterArr.push(property)
+          self.properties.push(filterArr)
+        }
+
+        if (self.filterChosen == "All Properties") {
+          self.revertProperties()
+        }
+      })
+      // if no properties equal the filter value then return nothing
+      if (filterArr.length == 0) {
         self.properties = []
-        self.properties.push(self.originalProperties[0])
-        self.search = ''
       }
     },
-    // computed: {
-    //   filteredProperties: function () {
-    //     let self = this
-    //
-    //     return self.properties.filter(function (property) {
-    //       console.log(property, 'PROPETY IN COMPUTED');
-    //       return property.forEach(function(property) {
-    //         console.log(property, 'PROPERTY IN THE FOREACH');
-    //       return property.address.match(self.search)
-    //       })
-    //
-    //     })
-    //   }
-    // }
+    revertProperties() {
+      let self = this
 
-  }
+      self.properties = []
+      self.properties.push(self.originalProperties[0])
+      self.search = ''
+    }
+  },
+}
 </script>
 
 <style scoped>
+
+.mainContent {
+  padding: 10% 10% 10% 0;
+  background: linear-gradient(to right, whitesmoke, #ffffff);
+}
+.card {
+  width: 90%;
+}
+
+
+li:hover {
+
+  box-shadow: 0px .5px .25px dimgrey;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+input {
+  width: 70%;
+  height: 4vh;
+  padding: 2%;
+  margin-right: 2%;
+  border-radius: 2%;
+  border: 1px solid gainsboro;
+}
+
+label {
+  font-weight: 500;
+
+}
+select {
+  height: 4.5vh;
+  width: 70%;
+  margin-left: 3%;
+  margin-bottom: 15%;
+}
+
+
+
+
 
 </style>

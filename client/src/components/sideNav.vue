@@ -1,41 +1,60 @@
 <template>
 <div class="sideNav">
 
-  <div class = "row row2">
+<!-- notifications -->
+  <i class="material-icons notifyBell" @click="showNotifications = !showNotifications">notifications_none</i>
+
+  <div class="notififyBox" id="taskList" v-if="showNotifications">
+          <ProTasks></ProTasks>
+  </div>
+<!--    -->
+
+  <div class="row row2">
   </div>
   <div class="row row1">
     <div class="col-md-12">
       <h1>CRE <span class="advantage">Advantage</span></h1>
+      <p class="theDate">{{ today }}</p>
     </div>
 
-</div>
+  </div>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
+import ProTasks from './profileTasks.vue'
 
 
 export default {
   name: 'sideNav',
+  components: {
+    ProTasks
+  },
   data() {
     return {
-
+      today: '',
+      showNotifications: false
     }
+  },
+  mounted: function() {
+    let date = new Date()
+    this.today = moment(date).format("dddd, MMM DD");
+
   }
 }
 </script>
 
 <style scoped>
-
 .row1 {
   height: 10%;
   background-color: black;
-  position: relative;
+  position: fixed;
   top: 0;
   width: 100%;
   margin: 0;
-  z-index: 2;
+  z-index: 200;
 
 }
 
@@ -48,7 +67,7 @@ export default {
   width: 10%;
   margin: 0;
   position: fixed;
-  z-index:1;
+  z-index: 100;
 }
 
 h1 {
@@ -57,9 +76,37 @@ h1 {
   font-weight: 300;
   font-size: 100;
 }
+
 .advantage {
   font-weight: 200;
   font-style: italic;
+}
+.theDate {
+  position: fixed;
+  top: 3%;
+  right: 12%;
+  color: white;
+  font-size: 3vh;
+  font-weight: 200;
+}
+.notififyBox {
+  position: fixed;
+  top: 12%;
+  right: 4%;
+  width: 30%;
+  z-index: 100;
+}
+.notifyBell {
+  position: fixed;
+  top: 2%;
+  right: 6%;
+  font-size: 5vh;
+  color: gainsboro;
+  z-index: 300;
+}
+.notifyBell:hover {
+  color: #73BEDB;
+  cursor: pointer;
 }
 
 </style>
