@@ -8,9 +8,6 @@
     <div class="card card-body">
       <div class="col-sm-12">
 
-
-
-
         <!-- Clear Button -->
         <div class="row">
           <div class="col-sm-2">
@@ -292,6 +289,7 @@ export default {
   margin-left: 15%;
   margin-right: 5%;
   padding-top: 8%;
+  
 }
 
 .form-tasks {

@@ -2,7 +2,7 @@
 <div class="profile">
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-12">
       <headerTopper></headerTopper>
     </div>
   </div>

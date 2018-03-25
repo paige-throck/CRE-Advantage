@@ -5,50 +5,49 @@
 
   <div class = "userContainer">
     <div class="row" v-for="person in userArr[0]">
-<div class = "col-sm-12">
 
 
-      <div class="row">
+<!-- Button Navbar -->
+      <div class="row buttonRow">
 
 
-        <p><label>Name:</label> {{person.name}}</p>
-        <p><label>Email:</label> {{person.email}}</p>
-        <p><label>Current City:</label> {{person.city}}</p>
-      </div>
+      <div class = "col-sm-1">
+        <button v-on:click="indexEmail = !indexEmail" type="button" class="btn btn-info">Update Email</button>
       </div>
 
+      <div class = "col-sm-1">
+      </div>
 
+      <div class ="col-sm-1">
+        <button type="button" class="btn btn-info" v-on:click="indexPassword = !indexPassword">Update Password</button>
+      </div>
 
+      <div class = "col-sm-1">
+      </div>
 
-    <div class="row text-center buttonRow">
-      <div class="col-md-1"></div>
-        <div class="col-md-10">
-          <div class="btn-group" role="group" aria-label="User Nav">
-
-      <button v-on:click="indexEmail = !indexEmail" type="button" class="btn btn-light">Update Email</button>
-
-
-      <button type="button" class="btn btn-light" v-on:click="indexPassword = !indexPassword">Update Password</button>
-
-      <button type="button" class="btn btn-light" v-on:click="indexInfo = !indexInfo">Update Info</button>
-
+      <div class = "col-sm-1">
+        <button type="button" class="btn btn-info" v-on:click="indexInfo = !indexInfo">Update Info</button>
+      </div>
+      <div class = "col-sm-1">
       </div>
     </div>
-  </div>
+
+
+<div class = "row userInfoList">
+  <div class = "col-sm-4">
+        <h3><label>Name:</label> {{person.name}}</h3>
+        <h3><label>Email:</label> {{person.email}}</h3>
+        <h3><label>Current City:</label> {{person.city}}</h3>
+</div>
+
 
       <!-- Edit Email Form -->
-      <div class="row" >
-        <div class="col-md-3"></div>
+<div class = "col-sm-8">
 
-        <div class="col-md-6 container-box">
-          <div class="col">
+        <div class="col-sm-12 container-box">
             <div id="update-email">
-
-
-              <div class="row">
-                <div class="col-md-3"></div>
-
-                <div class="col-md-6 " v-if="indexEmail">
+              <div class = "row">
+                <div class="col-sm-12 " v-if="indexEmail">
                   <form @submit.prevent="updateEmail">
                     <h3 class="update-account-header">Update Email</h3>
 
@@ -56,56 +55,56 @@
                       <input type="email" v-model="newEmail.email" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
                     </div>
 
-                    <button type="submit" class="btn btn-lg btn-primary btn-block">Update Email</button>
+                    <button type="submit" class="btn btn btn-info">Update Email</button>
                   </form>
                 </div>
               </div>
             </div>
-
-            <div class="row-md-3"></div>
           </div>
 
-        </div>
-      </div>
+
 
 
       <!-- Update Password -->
-      <div class="row" v-if="indexPassword">
-        <div class="col-md-3"></div>
-
-        <div class="col-md-6 container-box">
-          <form id="update-password" @submit.prevent="updatePassword">
-
+      <div class="col-sm-12 container-box">
+          <div id="update-password">
+            <div class = "row">
+              <div class="col-sm-12 " v-if="indexPassword">
+          <form  @submit.prevent="updatePassword">
             <h3 class="update-account-header">Update Password</h3>
 
+            <div class = "form-group">
             <input type="password" v-model="newPassword.oldPassword" id="oldPassword" class="form-control" placeholder="Current Password" required autofocus>
-            <br></br>
+          </div>
 
+          <div class = "form-group">
             <input type="password" v-model="newPassword.newPassword" id="newPassword" class="form-control" placeholder="New Password" required autofocus>
+          </div>
 
-            <br></br>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
+            <button class="btn btn-info" type="submit">Update Info</button>
           </form>
         </div>
-
-        <div class="row-md-3"></div>
       </div>
-
     </div>
+  </div>
+
+
 
     <!-- Info Form -->
-    <div class="row" v-if="indexInfo">
-      <div class="col-md-3"></div>
+    <div class="col-sm-12 container-box">
+        <div id="update-info">
+          <div class = "row">
+            <div class="col-sm-12 " v-if="indexInfo">
 
-      <div class="col-md-6 container-box">
-        <form id="update-info" @submit.prevent="updateInfo">
+        <form @submit.prevent="updateInfo">
 
           <h3 class="update-account-header">Update Name and City</h3>
 
+          <div class = "form-group">
           <input type="text" v-model="newInfo.name" placeholder="Enter a New Name" id="inputName" class="form-control" required autofocus>
+        </div>
 
-          <br></br>
-
+          <div class = "form-group">
           <div class="row">
             <div class="col-sm-6">
               <label for="inputCity" class="sr-only">City</label>
@@ -169,14 +168,16 @@
   </select>
             </div>
           </div>
-
-          <br></br>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Update Info</button>
+        </div>
+          <button class="btn btn btn-info" type="submit">Update Info</button>
         </form>
       </div>
-
-      <div class="row-md-3"></div>
     </div>
+  </div>
+  </div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </template>
@@ -298,42 +299,39 @@ export default {
 
 <style scoped>
 
+.userInfoList{
+  margin-top: 5%;
+  margin-left: 15%;
+}
+
 .update-user{
-  background-color: gainsboro;
   height: 100vh;
 }
+
 .userContainer{
-    margin-left: 15%;
+    margin-left: 5%;
     margin-right: 5%;
+    /* margin-top: 5%; */
     padding-top: 8%;
 
 }
 
 .buttonRow {
   width: 100%;
-  position: fixed;
-  top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  /* margin-top: 10%; */
-  background: whitesmoke;
-  border-bottom: 1px solid gainsboro;
-}
-.btn-group>.btn {
-  margin-left: auto;
-  margin-right: auto;
-  width: 16vh;
-  background: whitesmoke;
-  color: #136a8a;
-}
-
-.btn-group>.btn:hover {
-  background: linear-gradient(to right, whitesmoke, #ffffff);
+  margin-top: 2%;
+  margin-left: 10%;
 
 }
-.btn-group > .btn:focus,
-.btn-group > .butn:active {
-  outline: none !important;
-  background: white;
+
+.btn{
+  font-size: 2vh;
 }
+
+
+form{
+  border:1px solid gainsboro;
+  padding: 2%;
+  border-radius:2%;
+}
+
 </style>

@@ -51,7 +51,7 @@
 
 
   <div class="row row1">
-    <div class="col-md-12">
+    <div class="col-sm-12">
       <h1>CRE <span class="advantage">Advantage</span></h1>
       <p class="theDate">{{ today }}</p>
     </div>

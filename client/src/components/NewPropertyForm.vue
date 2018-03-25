@@ -2,11 +2,11 @@
 <div class="propForm">
   <form @submit.prevent="addNewProperty">
     <div class="form-row">
-      <div class="form-group col-md-8">
+      <div class="form-group col-sm-8">
         <label for="prop-owner">Property Owner</label>
         <input type="text" class="form-control" id="prop-owner" v-model="newPropInfo.prop_owner">
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-sm-4">
         <label for="prop-type">Property Type</label>
         <select id="prop-type" class="form-control" v-model="newPropInfo.prop_type">
 
@@ -20,37 +20,37 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-sm-4">
         <label for="prop-size">Property Size</label>
         <input type="text" class="form-control" id="prop-size" v-model="newPropInfo.prop_size">
 
 
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-sm-4">
         <label for="prop-range">Property Range</label>
         <input type="text" class="form-control" id="prop-range" v-model="newPropInfo.prop_range">
 
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-sm-4">
         <label for="num-suites">Number of Suites</label>
         <input type="text" class="form-control" id="suite-num" v-model="newPropInfo.num_suites">
 
 
       </div>
     </div>
-    <div class="form-group col-md-12">
+    <div class="form-group col-sm-12">
       <label for="propStreetAddress">Street Address</label>
       <input type="text" class="form-control" id="propStreetAddress" v-model="newPropInfo.streetAddress">
 
 
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-sm-6">
         <label for="propCity">City</label>
         <input type="text" class="form-control" id="propCity" v-model="newPropInfo.city">
 
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-sm-4">
         <label for="prop-state">State</label>
 
         <select id="prop-state" class="form-control" v-model="newPropInfo.state">
@@ -62,14 +62,14 @@
           </option>
         </select>
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-sm-2">
         <label for="propZip">Zip</label>
         <input type="text" class="form-control" id="propZip" v-model="newPropInfo.zip">
 
 
       </div>
     </div>
-    <div class="form-group col-md-12">
+    <div class="form-group col-sm-12">
       <div class="form-check text-center">
         <input class="form-check-input" type="checkbox" id="prospective-prop" v-model="newPropInfo.prospective_prop">
 
