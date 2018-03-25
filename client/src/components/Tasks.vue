@@ -2,8 +2,10 @@
 <div class="tasks">
 
   <sideNav></sideNav>
-    <!-- <Nav></Nav> -->
+
+
 <div class = "row tasksContainer">
+  <div class="card card-body">
 <div class = "col-sm-12">
 
 
@@ -41,22 +43,31 @@
         </form>
 </div>
 </div>
-        <!-- Tasks List -->
-
-        <div class="row taskList">
-          <ul class="list-group" v-for="(task, index) in tasksArr[0][0]" v-model="tasksArr">
 
 
-            <li class="list-group-items clearfix task" v-bind:class="{complete:task.completed, notComplete: !task.completed}">
+  <!-- Tasks List -->
 
-              <div class="list-items">
-                <span class="pull-left">
+<div class="row taskList">
+<ul class="list-group" v-for="(task, index) in tasksArr[0][0]" v-model="tasksArr">
 
-      <div class="lead"><b>{{task.item}}</b></div>
-    </span>
-                <span class="pull-left">
-        <div class="lead">  &nbsp; {{ formatDate(task.task_date)}}</div>
-    </span>
+  <li v-bind:class="{completeColor:task.completed, notCompleteColor: !task.completed}" class="list-group-items clearfix task">
+
+    <div class="list-items">
+      <span class="pull-left">
+
+
+      <p>
+      <h4 class ="taskItem" v-bind:class="{complete:task.completed, notComplete: !task.completed}">{{task.item}}</h4>
+    </p>
+
+    <p>
+      <h5 v-bind:class="{complete:task.completed, notComplete: !task.completed}">  &nbsp;{{ formatDate(task.task_date)}}</h5>
+    </p>
+
+</span>
+
+
+
               </div>
               <div>
                 <span class="pull-right">
@@ -115,6 +126,7 @@ v-on:click="deleteTask($event, task.id)"></span></button>
     </div>
 
 
+</div>
 </div>
 </div>
 </div>
@@ -194,6 +206,7 @@ export default {
       axios.post(`http://localhost:8881/tasks/${id}`, this.newTask)
         .then(function() {
           self.newTask.item = ""
+          self.newTask.task_date = ""
           self.getTasks();
         }).catch(function(error) {
           console.log(error);
@@ -284,7 +297,7 @@ export default {
 <style scoped>
 .tasksContainer{
   margin-left:15%;
-  margin-right:10%;
+  margin-right:5%;
   padding-top: 8%;
 }
 
@@ -292,16 +305,37 @@ export default {
   margin-bottom: 2%;
 }
 
+.taskList{
+  padding-top: 1%;
+}
+
+.card {
+  width: 90%;
+}
+
 ul {
   list-style: none;
 }
 
 .complete {
-  background-color: gainsboro;
+  text-decoration: line-through;
 }
 
-.notComplete {
+
+/* .notComplete {
   background-color: white;
+
+} */
+
+.completeColor {
+  background-color: gainsboro;
+
+}
+
+
+.notCompleteColor {
+  background-color: white;
+
 }
 
 .list-group-true {
@@ -309,23 +343,4 @@ ul {
   border-radius: 5px;
 }
 
-/* #edit-task {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -37.5%;
-  margin-left: -37.5%;
-  width: 75%;
-  height: 75%;
-  background-color: grey;
-  z-index: 10;
-}
-
-.edit-task-form {
-  position: fixed;
-  top: 25%;
-  left: 25%;
-
-  background-color: blue;
-} */
 </style>
