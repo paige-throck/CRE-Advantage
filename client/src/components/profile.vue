@@ -7,7 +7,7 @@
     </div>
   </div>
 
-<i class="material-icons notifyBell" @click="showNotifications = !showNotifications">notifications_none</i>
+<i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
 
 <div class="notififyBox" id="taskList" v-if="showNotifications">
         <ProTasks></ProTasks>
@@ -24,7 +24,7 @@
     <p>New Property</p>
   </div>
 
-<br></br>
+
 
 <router-link to="/tasks"><div class = "row gridBox">
 <i class="material-icons" style="font-size:10vh">event_note</i>
@@ -34,14 +34,14 @@
 
 
 <div class = "col-sm-4">
-<router-link to="/allprop"><div class = "row gridBox">
+<router-link to="/properties"><div class = "row gridBox">
   <i class="material-icons" style="font-size:10vh">location_city</i>
 <p>Properties</p>
 </div></router-link>
 
-<br></br>
 
-<router-link to="/update-account"><div class = "row gridBox">
+
+<router-link to="/account-settings"><div class = "row gridBox">
 <i class="material-icons" style="font-size:10vh">account_box</i>
 <p>Account Settings</p>
 </div></router-link>
@@ -55,7 +55,7 @@
 <p>Map</p>
 </div></router-link>
 
-<br></br>
+
 
 <router-link to="/login"><div class = "row gridBox" v-on:click="logout">
 <i class="material-icons" style="font-size:10vh">close</i>
@@ -179,6 +179,7 @@ a:hover {
   font-size: 5vh;
   color: gainsboro;
   z-index: 1;
+  padding-top: 1%;
 }
 .notifyBell:hover {
   color: #73BEDB;

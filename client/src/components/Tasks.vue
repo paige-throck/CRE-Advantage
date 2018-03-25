@@ -5,21 +5,21 @@
     <!-- <Nav></Nav> -->
 <div class = "row tasksContainer">
 <div class = "col-sm-12">
-<br></br>
-<br></br>
+
+
+
+
 <!-- Clear Button -->
-<div class = "row clearButton">
-<div class = "col-sm-10">
-</div>
+<div class = "row">
 <div class = "col-sm-2">
 <button class="btn btn-danger" v-on:click="clearList($event)">Clear Tasks</button>
 </span>
 </div>
-</div>
+
 
 <!--  New Task Form-->
-  <div class ="row">
-<div class = "col-sm-12">
+
+<div class = "col-sm-10">
         <form class="form-tasks" @submit.prevent="addTask">
           <div class="row">
 
@@ -285,6 +285,7 @@ export default {
 .tasksContainer{
   margin-left:15%;
   margin-right:10%;
+  padding-top: 8%;
 }
 
 .form-tasks {
@@ -308,7 +309,7 @@ ul {
   border-radius: 5px;
 }
 
-#edit-task {
+/* #edit-task {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -326,5 +327,5 @@ ul {
   left: 25%;
 
   background-color: blue;
-}
+} */
 </style>
