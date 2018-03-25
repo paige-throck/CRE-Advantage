@@ -1,7 +1,18 @@
 <template>
 
 <div class="newSuiteForm">
+
+
+
+    <h3>Add Suite</h3>
+
 <form @submit.prevent="addNewSuite" id="newSuiteForm">
+
+    <div class="form-row newSuiteClose" >
+      <div class="glyphicon glyphicon-remove btn" @click="closeNewSuiteForm"></div>
+    </div>
+
+
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="suite-num">Suite Number</label>
@@ -64,6 +75,9 @@ export default {
     addNewSuite: function() {
       this.$emit('addNewSuite', this.newSuiteInfo)
     },
+    closeNewSuiteForm: function() {
+      this.$emit('closeNewSuiteForm')
+    }
   }
 }
 
@@ -76,10 +90,22 @@ export default {
 form {
   width: 85%;
   margin-top: 5%;
+  border: 1px solid gainsboro;
+  border-radius: 2%;
 }
 
 button {
   margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.newSuiteClose {
+  width: 100%;
+  text-align: right;
+  margin-bottom:4%;
+}
+.newSuiteClose > div:hover {
+  color: #73BEDB;
 }
 
 
