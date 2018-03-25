@@ -3,20 +3,25 @@
 
   <!-- <Nav v-on:getPropertyData="updateProperties($event)"></Nav> -->
 
-  <div class="row">
+  <div class="row nav">
     <div class="col-md-12">
       <sideNav></sideNav>
     </div>
+  </div>
+
+  <div class="notififyBox" id="taskList" v-if="showNotifications">
+          <ProTasks></ProTasks>
   </div>
 
 
   <!-- ============= nav buttons =====================-->
 
   <div class="row text-center buttonRow">
-    <div class="col-md-12">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
       <div class="btn-group" role="group" aria-label="Property Nav">
 
-        <button type="button" class="btn btn-light" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">
+        <button type="button" class="btn btn-light" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites" @click="showSuites = !showSuites">
           <i class="material-icons md-48">view_module</i>
           <p>Suites</p>
         </button>
@@ -59,19 +64,22 @@
 
   <!-- ============= left map column =====================-->
 
-  <div class="row">
-    <div class="col-sm-3 text-left mapColumn">
+  <div class="row mainContent">
+    <div class="col-md-1"></div>
+    <div class="col-md-3 text-left mapColumn">
 
       <SmallMap :property="property" class="centerMap"></SmallMap>
 
       <h3>{{ propStreetAddress }}</h3>
       <h3> {{ propCity}}, {{ propState}} {{ propZip }}</h3>
+      <div class="propInfo">
       <p><span class="propHeader">Property Owner:</span> {{ property[0].prop_owner}}</p>
       <p><span class="propHeader">Property Size:</span> {{ property[0].prop_size}}</p>
       <p><span class="propHeader">Type:</span> {{ property[0].prop_type}}</p>
       <p><span class="propHeader">Suites:</span> {{ property[0].num_suites}}</p>
     </div>
-    <div class="col-sm-8 rightCol">
+  </div>
+    <div class="col-md-8 rightCol">
 
 
 
@@ -110,13 +118,13 @@
       <div class="row">
 
         <div class="col">
-          <div class="collapse multi-collapse text-left" id="suites">
+          <div class=" text-left"  v-if="showSuites">
 
             <!-- <button class="btn btn-primary" @click="showNewSuiteForm = !showNewSuiteForm" type="button">New Suite</button> -->
 
 
 
-            <div class="card card-body">
+            <div class="card card-body suiteTable">
 
               <!-- <div v-for="(suite, index) in suites[0]"> -->
               <table class="table">
@@ -414,6 +422,8 @@ import NewSuiteForm from './NewSuiteForm.vue'
 import NewPropertyForm from './NewPropertyForm.vue'
 import headerTopper from './headerTopper'
 import sideNav from './sideNav.vue'
+import ProTasks from './profileTasks.vue'
+
 
 
 export default {
@@ -425,6 +435,7 @@ export default {
     'NewPropertyForm': NewPropertyForm,
     'headerTopper': headerTopper,
     'sideNav': sideNav,
+    'ProTasks': ProTasks
   },
   data() {
     return {
@@ -473,7 +484,9 @@ export default {
       showNewPropertyForm: false,
       showEditPropertyForm: false,
       suiteHovered: false,
-      activeSuiteIndex: ''
+      activeSuiteIndex: '',
+      showNotifications: false,
+      showSuites: false
 
     }
   },
@@ -664,6 +677,7 @@ export default {
       this.activeSuiteItem = []
       this.activeSuiteItem.push(this.suites[0][indexClicked])
       this.showEditSuiteForm = !this.showEditSuiteForm
+      this.showSuites = !this.showSuites
     },
     editSuite: function() {
       let self = this
@@ -761,19 +775,39 @@ export default {
 
 
 <style scoped>
+
+.notififyBox {
+  position: fixed;
+  top: 12%;
+  right: 4%;
+  width: 30%;
+  z-index: 100;
+}
+
 .property {
-  background-color: white;
+  margin: 0;
+  /* background: linear-gradient(to right, whitesmoke, #ffffff); */
+}
+
+/* ============ secondary button nav =================*/
+.buttonRow {
+  width: 100%;
+  position: fixed;
+  top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: 10%; */
+  background: whitesmoke;
+  border-bottom: 1px solid gainsboro;
 }
 
 .btn-group>.btn {
   margin-left: auto;
   margin-right: auto;
-  width: 150px;
+  width: 16vh;
   background: whitesmoke;
   color: #136a8a;
-  /* background: linear-gradient(to right, whitesmoke, #ffffff) */
 }
-
 
 .btn-group>.btn:hover {
   background: linear-gradient(to right, whitesmoke, #ffffff);
@@ -784,40 +818,77 @@ export default {
   outline: none !important;
   background: white;
 }
-.buttonRow {
-  background: whitesmoke;
-  border-bottom: 1px solid gainsboro;
+
+.mainContent {
+  margin-top: 12%;
 }
 
-
-.editInput {
-  background-color: lightyellow !important
-}
-
-.suiteEditFormMargin {
-  margin-top: 50px;
-}
-
+/* ============= map column styling ==================*/
 .mapColumn {
   padding: 2%;
   border-right: 1px solid gainsboro;
+  background: whitesmoke;
 }
 
-.mapColumn>h3 {
+.mapColumn > h3 {
   margin: 5% 5%;
+  line-height: .5em;
 }
 
-.mapColumn>p {
-  margin: 5% 5%;
+.centerMap {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5vh;
+}
+
+.propInfo {
+  margin: 10% 5%;
+}
+.propInfo > p {
+  margin: 0;
+  border-bottom: 1px solid gainsboro;
 }
 
 .propHeader {
   font-weight: 500;
 }
 
+
+/* ============ main content styling ===============*/
 .rightCol {
   padding-left: 3%;
-  /* background-color: darkgrey; */
+  background-color: white;
+}
+
+/* ======================= suites ====================*/
+.suiteTable {
+  width: 75%;
+  margin-top: 3%;
+  margin-left: 2%;
+}
+.thead-dark {
+  background-color: #136a8a;
+  color: white;
+}
+.rowHover {
+  height: 75px;
+}
+.rowHover:hover {
+  background-color: whitesmoke;
+  border-bottom: .50px dimgrey;
+}
+
+.suiteTable > table {
+  border: 1px solid gainsboro;
+}
+
+.suiteEditFormMargin {
+  margin-top: 50px;
+}
+
+.showSuiteButtons {
+  margin-left: 6vh;
+
 }
 
 .newPropFormMargin {
@@ -825,19 +896,11 @@ export default {
   margin-bottom: 5%;
 }
 
-.centerMap {
-  margin-left: auto;
-  margin-right: auto;
-}
-.rowHover {
-  height: 75px;
-}
-.rowHover:hover {
-  background-color: whitesmoke;
-}
-.showSuiteButtons {
-  margin-left: 4%;
 
+.editInput {
+  background-color: lightyellow !important
 }
+
+
 
 </style>

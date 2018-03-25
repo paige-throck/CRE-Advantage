@@ -2,14 +2,15 @@
 <div class="col proTasks">
 
     <div class = "row">
-    <ul class="list-group" v-for="protask in protasksArr" v-model="protasksArr">
+    <ul class="list-group" id="taskList" v-for="protask in protasksArr" v-model="protasksArr">
       <li class="list-group-items clearfix task">
-        <div class="lead"><b>{{protask.item}}</b>
-          
-          <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
-  v-on:click="proCompleteTask($event, protask.id)"></span></button>
 
-</div>
+          {{protask.item}}
+
+          <button class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-ok"
+            v-on:click="proCompleteTask($event, protask.id)"></span></button>
+
+
       </li>
     </ul>
 </div>
@@ -67,7 +68,6 @@ export default {
 
         })
     },
-
     proCompleteTask(event, taskId) {
       console.log('is this working??');
       console.log(taskId);
@@ -83,6 +83,13 @@ export default {
       }
     }
 }
+
+
+$("#taskList li").each(function(task) {
+  console.log('heyyyy');
+    $(this).delay(100 * task).fadeIn(500);
+});
+
 </script>
 
 
@@ -90,10 +97,41 @@ export default {
 
 <style scoped>
 .proTasks {
-  margin: 5%;
+  /* margin: 5%; */
+  /* width: 100%; */
 }
 
 ul {
   list-style: none;
+  margin-bottom: 3%;
 }
+
+.task {
+  background-color: lightgoldenrodyellow;
+  border-radius: 1%;
+  box-shadow: 0px 0.5px 3px #202020;
+  /* margin-bottom: 1%; */
+  padding: 2%;
+  animation-duration: .5s;
+  animation-name: fadein;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    width: 100%
+  }
+
+  to {
+    opacity: 100%;
+    width: 100%
+  }
+}
+.btn {
+  margin-left: 2%;
+}
+
+
+
+
 </style>

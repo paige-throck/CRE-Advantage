@@ -7,64 +7,63 @@
     </div>
   </div>
 
+<i class="material-icons notifyBell" @click="showNotifications = !showNotifications">notifications_none</i>
+
+<div class="notififyBox" id="taskList" v-if="showNotifications">
+        <ProTasks></ProTasks>
+</div>
 
 
-<br></br>
-<div class = "row">
-<div id="mainDash" class = "col-sm-10">
+
+<div class = "row mainRowPadding">
+<div id="mainDash" class = "col-sm-12">
 
 <div class = "col-sm-4">
-  <div class = "row">
-    <center><i class="material-icons" style="font-size:10vh">add_location</i></center>
-    <center>New Property</center>
+  <div class = "row gridBox">
+    <i class="material-icons" style="font-size:10vh">add_location</i>
+    <p>New Property</p>
   </div>
 
 <br></br>
 
-<router-link to="/tasks"><div class = "row">
-<center><i class="material-icons" style="font-size:10vh">event_note</i></center>
-<center>Tasks</center>
+<router-link to="/tasks"><div class = "row gridBox">
+<i class="material-icons" style="font-size:10vh">event_note</i>
+<p>Tasks</p>
 </div></router-link>
 </div>
 
 
 <div class = "col-sm-4">
-<router-link to="/allprop"><div class = "row">
-  <center><i class="material-icons" style="font-size:10vh">location_city</i></center>
-  <center>Properties</center>
+<router-link to="/allprop"><div class = "row gridBox">
+  <i class="material-icons" style="font-size:10vh">location_city</i>
+<p>Properties</p>
 </div></router-link>
 
 <br></br>
 
-<router-link to="/update-account"><div class = "row">
-<center><i class="material-icons" style="font-size:10vh">account_box</i></center>
-<center>Account Settings</center>
+<router-link to="/update-account"><div class = "row gridBox">
+<i class="material-icons" style="font-size:10vh">account_box</i>
+<p>Account Settings</p>
 </div></router-link>
 </div>
 
 
 
 <div class = "col-sm-4">
-  <router-link to="/map"><div class = "row">
-  <center><i class="material-icons" style="font-size:10vh">satellite</i></center>
-  <center>Map</center>
+  <router-link to="/map"><div class = "row gridBox">
+<i class="material-icons" style="font-size:10vh">satellite</i>
+<p>Map</p>
 </div></router-link>
 
 <br></br>
 
-<router-link to="/login"><div class = "row" v-on:click="logout">
-<center><i class="material-icons" style="font-size:10vh">close</i></center>
-  <center>Logout</center>
+<router-link to="/login"><div class = "row gridBox" v-on:click="logout">
+<i class="material-icons" style="font-size:10vh">close</i>
+<p>Logout</p>
 </div></router-link>
 </div>
 
 </div>
-
-
-<div id="taskList" class = "col-sm-2">
-<ProTasks></ProTasks>
-</div>
-
 
 
 </div>
@@ -93,7 +92,8 @@ export default {
   },
   data() {
     return {
-      msg: window.localStorage.name
+      msg: window.localStorage.name,
+      showNotifications: false
     }
   },
   mounted: function() {
@@ -121,13 +121,19 @@ export default {
 
 
 <style scoped>
-
+.profile {
+  background: linear-gradient(to right, #136a8a, #267871);
+  height: 100%;
+  margin-bottom: 0;
+}
+.mainRowPadding {
+  padding: 12%;
+}
 .square{
   background-color: blue;
   background-image: url("../../img/apartment.png");
     width: 15vw;
     height: 15vw;
-
 }
 
 .squareMap{
@@ -136,6 +142,49 @@ export default {
     height: 15vw;
 
 }
+.gridBox {
+
+  background: white;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 25%;
+  padding-top: 20%;
+  text-align: center;
+  color: #136a8a;
+  border-radius: 1%;
+  box-shadow: 1px 1px 10px #202020;
+  display: block;
+}
+.gridBox:hover {
+  background: linear-gradient(to right, whitesmoke, #ffffff);
+  color: black;
+}
+p {
+  margin-top: 5%;
+}
+a:hover {
+  text-decoration: none;
+}
+.notififyBox {
+  position: fixed;
+  top: 12%;
+  right: 4%;
+  width: 30%;
+  z-index: 100;
+}
+.notifyBell {
+  position: fixed;
+  top: 2%;
+  right: 6%;
+  font-size: 5vh;
+  color: gainsboro;
+  z-index: 1;
+}
+.notifyBell:hover {
+  color: #73BEDB;
+  cursor: pointer;
+}
+
 
 /* .material-icons.md-100 { font-size: 100px; } */
 
