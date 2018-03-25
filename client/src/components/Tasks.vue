@@ -3,21 +3,23 @@
 
   <sideNav></sideNav>
     <!-- <Nav></Nav> -->
-<div class = "col-sm-1">
+<div class = "row tasksContainer">
+<div class = "col-sm-12">
+<br></br>
+<br></br>
+<!-- Clear Button -->
+<div class = "row clearButton">
+<div class = "col-sm-10">
 </div>
-    <div class="row">
-      <div class="col-sm-2">
-      </div>
-      <div class="taskContainer col-sm-10">
-        <span class="pull-right">
-<button class="btn btn-danger" v-on:click="clearList($event)"><span
-></span>Clear Tasks</button>
-        </span>
+<div class = "col-sm-2">
+<button class="btn btn-danger" v-on:click="clearList($event)">Clear Tasks</button>
+</span>
+</div>
+</div>
 
-        <br></br>
-
-
-        <!--  New Task Form-->
+<!--  New Task Form-->
+  <div class ="row">
+<div class = "col-sm-12">
         <form class="form-tasks" @submit.prevent="addTask">
           <div class="row">
 
@@ -37,7 +39,8 @@
             </div>
           </div>
         </form>
-
+</div>
+</div>
         <!-- Tasks List -->
 
         <div class="row taskList">
@@ -95,23 +98,25 @@ v-on:click="deleteTask($event, task.id)"></span></button>
                       </div>
 
                     </div>
-                    <div class="col-sm-2">
-                    </div>
+                    <!-- <div class="col-sm-2">
+                    </div> -->
                   </form>
                 </div>
               </div>
             </li>
           </ul>
-        </div>
 
-      </div>
 
-      <div class="col-sm-1">
+
+
+      <div class="col-sm-2">
       </div>
 
     </div>
 
 
+</div>
+</div>
 </div>
 </template>
 
@@ -277,9 +282,10 @@ export default {
 </script>
 
 <style scoped>
-/* .taskContainer{
-  margin-left: 1%;
-} */
+.tasksContainer{
+  margin-left:15%;
+  margin-right:10%;
+}
 
 .form-tasks {
   margin-bottom: 2%;
