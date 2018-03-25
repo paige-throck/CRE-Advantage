@@ -24,12 +24,12 @@
 
 
     <div class="row">
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#update-email" aria-expanded="false" aria-controls="update-email">Update Email</button>
+      <button v-on:click="indexEmail = !indexEmail" class="btn btn-primary" type="button">Update Email</button>
 
 
-      <button class="btn btn-primary" type="submit" data-toggle="collapse" href="#update-password" role="button" aria-expanded="false" aria-controls="password">Update Password</button>
+      <button class="btn btn-primary" v-on:click="indexPassword = !indexPassword">Update Password</button>
 
-      <button type="submit" class="btn btn-primary" data-toggle="collapse" href="#update-info" role="button" aria-expanded="false" aria-controls="info">Update Info</button>
+      <button type="submit" class="btn btn-primary" v-on:click="indexInfo = !indexInfo">Update Info</button>
 
     </div>
     <div class = "col-sm-2">
@@ -37,18 +37,18 @@
     </div>
 
       <!-- Edit Email Form -->
-      <div class="row">
+      <div class="row" >
         <div class="col-md-3"></div>
 
         <div class="col-md-6 container-box">
           <div class="col">
-            <div class="collapse multi-collapse" id="update-email">
+            <div id="update-email">
 
 
               <div class="row">
                 <div class="col-md-3"></div>
 
-                <div class="col-md-6 ">
+                <div class="col-md-6 " v-if="indexEmail">
                   <form @submit.prevent="updateEmail">
                     <h3 class="update-account-header">Update Email</h3>
 
@@ -70,11 +70,11 @@
 
 
       <!-- Update Password -->
-      <div class="row">
+      <div class="row" v-if="indexPassword">
         <div class="col-md-3"></div>
 
         <div class="col-md-6 container-box">
-          <form class="collapse multi-collapse" id="update-password" @submit.prevent="updatePassword">
+          <form id="update-password" @submit.prevent="updatePassword">
 
             <h3 class="update-account-header">Update Password</h3>
 
@@ -94,11 +94,11 @@
     </div>
 
     <!-- Info Form -->
-    <div class="row">
+    <div class="row" v-if="indexInfo">
       <div class="col-md-3"></div>
 
       <div class="col-md-6 container-box">
-        <form class="collapse multi-collapse" id="update-info" @submit.prevent="updateInfo">
+        <form id="update-info" @submit.prevent="updateInfo">
 
           <h3 class="update-account-header">Update Name and City</h3>
 
@@ -209,8 +209,12 @@ export default {
         name: '',
         city: '',
         state: ''
-      }
+      },
+      indexEmail: false,
+      indexInfo: false,
+      indexPassword:false
     }
+
   },
 
   mounted: function() {
@@ -239,9 +243,11 @@ export default {
         });
     },
     updateEmail() {
-      console.log(this.newEmail, "new email being sent");
+
       let self = this;
       let id = window.localStorage.id;
+
+      self.indexEmail = false;
 
       axios.patch(`http://localhost:8881/profile/email/${id}`, this.newEmail)
         .then(function(results) {
@@ -254,9 +260,10 @@ export default {
     },
 
     updateInfo() {
-      console.log(this.newInfo);
       let self = this;
       let id = window.localStorage.id;
+
+      self.indexInfo = false;
 
       axios.put(`http://localhost:8881/profile/${id}/info`, this.newInfo)
         .then(function() {
@@ -271,8 +278,11 @@ export default {
     },
 
     updatePassword() {
+
       let self = this;
       let id = window.localStorage.id;
+
+      self.indexPassword = false;
 
       axios.put(`http://localhost:8881/profile/${id}/password`, this.newPassword)
         .then(function(response) {

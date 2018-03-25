@@ -1,6 +1,7 @@
 <template>
 <div class="sideNav">
 
+
 <!-- notifications -->
   <i class="material-icons notifyBell" @click="showNotifications = !showNotifications">notifications_none</i>
 
@@ -10,15 +11,43 @@
 <!--    -->
 
   <div class="row row2">
+
+  <!-- <div class="panel panel-default">
+  <div class="panel-body advantage"><h1>CRE Advantage</h1></div>
+  </div> -->
+
+    <div class ="row2">
+      <br></br>
+      <br></br>
+      <center><i class="material-icons"style="font-size:8vh">home</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">add_location</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">location_city</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">account_box</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">satellite</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">close</i></center>
+
+
   </div>
+
+
+
   <div class="row row1">
     <div class="col-md-12">
       <h1>CRE <span class="advantage">Advantage</span></h1>
       <p class="theDate">{{ today }}</p>
     </div>
 
+
   </div>
+
+
 </div>
+
 </template>
 
 <script>
@@ -62,13 +91,17 @@ export default {
   height: 100%;
   background-color: #136a8a;
   position: relative;
+  width: 15%;
+  z-index:1;
   top: 0;
   left: 0;
-  width: 10%;
-  margin: 0;
+  margin: auto;
   position: fixed;
+
   z-index: 100;
+
 }
+
 
 h1 {
   font-family: 'Fira Sans Condensed', sans-serif;

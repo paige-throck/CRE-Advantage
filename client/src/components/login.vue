@@ -16,7 +16,7 @@
 
 
       <form class="form-login" @submit.prevent="login">
-        <h2 class="form-login-heading text-center">Sign In</h2>
+        <h2 class="form-login-heading text-center">Login</h2>
 
         <div class="form-row">
           <div class="col-sm-12">
@@ -32,7 +32,7 @@
         </div>
 
         <div class="text-center">
-          <button class="btn btn-lg btn-info" type="submit">Sign in</button>
+          <button class="btn btn-lg btn-info" type="submit">Login</button>
         </div>
       </form>
 
