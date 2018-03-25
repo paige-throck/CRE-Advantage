@@ -3,7 +3,7 @@
 
 
 <!-- notifications -->
-  <i class="material-icons notifyBell" style="font-size:3vh" @click="showNotifications = !showNotifications">notifications_none</i>
+  <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
 
   <div class="notififyBox" id="taskList" v-if="showNotifications">
           <ProTasks></ProTasks>
@@ -40,7 +40,10 @@
     </router-link>
 
 
-    <center><i class="material-icons" style="font-size:8vh">close</i></center>
+    <router-link to="/login">
+    <center><i class="material-icons" v-on:click="logout" style="font-size:8vh">close</i></center>
+    <center><p>Logout</p></center>
+    </router-link>
 
 
   </div>
@@ -82,6 +85,12 @@ export default {
     let date = new Date()
     this.today = moment(date).format("dddd, MMM DD");
 
+  },
+  methods:{
+    logout: function() {
+      let self = this;
+      localStorage.clear();
+  },
   }
 }
 </script>
@@ -111,7 +120,12 @@ export default {
   z-index: 100;
 
 }
-
+a{
+  color: black;
+}
+.material-icons{
+  color: black;
+}
 
 h1 {
   font-family: 'Fira Sans Condensed', sans-serif;

@@ -1,40 +1,40 @@
 <template>
 <div class="update-user">
-  <!-- <Nav></Nav> -->
 
-  <div class="row">
-    <div class="col-md-12">
-      <sideNav></sideNav>
-    </div>
-  </div>
+<sideNav></sideNav>
 
-
-
+  <div class = "userContainer">
     <div class="row" v-for="person in userArr[0]">
+<div class = "col-sm-12">
+
 
       <div class="row">
-        <div class = "col-sm-2">
-        </div>
-        <div class = "col-sm-8">
+
+
         <p><label>Name:</label> {{person.name}}</p>
         <p><label>Email:</label> {{person.email}}</p>
         <p><label>Current City:</label> {{person.city}}</p>
+      </div>
+      </div>
 
 
 
 
-    <div class="row">
-      <button v-on:click="indexEmail = !indexEmail" class="btn btn-primary" type="button">Update Email</button>
+    <div class="row text-center buttonRow">
+      <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div class="btn-group" role="group" aria-label="User Nav">
+
+      <button v-on:click="indexEmail = !indexEmail" type="button" class="btn btn-light">Update Email</button>
 
 
-      <button class="btn btn-primary" v-on:click="indexPassword = !indexPassword">Update Password</button>
+      <button type="button" class="btn btn-light" v-on:click="indexPassword = !indexPassword">Update Password</button>
 
-      <button type="submit" class="btn btn-primary" v-on:click="indexInfo = !indexInfo">Update Info</button>
+      <button type="button" class="btn btn-light" v-on:click="indexInfo = !indexInfo">Update Info</button>
 
+      </div>
     </div>
-    <div class = "col-sm-2">
-    </div>
-    </div>
+  </div>
 
       <!-- Edit Email Form -->
       <div class="row" >
@@ -177,9 +177,6 @@
 
       <div class="row-md-3"></div>
     </div>
-
-</div>
-  </div>
 </div>
 </div>
 </template>
@@ -286,7 +283,6 @@ export default {
 
       axios.put(`http://localhost:8881/profile/${id}/password`, this.newPassword)
         .then(function(response) {
-          console.log(response, "nckadsbnfckwqjdanscjkdsm");
           localStorage.clear();
           self.$router.push('/login')
           // self.getUser();
@@ -301,12 +297,43 @@ export default {
 </script>
 
 <style scoped>
-/* .container-box {
-  margin-top: 9%;
-  padding: 3%;
-  border-radius: 1%;
-  background-color: white;
-  opacity: .96;
-  box-shadow: 2px 2px 8px black;
-} */
+
+.update-user{
+  background-color: gainsboro;
+  height: 100vh;
+}
+.userContainer{
+    margin-left: 15%;
+    margin-right: 5%;
+    padding-top: 8%;
+
+}
+
+.buttonRow {
+  width: 100%;
+  position: fixed;
+  top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: 10%; */
+  background: whitesmoke;
+  border-bottom: 1px solid gainsboro;
+}
+.btn-group>.btn {
+  margin-left: auto;
+  margin-right: auto;
+  width: 16vh;
+  background: whitesmoke;
+  color: #136a8a;
+}
+
+.btn-group>.btn:hover {
+  background: linear-gradient(to right, whitesmoke, #ffffff);
+
+}
+.btn-group > .btn:focus,
+.btn-group > .butn:active {
+  outline: none !important;
+  background: white;
+}
 </style>
