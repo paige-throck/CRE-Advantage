@@ -112,7 +112,7 @@
 
       <!-- ============= suites =====================-->
 
-      <NewSuiteForm v-if="showNewSuiteForm" id="newSuites" v-on:addNewSuite="addSuite($event)"></NewSuiteForm>
+      <NewSuiteForm v-if="showNewSuiteForm" id="newSuites" v-on:addNewSuite="addSuite($event)" v-on:closeNewSuiteForm="closeNewSuiteForm($event)"> </NewSuiteForm>
 
 
       <div class="row">
@@ -179,6 +179,11 @@
 
 
             <div class="card card-body suiteTable">
+              <h3>Suites   <div class="glyphicon glyphicon-remove btn form-row suitesClose pull-right" @click="closeSuites"></div></h3>
+
+
+
+
 
               <!-- <div v-for="(suite, index) in suites[0]"> -->
               <table class="table">
@@ -195,7 +200,7 @@
                 <tbody>
 
                   <tr v-for="(suite, index) in suites[0]" class="rowHover"
-                  v-on:mouseover="mouseover($event, suite.id)">
+                  v-on:mouseover="mouseover($event, suite.id)" v-on:mouseout="mouseout($event, suite.id)">
                     <th scope="row">{{ suite.suite_num}}</th>
                     <td>{{ suite.suite_size }}</td>
                     <td>{{ suite.tenant }}</td>
@@ -280,10 +285,10 @@
 
               <!-- :class="{active: index === activeItem}" -->
               <ul class="list-group" v-for="(note, index) in notes.content[0]">
-                <li class="list-group-item clearfix" v-on:mouseover="notesMouseover($event, index)">
-                  <p class="lead bg-info">{{ note }}</p>
-                  <div v-if="noteHovered && activeNote == index" class="noteCardButtons">
-                    <span class="pull-right">
+                <li class="list-group-item clearfix" v-on:mouseover="notesMouseover($event, index)" v-on:mouseout="notesMouseOut($event, index)">
+                  <p class="lead notecardsP">{{ note }}</p>
+                  <div  class="noteCardButtons">
+                    <span class="pull-right" v-if="noteHovered && activeNote == index">
                 <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
                   v-on:click="editNoteClick(index)"></span></button>
 
@@ -301,8 +306,7 @@
                     <div></div>
 
                     <span class="input-group-btn">
-                     <button class="btn btn-default" type="submit"><span
-                       class="glyphicon glyphicon-plus"></span>Save Changes</button>
+                     <button class="btn btn-info" type="submit">Save Changes</button>
                     </span>
                   </div>
                 </form>
@@ -751,6 +755,12 @@ export default {
           console.log(error, 'YOU HAVE AN ERROR POSTING A NEW SUITE');
         })
     },
+    closeNewSuiteForm: function () {
+      this.showNewSuiteForm = !this.showNewSuiteForm
+    },
+    closeSuites: function () {
+      this.showSuites = !this.showSuites
+    },
     deleteProperty: function() {
       let self = this
       let prop_id = this.property[0].id
@@ -778,10 +788,18 @@ export default {
       this.suiteHovered = !this.suiteHovered
 
     },
+    mouseout: function (event, index) {
+      this.activeSuiteIndex = -1
+      this.suiteHovered = !this.suiteHovered
+    },
     notesMouseover: function (event, noteIndex) {
       console.log(event, 'EVENT');
       this.noteHovered = !this.noteHovered
       this.activeNote = noteIndex
+    },
+    notesMouseOut: function (event, noteIndex) {
+      this.noteHovered = !this.noteHovered
+      this.activeNote = -1
     }
   },
   watch: {
@@ -893,6 +911,13 @@ export default {
   margin-top: 3%;
   margin-left: 2%;
 }
+.suiteTable > h3 {
+  margin-bottom: 4%;
+  width: 100%;
+}
+.suitesClose:hover {
+  color: #73BEDB;
+}
 .thead-dark {
   background-color: #136a8a;
   color: white;
@@ -934,9 +959,14 @@ export default {
   width: 80%;
   margin-left: 2%;
 }
-.noteCardButtons{
-
+.notecardsP {
+  width: 80%;
+  display: inline;
 }
+.noteCardButtons{
+  display: inline;
+}
+
 .noteCards > ul > li:hover {
   box-shadow: 0px .5px .25px dimgrey;
 }
@@ -949,7 +979,7 @@ export default {
 
 
 .editInput {
-  background-color: lightyellow !important
+  background-color: ivory !important
 }
 
 
