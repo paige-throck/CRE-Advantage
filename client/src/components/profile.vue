@@ -19,8 +19,9 @@
 <div id="mainDash" class = "col-sm-12">
 
 <div class = "col-sm-4">
+
   <div class = "row gridBox">
-    <i class="material-icons" style="font-size:10vh">add_location</i>
+    <router-link to="/new-property"><i class="material-icons" style="font-size:10vh">add_location</i></router-link>
     <p>New Property</p>
   </div>
 
