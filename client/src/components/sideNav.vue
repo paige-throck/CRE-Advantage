@@ -40,7 +40,7 @@
     </router-link>
 
 
-    <router-link to="/login">
+    <router-link to="/">
     <center><i class="material-icons" v-on:click="logout" style="font-size:8vh">close</i></center>
     <center><p>Logout</p></center>
     </router-link>

@@ -61,7 +61,7 @@
 <div class = "paddding">
 </div>
 
-<router-link to="/login"><div class = "row gridBox" v-on:click="logout">
+<router-link to="/"><div class = "row gridBox" v-on:click="logout">
 <i class="material-icons" style="font-size:10vh">close</i>
 <p>Logout</p>
 </div></router-link>
