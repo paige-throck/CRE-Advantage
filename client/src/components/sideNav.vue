@@ -8,7 +8,6 @@
   <div class="notififyBox" id="taskList" v-if="showNotifications">
           <ProTasks></ProTasks>
   </div>
-<!--    -->
 
 
     <div class ="row2">

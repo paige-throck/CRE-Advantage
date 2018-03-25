@@ -24,7 +24,8 @@
     <p>New Property</p>
   </div>
 
-
+<div class = "paddding">
+</div>
 
 <router-link to="/tasks"><div class = "row gridBox">
 <i class="material-icons" style="font-size:10vh">event_note</i>
@@ -40,6 +41,8 @@
 </div></router-link>
 
 
+<div class = "paddding">
+</div>
 
 <router-link to="/account-settings"><div class = "row gridBox">
 <i class="material-icons" style="font-size:10vh">account_box</i>
@@ -55,7 +58,8 @@
 <p>Map</p>
 </div></router-link>
 
-
+<div class = "paddding">
+</div>
 
 <router-link to="/login"><div class = "row gridBox" v-on:click="logout">
 <i class="material-icons" style="font-size:10vh">close</i>
@@ -128,6 +132,10 @@ export default {
 }
 .mainRowPadding {
   padding: 12%;
+}
+
+.paddding{
+  margin: 8%;
 }
 .square{
   background-color: blue;
