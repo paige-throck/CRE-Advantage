@@ -117,6 +117,60 @@
 
       <div class="row">
 
+
+
+        <!-- EDIT SUITE FORM -->
+
+
+        <div class="card card-body suiteEditFormMargin">
+
+          <form @submit.prevent="editSuite" v-if="showEditSuiteForm" id="editSuite">
+
+                <div class="form-row glyphicon glyphicon-remove btn editSuiteClose" @click="showEditSuiteForm = !showEditSuiteForm"></div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="suite-num">Suite Number</label>
+                <input type="text" class="form-control" id="suite-num" :placeholder="activeSuiteItem[0].suite_num" v-model="editedSuiteInfo.suite_num">
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="lease-date">Lease Date</label>
+                <input type="text" class="form-control" id="lease-date" :placeholder="activeSuiteItem[0].lease_date" v-model="editedSuiteInfo.lease_date">
+              </div>
+
+            </div>
+            <div class="form-group col-md-12">
+              <label for="tenant">Tenant</label>
+              <input type="text" class="form-control" id="tenant" :placeholder="activeSuiteItem[0].tenant" v-model="editedSuiteInfo.tenant">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="suite-size">Suite Size</label>
+                <input type="text" class="form-control" id="suite-size" :placeholder="activeSuiteItem[0].suite_size" v-model="editedSuiteInfo.suite_size">
+
+
+              </div>
+              <div class="form-group col-md-6">
+                <label for="rental-rate">Rental Rate</label>
+                <input type="text" class="form-control" id="rental-rate" :placeholder="activeSuiteItem[0].rental_rate" v-model="editedSuiteInfo.rental_rate">
+
+              </div>
+
+            </div>
+            <div class="text-center editSuiteButton">
+            <button type="submit" class="btn btn-info">Save Changes</button>
+          </div>
+          </form>
+        </div>
+
+
+
+
+
+<!-- ============= suites =====================-->
+
+
         <div class="col">
           <div class=" text-left"  v-if="showSuites">
 
@@ -168,45 +222,7 @@
 
 
 
-              <!-- EDIT SUITE FORM -->
 
-
-              <div class="card card-body suiteEditFormMargin">
-                <form @submit.prevent="editSuite" v-if="showEditSuiteForm" id="editSuite">
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="suite-num">Suite Number</label>
-                      <input type="text" class="form-control" id="suite-num" :placeholder="activeSuiteItem[0].suite_num" v-model="editedSuiteInfo.suite_num">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                      <label for="lease-date">Lease Date</label>
-                      <input type="text" class="form-control" id="lease-date" :placeholder="activeSuiteItem[0].lease_date" v-model="editedSuiteInfo.lease_date">
-                    </div>
-
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="tenant">Tenant</label>
-                    <input type="text" class="form-control" id="tenant" :placeholder="activeSuiteItem[0].tenant" v-model="editedSuiteInfo.tenant">
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="suite-size">Suite Size</label>
-                      <input type="text" class="form-control" id="suite-size" :placeholder="activeSuiteItem[0].suite_size" v-model="editedSuiteInfo.suite_size">
-
-
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="rental-rate">Rental Rate</label>
-                      <input type="text" class="form-control" id="rental-rate" :placeholder="activeSuiteItem[0].rental_rate" v-model="editedSuiteInfo.rental_rate">
-
-                    </div>
-
-                  </div>
-
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-              </div>
               <!-- </div>
             </div>
 
@@ -249,7 +265,7 @@
 
         <div class="col">
           <div class="collapse multi-collapse text-left" id="notes">
-            <div class="card card-body">
+            <div class="card card-body noteCards">
               <!-- <form class="form-tasks" @submit.prevent="addNote">
                 <div class="input-group">
                   <input type="text" class="form-control" v-model="newNote.content" placeholder="Add a note" required autofocus>
@@ -264,9 +280,9 @@
 
               <!-- :class="{active: index === activeItem}" -->
               <ul class="list-group" v-for="(note, index) in notes.content[0]">
-                <li class="list-group-item clearfix">
-                  <p class="lead">{{ note }}</p>
-                  <div>
+                <li class="list-group-item clearfix" v-on:mouseover="notesMouseover($event, index)">
+                  <p class="lead bg-info">{{ note }}</p>
+                  <div v-if="noteHovered && activeNote == index" class="noteCardButtons">
                     <span class="pull-right">
                 <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"
                   v-on:click="editNoteClick(index)"></span></button>
@@ -474,11 +490,11 @@ export default {
       activeSuiteItem: [],
       showEditSuiteForm: false,
       editedSuiteInfo: {
-        suite_num: '',
-        tenant: '',
-        lease_date: '',
-        suite_size: '',
-        rental_rate: ''
+        suite_num: "",
+        tenant: "",
+        lease_date: "",
+        suite_size: "",
+        rental_rate: ""
       },
       showNewSuiteForm: false,
       showNewPropertyForm: false,
@@ -486,7 +502,9 @@ export default {
       suiteHovered: false,
       activeSuiteIndex: '',
       showNotifications: false,
-      showSuites: false
+      showSuites: false,
+      activeNote: -1,
+      noteHovered: false
 
     }
   },
@@ -682,15 +700,19 @@ export default {
     editSuite: function() {
       let self = this
       let editedSuiteInfoKeys = Object.keys(self.editedSuiteInfo)
-      let suiteId = self.suites[0][self.activeSuiteItem].id
+      let suiteId = self.activeSuiteItem[0].id
       let editedSuiteData = {}
+
+      //hide edit suite form
+      self.showEditSuiteForm = !self.showEditSuiteForm
 
       // loop through edited suite info keys and add edited values to edited suite data
       for (let i = 0; i < editedSuiteInfoKeys.length; i++) {
-        if (self.editedSuiteInfo[editedSuiteInfoKeys[i]].length > 0) {
+
+        if (self.editedSuiteInfo[editedSuiteInfoKeys[i]] !== "") {
           editedSuiteData[editedSuiteInfoKeys[i]] = self.editedSuiteInfo[editedSuiteInfoKeys[i]]
         } else {
-          editedSuiteData[editedSuiteInfoKeys[i]] = self.suites[0][self.activeSuiteItem][editedSuiteInfoKeys[i]]
+          editedSuiteData[editedSuiteInfoKeys[i]] = self.activeSuiteItem[0][editedSuiteInfoKeys[i]]
         }
       }
       self.suites[0][self.activeSuiteItem] = editedSuiteData
@@ -755,6 +777,11 @@ export default {
       this.activeSuiteIndex = index
       this.suiteHovered = !this.suiteHovered
 
+    },
+    notesMouseover: function (event, noteIndex) {
+      console.log(event, 'EVENT');
+      this.noteHovered = !this.noteHovered
+      this.activeNote = noteIndex
     }
   },
   watch: {
@@ -877,23 +904,47 @@ export default {
   background-color: whitesmoke;
   border-bottom: .50px dimgrey;
 }
+.editSuiteClose {
+  width: 100%;
+  text-align: right;
+  margin-bottom:4%;
+}
+
+.editSuiteButton > button {
+  margin-top: 8%;
+}
 
 .suiteTable > table {
   border: 1px solid gainsboro;
 }
 
 .suiteEditFormMargin {
-  margin-top: 50px;
+  margin-top: 40px;
+  margin-left: 2%;
+  width: 80%;
 }
 
 .showSuiteButtons {
   margin-left: 6vh;
+}
 
+/* ======================= notes ====================*/
+
+.noteCards {
+  width: 80%;
+  margin-left: 2%;
+}
+.noteCardButtons{
+
+}
+.noteCards > ul > li:hover {
+  box-shadow: 0px .5px .25px dimgrey;
 }
 
 .newPropFormMargin {
   padding: 5% 3%;
   margin-bottom: 5%;
+  display: block;
 }
 
 
