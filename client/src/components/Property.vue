@@ -33,7 +33,7 @@
           <p>New Suite</p>
         </button>
 
-        <button type="button" class="btn btn btn-light" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">
+        <button type="button" class="btn btn btn-light" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes" @click="showNotes = !showNotes">
           <i class="material-icons md-48">note</i>
           <p>Notes</p>
         </button>
@@ -269,19 +269,11 @@
 
 
         <div class="col">
-          <div class="collapse multi-collapse text-left" id="notes">
+          <div class=" text-left" id="notes" v-if="showNotes">
             <div class="card card-body noteCards">
-              <!-- <form class="form-tasks" @submit.prevent="addNote">
-                <div class="input-group">
-                  <input type="text" class="form-control" v-model="newNote.content" placeholder="Add a note" required autofocus>
-                  <div></div>
-
-                  <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><span
-                  class="glyphicon glyphicon-plus"></span> Add Note</button>
-                  </span>
+              <h3>Property Notes   <div class="form-row notesClose glyphicon glyphicon-remove btn pull-right" @click="closeNotes" >
                 </div>
-              </form> -->
+                </h3>
 
               <!-- :class="{active: index === activeItem}" -->
               <ul class="list-group" v-for="(note, index) in notes.content[0]">
@@ -508,7 +500,8 @@ export default {
       showNotifications: false,
       showSuites: false,
       activeNote: -1,
-      noteHovered: false
+      noteHovered: false,
+      showNotes: false
 
     }
   },
@@ -695,6 +688,9 @@ export default {
           console.log(error, 'HEY THERE WAS AN ERROR WHEN YOU DELETED A NOTE');
         })
     },
+    closeNotes: function () {
+      this.showNotes = !this.showNotes
+    },
     editSuiteClick: function(event, indexClicked) {
       this.activeSuiteItem = []
       this.activeSuiteItem.push(this.suites[0][indexClicked])
@@ -767,7 +763,7 @@ export default {
 
       axios.delete(`http://localhost:8881/properties/${prop_id}`)
         .then(function(results) {
-          self.$router.push('/profile')
+          self.$router.push('/properties')
         })
     },
     addProperty: function(event) {
@@ -963,10 +959,16 @@ export default {
   width: 80%;
   display: inline;
 }
+.noteCards > h3 {
+  margin-bottom: 4%;
+  width: 100%;
+}
 .noteCardButtons{
   display: inline;
 }
-
+.notesClose:hover {
+  color: #73BEDB;
+}
 .noteCards > ul > li:hover {
   box-shadow: 0px .5px .25px dimgrey;
 }
