@@ -1,19 +1,27 @@
 <template>
 <div class="sideNav">
 
-  <div class = "row row2">
+  <!-- <div class="panel panel-default">
+  <div class="panel-body advantage"><h1>CRE Advantage</h1></div>
+  </div> -->
 
+    <div class ="row2">
       <br></br>
       <br></br>
-    <div class = "icons">
-    <i class="material-icons" style="font-size:10vh">add_location</i>
-    <i class="material-icons" style="font-size:10vh">location_city</i>
-    <i class="material-icons" style="font-size:10vh">account_box</i>
-    <i class="material-icons" style="font-size:10vh">satellite</i>
-    <i class="material-icons" style="font-size:10vh">close</i>
-    <i class="material-icons"style="font-size:10vh">home</i>
-</div>
+      <center><i class="material-icons"style="font-size:8vh">home</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">add_location</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">location_city</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">account_box</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">satellite</i></center>
+
+    <center><i class="material-icons" style="font-size:8vh">close</i></center>
+
   </div>
+
 
 
   <div class="row row1">
@@ -21,8 +29,13 @@
       <h1>CRE <span class="advantage">Advantage</span></h1>
     </div>
 
+
+
+
 </div>
+
 </div>
+
 </template>
 
 <script>
@@ -56,18 +69,14 @@ export default {
   height: 100%;
   background-color: #136a8a;
   position: relative;
+  width: 15%;
+  z-index:1;
   top: 0;
   left: 0;
-  width: 10%;
-  margin: 0;
+  margin: auto;
   position: fixed;
-  z-index:1;
-
 }
 
-/* .icons{
-  position: relative;
-} */
 
 h1 {
   font-family: 'Fira Sans Condensed', sans-serif;
