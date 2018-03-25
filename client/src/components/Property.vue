@@ -4,7 +4,7 @@
   <!-- <Nav v-on:getPropertyData="updateProperties($event)"></Nav> -->
 
   <div class="row nav">
-    <div class="col-md-12">
+    <div class="col-sm-12">
       <sideNav></sideNav>
     </div>
   </div>
@@ -17,8 +17,8 @@
   <!-- ============= nav buttons =====================-->
 
   <div class="row text-center buttonRow">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
       <div class="btn-group" role="group" aria-label="Property Nav">
 
         <button type="button" class="btn btn-light" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites" @click="showSuites = !showSuites">
@@ -65,8 +65,8 @@
   <!-- ============= left map column =====================-->
 
   <div class="row mainContent">
-    <div class="col-md-1"></div>
-    <div class="col-md-3 text-left mapColumn">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-3 text-left mapColumn">
 
       <SmallMap :property="property" class="centerMap"></SmallMap>
 
@@ -79,7 +79,7 @@
       <p><span class="propHeader">Suites:</span> {{ property[0].num_suites}}</p>
     </div>
   </div>
-    <div class="col-md-8 rightCol">
+    <div class="col-sm-8 rightCol">
 
 
 
@@ -129,29 +129,29 @@
                 <div class="form-row glyphicon glyphicon-remove btn editSuiteClose" @click="showEditSuiteForm = !showEditSuiteForm"></div>
 
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-sm-6">
                 <label for="suite-num">Suite Number</label>
                 <input type="text" class="form-control" id="suite-num" :placeholder="activeSuiteItem[0].suite_num" v-model="editedSuiteInfo.suite_num">
               </div>
 
-              <div class="form-group col-md-6">
+              <div class="form-group col-sm-6">
                 <label for="lease-date">Lease Date</label>
                 <input type="text" class="form-control" id="lease-date" :placeholder="activeSuiteItem[0].lease_date" v-model="editedSuiteInfo.lease_date">
               </div>
 
             </div>
-            <div class="form-group col-md-12">
+            <div class="form-group col-sm-12">
               <label for="tenant">Tenant</label>
               <input type="text" class="form-control" id="tenant" :placeholder="activeSuiteItem[0].tenant" v-model="editedSuiteInfo.tenant">
             </div>
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-sm-6">
                 <label for="suite-size">Suite Size</label>
                 <input type="text" class="form-control" id="suite-size" :placeholder="activeSuiteItem[0].suite_size" v-model="editedSuiteInfo.suite_size">
 
 
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-sm-6">
                 <label for="rental-rate">Rental Rate</label>
                 <input type="text" class="form-control" id="rental-rate" :placeholder="activeSuiteItem[0].rental_rate" v-model="editedSuiteInfo.rental_rate">
 
@@ -318,11 +318,11 @@
             <div class="card card-body">
               <form @submit.prevent="formatEditedProperty">
                 <div class="form-row">
-                  <div class="form-group col-md-8">
+                  <div class="form-group col-sm-8">
                     <label for="prop-owner">Property Owner</label>
                     <input type="text" class="form-control" id="prop-owner" :placeholder="property[0].prop_owner" v-model="editedPropInfo.prop_owner">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-sm-4">
                     <label for="prop-type">Property Type</label>
                     <select id="prop-type" class="form-control" v-model="editedPropInfo.prop_type">
                         <option v-if="property[0].prop_type == null" selected value="">
@@ -339,37 +339,37 @@
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-sm-4">
                     <label for="prop-size">Property Size</label>
                     <input type="text" class="form-control" id="prop-size" :placeholder="property[0].prop_size" v-model="editedPropInfo.prop_size">
 
 
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-sm-4">
                     <label for="prop-range">Property Range</label>
                     <input type="text" class="form-control" id="prop-range" :placeholder="property[0].prop_range" v-model="editedPropInfo.prop_range">
 
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-sm-4">
                     <label for="num-suites">Number of Suites</label>
                     <input type="text" class="form-control" id="suite-num" :placeholder="property[0].num_suites" v-model="editedPropInfo.num_suites">
 
 
                   </div>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-sm-12">
                   <label for="propStreetAddress">Street Address</label>
                   <input type="text" class="form-control" id="propStreetAddress" :placeholder="propStreetAddress" v-model="editedPropInfo.streetAddress">
 
 
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-sm-6">
                     <label for="propCity">City</label>
                     <input type="text" class="form-control" id="propCity" :placeholder="propCity" v-model="editedPropInfo.city">
 
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-sm-4">
                     <label for="prop-state">State</label>
 
                     <select id="prop-state" class="form-control" v-model="editedPropInfo.state">
@@ -381,7 +381,7 @@
                         </option>
                       </select>
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-sm-2">
                     <label for="propZip">Zip</label>
                     <input type="text" class="form-control" id="propZip" :placeholder="propZip" v-model="editedPropInfo.zip">
 

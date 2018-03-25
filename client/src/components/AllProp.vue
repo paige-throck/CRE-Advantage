@@ -1,20 +1,14 @@
 <template>
 <div class="allProp">
 
-  <div class="row">
-    <div class="col-md-12">
-      <sideNav></sideNav>
-    </div>
-  </div>
+  <sideNav></sideNav>
+
 
   <div class="row mainContent">
-    <div class="col-md-2"></div>
-    <div class="col-md-10">
-
-
+    <div class="col-sm-12">
 
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-sm-7">
           <form @submit.prevent="searchProperties">
             <input type="text" v-model="search" placeholder="Search Properties..." id="searchBox">
             <button type="submit" class="btn btn-info" title="Search">Search</button>
@@ -25,7 +19,7 @@
 
 
 
-        <div class="col-md-5">
+        <div class="col-sm-5">
           <label for="filterProperties">Property Type</label>
           <select v-model="filterChosen" v-on:change="filterProperties" id="filterProperties">
           <option value="" deselected selected>Filter Properties...</option>
@@ -147,10 +141,17 @@ export default {
 </script>
 
 <style scoped>
-
+.allProp{
+  /* background: linear-gradient(to right, whitesmoke, #ffffff); */
+  height: 100vh;
+}
 .mainContent {
-  padding: 10% 10% 10% 0;
-  background: linear-gradient(to right, whitesmoke, #ffffff);
+  /* padding: 10% 10% 10% 0%; */
+  /* background: linear-gradient(to right, whitesmoke, #ffffff); */
+  margin-top: 5%;
+  margin-left: 15%;
+  margin-right: 5%;
+  padding-top: 8%;
 }
 .card {
   width: 90%;

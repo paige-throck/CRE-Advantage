@@ -1,16 +1,16 @@
 <template>
 <div class="home">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-12">
       <headerTopper></headerTopper>
     </div>
   </div>
 
 
   <div class="row text-center">
-    <div class="col-md-3"></div>
+    <div class="col-sm-3"></div>
 
-    <div class="col-md-6 container-box">
+    <div class="col-sm-6 container-box">
       <h3 class="welcome">Welcome</h3>
 
       <p class="lead">The place where brokers come to get ahead</p>
@@ -20,7 +20,7 @@
       <router-link to="signup"><button class="button btn btn-info">Signup</button></router-link>
     </div>
 
-    <div class="row-md-3"></div>
+    <div class="row-sm-3"></div>
   </div>
 </div>
 

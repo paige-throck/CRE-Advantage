@@ -8,9 +8,6 @@
     <div class="card card-body">
       <div class="col-sm-12">
 
-
-
-
         <!-- Clear Button -->
         <div class="row">
           <div class="col-sm-2">
@@ -292,6 +289,7 @@ export default {
   margin-left: 15%;
   margin-right: 5%;
   padding-top: 8%;
+
 }
 
 .form-tasks {
@@ -335,4 +333,13 @@ ul {
   list-style: none;
   border-radius: 5px;
 }
+
+/* form{
+  border:1px solid gainsboro;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right:5%;
+  padding-left: 2%;
+  border-radius:2%;
+} */
 </style>

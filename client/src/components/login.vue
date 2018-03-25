@@ -3,16 +3,16 @@
 
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-12">
       <headerTopper></headerTopper>
     </div>
   </div>
 
 
   <div class="row">
-    <div class="col-md-3"></div>
+    <div class="col-sm-3"></div>
 
-    <div class="col-md-6 container-box">
+    <div class="col-sm-6 container-box">
 
 
       <form class="form-login" @submit.prevent="login">
@@ -41,7 +41,7 @@
       </p>
     </div>
 
-    <div class="row-md-3"></div>
+    <div class="row-sm-3"></div>
   </div>
 </div>
 
