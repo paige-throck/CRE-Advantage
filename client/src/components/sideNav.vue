@@ -3,33 +3,47 @@
 
 
 <!-- notifications -->
-  <i class="material-icons notifyBell" @click="showNotifications = !showNotifications">notifications_none</i>
+  <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
 
   <div class="notififyBox" id="taskList" v-if="showNotifications">
           <ProTasks></ProTasks>
   </div>
-<!--    -->
 
-  <div class="row row2">
-
-  <!-- <div class="panel panel-default">
-  <div class="panel-body advantage"><h1>CRE Advantage</h1></div>
-  </div> -->
 
     <div class ="row2">
       <br></br>
       <br></br>
-      <center><i class="material-icons"style="font-size:8vh">home</i></center>
+
+
+      <router-link to="/profile"><center><i class="material-icons"style="font-size:8vh">home</i></center>
+        <center>Home</center>
+      </router-link>
 
     <center><i class="material-icons" style="font-size:8vh">add_location</i></center>
+    <center>Add Property</center>
 
-    <center><i class="material-icons" style="font-size:8vh">location_city</i></center>
+    <router-link to="/properties"><center><i class="material-icons" style="font-size:8vh">location_city</i></center>
+      <center>Properties</center>
+    </router-link>
 
-    <center><i class="material-icons" style="font-size:8vh">account_box</i></center>
+    <router-link to="/map"><center><i class="material-icons" style="font-size:8vh">satellite</i></center>
+      <center>Map</center>
+    </router-link>
 
-    <center><i class="material-icons" style="font-size:8vh">satellite</i></center>
+    <router-link to="/tasks">
+    <center><i class="material-icons" style="font-size:8vh">event_note</i></center>
+    <center>Tasks</center>
+  </router-link>
 
-    <center><i class="material-icons" style="font-size:8vh">close</i></center>
+    <router-link to ="/account-settings"><center><i class="material-icons" style="font-size:8vh">account_box</i></center>
+      <center>Account</center>
+    </router-link>
+
+
+    <router-link to="/login">
+    <center><i class="material-icons" v-on:click="logout" style="font-size:8vh">close</i></center>
+    <center><p>Logout</p></center>
+    </router-link>
 
 
   </div>
@@ -45,7 +59,7 @@
 
   </div>
 
-</div>
+
 </div>
 
 </template>
@@ -71,6 +85,12 @@ export default {
     let date = new Date()
     this.today = moment(date).format("dddd, MMM DD");
 
+  },
+  methods:{
+    logout: function() {
+      let self = this;
+      localStorage.clear();
+  },
   }
 }
 </script>
@@ -91,23 +111,28 @@ export default {
   height: 100%;
   background-color: #136a8a;
   position: relative;
-  width: 10%;
+  min-width: 10%;
   z-index:1;
   top: 0;
   left: 0;
   margin: auto;
   position: fixed;
-
   z-index: 100;
 
 }
-
+a{
+  color: black;
+}
+.material-icons{
+  color: black;
+}
 
 h1 {
   font-family: 'Fira Sans Condensed', sans-serif;
   color: white;
   font-weight: 300;
-  font-size: 100;
+  font-size: 4vh;
+  position: fixed;
 }
 
 .advantage {
