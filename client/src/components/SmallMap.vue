@@ -49,11 +49,11 @@ export default {
         map: self.map,
         title: individualMarker.address,
         prop_type: individualMarker.prop_type,
-        icon: {
-          url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
-          anchor: new google.maps.Point(30, 30),
-          scaledSize: new google.maps.Size(25, 30)
-        }
+        // icon: {
+        //   url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
+        //   anchor: new google.maps.Point(30, 30),
+        //   scaledSize: new google.maps.Size(25, 30)
+        // }
       })
     },
   },
