@@ -220,6 +220,8 @@ export default {
       let self = this
       let position = new google.maps.LatLng(individualMarker.latitude, individualMarker.longitude)
 
+
+
       let marker = new google.maps.Marker({
         position: position,
         map: self.map,

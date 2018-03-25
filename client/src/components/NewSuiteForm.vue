@@ -1,6 +1,6 @@
 <template>
 
-<div>
+<div class="newSuiteForm">
 <form @submit.prevent="addNewSuite" id="newSuiteForm">
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -32,8 +32,9 @@
     </div>
 
   </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="text-center">
+  <button type="submit" class="btn btn-info">Submit</button>
+</div>
 </form>
 </div>
 
@@ -70,5 +71,16 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
+form {
+  width: 85%;
+  margin-top: 5%;
+}
+
+button {
+  margin-top: 5%;
+}
+
+
 </style>

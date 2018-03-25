@@ -111,7 +111,9 @@ export default {
   height: 100%;
   background-color: #136a8a;
   position: relative;
+
   min-width: 10%;
+
   z-index:1;
   top: 0;
   left: 0;
