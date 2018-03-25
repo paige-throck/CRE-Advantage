@@ -228,11 +228,11 @@ export default {
         title: individualMarker.address,
         animation: google.maps.Animation.DROP,
         prop_type: individualMarker.prop_type,
-        icon: {
-          url: 'https://image.flaticon.com/icons/svg/37/37481.svg',
-          anchor: new google.maps.Point(30, 30),
-          scaledSize: new google.maps.Size(25, 30)
-        }
+        // icon: {
+        //   path: '',
+        //   anchor: new google.maps.Point(30, 30),
+        //   scaledSize: new google.maps.Size(25, 30)
+        // }
       })
 
       // add reference to marker to be able to filter later

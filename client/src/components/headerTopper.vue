@@ -46,7 +46,8 @@ h1 {
   font-family: 'Fira Sans Condensed', sans-serif;
   color: white;
   font-weight: 300;
-  font-size: 100;
+  font-size: 4vh;
+  position: fixed;
 }
 .advantage {
   font-weight: 200;

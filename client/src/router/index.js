@@ -66,12 +66,12 @@ export default new Router({
       component: Tasks
     },
     {
-      path: '/update-account',
+      path: '/account-settings',
       name: 'UpdateUser',
       component: UpdateUser
     },
     {
-      path: '/allprop',
+      path: '/properties',
       name: 'AllProp',
       component: AllProp
     }

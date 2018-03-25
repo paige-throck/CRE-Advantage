@@ -2,58 +2,72 @@
 <div class="tasks">
 
   <sideNav></sideNav>
-    <!-- <Nav></Nav> -->
-<div class = "col-sm-1">
-</div>
-    <div class="row">
-      <div class="col-sm-2">
-      </div>
-      <div class="taskContainer col-sm-10">
-        <span class="pull-right">
-<button class="btn btn-danger" v-on:click="clearList($event)"><span
-></span>Clear Tasks</button>
-        </span>
-
-        <br></br>
 
 
-        <!--  New Task Form-->
-        <form class="form-tasks" @submit.prevent="addTask">
-          <div class="row">
+  <div class="row tasksContainer">
+    <div class="card card-body">
+      <div class="col-sm-12">
 
-            <div class="col-sm-2">
-              <span class="input-group-btn">
-    <button class="btn btn-default" type="submit"><span
-  class="glyphicon glyphicon-plus"></span> Add Task</button>
-              </span>
-            </div>
 
-            <div class="col-sm-8">
-              <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
-            </div>
 
-            <div class="col-sm-2">
-              <datepicker format="MMM dd yyyy" type="date" v-model="newTask.task_date" placeholder="Select a Date"></datepicker>
-            </div>
+
+        <!-- Clear Button -->
+        <div class="row">
+          <div class="col-sm-2">
+            <button class="btn btn-danger" v-on:click="clearList($event)">Clear Tasks</button>
+            </span>
           </div>
-        </form>
+
+
+          <!--  New Task Form-->
+
+          <div class="col-sm-10">
+            <form class="form-tasks" @submit.prevent="addTask">
+              <div class="row">
+
+                <div class="col-sm-2">
+                  <span class="input-group-btn">
+    <button class="btn btn-info" type="submit"><span
+  class="glyphicon glyphicon-plus"></span> Add Task</button>
+                  </span>
+                </div>
+
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
+                </div>
+
+                <div class="col-sm-2">
+                  <datepicker format="MMM dd yyyy" type="date" v-model="newTask.task_date" placeholder="Select a Date"></datepicker>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
 
         <!-- Tasks List -->
 
         <div class="row taskList">
           <ul class="list-group" v-for="(task, index) in tasksArr[0][0]" v-model="tasksArr">
 
-
-            <li class="list-group-items clearfix task" v-bind:class="{complete:task.completed, notComplete: !task.completed}">
+            <li v-bind:class="{completeColor:task.completed, notCompleteColor: !task.completed}" class="list-group-items clearfix task">
 
               <div class="list-items">
                 <span class="pull-left">
 
-      <div class="lead"><b>{{task.item}}</b></div>
-    </span>
-                <span class="pull-left">
-        <div class="lead">  &nbsp; {{ formatDate(task.task_date)}}</div>
-    </span>
+
+      <p>
+      <h4 class ="taskItem" v-bind:class="{complete:task.completed, notComplete: !task.completed}">{{task.item}}</h4>
+    </p>
+
+    <p>
+      <h5 v-bind:class="{complete:task.completed, notComplete: !task.completed}">  &nbsp;{{ formatDate(task.task_date)}}</h5>
+    </p>
+
+</span>
+
+
+
               </div>
               <div>
                 <span class="pull-right">
@@ -70,48 +84,44 @@ v-on:click="deleteTask($event, task.id)"></span></button>
               </div>
 
               <!-- Edit Task Form inside List -->
-              <div class="col">
-                <div>
+
+              <div class="row">
+                <div class="col-sm-12">
+
                   <form id="edit-task" v-if="index == activeTask && showEditForm">
-                    <br></br>
-                    <div class="col-sm-2">
-                    </div>
 
-                    <div class="col-sm-8">
-
-                      <div class="row">
-                        <span class="input-group-btn">
-              <button v-on:click="editTask($event, editedTask.item, editedTask.task_date, task)" class="btn btn-default" type="submit"><span
-            class="glyphicon glyphicon-plus"></span> Update Task</button>
-                        </span>
-
+                    <div class="row">
+                      <div class="col-sm-1">
                       </div>
-                      <div class="row">
+
+                      <div class="col-sm-6">
                         <input type="text" class="form-control" id="edited-email" :placeholder="task.item" v-model="editedTask.item">
                       </div>
 
-                      <div class="row">
+                      <div class="col-sm-2">
                         <datepicker format="MMM dd yyyy" type="date" v-model="editedTask.task_date" :placeholder="formatDate(task.task_date)"></datepicker>
                       </div>
 
-                    </div>
-                    <div class="col-sm-2">
+                      <div class="col-sm-2"><button v-on:click="editTask($event, editedTask.item, editedTask.task_date, task)" class="btn btn-info" type="submit">Update Task</button>
+                      </div>
+
+                      <div class="col-sm-1">
+                      </div>
+
                     </div>
                   </form>
+
                 </div>
               </div>
+
             </li>
           </ul>
         </div>
 
-      </div>
 
-      <div class="col-sm-1">
       </div>
-
     </div>
-
-
+  </div>
 </div>
 </template>
 
@@ -189,6 +199,7 @@ export default {
       axios.post(`http://localhost:8881/tasks/${id}`, this.newTask)
         .then(function() {
           self.newTask.item = ""
+          self.newTask.task_date = ""
           self.getTasks();
         }).catch(function(error) {
           console.log(error);
@@ -277,12 +288,22 @@ export default {
 </script>
 
 <style scoped>
-/* .taskContainer{
-  margin-left: 1%;
-} */
+.tasksContainer {
+  margin-left: 15%;
+  margin-right: 5%;
+  padding-top: 8%;
+}
 
 .form-tasks {
   margin-bottom: 2%;
+}
+
+.taskList {
+  padding-top: 1%;
+}
+
+.card {
+  width: 90%;
 }
 
 ul {
@@ -290,35 +311,28 @@ ul {
 }
 
 .complete {
-  background-color: gainsboro;
+  text-decoration: line-through;
 }
 
-.notComplete {
+
+/* .notComplete {
   background-color: white;
+
+} */
+
+.completeColor {
+  background-color: gainsboro;
+
+}
+
+
+.notCompleteColor {
+  background-color: white;
+
 }
 
 .list-group-true {
   list-style: none;
   border-radius: 5px;
-}
-
-#edit-task {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -37.5%;
-  margin-left: -37.5%;
-  width: 75%;
-  height: 75%;
-  background-color: grey;
-  z-index: 10;
-}
-
-.edit-task-form {
-  position: fixed;
-  top: 25%;
-  left: 25%;
-
-  background-color: blue;
 }
 </style>
