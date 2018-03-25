@@ -1,6 +1,8 @@
 <template>
 <div class="propForm">
-  <form @submit.prevent="addNewProperty">
+  <sideNav></sideNav>
+
+  <form div class ="newPropForm" @submit.prevent="addNewProperty">
     <div class="form-row">
       <div class="form-group col-sm-8">
         <label for="prop-owner">Property Owner</label>
@@ -88,10 +90,14 @@
 
 <script>
 import axios from 'axios';
+import sideNav from './sideNav.vue'
 
 export default {
   name: 'NewPropertyForm',
   props: ['propTypes', 'states'],
+  components:{
+    sideNav
+  },
   data() {
     return {
 
@@ -143,7 +149,6 @@ export default {
 
         })
 
-
     }
 
 
@@ -153,6 +158,11 @@ export default {
 </script>
 
 <style scoped>
+
+.newPropForm{
+  margin: 10%;
+}
+
 label {
   font-weight: 500;
 

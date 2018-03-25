@@ -19,8 +19,8 @@
         <center>Home</center>
       </router-link>
 
-    <center><i class="material-icons" style="font-size:8vh">add_location</i></center>
-    <center>Add Property</center>
+    <router-link to="/new-property"><center><i class="material-icons" style="font-size:8vh">add_location</i></center>
+    <center>Add Property</center></router-link>
 
     <router-link to="/properties"><center><i class="material-icons" style="font-size:8vh">location_city</i></center>
       <center>Properties</center>
