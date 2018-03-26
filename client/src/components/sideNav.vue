@@ -13,36 +13,35 @@
     <div class ="row2">
       <br></br>
       <br></br>
+      <br></br>
 
+      <router-link to="/profile"><center><i class="material-icons navButton" style="font-size:6vh">home</i></center>
+      <center class = "navText">Home</center></router-link>
 
-      <router-link to="/profile"><center><i class="material-icons"style="font-size:8vh">home</i></center>
-        <center>Home</center>
-      </router-link>
+    <router-link to="/new-property"><center><i class="material-icons navButton" style="font-size:6vh">add_location</i></center>
+    <center class = "navText">Add Property</center></router-link>
 
-    <router-link to="/new-property"><center><i class="material-icons" style="font-size:8vh">add_location</i></center>
-    <center>Add Property</center></router-link>
-
-    <router-link to="/properties"><center><i class="material-icons" style="font-size:8vh">location_city</i></center>
-      <center>Properties</center>
+    <router-link to="/properties"><center><i class="material-icons navButton" style="font-size:6vh">location_city</i></center>
+      <center class = "navText">Properties</center>
     </router-link>
 
-    <router-link to="/map"><center><i class="material-icons" style="font-size:8vh">satellite</i></center>
-      <center>Map</center>
+    <router-link to="/map"><center><i class="material-icons navButton" style="font-size:6vh">satellite</i></center>
+      <center class = "navText">Map</center>
     </router-link>
 
     <router-link to="/tasks">
-    <center><i class="material-icons" style="font-size:8vh">event_note</i></center>
-    <center>Tasks</center>
+    <center><i class="material-icons navButton" style="font-size:6vh">event_note</i></center>
+    <center class = "navText">Tasks</center>
   </router-link>
 
-    <router-link to ="/account-settings"><center><i class="material-icons" style="font-size:8vh">account_box</i></center>
-      <center>Account</center>
+    <router-link to ="/account-settings"><center><i class="material-icons navButton" style="font-size:6vh">account_box</i></center>
+      <center class = "navText">Account</center>
     </router-link>
 
 
     <router-link to="/">
-    <center><i class="material-icons" v-on:click="logout" style="font-size:8vh">close</i></center>
-    <center><p>Logout</p></center>
+    <center><i class="material-icons navButton" v-on:click="logout" style="font-size:6vh">close</i></center>
+    <center class = "navText"><p>Logout</p></center>
     </router-link>
 
 
@@ -126,6 +125,13 @@ a{
 }
 .material-icons{
   color: black;
+}
+.navButton{
+  padding-top: 5%;
+}
+
+.navText{
+  padding-bottom: 5%;
 }
 
 h1 {
