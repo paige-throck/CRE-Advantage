@@ -11,28 +11,25 @@
       <div class="row buttonRow">
 
         <div class = "col-sm-6">
-          <h3>Account Settings</h3>
+          <h2>Account Settings</h2>
         </div>
 
-      <div class = "col-sm-2">
+      <div class = "col-sm-2 navButton">
         <button v-on:click="indexEmail = !indexEmail" type="button" class="btn btn-info">Update Email</button>
       </div>
 
-      <!-- <div class = "col-sm-1">
-      </div> -->
 
-      <div class ="col-sm-2">
+
+      <div class ="col-sm-2 navButton">
         <button type="button" class="btn btn-info" v-on:click="indexPassword = !indexPassword">Update Password</button>
       </div>
 
-      <!-- <div class = "col-sm-1">
-      </div> -->
 
-      <div class = "col-sm-2">
+
+      <div class = "col-sm-2 navButton">
         <button type="button" class="btn btn-info" v-on:click="indexInfo = !indexInfo">Update Info</button>
       </div>
-<!-- <div class = "col-sm-2">
-</div> -->
+
     </div>
 
 
@@ -120,7 +117,7 @@
 
 
 
-    <!-- Info Form -->
+    <!-- Update Info Form -->
     <div class="col-sm-12 container-box">
         <div id="update-info">
           <div class = "row">
@@ -343,12 +340,9 @@ export default {
 
 <style scoped>
 
-.userInfoList{
-  margin-top: 5%;
-  margin-left: 15%;
+.update-user{
+  height: 100vh;
 }
-
-
 
 .user{
   border:1px solid gainsboro;
@@ -356,8 +350,10 @@ export default {
   border-radius:2%;
 }
 
-.update-user{
-  height: 100vh;
+
+.userInfoList{
+  margin-top: 5%;
+  margin-left: 15%;
 }
 
 .userContainer{
@@ -378,9 +374,12 @@ export default {
   border-radius:2%;
 }
 
-.btn{
+.navButton{
+  margin-top: 1%;
   font-size: 2vh;
 }
+
+
 
 
 form{
