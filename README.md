@@ -33,6 +33,13 @@
 # ERD
 ![alt tag](screenshots/erd.png)
 
+
+
+# Application
+![alt tag](screenshots/homePage.png)
+![alt tag](screenshots/loginPage.png)
+![alt tag](screenshots/signupPage.png)
+
 <div>
 <b>Created by:
 Paige Throckmorton and Melissa Warren
