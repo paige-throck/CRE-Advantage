@@ -44,9 +44,9 @@
 <br></br>
 ![alt tag](screenshots/profilePage.png)
 <br></br>
-![alt tag](screenshots/tasksPage.png)
-<br></br>
 ![alt tag](screenshots/newPropPage.png)
+<br></br>
+![alt tag](screenshots/tasksPage.png)
 <br></br>
 ![alt tag](screenshots/accountsPage2.png)
 <br></br>
