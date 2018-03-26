@@ -46,7 +46,7 @@
 <br></br>
 ![alt tag](screenshots/tasksPage.png)
 <br></br>
-![alt tag](screenshots/accountsPage.png)
+![alt tag](screenshots/accountsPage2.png)
 <br></br>
 
 <div>
