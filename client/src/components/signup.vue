@@ -172,7 +172,7 @@ export default {
 }
 
 .container-box {
-  margin-top: 5%;
+  margin-top: 10%;
   padding: 3%;
   border-radius: 1%;
   background-color: white;
