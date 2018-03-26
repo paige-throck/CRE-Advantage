@@ -396,6 +396,11 @@ export default {
   text-align: center;
 }
 
+.navButtonInfo:hover,
+.navButtonEmail:hover,
+.navButtonPassword:hover {
+  color: #73BEDB;
+}
 
 
 
