@@ -835,7 +835,7 @@ export default {
   /* background: linear-gradient(to right, whitesmoke, #ffffff); */
 }
 .mainContent {
-  margin-top: 11%;
+  margin-top: 10%;
 }
 
 .rightCol {
