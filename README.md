@@ -40,6 +40,7 @@
 ![alt tag](screenshots/loginPage.png)
 ![alt tag](screenshots/signupPage.png)
 ![alt tag](screenshots/profilePage.png)
+![alt tag](screenshots/tasksPage.png)
 
 <div>
 <b>Created by:
