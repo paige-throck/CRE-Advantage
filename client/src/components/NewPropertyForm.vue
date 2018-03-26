@@ -1,6 +1,6 @@
 <template>
 <div class="propForm">
-  <sideNav></sideNav>
+  <!-- <sideNav></sideNav> -->
 
 <h3 class="editPropertyFormH3">Add Property</h3>
 

@@ -20,10 +20,10 @@
 
 <div class = "col-sm-4">
 
-  <div class = "row gridBox">
-    <router-link to="/new-property"><i class="material-icons" style="font-size:10vh">add_location</i></router-link>
+
+    <router-link to="/new-property"><div class = "row gridBox"><i class="material-icons" style="font-size:10vh">add_location</i>
     <p>New Property</p>
-  </div>
+  </div></router-link>
 
 <div class = "paddding">
 </div>
@@ -136,7 +136,7 @@ export default {
 }
 
 .paddding{
-  margin: 8%;
+  margin: 12%;
 }
 .square{
   background-color: blue;

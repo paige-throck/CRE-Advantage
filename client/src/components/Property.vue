@@ -64,9 +64,9 @@
 
   <!-- ============= left map column =====================-->
 
-  <div class="row mainContent container">
-    <div class="col-sm-1 hiddenColumn"></div>
-    <div class="col-sm-3 text-left mapColumn">
+  <div class="row mainContent">
+    <div class="col-md-1 hiddenColumn"></div>
+    <div class="col-md-3 text-left mapColumn">
 
       <SmallMap :property="property" class="centerMap"></SmallMap>
 
@@ -79,7 +79,7 @@
       <p><span class="propHeader">Suites:</span> {{ property[0].num_suites}}</p>
     </div>
   </div>
-    <div class="col-sm-8 rightCol">
+    <div class="col-md-8 rightCol">
 
 
 
@@ -840,7 +840,8 @@ export default {
 
 .rightCol {
   padding-left: 3%;
-  background-color: white;
+  height: 100%;
+  width: 60%;
 
 }
 /* .hiddenColumn {
