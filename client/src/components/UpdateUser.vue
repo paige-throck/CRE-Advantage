@@ -14,20 +14,24 @@
           <h2>Account Settings</h2>
         </div>
 
-      <div class = "col-sm-2 navButton">
-        <button v-on:click="indexEmail = !indexEmail" type="button" class="btn btn-info">Update Email</button>
+      <div class = "col-sm-2 navButtonEmail">
+        <i class="material-icons" style="font-size:5vh" v-on:click="indexEmail = !indexEmail">mail_outline</i>
+        <div>Update Email</div>
       </div>
 
 
 
-      <div class ="col-sm-2 navButton">
-        <button type="button" class="btn btn-info" v-on:click="indexPassword = !indexPassword">Update Password</button>
+      <div class ="col-sm-2 navButtonPassword">
+
+        <i class="material-icons" style="font-size:5vh" v-on:click="indexPassword = !indexPassword">lock_open</i>
+        <div>Update Password</div>
       </div>
 
 
 
-      <div class = "col-sm-2 navButton">
-        <button type="button" class="btn btn-info" v-on:click="indexInfo = !indexInfo">Update Info</button>
+      <div class = "col-sm-2 navButtonInfo">
+        <i class="material-icons" style="font-size:5vh" v-on:click="indexInfo = !indexInfo">account_box</i>
+        <div>Update Info</div>
       </div>
 
     </div>
@@ -69,7 +73,7 @@
                       <input type="email" v-model="newEmail.email" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
                     </div>
 
-                    <button type="submit" class="btn btn btn-info">Update Email</button>
+                    <button type="submit" class="btn btn btn-info">Save</button>
                   </form>
                 </div>
               </div>
@@ -108,7 +112,7 @@
             <input type="password" v-model="newPassword.newPassword" id="newPassword" class="form-control" placeholder="New Password" required autofocus>
           </div>
 
-            <button class="btn btn-info" type="submit">Update Info</button>
+            <button class="btn btn-info" type="submit">Save</button>
           </form>
         </div>
       </div>
@@ -127,7 +131,7 @@
           <div class = "row">
           <div class = "col-sm-8">
             <label>
-            <h3 class="update-account-header">Update Name and City</h3>
+            <h3 class="update-account-header">Update Info</h3>
           </label>
           </div>
 
@@ -208,7 +212,7 @@
             </div>
           </div>
         </div>
-          <button class="btn btn btn-info" type="submit">Update Info</button>
+          <button class="btn btn btn-info" type="submit">Save</button>
         </form>
       </div>
     </div>
@@ -374,9 +378,22 @@ export default {
   border-radius:2%;
 }
 
-.navButton{
+.navButtonEmail{
   margin-top: 1%;
   font-size: 2vh;
+  text-align: center;
+}
+
+.navButtonPassword{
+  margin-top: 1%;
+  font-size: 2vh;
+  text-align: center;
+}
+
+.navButtonInfo{
+  margin-top: 1%;
+  font-size: 2vh;
+  text-align: center;
 }
 
 

@@ -173,7 +173,7 @@ export default {
       if (date === null) {
         return "";
       } else {
-        return moment(date).format("ddd MMM DD YYYY");
+        return moment.utc(date).format("ddd MMM DD YYYY");
       }
 
     },
@@ -198,8 +198,8 @@ export default {
       let id = window.localStorage.id;
       axios.post(`http://localhost:8881/tasks/${id}`, this.newTask)
         .then(function() {
-          // self.newTask.item = ""
-          // self.newTask.task_date = ""
+          self.newTask.item = ""
+          self.newTask.task_date = ""
           self.getTasks();
         }).catch(function(error) {
           console.log(error);
