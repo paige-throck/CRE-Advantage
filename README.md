@@ -39,9 +39,15 @@
 ![alt tag](screenshots/homePage.png)
 <br></br>
 ![alt tag](screenshots/loginPage.png)
+<br></br>
 ![alt tag](screenshots/signupPage.png)
+<br></br>
 ![alt tag](screenshots/profilePage.png)
+<br></br>
 ![alt tag](screenshots/tasksPage.png)
+<br></br>
+![alt tag](screenshots/accountsPage.png)
+<br></br>
 
 <div>
 <b>Created by:
