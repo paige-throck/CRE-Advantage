@@ -22,8 +22,10 @@
 
   </div>
 
+
   <div class="property-map" id="mapId">
   </div>
+
 
 </div>
 </div>
@@ -343,6 +345,7 @@ export default {
   margin: 0 auto;
   background: grey;
 }
+
 
 .property-map {
   /* width: 600px;

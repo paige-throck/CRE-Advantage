@@ -34,9 +34,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                  <datepicker
-
-                  format="yyyy/MM/dd " type="date" v-model="newTask.task_date" placeholder="Select a Date">
+                  <datepicker format="MMM dd yyyy" type="date" v-model="newTask.task_date" placeholder="Select a Date">
 
                   </datepicker>
                 </div>
