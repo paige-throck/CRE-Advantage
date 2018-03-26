@@ -13,7 +13,7 @@
     <div class ="row2">
       <br></br>
       <br></br>
-      <br></br>
+      <!-- <br></br> -->
 
       <router-link to="/profile"><center><i class="material-icons navButton" style="font-size:6vh">home</i></center>
       <center class = "navText">Home</center></router-link>
@@ -123,9 +123,18 @@ export default {
 a{
   color: black;
 }
+a:hover {
+  text-decoration: none;
+  color: #19334d;
+}
+
 .material-icons{
   color: black;
 }
+.material-icons:hover {
+  color: #19334d;
+}
+
 .navButton{
   padding-top: 5%;
 }
@@ -163,7 +172,7 @@ h1 {
 }
 .notifyBell {
   position: fixed;
-  top: 2%;
+  top: 3%;
   right: 6%;
   font-size: 5vh;
   color: gainsboro;

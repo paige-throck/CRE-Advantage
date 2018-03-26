@@ -5,20 +5,19 @@
 
 
   <div class = "searchBar">
+
     <input id="search-input" class="controls" type="text" placeholder="Search Box">
 
     <select v-model="filterChosen" v-on:change="filterProperties">
     <option value="" disabled selected>Filter Properties</option>
+    <option>All Properties</option>
     <option>Office</option>
     <option>Retail</option>
     <option>Industrial</option>
   </select>
 
-    <span>{{ filterChosen }} </span>
-
-
-    <button v-model="userLocation" @click="pinUserLocation" type="button" class="btn btn-info btn-circle" id="addPin">+</button>
-    <span>{{ searchingForUser }}</span>
+    <button v-model="userLocation" @click="pinUserLocation" type="button" class="btn btn-circle userLocation" id="addPin"><i class="material-icons" style="font-size:4vh">my_location</i></button>
+    <span class="searchingUser">{{ searchingForUser }}</span>
 
   </div>
 
@@ -277,13 +276,18 @@ export default {
       let self = this
 
       // set filtered values to visibile and others to hidden
-      for (var i = 0; i < self.googleMarkerArr.length; i++)
+      for (var i = 0; i < self.googleMarkerArr.length; i++) {
 
         if (self.googleMarkerArr[i] && self.googleMarkerArr[i].prop_type === this.filterChosen) {
           self.googleMarkerArr[i].setVisible(true)
-        } else {
+        } else if (this.filterChosen == "All Properties"){
+          self.googleMarkerArr[i].setVisible(true)
+        } else  {
           self.googleMarkerArr[i].setVisible(false)
         }
+
+
+      }
     },
     /* =====================================================
     Get user location and set up to add as marker to the map
@@ -357,8 +361,25 @@ export default {
 
 input {
   margin-bottom: 20px;
+  width: 70%;
+  height: 3vh;
+  padding: 1.5%;
+  margin-right: 2%;
+  border-radius: 2%;
+  border: 1px solid gainsboro;
 }
+select {
+  height: 4.5vh;
+  width: 20%;
+  margin-left: 3%;
+}
+.userLocation:hover {
+  color: #73BEDB;
+}
+.searchingUser {
+  margin-left: 1%;
 
+}
 .btn-circle {
   width: 30px;
   height: 30px;

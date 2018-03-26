@@ -170,7 +170,7 @@ a:hover {
 input {
   width: 70%;
   height: 4vh;
-  padding: 2%;
+  padding: 2.5%;
   margin-right: 2%;
   border-radius: 2%;
   border: 1px solid gainsboro;
