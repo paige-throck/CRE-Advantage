@@ -48,6 +48,8 @@
 <br></br>
 ![alt tag](screenshots/propertyPage.png)
 <br></br>
+![alt tag](screenshots/mapPage.png)
+<br></br>
 ![alt tag](screenshots/tasksPage.png)
 <br></br>
 ![alt tag](screenshots/accountsPage2.png)
