@@ -37,6 +37,7 @@
 
 # Application
 ![alt tag](screenshots/homePage.png)
+<br></br>
 ![alt tag](screenshots/loginPage.png)
 ![alt tag](screenshots/signupPage.png)
 ![alt tag](screenshots/profilePage.png)
