@@ -10,34 +10,35 @@
 <!-- Button Navbar -->
       <div class="row buttonRow">
 
-
-      <div class = "col-sm-1">
+        <div class = "col-sm-2">
+        </div>
+      <div class = "col-sm-2">
         <button v-on:click="indexEmail = !indexEmail" type="button" class="btn btn-info">Update Email</button>
       </div>
 
       <div class = "col-sm-1">
       </div>
 
-      <div class ="col-sm-1">
+      <div class ="col-sm-2">
         <button type="button" class="btn btn-info" v-on:click="indexPassword = !indexPassword">Update Password</button>
       </div>
 
       <div class = "col-sm-1">
       </div>
 
-      <div class = "col-sm-1">
+      <div class = "col-sm-2">
         <button type="button" class="btn btn-info" v-on:click="indexInfo = !indexInfo">Update Info</button>
       </div>
-      <div class = "col-sm-1">
-      </div>
+<div class = "col-sm-2">
+</div>
     </div>
 
 
 <div class = "row userInfoList">
-  <div class = "col-sm-4">
-        <h3><label>Name:</label> {{person.name}}</h3>
-        <h3><label>Email:</label> {{person.email}}</h3>
-        <h3><label>Current City:</label> {{person.city}}</h3>
+  <div class = "col-sm-4 user">
+        <h4><label>Name:</label> {{person.name}}</h4>
+        <h4><label>Email:</label> {{person.email}}</h4>
+        <h4><label>Current City:</label> {{person.city}}</h4>
 </div>
 
 
@@ -304,6 +305,14 @@ export default {
   margin-left: 15%;
 }
 
+
+
+.user{
+  border:1px solid gainsboro;
+  padding: 2%;
+  border-radius:2%;
+}
+
 .update-user{
   height: 100vh;
 }
@@ -317,10 +326,13 @@ export default {
 }
 
 .buttonRow {
-  width: 100%;
+  /* width: 100%; */
   margin-top: 2%;
   margin-left: 10%;
-
+  margin-right: 10%;
+  border:1px solid gainsboro;
+  padding: 2%;
+  border-radius:2%;
 }
 
 .btn{
