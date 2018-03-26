@@ -29,7 +29,7 @@
 
 
         <button type="button" class="btn btn-light" data-toggle="collapse" href="#newSuites" role="button" aria-expanded="false" aria-controls="newSuites" @click="showNewSuiteForm = !showNewSuiteForm">
-          <i class="material-icons md-48">view_module</i>
+          <i class="material-icons md-48">add_box</i>
           <p>New Suite</p>
         </button>
 
@@ -39,7 +39,7 @@
         </button>
 
         <button type="button" class="btn btn btn-light" @click="showNewNotes = !showNewNotes">
-          <i class="material-icons md-48">note</i>
+          <i class="material-icons md-48">add_circle_outline</i>
           <p>New Note</p>
         </button>
 
@@ -897,9 +897,9 @@ export default {
   padding: 2%;
   border-right: 1px solid gainsboro;
   background: whitesmoke;
-  height: 100%;
+  height: 100vh;
   /* width: 20%; */
-  margin-left: 4%;
+  margin-left: 3%;
   min-width: 200px;
   /* top: 20%;
   left: 5%; */
@@ -914,19 +914,22 @@ export default {
 .centerMap {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 5vh;
+  height: 25%;
+
+  border: 1px solid darkgrey;
 }
 
 .propInfo {
   margin: 10% 5%;
 }
 .propInfo > p {
-  margin: 0;
-  border-bottom: 1px solid gainsboro;
+  margin: 2%;
+  /* border-bottom: 1px solid gainsboro; */
 }
 
 .propHeader {
   font-weight: 500;
+  margin-right: 3%;
 }
 
 

@@ -68,8 +68,8 @@ export default {
 
 <style scoped>
 .SmallMapPage {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 40%;
 }
 .property-map {
   width: 100%;
