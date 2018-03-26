@@ -10,34 +10,34 @@
 <!-- Button Navbar -->
       <div class="row buttonRow">
 
+        <div class = "col-sm-6">
+          <h2>Account Settings</h2>
+        </div>
 
-      <div class = "col-sm-1">
+      <div class = "col-sm-2 navButton">
         <button v-on:click="indexEmail = !indexEmail" type="button" class="btn btn-info">Update Email</button>
       </div>
 
-      <div class = "col-sm-1">
-      </div>
 
-      <div class ="col-sm-1">
+
+      <div class ="col-sm-2 navButton">
         <button type="button" class="btn btn-info" v-on:click="indexPassword = !indexPassword">Update Password</button>
       </div>
 
-      <div class = "col-sm-1">
-      </div>
 
-      <div class = "col-sm-1">
+
+      <div class = "col-sm-2 navButton">
         <button type="button" class="btn btn-info" v-on:click="indexInfo = !indexInfo">Update Info</button>
       </div>
-      <div class = "col-sm-1">
-      </div>
+
     </div>
 
 
 <div class = "row userInfoList">
-  <div class = "col-sm-4">
-        <h3><label>Name:</label> {{person.name}}</h3>
-        <h3><label>Email:</label> {{person.email}}</h3>
-        <h3><label>Current City:</label> {{person.city}}</h3>
+  <div class = "col-sm-4 user">
+        <h4><label>Name:</label> {{person.name}}</h4>
+        <h4><label>Email:</label> {{person.email}}</h4>
+        <h4><label>Current City:</label> {{person.city}}</h4>
 </div>
 
 
@@ -49,7 +49,21 @@
               <div class = "row">
                 <div class="col-sm-12 " v-if="indexEmail">
                   <form @submit.prevent="updateEmail">
-                    <h3 class="update-account-header">Update Email</h3>
+                    <div class = "row">
+                    <div class = "col-sm-8">
+                      <label>
+                      <h3 class="update-account-header">Update Email</h3>
+                    </label>
+                    </div>
+
+                      <div class = "col-sm-3">
+                      </div>
+
+                    <div class = "col-sm-1">
+                    <div class="form-row glyphicon glyphicon-remove btn editSuiteClose" @click="indexEmail = !indexEmail"></div>
+                  </div>
+                    </div>
+
 
                     <div class="form-group">
                       <input type="email" v-model="newEmail.email" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
@@ -71,7 +85,20 @@
             <div class = "row">
               <div class="col-sm-12 " v-if="indexPassword">
           <form  @submit.prevent="updatePassword">
-            <h3 class="update-account-header">Update Password</h3>
+            <div class = "row">
+            <div class = "col-sm-8">
+              <label>
+              <h3 class="update-account-header">Update Password</h3>
+            </label>
+            </div>
+
+              <div class = "col-sm-3">
+              </div>
+
+            <div class = "col-sm-1">
+            <div class="form-row glyphicon glyphicon-remove btn editSuiteClose" @click="indexPassword = !indexPassword"></div>
+          </div>
+            </div>
 
             <div class = "form-group">
             <input type="password" v-model="newPassword.oldPassword" id="oldPassword" class="form-control" placeholder="Current Password" required autofocus>
@@ -90,15 +117,27 @@
 
 
 
-    <!-- Info Form -->
+    <!-- Update Info Form -->
     <div class="col-sm-12 container-box">
         <div id="update-info">
           <div class = "row">
             <div class="col-sm-12 " v-if="indexInfo">
 
         <form @submit.prevent="updateInfo">
+          <div class = "row">
+          <div class = "col-sm-8">
+            <label>
+            <h3 class="update-account-header">Update Name and City</h3>
+          </label>
+          </div>
 
-          <h3 class="update-account-header">Update Name and City</h3>
+            <div class = "col-sm-3">
+            </div>
+
+          <div class = "col-sm-1">
+          <div class="form-row glyphicon glyphicon-remove btn editSuiteClose" @click="indexInfo = !indexInfo"></div>
+        </div>
+          </div>
 
           <div class = "form-group">
           <input type="text" v-model="newInfo.name" placeholder="Enter a New Name" id="inputName" class="form-control" required autofocus>
@@ -263,6 +302,8 @@ export default {
 
       self.indexInfo = false;
 
+      self.indexInfo = !self.indexInfo
+
       axios.put(`http://localhost:8881/profile/${id}/info`, this.newInfo)
         .then(function() {
           self.newInfo.name = ""
@@ -299,13 +340,20 @@ export default {
 
 <style scoped>
 
+.update-user{
+  height: 100vh;
+}
+
+.user{
+  border:1px solid gainsboro;
+  padding: 2%;
+  border-radius:2%;
+}
+
+
 .userInfoList{
   margin-top: 5%;
   margin-left: 15%;
-}
-
-.update-user{
-  height: 100vh;
 }
 
 .userContainer{
@@ -317,15 +365,21 @@ export default {
 }
 
 .buttonRow {
-  width: 100%;
+  /* width: 100%; */
   margin-top: 2%;
   margin-left: 10%;
-
+  margin-right: 10%;
+  border:1px solid gainsboro;
+  padding: 2%;
+  border-radius:2%;
 }
 
-.btn{
+.navButton{
+  margin-top: 1%;
   font-size: 2vh;
 }
+
+
 
 
 form{

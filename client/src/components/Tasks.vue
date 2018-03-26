@@ -34,7 +34,11 @@
                 </div>
 
                 <div class="col-sm-2">
-                  <datepicker format="MMM dd yyyy" type="date" v-model="newTask.task_date" placeholder="Select a Date"></datepicker>
+                  <datepicker
+
+                  format="yyyy/MM/dd " type="date" v-model="newTask.task_date" placeholder="Select a Date">
+
+                  </datepicker>
                 </div>
               </div>
             </form>
@@ -69,7 +73,7 @@
               <div>
                 <span class="pull-right">
 
-<button class="btn btn-default btn-xs" type="button" v-on:click="updateTask(index)"><span class="glyphicon glyphicon-pencil"></span></button>
+<button class="btn btn-default btn-xs" v-bind:class="{hideButton:task.completed, showButton: !task.completed}" type="button" v-on:click="updateTask(index)"><span class="glyphicon glyphicon-pencil"></span></button>
 
                 <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
   v-on:click="completeTask($event, task.id)"></span></button>
@@ -89,6 +93,7 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 
                     <div class="row">
                       <div class="col-sm-1">
+
                       </div>
 
                       <div class="col-sm-6">
@@ -96,7 +101,7 @@ v-on:click="deleteTask($event, task.id)"></span></button>
                       </div>
 
                       <div class="col-sm-2">
-                        <datepicker format="MMM dd yyyy" type="date" v-model="editedTask.task_date" :placeholder="formatDate(task.task_date)"></datepicker>
+                        <datepicker format="ddd MMM dd yyyy" type="date" v-model="editedTask.task_date" :placeholder="formatDate(task.task_date)"></datepicker>
                       </div>
 
                       <div class="col-sm-2"><button v-on:click="editTask($event, editedTask.item, editedTask.task_date, task)" class="btn btn-info" type="submit">Update Task</button>
@@ -170,7 +175,7 @@ export default {
       if (date === null) {
         return "";
       } else {
-        return moment(date).format("ddd MMM DD YY");
+        return moment(date).format("ddd MMM DD YYYY");
       }
 
     },
@@ -195,8 +200,8 @@ export default {
       let id = window.localStorage.id;
       axios.post(`http://localhost:8881/tasks/${id}`, this.newTask)
         .then(function() {
-          self.newTask.item = ""
-          self.newTask.task_date = ""
+          // self.newTask.item = ""
+          // self.newTask.task_date = ""
           self.getTasks();
         }).catch(function(error) {
           console.log(error);
@@ -312,7 +317,9 @@ ul {
   text-decoration: line-through;
 }
 
-
+.hideButton{
+  display: none;
+}
 /* .notComplete {
   background-color: white;
 
@@ -320,7 +327,6 @@ ul {
 
 .completeColor {
   background-color: gainsboro;
-
 }
 
 
@@ -334,12 +340,4 @@ ul {
   border-radius: 5px;
 }
 
-/* form{
-  border:1px solid gainsboro;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  padding-right:5%;
-  padding-left: 2%;
-  border-radius:2%;
-} */
 </style>
