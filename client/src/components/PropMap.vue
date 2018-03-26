@@ -330,6 +330,7 @@ export default {
 
 .searchBar{
   margin-right:10%;
+  margin-left: 10%;
   text-align: center;
 }
 .searchBar > input {
@@ -344,8 +345,9 @@ export default {
 }
 
 .property-map {
-  width: 600px;
-  height: 600px;
+  /* width: 600px;
+  height: 600px; */
+  height:400pt;
   margin: 0 auto;
   text-align: left;
 }
