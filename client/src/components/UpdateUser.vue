@@ -10,27 +10,29 @@
 <!-- Button Navbar -->
       <div class="row buttonRow">
 
-        <div class = "col-sm-2">
+        <div class = "col-sm-6">
+          <h3>Account Settings</h3>
         </div>
+
       <div class = "col-sm-2">
         <button v-on:click="indexEmail = !indexEmail" type="button" class="btn btn-info">Update Email</button>
       </div>
 
-      <div class = "col-sm-1">
-      </div>
+      <!-- <div class = "col-sm-1">
+      </div> -->
 
       <div class ="col-sm-2">
         <button type="button" class="btn btn-info" v-on:click="indexPassword = !indexPassword">Update Password</button>
       </div>
 
-      <div class = "col-sm-1">
-      </div>
+      <!-- <div class = "col-sm-1">
+      </div> -->
 
       <div class = "col-sm-2">
         <button type="button" class="btn btn-info" v-on:click="indexInfo = !indexInfo">Update Info</button>
       </div>
-<div class = "col-sm-2">
-</div>
+<!-- <div class = "col-sm-2">
+</div> -->
     </div>
 
 
@@ -50,7 +52,21 @@
               <div class = "row">
                 <div class="col-sm-12 " v-if="indexEmail">
                   <form @submit.prevent="updateEmail">
-                    <h3 class="update-account-header">Update Email</h3>
+                    <div class = "row">
+                    <div class = "col-sm-8">
+                      <label>
+                      <h3 class="update-account-header">Update Email</h3>
+                    </label>
+                    </div>
+
+                      <div class = "col-sm-3">
+                      </div>
+
+                    <div class = "col-sm-1">
+                    <div class="form-row glyphicon glyphicon-remove btn editSuiteClose" @click="indexEmail = !indexEmail"></div>
+                  </div>
+                    </div>
+
 
                     <div class="form-group">
                       <input type="email" v-model="newEmail.email" id="inputEmail" class="form-control" placeholder="New Email Address" required autofocus>
@@ -72,7 +88,20 @@
             <div class = "row">
               <div class="col-sm-12 " v-if="indexPassword">
           <form  @submit.prevent="updatePassword">
-            <h3 class="update-account-header">Update Password</h3>
+            <div class = "row">
+            <div class = "col-sm-8">
+              <label>
+              <h3 class="update-account-header">Update Password</h3>
+            </label>
+            </div>
+
+              <div class = "col-sm-3">
+              </div>
+
+            <div class = "col-sm-1">
+            <div class="form-row glyphicon glyphicon-remove btn editSuiteClose" @click="indexPassword = !indexPassword"></div>
+          </div>
+            </div>
 
             <div class = "form-group">
             <input type="password" v-model="newPassword.oldPassword" id="oldPassword" class="form-control" placeholder="Current Password" required autofocus>
@@ -98,8 +127,20 @@
             <div class="col-sm-12 " v-if="indexInfo">
 
         <form @submit.prevent="updateInfo">
+          <div class = "row">
+          <div class = "col-sm-8">
+            <label>
+            <h3 class="update-account-header">Update Name and City</h3>
+          </label>
+          </div>
 
-          <h3 class="update-account-header">Update Name and City</h3>
+            <div class = "col-sm-3">
+            </div>
+
+          <div class = "col-sm-1">
+          <div class="form-row glyphicon glyphicon-remove btn editSuiteClose" @click="indexInfo = !indexInfo"></div>
+        </div>
+          </div>
 
           <div class = "form-group">
           <input type="text" v-model="newInfo.name" placeholder="Enter a New Name" id="inputName" class="form-control" required autofocus>
@@ -263,6 +304,8 @@ export default {
       let id = window.localStorage.id;
 
       self.indexInfo = false;
+
+      self.indexInfo = !self.indexInfo
 
       axios.put(`http://localhost:8881/profile/${id}/info`, this.newInfo)
         .then(function() {

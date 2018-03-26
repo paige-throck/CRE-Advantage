@@ -73,7 +73,7 @@
               <div>
                 <span class="pull-right">
 
-<button class="btn btn-default btn-xs" type="button" v-on:click="updateTask(index)"><span class="glyphicon glyphicon-pencil"></span></button>
+<button class="btn btn-default btn-xs" v-bind:class="{hideButton:task.completed, showButton: !task.completed}" type="button" v-on:click="updateTask(index)"><span class="glyphicon glyphicon-pencil"></span></button>
 
                 <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
   v-on:click="completeTask($event, task.id)"></span></button>
@@ -93,6 +93,7 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 
                     <div class="row">
                       <div class="col-sm-1">
+
                       </div>
 
                       <div class="col-sm-6">
@@ -316,7 +317,9 @@ ul {
   text-decoration: line-through;
 }
 
-
+.hideButton{
+  display: none;
+}
 /* .notComplete {
   background-color: white;
 
@@ -324,7 +327,6 @@ ul {
 
 .completeColor {
   background-color: gainsboro;
-
 }
 
 
