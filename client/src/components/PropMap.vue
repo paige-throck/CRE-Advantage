@@ -327,7 +327,7 @@ export default {
 
 <style scoped>
 .mapPage{
-  margin-top: 10%;
+  margin-top: 8%;
 }
 
 .searchBar{
@@ -339,18 +339,17 @@ export default {
   width: 30%;
 }
 
-.property-map {
+/* .property-map {
   width: 600px;
   height: 600px;
   margin: 0 auto;
   background: grey;
-}
+} */
 
 
 .property-map {
-  /* width: 600px;
-  height: 600px; */
-  height:400pt;
+  height:450pt;
+  width: 700pt;
   margin: 0 auto;
   text-align: left;
 }
