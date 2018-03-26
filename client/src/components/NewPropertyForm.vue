@@ -1,8 +1,15 @@
 <template>
 <div class="propForm">
-  <sideNav></sideNav>
+  <!-- <sideNav></sideNav> -->
+
+<h3 class="editPropertyFormH3">Add Property</h3>
 
   <form div class ="newPropForm" @submit.prevent="addNewProperty">
+
+    <div class="form-row newPropClose" >
+      <div class="glyphicon glyphicon-remove btn" @click="closeNewPropForm"></div>
+    </div>
+
     <div class="form-row">
       <div class="form-group col-sm-8">
         <label for="prop-owner">Property Owner</label>
@@ -72,7 +79,7 @@
       </div>
     </div>
     <div class="form-group col-sm-12">
-      <div class="form-check text-center">
+      <div class="form-check">
         <input class="form-check-input" type="checkbox" id="prospective-prop" v-model="newPropInfo.prospective_prop">
 
 
@@ -82,7 +89,7 @@
       </div>
     </div>
     <div class="text-center">
-    <button type="submit" class="btn btn-info btn-lg">Submit</button>
+    <button type="submit" class="btn btn-info">Submit</button>
   </div>
   </form>
 </div>
@@ -149,6 +156,9 @@ export default {
 
         })
 
+    },
+    closeNewPropForm: function () {
+      this.$emit('closeNewPropForm')
     }
 
 
@@ -159,24 +169,34 @@ export default {
 
 <style scoped>
 
-.newPropForm{
-  margin: 10%;
+h3 {
+  margin-top: 5%;
 }
 
 label {
   font-weight: 500;
-
 }
-.btn {
+button {
   margin-top: 3%;
+  margin-bottom: 4%;
 }
 .form-check {
-  margin-top: 3%;
+  /* margin-top: 3%; */
 }
-.propForm {
-  border-radius: 1%;
-  background-color: white;
+.newPropForm {
   margin-top: 5%;
+  width: 85%;
+  border: 1px solid gainsboro;
+  border-radius: 2%;
+}
+
+.newPropClose {
+  width: 100%;
+  text-align: right;
+  margin-bottom:4%;
+}
+.newPropClose > div:hover {
+  color: #73BEDB;
 }
 
 </style>

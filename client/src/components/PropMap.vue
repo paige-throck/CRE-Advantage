@@ -329,9 +329,11 @@ export default {
 }
 
 .searchBar{
-  margin-left:10%;
   margin-right:10%;
   text-align: center;
+}
+.searchBar > input {
+  width: 30%;
 }
 
 .property-map {

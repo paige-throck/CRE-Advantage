@@ -87,6 +87,9 @@ export default {
 
 <style scoped>
 
+.newSuiteForm {
+  margin-top:5%;
+}
 form {
   width: 85%;
   margin-top: 5%;

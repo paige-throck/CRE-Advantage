@@ -33,12 +33,12 @@
           <p>New Suite</p>
         </button>
 
-        <button type="button" class="btn btn btn-light" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes" @click="showNotes = !showNotes">
+        <button type="button" class="btn btn btn-light"  @click="showNotes = !showNotes">
           <i class="material-icons md-48">note</i>
           <p>Notes</p>
         </button>
 
-        <button type="button" class="btn btn btn-light" data-toggle="collapse" data-target="#newNotes" aria-expanded="false" aria-controls="newNotes">
+        <button type="button" class="btn btn btn-light" @click="showNewNotes = !showNewNotes">
           <i class="material-icons md-48">note</i>
           <p>New Note</p>
         </button>
@@ -65,8 +65,8 @@
   <!-- ============= left map column =====================-->
 
   <div class="row mainContent">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-3 text-left mapColumn">
+    <div class="col-md-1 hiddenColumn"></div>
+    <div class="col-md-3 text-left mapColumn">
 
       <SmallMap :property="property" class="centerMap"></SmallMap>
 
@@ -79,34 +79,13 @@
       <p><span class="propHeader">Suites:</span> {{ property[0].num_suites}}</p>
     </div>
   </div>
-    <div class="col-sm-8 rightCol">
+    <div class="col-md-8 rightCol">
 
 
 
-      <!-- </div> -->
 
 
-
-      <!-- <div class="row"> -->
-      <!-- <div class="col"> -->
-
-      <!-- PROPERTY MENU BUTTONS -->
-      <!-- <p> -->
-      <!-- <a class="btn btn-primary" data-toggle="collapse" href="#suites" role="button" aria-expanded="false" aria-controls="suites">Suites</a> -->
-
-      <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#notes" aria-expanded="false" aria-controls="notes">Notes</button> -->
-
-      <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#documents" aria-expanded="false" aria-controls="documents">Documents</button> -->
-
-      <!-- <button class="btn btn-primary" type="button" @click="showEditPropertyForm = ! showEditPropertyForm">Edit Property</button> -->
-
-      <!-- <button class="btn btn-primary" type="button" @click="deleteProperty">Delete Property</button> -->
-
-      <!-- <button class="btn btn-primary" type="button" @click="showNewPropertyForm = !showNewPropertyForm">New Property</button> -->
-      <!-- </p> -->
-
-
-      <NewPropertyForm v-if="showNewPropertyForm"  v-on:addNewProperty="addProperty($event)" :propTypes="propTypes" :states="states" class="newPropFormMargin"></NewPropertyForm>
+      <NewPropertyForm v-if="showNewPropertyForm"  v-on:addNewProperty="addProperty($event)" v-on:closeNewPropForm="closeNewPropForm($event)" :propTypes="propTypes" :states="states" ></NewPropertyForm>
 
 
 
@@ -244,20 +223,19 @@
 
 
 
-        <div class="col">
-          <div class="collapse multi-collapse text-left" id="newNotes">
-            <div class="card card-body">
-              <form class="form-tasks" @submit.prevent="addNote">
+        <div class="col newNotesDiv">
+          <div class=" text-left" v-if="showNewNotes">
+            <div class="card card-body newNoteTitle">
+              <h3>New Note<div class="form-row newNotesClose glyphicon glyphicon-remove btn pull-right" @click="closeNewNotes"> </div></h3>
+              <form class="form-tasks newNotesForm" @submit.prevent="addNote">
 
-                <label for="newNoteArea">Add a note</label>
-                  <textarea class="form-control" v-model="newNote.content" placeholder="Add a note" required autofocus id="newNoteArea" rows="3">
+                  <textarea class="form-control" v-model="newNote.content" placeholder="Add a note" required autofocus id="newNoteArea" rows="5">
                   </textarea>
-                  <div></div>
 
-                  <span class="input-group-btn">
-                <button class="btn btn-info" type="submit"><span
-                  class="glyphicon glyphicon-plus"></span> Add Note</button>
-                  </span>
+
+                  <div class="text-center newNotesButton">
+                <button class="btn btn-info" type="submit">Add Note</button>
+              </div>
 
               </form>
             </div>
@@ -312,7 +290,15 @@
         <div class="col">
           <div v-if="showEditPropertyForm" id="edit-property">
             <div class="card card-body">
-              <form @submit.prevent="formatEditedProperty">
+
+              <h3 class="editPropertyFormH3">Edit Property</h3>
+
+              <form @submit.prevent="formatEditedProperty" class=" editPropertyForm">
+
+                <div class="form-row editPropertyClose pull-right" >
+                  <div class="glyphicon glyphicon-remove btn pull-right" @click="closeEditPropertyForm"></div>
+                </div>
+
                 <div class="form-row">
                   <div class="form-group col-sm-8">
                     <label for="prop-owner">Property Owner</label>
@@ -384,17 +370,19 @@
 
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-sm-12">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="prospective-prop" :value="editedPropInfo.prospective_prop" v-model="editedPropInfo.prospective_prop">
 
 
                     <label class="form-check-label" for="prospective-prop">
-                        Prospective Property {{ editedPropInfo.prospective_prop }}
+                        Prospective Property
                       </label>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <div class="text-center">
+                <button type="submit" class="btn btn-info editPropertyFormButton">Save Changes</button>
+              </div>
               </form>
             </div>
           </div>
@@ -501,7 +489,8 @@ export default {
       showSuites: false,
       activeNote: -1,
       noteHovered: false,
-      showNotes: false
+      showNotes: false,
+      showNewNotes: false
 
     }
   },
@@ -638,10 +627,15 @@ export default {
         num_suites: ""
       }
     },
+    closeEditPropertyForm: function () {
+      this.showEditPropertyForm = !this.showEditPropertyForm
+    },
     addNote: function() {
       let self = this
       let id = self.notes.id
       let user_id = window.localStorage.id
+
+      self.showNewNotes = !self.showNewNotes
 
       axios.post(`http://localhost:8881/properties/note/${id}`, self.newNote)
         .then(function(results) {
@@ -690,6 +684,9 @@ export default {
     },
     closeNotes: function () {
       this.showNotes = !this.showNotes
+    },
+    closeNewNotes: function () {
+      this.showNewNotes = !this.showNewNotes
     },
     editSuiteClick: function(event, indexClicked) {
       this.activeSuiteItem = []
@@ -775,9 +772,13 @@ export default {
       axios.post(`http://localhost:8881/properties/new`, event)
         .then(function(results) {
           console.log('OMG YOU HAVE A NEW PROPERTY');
-          self.$router.push('/profile')
+          self.$router.push(`/properties/${prop_id}`)
         })
     },
+    closeNewPropForm: function () {
+      this.showNewPropertyForm = !this.showNewPropertyForm
+    },
+
     mouseover: function (event, index) {
       console.log(index,'HEYYYY EVENT');
       this.activeSuiteIndex = index
@@ -812,10 +813,14 @@ export default {
 }
 
 
+
 </script>
 
 
 <style scoped>
+
+/* ============ main content styling ===============*/
+
 
 .notififyBox {
   position: fixed;
@@ -829,6 +834,22 @@ export default {
   margin: 0;
   /* background: linear-gradient(to right, whitesmoke, #ffffff); */
 }
+.mainContent {
+  margin-top: 11%;
+}
+
+.rightCol {
+  padding-left: 3%;
+  height: 100%;
+  width: 60%;
+
+}
+/* .hiddenColumn {
+  width: 10%;
+  margin-left: 4%;
+  overflow-x: hidden;
+  white-space: nowrap;
+} */
 
 /* ============ secondary button nav =================*/
 .buttonRow {
@@ -837,9 +858,15 @@ export default {
   top: 10%;
   margin-left: auto;
   margin-right: auto;
-  /* margin-top: 10%; */
   background: whitesmoke;
   border-bottom: 1px solid gainsboro;
+  z-index: 50;
+  min-width: 10%;
+  overflow-x: scroll;
+
+}
+.btn-group {
+  white-space: nowrap;
 }
 
 .btn-group>.btn {
@@ -848,7 +875,10 @@ export default {
   width: 16vh;
   background: whitesmoke;
   color: #136a8a;
+  display: inline-block;
+  float: none;
 }
+
 
 .btn-group>.btn:hover {
   background: linear-gradient(to right, whitesmoke, #ffffff);
@@ -860,20 +890,25 @@ export default {
   background: white;
 }
 
-.mainContent {
-  margin-top: 12%;
-}
+
 
 /* ============= map column styling ==================*/
 .mapColumn {
   padding: 2%;
   border-right: 1px solid gainsboro;
   background: whitesmoke;
+  height: 100%;
+  /* width: 20%; */
+  margin-left: 4%;
+  min-width: 200px;
+  /* top: 20%;
+  left: 5%; */
+
 }
 
 .mapColumn > h3 {
   margin: 5% 5%;
-  line-height: .5em;
+  /* line-height: .5em; */
 }
 
 .centerMap {
@@ -895,11 +930,6 @@ export default {
 }
 
 
-/* ============ main content styling ===============*/
-.rightCol {
-  padding-left: 3%;
-  background-color: white;
-}
 
 /* ======================= suites ====================*/
 .suiteTable {
@@ -966,22 +996,57 @@ export default {
 .noteCardButtons{
   display: inline;
 }
-.notesClose:hover {
-  color: #73BEDB;
-}
 .noteCards > ul > li:hover {
   box-shadow: 0px .5px .25px dimgrey;
 }
-
-.newPropFormMargin {
-  padding: 5% 3%;
-  margin-bottom: 5%;
-  display: block;
+.notesClose:hover {
+  color: #73BEDB;
 }
+.newNotesClose:hover {
+  color: #73BEDB;
+}
+.newNotesForm {
+  border: 1px solid gainsboro;
+  border-radius: 2%;
+  padding: 3%;
 
-
+}
+.newNotesDiv {
+  width: 75%;
+  margin-left: 3%;
+}
+.newNotesButton {
+  margin-top: 4%;
+}
+.newNoteTitle > h3{
+  margin-bottom: 4%;
+}
 .editInput {
   background-color: ivory !important
+}
+
+/* ============= property styling ==================*/
+
+
+.editPropertyForm {
+  border: 1px solid gainsboro;
+  border-radius: 2%;
+  padding: 2%;
+  width: 85%;
+  margin-bottom: 5%;
+  margin-left: 3%;
+}
+.editPropertyClose {
+  width: 100%;
+  margin-bottom:4%;
+}
+.editPropertyFormH3 {
+  margin-bottom: 4%;
+  margin-left: 3%;
+}
+.editPropertyFormButton {
+  margin-top: 4%;
+  margin-bottom: 4%;
 }
 
 

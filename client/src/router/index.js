@@ -20,7 +20,7 @@ import DatePicker from '@/components/DatePicker'
 import Nav from '@/components/Nav'
 import App from '@/App'
 import ProTasks from '@/components/profileTasks'
-import NewPropertyForm from '@/components/NewPropertyForm.vue'
+import NewProperty from '@/components/NewProperty.vue'
 
 Vue.use(Router)
 Vue.use(VueSession)
@@ -77,8 +77,8 @@ export default new Router({
     },
     {
     path: '/new-property',
-    name: 'NewPropertyForm',
-    component: NewPropertyForm
+    name: 'NewProperty',
+    component: NewProperty
   }
   ]
 });
