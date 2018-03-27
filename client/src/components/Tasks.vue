@@ -173,7 +173,9 @@ export default {
       if (date === null) {
         return "";
       } else {
-        return moment.utc(date).format("ddd MMM DD YYYY");
+        // return moment(date).utcOffset('+0100').format("ddd MMM DD YYYY");
+        return moment(new Date(date)).zone("+08:00").format("ddd MMM DD YYYY");
+
       }
 
     },

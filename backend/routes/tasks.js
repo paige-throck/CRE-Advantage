@@ -26,6 +26,7 @@ router.get('/:id', (req, res, next)=>{
   knex('tasks').where('user_id', userId).select('*')
   .orderBy('id', 'asc')
   .then((tasks) => {
+    console.log(tasks, 'bakend taks date');
   taskArr.push(tasks)
     res.json(taskArr);
   })
