@@ -1,49 +1,48 @@
 <template>
 <div class="update-user">
 
-<sideNav></sideNav>
+<headerTopper></headerTopper>
+
+<i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
+
+<div class="notififyBox" id="taskList" v-if="showNotifications">
+        <ProTasks></ProTasks>
+</div>
 
   <div class = "userContainer">
     <div class="row" v-for="person in userArr[0]">
 
 
 <!-- Button Navbar -->
-      <div class="row buttonRow">
+      <div class="row">
 
-        <div class = "col-sm-6">
-          <h2>Account Settings</h2>
-        </div>
-
-      <div class = "col-sm-2 navButtonEmail">
-        <i class="material-icons" style="font-size:5vh" v-on:click="indexEmail = !indexEmail">mail_outline</i>
-        <div>Update Email</div>
+        <div class = "col-sm-12 user">
+              <h4><label>Name:</label> {{person.name}}</h4>
+              <h4><label>Email:</label> {{person.email}}</h4>
+              <h4><label>Current City:</label> {{person.city}}</h4>
       </div>
-
-
-
-      <div class ="col-sm-2 navButtonPassword">
-
-        <i class="material-icons" style="font-size:5vh" v-on:click="indexPassword = !indexPassword">lock_open</i>
-        <div>Update Password</div>
-      </div>
-
-
-
-      <div class = "col-sm-2 navButtonInfo">
-        <i class="material-icons" style="font-size:5vh" v-on:click="indexInfo = !indexInfo">account_box</i>
-        <div>Update Info</div>
-      </div>
-
     </div>
 
+    <div class = "row">
+      <div class ="col-sm-2">
+      </div>
+        <i class="material-icons" style="font-size:3vh" v-on:click="indexEmail = !indexEmail">mail_outline</i>
+        <div>Update Email</div>
 
-<div class = "row userInfoList">
-  <div class = "col-sm-4 user">
-        <h4><label>Name:</label> {{person.name}}</h4>
-        <h4><label>Email:</label> {{person.email}}</h4>
-        <h4><label>Current City:</label> {{person.city}}</h4>
-</div>
+        <i class="material-icons" style="font-size:3vh" v-on:click="indexPassword = !indexPassword">lock_open</i>
+        <div>Update Password</div>
 
+        <i class="material-icons" style="font-size:3vh" v-on:click="indexInfo = !indexInfo">account_box</i>
+        <div>Update Info</div>
+        <div class ="col-sm-2">
+        </div>
+      </div>
+
+
+
+
+
+    </div>
 
       <!-- Edit Email Form -->
 <div class = "col-sm-8">
@@ -118,7 +117,7 @@
       </div>
     </div>
   </div>
-
+</div>
 
 
     <!-- Update Info Form -->
@@ -227,12 +226,12 @@
 
 <script>
 import axios from 'axios';
-import sideNav from './sideNav.vue'
+import headerTopper from './headerTopper.vue'
 
 export default {
-  name: 'UpdateUser',
+  name: 'mobileAccount',
   components: {
-    'sideNav': sideNav,
+    'headerTopper': headerTopper,
   },
   data() {
     return {
@@ -347,6 +346,14 @@ export default {
   height: 100vh;
 }
 
+.userContainer{
+    margin-left: 5%;
+    margin-right: 5%;
+    /* margin-top: 5%; */
+    padding-top: 8%;
+
+}
+
 .user{
   border:1px solid gainsboro;
   padding: 2%;
@@ -359,13 +366,7 @@ export default {
   margin-left: 15%;
 }
 
-.userContainer{
-    margin-left: 5%;
-    margin-right: 5%;
-    /* margin-top: 5%; */
-    padding-top: 8%;
 
-}
 
 .buttonRow {
   /* width: 100%; */
@@ -395,11 +396,6 @@ export default {
   text-align: center;
 }
 
-.navButtonInfo:hover,
-.navButtonEmail:hover,
-.navButtonPassword:hover {
-  color: #73BEDB;
-}
 
 .editSuiteClose{
   position: relative;

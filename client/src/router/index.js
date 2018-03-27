@@ -5,7 +5,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
 
-
+import App from '@/App'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
@@ -17,10 +17,12 @@ import UpdateUser from '@/components/UpdateUser'
 import SmallMap from '@/components/SmallMap'
 import AllProp from '@/components/AllProp'
 import DatePicker from '@/components/DatePicker'
-import Nav from '@/components/Nav'
-import App from '@/App'
 import ProTasks from '@/components/profileTasks'
 import NewProperty from '@/components/NewProperty.vue'
+import mobileProfile from '@/components/mobileProfile.vue'
+import mobileTasks from '@/components/mobileTasks.vue'
+import mobileMap from '@/components/mobileMap.vue'
+import mobileAccount from '@/components/mobileAccount.vue'
 
 Vue.use(Router)
 Vue.use(VueSession)
@@ -79,6 +81,23 @@ export default new Router({
     path: '/new-property',
     name: 'NewProperty',
     component: NewProperty
-  }
+  },
+  {  path: '/mobile-profile',
+  name: 'mobileProfile',
+  component: mobileProfile
+  },
+  {  path: '/mobile-tasks',
+  name: 'mobileTasks',
+  component: mobileTasks
+  },
+  {  path: '/mobile-map',
+  name: 'mobileMap',
+  component: mobileMap
+},
+{  path: '/mobile-account-settings',
+name: 'mobileAccount',
+component: mobileAccount
+}
+
   ]
 });
