@@ -170,12 +170,10 @@ export default {
   background-size: cover;
   background-image: url("../../img/bigcity.jpg");
 }
-.signup-top{
-  margin-top: 1%;
-}
+
 
 .form-signup-heading{
-  padding-top: 3%;
+  padding-top: 4%;
 }
 .container-box {
   margin-top: 10%;
