@@ -60,17 +60,27 @@
 
 # Mobile Application
 
-
+<table>
+<tr>
+<td>
 ![alt tag](screenshots/mobileLogin.png)
-
+</td>
+<td>
 ![alt tag](screenshots/mobileProfile.png)
-
+</td>
+<td>
 ![alt tag](screenshots/mobileMap.png)
-
+</td>
+</tr>
+<tr>
+<td>
 ![alt tag](screenshots/mobileTasks.png)
-
+</td>
+<td>
 ![alt tag](screenshots/mobileAccount.png)
-
+</td>
+</tr>
+</table>
 
 <br></br>
 <div>
