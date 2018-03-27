@@ -9,7 +9,7 @@
     </div>
 
 
-    <div class="row">
+    <div class="row signup-top">
       <div class="col-sm-3"></div>
 
       <div class="col-sm-6 container-box">
@@ -170,7 +170,13 @@ export default {
   background-size: cover;
   background-image: url("../../img/bigcity.jpg");
 }
+.signup-top{
+  margin-top: 1%;
+}
 
+.form-signup-heading{
+  padding-top: 3%;
+}
 .container-box {
   margin-top: 10%;
   padding: 3%;

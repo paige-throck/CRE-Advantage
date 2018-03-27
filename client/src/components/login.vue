@@ -104,7 +104,7 @@ export default {
   background-image: url("../../img/bigcity.jpg");
 }
 .login-top{
-  margin-top: 10%;
+  margin-top: 5%;
 }
 .container-box {
   margin-top: 9%;

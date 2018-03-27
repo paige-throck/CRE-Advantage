@@ -3,6 +3,8 @@
 
 <sideNav></sideNav>
 
+
+
   <div class = "userContainer">
     <div class="row" v-for="person in userArr[0]">
 
