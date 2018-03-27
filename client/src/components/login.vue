@@ -36,7 +36,7 @@
 
             <label for="checkMobile" class="mobileLabel">Mobile</label>
 
-            <input v-model="user.mobile" type="checkbox"  data-style="ios" data-onstyle="info" data-offstyle="default"  class="form-control mobileCheck" id="mobileCheck" data-size="small" data-toggle="toggle">
+            <input  type="checkbox"  data-style="ios" data-onstyle="info" data-offstyle="default"  class="form-control mobileCheck" id="mobileCheck" data-size="small" data-toggle="toggle">
 
 
           </div>
@@ -71,8 +71,7 @@ export default {
     return {
       user: {
         email: '',
-        password: '',
-        mobile: ''
+        password: ''
       }
     }
   },
@@ -87,6 +86,7 @@ export default {
 
       let self = this
       let checked = $('#mobileCheck:checked').val()
+      console.log(checked, 'CHECKEDDDDD');
 
       axios.post('http://localhost:8881/login/', this.user)
         .then(function(response) {
