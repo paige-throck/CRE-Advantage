@@ -1,7 +1,7 @@
 <template>
 <div class="update-user">
 
-<headerTopper></headerTopper>
+<mobileNav></mobileNav>
 
 <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
 
@@ -13,8 +13,8 @@
     <div class="row" v-for="person in userArr[0]">
 
 
-<!-- Button Navbar -->
-      <div class="row">
+
+      <div class="row userBox">
 
         <div class = "col-sm-12 user">
               <h4><label>Name:</label> {{person.name}}</h4>
@@ -23,30 +23,38 @@
       </div>
     </div>
 
-    <div class = "row">
+    <div class = "row buttonBox">
+
       <div class ="col-sm-2">
-      </div>
-        <i class="material-icons" style="font-size:3vh" v-on:click="indexEmail = !indexEmail">mail_outline</i>
+        <i class="material-icons" style="font-size:4vh" v-on:click="indexEmail = !indexEmail">mail_outline</i>
         <div>Update Email</div>
+      </div>
 
-        <i class="material-icons" style="font-size:3vh" v-on:click="indexPassword = !indexPassword">lock_open</i>
+      <div class = "col-sm-3">
+      </div>
+
+      <div class ="col-sm-2">
+        <i class="material-icons" style="font-size:4vh" v-on:click="indexPassword = !indexPassword">lock_open</i>
         <div>Update Password</div>
+      </div>
 
-        <i class="material-icons" style="font-size:3vh" v-on:click="indexInfo = !indexInfo">account_box</i>
+      <div class = "col-sm-3">
+      </div>
+
+      <div class ="col-sm-2">
+        <i class="material-icons" style="font-size:4vh" v-on:click="indexInfo = !indexInfo">account_box</i>
         <div>Update Info</div>
-        <div class ="col-sm-2">
-        </div>
+      </div>
+
       </div>
 
 
 
 
+<div class = "row">
 
-    </div>
 
       <!-- Edit Email Form -->
-<div class = "col-sm-8">
-
         <div class="col-sm-12 container-box">
             <div id="update-email">
               <div class = "row">
@@ -117,7 +125,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 
     <!-- Update Info Form -->
@@ -218,6 +226,10 @@
   </div>
   </div>
 </div>
+
+
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -226,12 +238,14 @@
 
 <script>
 import axios from 'axios';
-import headerTopper from './headerTopper.vue'
+import mobileNav from './mobileNav.vue'
+import ProTasks from './profileTasks.vue'
 
 export default {
   name: 'mobileAccount',
   components: {
-    'headerTopper': headerTopper,
+    'mobileNav': mobileNav,
+    'ProTasks': ProTasks,
   },
   data() {
     return {
@@ -349,62 +363,49 @@ export default {
 .userContainer{
     margin-left: 5%;
     margin-right: 5%;
-    /* margin-top: 5%; */
     padding-top: 8%;
 
 }
 
-.user{
-  border:1px solid gainsboro;
-  padding: 2%;
-  border-radius:2%;
+.userBox{
+  margin-top: 12%;
+  margin-left:10%
 }
 
-
-.userInfoList{
+.buttonBox{
   margin-top: 5%;
-  margin-left: 15%;
+  margin-left:10%
 }
 
-
-
-.buttonRow {
-  /* width: 100%; */
-  margin-top: 2%;
-  margin-left: 10%;
-  margin-right: 10%;
-  border:1px solid gainsboro;
-  padding: 2%;
-  border-radius:2%;
+.container-box{
+  margin-top:2%;
+  margin-right:10%;
+  margin-left:10%;
 }
-
-.navButtonEmail{
-  margin-top: 1%;
-  font-size: 2vh;
-  text-align: center;
-}
-
-.navButtonPassword{
-  margin-top: 1%;
-  font-size: 2vh;
-  text-align: center;
-}
-
-.navButtonInfo{
-  margin-top: 1%;
-  font-size: 2vh;
-  text-align: center;
-}
-
 
 .editSuiteClose{
   position: relative;
 }
 
-form{
-  border:1px solid gainsboro;
-  padding: 2%;
-  border-radius:2%;
+.notififyBox {
+  position: fixed;
+  top: 12%;
+  right: 4%;
+  width: 30%;
+  z-index: 100;
+}
+.notifyBell {
+  position: fixed;
+  top: 2%;
+  right: 6%;
+  font-size: 5vh;
+  color: gainsboro;
+  z-index: 1;
+  padding-top: 1%;
+}
+.notifyBell:hover {
+  color: #73BEDB;
+  cursor: pointer;
 }
 
 </style>

@@ -1,13 +1,14 @@
 <template>
 <div class = "mapPage">
 
-<headerTopper></headerTopper>
+<mobileNav></mobileNav>
 
 <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
 
 <div class="notififyBox" id="taskList" v-if="showNotifications">
         <ProTasks></ProTasks>
 </div>
+
 
 <div class = "mapContainer">
   <div class = "searchBar">
@@ -39,12 +40,14 @@
 
 <script>
 import axios from 'axios';
-import headerTopper from './headerTopper.vue'
+import mobileNav from './mobileNav.vue'
+import ProTasks from './profileTasks.vue'
 
 export default {
   name: 'mobileMap',
   components:{
-    headerTopper
+    mobileNav,
+    ProTasks,
   },
   data() {
     return {
@@ -347,7 +350,7 @@ export default {
 }
 
 .searchBar{
-  margin-top: 20%;
+  margin-top: 15%;
   text-align: center;
 }
 
@@ -384,5 +387,26 @@ select {
   height: 30px;
   padding: 1px 1px;
   text-align: center;
+}
+
+.notififyBox {
+  position: fixed;
+  top: 12%;
+  right: 4%;
+  width: 30%;
+  z-index: 100;
+}
+.notifyBell {
+  position: fixed;
+  top: 2%;
+  right: 6%;
+  font-size: 5vh;
+  color: gainsboro;
+  z-index: 1;
+  padding-top: 1%;
+}
+.notifyBell:hover {
+  color: #73BEDB;
+  cursor: pointer;
 }
 </style>
