@@ -124,12 +124,15 @@ import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
 import mobileNav from './mobileNav.vue'
+import ProTasks from './profileTasks.vue'
+
 
 export default {
   name: 'mobileTasks',
   components: {
     Datepicker,
-    mobileNav
+    mobileNav,
+    ProTasks
   },
   data() {
     return {
@@ -144,8 +147,8 @@ export default {
         task_date: ''
       },
       showEditForm: false,
-      activeTask: -1
-
+      activeTask: -1,
+      showNotifications: false
     }
   },
 

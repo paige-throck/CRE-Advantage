@@ -63,7 +63,8 @@ export default {
       bounds: null,
       input: null,
       searchMarkers: [],
-      searchedProp: []
+      searchedProp: [],
+      showNotifications: false
     }
   },
   mounted: function() {

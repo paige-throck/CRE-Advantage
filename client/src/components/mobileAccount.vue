@@ -264,7 +264,8 @@ export default {
       },
       indexEmail: false,
       indexInfo: false,
-      indexPassword:false
+      indexPassword:false,
+      showNotifications: false
     }
 
   },
