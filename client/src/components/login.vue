@@ -9,7 +9,7 @@
   </div>
 
 
-  <div class="row">
+  <div class="row login-top">
     <div class="col-sm-3"></div>
 
     <div class="col-sm-6 container-box">
@@ -95,7 +95,9 @@ export default {
   background-size: cover;
   background-image: url("../../img/bigcity.jpg");
 }
-
+.login-top{
+  margin-top: 10%;
+}
 .container-box {
   margin-top: 9%;
   padding: 3%;
