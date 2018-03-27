@@ -33,7 +33,7 @@ function restrict(req, res, next) {
 //////////////LOGIN USER
 router.post('/', (req, res) => {
 let userObj = req.body;
-console.log(userObj);
+console.log(userObj.email, "what is this email??");
 knex.select('*').from('users').where('email', userObj.email)
 .then((result) => {
 console.log(result, "login post result");

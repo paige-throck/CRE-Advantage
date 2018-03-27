@@ -1,9 +1,15 @@
 <template>
 <div class = "mapPage">
-<!-- <Nav :searchedProp="searchedProp"></Nav> -->
-    <sideNav></sideNav>
 
+<headerTopper></headerTopper>
 
+<i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
+
+<div class="notififyBox" id="taskList" v-if="showNotifications">
+        <ProTasks></ProTasks>
+</div>
+
+<div class = "mapContainer">
   <div class = "searchBar">
 
     <input id="search-input" class="controls" type="text" placeholder="Search Box">
@@ -28,17 +34,17 @@
 
 </div>
 </div>
+</div>
 </template>
 
 <script>
 import axios from 'axios';
-import Nav from './Nav'
-import sideNav from './sideNav.vue'
+import headerTopper from './headerTopper.vue'
 
 export default {
-  name: 'PropMap',
+  name: 'mobileMap',
   components:{
-    'sideNav': sideNav,
+    headerTopper
   },
   data() {
     return {
@@ -331,34 +337,25 @@ export default {
 
 <style scoped>
 .mapPage{
-  margin-top: 8%;
-  /* background: whitesmoke; */
+  height: 100vh;
+}
+
+.mapContainer{
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-top: 8%;
 }
 
 .searchBar{
-  margin-right:10%;
-  margin-left: 10%;
+  margin-top: 20%;
   text-align: center;
 }
-.searchBar > input {
-  width: 30%;
-}
-
-/* .property-map {
-  width: 600px;
-  height: 600px;
-  margin: 0 auto;
-  background: grey;
-} */
 
 
 .property-map {
-  height:500pt;
-  width: 800pt;
-  /* margin: 0; */
-  margin-left: 15%;
-  text-align: left;
-
+  height:200pt;
+  margin-top:10%;
+  text-align: center;
 }
 
 input {
@@ -372,8 +369,6 @@ input {
 }
 select {
   height: 4.5vh;
-  width: 20%;
-  margin-left: 3%;
 }
 .userLocation:hover {
   color: #73BEDB;
@@ -382,14 +377,12 @@ select {
   margin-left: 1%;
 
 }
-.btn-circle {
+
+.btn-circle{
+  font-size: 18px;
   width: 30px;
   height: 30px;
   padding: 1px 1px;
-  border-radius: 15px;
   text-align: center;
-  font-size: 18px;
-  line-height: 1.42857;
-  margin-left: 40px;
 }
 </style>

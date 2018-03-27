@@ -13,7 +13,7 @@
     <div class ="row2">
       <br></br>
       <br></br>
-      <!-- <br></br> -->
+      <br></br>
 
       <router-link to="/profile"><center><i class="material-icons navButton" style="font-size:6vh">home</i></center>
       <center class = "navText">Home</center></router-link>

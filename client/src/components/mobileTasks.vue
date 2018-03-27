@@ -1,8 +1,13 @@
 <template>
 <div class="tasks">
 
-  <sideNav></sideNav>
+<headerTopper></headerTopper>
 
+<i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
+
+<div class="notififyBox" id="taskList" v-if="showNotifications">
+        <ProTasks></ProTasks>
+</div>
 
   <div class="row tasksContainer">
     <div class="card card-body">
@@ -129,13 +134,13 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
-import sideNav from './sideNav.vue'
+import headerTopper from './headerTopper.vue'
 
 export default {
-  name: 'Tasks',
+  name: 'mobileTasks',
   components: {
     Datepicker,
-    sideNav
+    headerTopper
   },
   data() {
     return {
