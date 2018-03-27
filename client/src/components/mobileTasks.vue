@@ -344,4 +344,25 @@ ul {
   border-radius: 5px;
 }
 
+.notififyBox {
+  position: fixed;
+  top: 12%;
+  right: 4%;
+  width: 30%;
+  z-index: 100;
+}
+.notifyBell {
+  position: fixed;
+  top: 2%;
+  right: 6%;
+  font-size: 5vh;
+  color: gainsboro;
+  z-index: 1;
+  padding-top: 1%;
+}
+.notifyBell:hover {
+  color: #73BEDB;
+  cursor: pointer;
+}
+
 </style>

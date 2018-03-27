@@ -9,6 +9,14 @@
         <ProTasks></ProTasks>
 </div>
 
+<div class = "row navBar">
+  <router-link to="/mobile-profile"><center><i class="material-icons navButton" style="font-size:2vh">home</i></center>
+  <center class = "navText">Home</center></router-link>
+</div>
+
+
+
+
 <div class = "mapContainer">
   <div class = "searchBar">
 
@@ -340,6 +348,12 @@ export default {
   height: 100vh;
 }
 
+.navBar{
+margin-top: 10%;
+margin-left: 10%;
+}
+
+
 .mapContainer{
   margin-left: 5%;
   margin-right: 5%;
@@ -347,7 +361,7 @@ export default {
 }
 
 .searchBar{
-  margin-top: 20%;
+  margin-top: 10%;
   text-align: center;
 }
 
@@ -384,5 +398,26 @@ select {
   height: 30px;
   padding: 1px 1px;
   text-align: center;
+}
+
+.notififyBox {
+  position: fixed;
+  top: 12%;
+  right: 4%;
+  width: 30%;
+  z-index: 100;
+}
+.notifyBell {
+  position: fixed;
+  top: 2%;
+  right: 6%;
+  font-size: 5vh;
+  color: gainsboro;
+  z-index: 1;
+  padding-top: 1%;
+}
+.notifyBell:hover {
+  color: #73BEDB;
+  cursor: pointer;
 }
 </style>
