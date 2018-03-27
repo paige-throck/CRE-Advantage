@@ -1,7 +1,7 @@
 <template>
 <div class="tasks">
 
-  <headerTopper></headerTopper>
+  <mobileNav></mobileNav>
 
   <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
 
@@ -123,13 +123,13 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
-import headerTopper from './headerTopper.vue'
+import mobileNav from './mobileNav.vue'
 
 export default {
   name: 'mobileTasks',
   components: {
     Datepicker,
-    headerTopper
+    mobileNav
   },
   data() {
     return {

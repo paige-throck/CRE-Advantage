@@ -1,7 +1,7 @@
 <template>
 <div class="profile">
 
-<headerTopper></headerTopper>
+<mobileNav></mobileNav>
 
 
 <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
@@ -52,7 +52,7 @@ import Property from './Property.vue'
 import Tasks from './Tasks.vue'
 import PropMap from './PropMap.vue'
 import ProTasks from './profileTasks.vue'
-import headerTopper from './headerTopper.vue'
+import mobileNav from './mobileNav.vue'
 
 
 
@@ -60,9 +60,10 @@ export default {
   name: 'mobileProfile',
   components: {
     'property': Property,
-    'headerTopper': headerTopper,
+    'mobileNav': mobileNav,
     'Tasks': Tasks,
     'ProTasks': ProTasks,
+
 
 
   },

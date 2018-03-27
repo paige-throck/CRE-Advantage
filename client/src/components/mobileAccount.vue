@@ -1,7 +1,7 @@
 <template>
 <div class="update-user">
 
-<headerTopper></headerTopper>
+<mobileNav></mobileNav>
 
 <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
 
@@ -238,13 +238,13 @@
 
 <script>
 import axios from 'axios';
-import headerTopper from './headerTopper.vue'
+import mobileNav from './mobileNav.vue'
 import ProTasks from './profileTasks.vue'
 
 export default {
   name: 'mobileAccount',
   components: {
-    'headerTopper': headerTopper,
+    'mobileNav': mobileNav,
     'ProTasks': ProTasks,
   },
   data() {

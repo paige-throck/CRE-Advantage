@@ -1,7 +1,7 @@
 <template>
 <div class = "mapPage">
 
-<headerTopper></headerTopper>
+<mobileNav></mobileNav>
 
 <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
 
@@ -40,13 +40,13 @@
 
 <script>
 import axios from 'axios';
-import headerTopper from './headerTopper.vue'
+import mobileNav from './mobileNav.vue'
 import ProTasks from './profileTasks.vue'
 
 export default {
   name: 'mobileMap',
   components:{
-    headerTopper,
+    mobileNav,
     ProTasks,
   },
   data() {
