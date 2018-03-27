@@ -74,7 +74,9 @@ export default {
         .then(function(response) {
           console.log(response);
           if (response.data === "no account with that email"){
+            alert("Incorrect Email")
             self.$router.push('/login')
+
           } else {
             self.user.email = ""
             self.user.password = ""

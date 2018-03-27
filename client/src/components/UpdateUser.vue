@@ -144,14 +144,14 @@
           </div>
 
           <div class = "form-group">
-          <input type="text" v-model="newInfo.name" placeholder="Enter a New Name" id="inputName" class="form-control" required autofocus>
+          <input type="text" v-model="newInfo.name" :placeholder="person.name" id="inputName" class="form-control" required autofocus>
         </div>
 
           <div class = "form-group">
           <div class="row">
             <div class="col-sm-6">
               <label for="inputCity" class="sr-only">City</label>
-              <input v-model="newInfo.city" placeholder="Enter a New City" type="city" id="inputCity" class="form-control" required autofocus>
+              <input v-model="newInfo.city" :placeholder="person.city" type="city" id="inputCity" class="form-control" required autofocus>
 
             </div>
             <div class="col-sm-6">
@@ -276,6 +276,7 @@ export default {
       let self = this
       axios.get(`http://localhost:8881/profile/${id}`)
         .then(function(results) {
+          console.log(results);
           self.userArr = [];
           self.userArr.push(results.data);
         })
@@ -397,7 +398,9 @@ export default {
 }
 
 
-
+.editSuiteClose{
+  position: relative;
+}
 
 form{
   border:1px solid gainsboro;
