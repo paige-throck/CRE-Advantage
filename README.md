@@ -59,13 +59,13 @@
 
 
 # Mobile Application
-![alt tag](screenshots/mobileProfile.png|width="200" height="400")
+![alt tag](screenshots/mobileProfile.png =200X400)
 <br></br>
-![alt tag](screenshots/mobileMap.png |width="200" height="400")
+![alt tag](screenshots/mobileMap.png =200X400)
 <br></br>
-![alt tag](screenshots/mobileTasks.png |width="200" height="400")
+![alt tag](screenshots/mobileTasks.png =200X400)
 <br></br>
-![alt tag](screenshots/mobileAccount.png|width="200" height="400")
+![alt tag](screenshots/mobileAccount.png=200X400)
 <br></br>
 
 <div>
