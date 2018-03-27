@@ -127,7 +127,6 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 
 <script>
 import axios from 'axios';
-import Nav from './Nav'
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
 import sideNav from './sideNav.vue'

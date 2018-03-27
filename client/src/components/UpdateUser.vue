@@ -227,13 +227,11 @@
 
 <script>
 import axios from 'axios';
-import Nav from './Nav.vue'
 import sideNav from './sideNav.vue'
 
 export default {
   name: 'UpdateUser',
   components: {
-    'Nav': Nav,
     'sideNav': sideNav,
   },
   data() {

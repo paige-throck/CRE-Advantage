@@ -416,11 +416,9 @@
 
 <script>
 import axios from 'axios';
-import Nav from './Nav.vue'
 import SmallMap from './SmallMap.vue'
 import NewSuiteForm from './NewSuiteForm.vue'
 import NewPropertyForm from './NewPropertyForm.vue'
-import headerTopper from './headerTopper'
 import sideNav from './sideNav.vue'
 import ProTasks from './profileTasks.vue'
 
@@ -429,11 +427,9 @@ import ProTasks from './profileTasks.vue'
 export default {
   name: 'Property',
   components: {
-    'Nav': Nav,
     'SmallMap': SmallMap,
     'NewSuiteForm': NewSuiteForm,
     'NewPropertyForm': NewPropertyForm,
-    'headerTopper': headerTopper,
     'sideNav': sideNav,
     'ProTasks': ProTasks
   },
