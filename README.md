@@ -63,21 +63,21 @@
 <table>
 <tr>
 <td>
-![alt tag](screenshots/mobileLogin.png)
+<img src="screenshots/mobileLogin.png">
 </td>
 <td>
-![alt tag](screenshots/mobileProfile.png)
+<img srr ="screenshots/mobileProfile.png">
 </td>
 <td>
-![alt tag](screenshots/mobileMap.png)
+<img src="screenshots/mobileMap.png">
 </td>
 </tr>
 <tr>
 <td>
-![alt tag](screenshots/mobileTasks.png)
+<img src = "screenshots/mobileTasks.png">
 </td>
 <td>
-![alt tag](screenshots/mobileAccount.png)
+<img src="screenshots/mobileAccount.png">
 </td>
 </tr>
 </table>
