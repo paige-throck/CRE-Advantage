@@ -72,7 +72,6 @@ router.get('/:id/:prop_id', function(req, res) {
 
 
 
-
 // edit suite
 router.patch('/suite/:suite_id', function(req, res) {
   console.log(req.body, 'HEY SUITE REQ BODY IN THE SUITE PATCH');
@@ -174,31 +173,51 @@ router.post('/new', function(req, res) {
 
 
 // save a new note for a property
-router.post('/note/:id', function(req, res) {
+router.post('/note/new', function(req, res) {
   let newNote = req.body.content;
+  let id = req.body.id
+  let prop_id = req.body.prop_id
+  let newNoteArr = []
 
-  // check to see if property id exists in the table
-  knex('property_notes').where('id', req.params.id)
-    .then(function(results) {
-      if (results) {
+  newNoteArr.push(newNote)
+  console.log(req.body, 'HEY I AM THE BODY IN THE NOTE');
+
+  if (id !== "") {
+
+
+    // check to see if note id exists in the table
+    knex('property_notes').where('id', id)
+      .then(function(results) {
+
         let existingNotes = results[0].notes;
         existingNotes.push(newNote);
-        return knex('property_notes').where('id', req.params.id)
+
+        return knex('property_notes').where('id', id)
           .update({
             notes: existingNotes
           });
-      } else {
-        return knex('property_notes').insert({
-          id: req.params.id,
-          notes: newNote
-        });
-      }
+      })
+      .then(function(results) {
+        console.log('WOO YOU FINALLY WORKED');
+        res.sendStatus(200);
+      });
+
+  } else {
+    knex('property_notes').insert({
+      // id: id,
+      prop_id: prop_id,
+      notes: newNoteArr
     })
     .then(function(results) {
-      console.log('WOO YOU FINALLY WORKED');
+      console.log('WOO JESUS NOTE');
       res.sendStatus(200);
     });
+  }
 });
+
+
+
+
 
 
 router.post('/suite/new', function(req, res) {
@@ -217,13 +236,13 @@ router.post('/suite/new', function(req, res) {
       //         num_suites: results[0].num_suites + 1
       //       })
       //       .then(function(results) {
-              if (results) {
-                res.sendStatus(200);
-              } else {
-                res.sendStatus(404);
-              }
-        //     });
-        // });
+      if (results) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+      //     });
+      // });
     });
 });
 
@@ -231,16 +250,16 @@ router.post('/suite/new', function(req, res) {
 // delete a property
 router.delete('/:prop_id', function(req, res) {
   knex('properties').where('id', req.params.prop_id)
-  .del()
-  .then(function(results) {
-    console.log('heyyyy delete');
-    if (results == 1) {
-      console.log('HEY SUITE DELETE WORKED');
-      res.sendStatus(200);
-    } else {
-      res.sendStatus(404);
-    }
-  });
+    .del()
+    .then(function(results) {
+      console.log('heyyyy delete');
+      if (results == 1) {
+        console.log('HEY SUITE DELETE WORKED');
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    });
 });
 
 

@@ -515,6 +515,7 @@ export default {
           if (result.data[2][0]) {
             self.notes.content.push(result.data[2][0].notes)
             self.notes.id = result.data[2][0].id
+            console.log(self.notes.content, 'WHAT IS HAPPENINGGGGGG');
           }
           self.splitAddress()
           self.editedPropInfo.prospective_prop = self.property[0].prospective_prop
@@ -591,7 +592,6 @@ export default {
       let user_id = window.localStorage.id
 
       self.editedData.prospective_prop = self.editedPropInfo.prospective_prop
-      console.log(self.editedData, 'EDITED DATA IN PROPERTY EDIT');
       self.showEditPropertyForm = !self.showEditPropertyForm
 
       // update property address on property object
@@ -603,7 +603,6 @@ export default {
 
       axios.patch(`http://localhost:8881/properties/${user_id}/${prop_id}`, self.editedData)
         .then(function(result) {
-          console.log('HEY');
           self.getPropertyData()
         })
         .catch(function(error) {
@@ -628,14 +627,26 @@ export default {
     },
     addNote: function() {
       let self = this
-      let id = self.notes.id
-      let user_id = window.localStorage.id
 
       self.showNewNotes = !self.showNewNotes
 
-      axios.post(`http://localhost:8881/properties/note/${id}`, self.newNote)
+      self.newNote.id = self.notes.id
+      self.newNote.prop_id = self.property[0].id
+
+      axios.post("http://localhost:8881/properties/note/new", self.newNote)
         .then(function(results) {
-          self.notes.content = []
+
+          // if this is the first note then nest in another array so it will display properly in the loop above
+          if (self.notes.content.length == 0) {
+            console.log('here?');
+            let tempArr = []
+            tempArr.push(self.newNote.content)
+            self.notes.content.push(tempArr)
+          } else {
+            self.notes.content[0].push(self.newNote.content)
+            console.log(self.notes.content, 'NOTES CONTENT')
+          }
+
 
           self.getPropertyData()
           self.newNote.content = ""
