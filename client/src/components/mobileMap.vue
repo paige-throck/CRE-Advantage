@@ -9,13 +9,6 @@
         <ProTasks></ProTasks>
 </div>
 
-<div class = "row navBar">
-  <router-link to="/mobile-profile"><center><i class="material-icons navButton" style="font-size:2vh">home</i></center>
-  <center class = "navText">Home</center></router-link>
-</div>
-
-
-
 
 <div class = "mapContainer">
   <div class = "searchBar">
@@ -48,11 +41,13 @@
 <script>
 import axios from 'axios';
 import headerTopper from './headerTopper.vue'
+import ProTasks from './profileTasks.vue'
 
 export default {
   name: 'mobileMap',
   components:{
-    headerTopper
+    headerTopper,
+    ProTasks,
   },
   data() {
     return {
@@ -348,12 +343,6 @@ export default {
   height: 100vh;
 }
 
-.navBar{
-margin-top: 10%;
-margin-left: 10%;
-}
-
-
 .mapContainer{
   margin-left: 5%;
   margin-right: 5%;
@@ -361,7 +350,7 @@ margin-left: 10%;
 }
 
 .searchBar{
-  margin-top: 10%;
+  margin-top: 15%;
   text-align: center;
 }
 

@@ -239,11 +239,13 @@
 <script>
 import axios from 'axios';
 import headerTopper from './headerTopper.vue'
+import ProTasks from './profileTasks.vue'
 
 export default {
   name: 'mobileAccount',
   components: {
     'headerTopper': headerTopper,
+    'ProTasks': ProTasks,
   },
   data() {
     return {

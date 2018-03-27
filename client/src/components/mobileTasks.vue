@@ -9,44 +9,38 @@
         <ProTasks></ProTasks>
 </div>
 
-  <div class="row tasksContainer">
-    <div class="card card-body">
-      <div class="col-sm-12">
 
-        <!-- Clear Button -->
-        <div class="row">
-          <div class="col-sm-2">
-            <button class="btn btn-danger" v-on:click="clearList($event)">Clear Tasks</button>
-            </span>
-          </div>
+  <div class="tasksContainer">
 
-
-          <!--  New Task Form-->
-
-          <div class="col-sm-10">
+          <div class = "row">
             <form class="form-tasks" @submit.prevent="addTask">
-              <div class="row">
 
-                <div class="col-sm-2">
-                  <span class="input-group-btn">
-    <button class="btn btn-info" type="submit"><span
-  class="glyphicon glyphicon-plus"></span> Add Task</button>
+              <div class="row buttonRow">
+                  <button class="btn btn-danger" v-on:click="clearList($event)">Clear Tasks</button>
                   </span>
-                </div>
+              </div>
 
-                <div class="col-sm-8">
+                <div class = "row">
+                <div class="col-sm-6">
                   <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
                 </div>
-
-                <div class="col-sm-2">
+                <div class="col-sm-6">
                   <datepicker format="MMM dd yyyy" type="date" v-model="newTask.task_date" placeholder="Select a Date">
-
                   </datepicker>
                 </div>
               </div>
+
+              <div class = "row addButton">
+                <div class = "col-sm-6">
+                <span class="input-group-btn">
+                  <button class="btn btn-info" type="submit"><span
+                    class="glyphicon glyphicon-plus"></span> Add Task</button>
+                </span>
+              </div>
+              </div>
             </form>
           </div>
-        </div>
+
 
 
         <!-- Tasks List -->
@@ -125,8 +119,8 @@ v-on:click="deleteTask($event, task.id)"></span></button>
 
 
       </div>
-    </div>
-  </div>
+
+
 </div>
 </template>
 
@@ -294,23 +288,30 @@ export default {
 </script>
 
 <style scoped>
-.tasksContainer {
-  margin-left: 15%;
-  margin-right: 5%;
-  padding-top: 8%;
 
+.tasksContainer {
+  margin-top: 20%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
+
 .form-tasks {
-  margin-bottom: 2%;
+  margin:5%;
+}
+
+.buttonRow{
+  margin-bottom: 5%;
+  margin-left: 1%;
+}
+
+.addButton{
+  margin-top: 2%;
 }
 
 .taskList {
-  padding-top: 1%;
-}
-
-.card {
-  width: 90%;
+  margin-left:2%;
+  margin-right: 2%;
 }
 
 ul {
@@ -324,10 +325,7 @@ ul {
 .hideButton{
   display: none;
 }
-/* .notComplete {
-  background-color: white;
 
-} */
 
 .completeColor {
   background-color: gainsboro;
@@ -336,7 +334,6 @@ ul {
 
 .notCompleteColor {
   background-color: white;
-
 }
 
 .list-group-true {

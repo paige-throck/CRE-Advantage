@@ -1,8 +1,7 @@
 <template>
 <div class="profile">
 
-
-  <headerTopper></headerTopper>
+<headerTopper></headerTopper>
 
 
 <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
@@ -13,38 +12,35 @@
 
 
 
-<div class = "row mainRowPadding">
-<div id="mainDash" class = "col-sm-12">
+<div class = "row navIcons">
 
-<div class = "col-sm-4">
-
-
-
-xs
-<router-link to="/mobile-tasks"><div class = "row gridBox">
+<div class = "col-sm-3">
+<router-link to="/mobile-tasks">
 <i class="material-icons" style="font-size:10vh">event_note</i>
 <p>Tasks</p>
-</div></router-link>
+</router-link>
 </div>
 
-
-
-
-<router-link to="/mobile-account-settings"><div class = "row gridBox">
-<i class="material-icons" style="font-size:10vh">account_box</i>
-<p>Account Settings</p>
-</div></router-link>
-</div>
-
-
-
-<div class = "col-sm-4">
-  <router-link to="/mobile-map"><div class = "row gridBox">
+<div class = "col-sm-3">
+  <router-link to="/mobile-map">
 <i class="material-icons" style="font-size:10vh">satellite</i>
 <p>Map</p>
-</div></router-link>
+</router-link>
 </div>
 
+<div class = "col-sm-3">
+<router-link to="/mobile-account-settings">
+<i class="material-icons" style="font-size:10vh">account_box</i>
+<p>Account Settings</p>
+</router-link>
+</div>
+
+<div class = "col-sm-3">
+<router-link to="/" v-on:click="logout">
+<i class="material-icons" style="font-size:10vh">close</i>
+<p>Logout</p>
+</router-link>
+</div>
 
 </div>
 </div>
@@ -103,51 +99,24 @@ export default {
 <style scoped>
 .profile {
   background: linear-gradient(to right, #136a8a, #267871);
-  height: 100%;
+  height: 100vh;
   margin-bottom: 0;
 }
-.mainRowPadding {
-  padding: 12%;
-}
 
-.paddding{
-  margin: 12%;
-}
-.square{
-  background-color: blue;
-  background-image: url("../../img/apartment.png");
-    width: 15vw;
-    height: 15vw;
-}
-
-.squareMap{
-  background-image: url("../../img/iconoMapa.png");
-    width: 15vw;
-    height: 15vw;
-
-}
-.gridBox {
-
-  background: white;
-  width: 100%;
-  height: 100%;
-  padding-bottom: 25%;
-  padding-top: 20%;
+.navIcons{
   text-align: center;
-  color: #136a8a;
-  border-radius: 1%;
-  box-shadow: 1px 1px 10px #202020;
-  display: block;
-}
-.gridBox:hover {
-  background: linear-gradient(to right, whitesmoke, #ffffff);
-  color: black;
+  padding-top:30%;
+
 }
 p {
   margin-top: 5%;
 }
 a:hover {
   text-decoration: none;
+}
+
+a{
+  color:white;
 }
 .notififyBox {
   position: fixed;
@@ -170,7 +139,5 @@ a:hover {
   cursor: pointer;
 }
 
-
-/* .material-icons.md-100 { font-size: 100px; } */
 
 </style>
