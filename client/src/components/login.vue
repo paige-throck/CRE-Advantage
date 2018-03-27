@@ -31,6 +31,16 @@
           </div>
         </div>
 
+        <div class="form-row">
+          <div class="col-sm-12">
+
+            <label for="checkMobile" class="mobileLabel">Mobile</label>
+
+            <input v-model="user.mobile" type="checkbox"  data-style="ios" data-onstyle="info" data-offstyle="default"  class="form-control mobileCheck" id="mobileCheck" data-size="small" data-toggle="toggle">
+
+
+          </div>
+        </div>
         <div class="text-center">
           <button class="btn btn-lg btn-info" type="submit">Login</button>
         </div>
@@ -61,21 +71,37 @@ export default {
     return {
       user: {
         email: '',
-        password: ''
+        password: '',
+        mobile: ''
       }
     }
   },
+  mounted: function () {
+    this.loadToggle()
+  },
   methods: {
-
+    loadToggle () {
+      $('#mobileCheck').bootstrapToggle();
+    },
     login() {
 
       let self = this
+      let checked = $('#mobileCheck:checked').val()
+
       axios.post('http://localhost:8881/login/', this.user)
         .then(function(response) {
           console.log(response);
           if (response.data === "no account with that email"){
             alert("Incorrect Email")
             self.$router.push('/login')
+
+          } else if (checked == "on")  {
+            self.user.email = ""
+            self.user.password = ""
+            self.$router.push('/mobile-profile')
+            localStorage.setItem('sessionData', response.data.session);
+            localStorage.setItem('name', response.data.name);
+            localStorage.setItem('id', response.data.id);
 
           } else {
             self.user.email = ""
@@ -93,6 +119,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>
@@ -131,4 +158,9 @@ label {
   font-weight: 500;
   margin-top: 3%;
 }
+.mobileLabel  {
+  margin-right: 3%;
+  margin-top: 4%;
+}
+
 </style>
