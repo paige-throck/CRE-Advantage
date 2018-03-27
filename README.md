@@ -66,7 +66,7 @@
 <img src="screenshots/mobileLogin.png">
 </td>
 <td>
-<img srr ="screenshots/mobileProfile.png">
+<img src ="screenshots/mobileProfile.png">
 </td>
 <td>
 <img src="screenshots/mobileMap.png">
