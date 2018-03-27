@@ -20,7 +20,8 @@
       <router-link to="signup"><button class="button btn btn-info">Signup</button></router-link>
     </div>
 
-    <div class="row-sm-3"></div>
+    <div class="col-sm-3"></div>
+
   </div>
 </div>
 
@@ -60,7 +61,7 @@ export default {
 
 .welcome {
   font-weight: 100;
-  font-size: 8em;
+  font-size: 10vh;
   opacity: 1;
   margin-bottom: 0;
   color: white;
@@ -74,5 +75,6 @@ button {
 margin-left: 2%;
 margin-right: 2%;
 }
+
 
 </style>
