@@ -60,21 +60,19 @@
 
 # Mobile Application
 
-<div>
+
 ![alt tag](screenshots/mobileLogin.png)
 
 ![alt tag](screenshots/mobileProfile.png)
-</div>
-<div>
+
 ![alt tag](screenshots/mobileMap.png)
 
 ![alt tag](screenshots/mobileTasks.png)
-</div>
-<div>
+
 ![alt tag](screenshots/mobileAccount.png)
-</div>
 
 
+<br></br>
 <div>
 <b>Created by:
 Paige Throckmorton and Melissa Warren
