@@ -60,15 +60,15 @@
 
 # Mobile Application
 ![alt tag](screenshots/mobileLogin.png)
-<br></br>
+
 ![alt tag](screenshots/mobileProfile.png)
-<br></br>
+
 ![alt tag](screenshots/mobileMap.png)
-<br></br>
+
 ![alt tag](screenshots/mobileTasks.png)
-<br></br>
+
 ![alt tag](screenshots/mobileAccount.png)
-<br></br>
+
 
 
 <div>
