@@ -59,17 +59,30 @@
 
 
 # Mobile Application
-![alt tag](screenshots/mobileProfile.png)
-<br></br>
-![alt tag](screenshots/mobileMap.png)
-<br></br>
-![alt tag](screenshots/mobileTasks.png)
-<br></br>
-![alt tag](screenshots/mobileAccount.png)
-<br></br>
-![alt tag](screenshots/mobileLogin.png)
-<br></br>
 
+<table>
+<tr>
+<td>
+<img src="screenshots/mobileLogin.png">
+</td>
+<td>
+<img src ="screenshots/mobileProfile.png">
+</td>
+<td>
+<img src="screenshots/mobileMap.png">
+</td>
+</tr>
+<tr>
+<td>
+<img src = "screenshots/mobileTasks.png">
+</td>
+<td>
+<img src="screenshots/mobileAccount.png">
+</td>
+</tr>
+</table>
+
+<br></br>
 <div>
 <b>Created by:
 Paige Throckmorton and Melissa Warren
