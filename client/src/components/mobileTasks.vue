@@ -1,124 +1,119 @@
 <template>
 <div class="tasks">
 
-<headerTopper></headerTopper>
+  <headerTopper></headerTopper>
 
-<i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
+  <i class="material-icons notifyBell" style="font-size:4vh" @click="showNotifications = !showNotifications">notifications_none</i>
 
-<div class="notififyBox" id="taskList" v-if="showNotifications">
-        <ProTasks></ProTasks>
-</div>
+  <div class="notififyBox" id="taskList" v-if="showNotifications">
+    <ProTasks></ProTasks>
+  </div>
 
 
   <div class="tasksContainer">
 
-          <div class = "row">
-            <form class="form-tasks" @submit.prevent="addTask">
+    <div class="row">
+      <form class="form-tasks" @submit.prevent="addTask">
 
-              <div class="row buttonRow">
-                  <button class="btn btn-danger" v-on:click="clearList($event)">Clear Tasks</button>
-                  </span>
-              </div>
+        <div class="row buttonRow">
+          <button class="btn btn-danger" v-on:click="clearList($event)">Clear Tasks</button>
+          </span>
+        </div>
 
-                <div class = "row">
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
-                </div>
-                <div class="col-sm-6">
-                  <datepicker format="MMM dd yyyy" type="date" v-model="newTask.task_date" placeholder="Select a Date">
-                  </datepicker>
-                </div>
-              </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <input type="text" class="form-control" v-model="newTask.item" placeholder="Add a task" required autofocus>
+          </div>
+          <div class="col-sm-6">
+            <datepicker format="MMM dd yyyy" type="date" v-model="newTask.task_date" placeholder="Select a Date">
+            </datepicker>
+          </div>
+        </div>
 
-              <div class = "row addButton">
-                <div class = "col-sm-6">
-                <span class="input-group-btn">
+        <div class="row addButton">
+          <div class="col-sm-6">
+            <span class="input-group-btn">
                   <button class="btn btn-info" type="submit"><span
                     class="glyphicon glyphicon-plus"></span> Add Task</button>
-                </span>
-              </div>
-              </div>
-            </form>
+            </span>
           </div>
+        </div>
+      </form>
+    </div>
 
 
 
-        <!-- Tasks List -->
+    <!-- Tasks List -->
 
-        <div class="row taskList">
-          <ul class="list-group" v-for="(task, index) in tasksArr[0][0]" v-model="tasksArr">
-
-            <li v-bind:class="{completeColor:task.completed, notCompleteColor: !task.completed}" class="list-group-items clearfix task">
-
-              <div class="list-items">
-                <span class="pull-left">
+    <div class="row taskList">
+      <ul class="list-group" v-for="(task, index) in tasksArr[0][0]" v-model="tasksArr">
 
 
+        <li v-bind:class="{completeColor:task.completed, notCompleteColor: !task.completed}" class="list-group-items clearfix task">
+          <div class="row">
+            <div class="list-items">
+              <span class="pull-left">
       <p>
-      <h4 class ="taskItem" v-bind:class="{complete:task.completed, notComplete: !task.completed}">{{task.item}}</h4>
-    </p>
+        <h4 class ="taskItem" v-bind:class="{complete:task.completed, notComplete: !task.completed}">{{task.item}}</h4>
+      </p>
+      <p>
+        <h5 v-bind:class="{complete:task.completed, notComplete: !task.completed}">  &nbsp;{{ formatDate(task.task_date)}}</h5>
+      </p>
+      </span>
+            </div>
 
-    <p>
-      <h5 v-bind:class="{complete:task.completed, notComplete: !task.completed}">  &nbsp;{{ formatDate(task.task_date)}}</h5>
-    </p>
-
-</span>
-
-
-
-              </div>
-              <div>
-                <span class="pull-right">
+          <div>
+            <span class="pull-right">
 
 <button class="btn btn-default btn-xs" v-bind:class="{hideButton:task.completed, showButton: !task.completed}" type="button" v-on:click="updateTask(index)"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
+            <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"
   v-on:click="completeTask($event, task.id)"></span></button>
 
 
-                <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
+            <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"
 v-on:click="deleteTask($event, task.id)"></span></button>
-                </span>
-              </div>
+            </span>
+          </div>
+</div>
+          <!-- Edit Task Form inside List -->
 
-              <!-- Edit Task Form inside List -->
+          <div class="row">
+            <div class="col-sm-12">
 
-              <div class="row">
-                <div class="col-sm-12">
+              <form id="edit-task" v-if="index == activeTask && showEditForm">
 
-                  <form id="edit-task" v-if="index == activeTask && showEditForm">
+                <div class="row">
+                  <div class="col-sm-1">
 
-                    <div class="row">
-                      <div class="col-sm-1">
+                  </div>
 
-                      </div>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" id="edited-email" :placeholder="task.item" v-model="editedTask.item">
+                  </div>
 
-                      <div class="col-sm-6">
-                        <input type="text" class="form-control" id="edited-email" :placeholder="task.item" v-model="editedTask.item">
-                      </div>
+                  <div class="col-sm-2">
+                    <datepicker format="ddd MMM dd yyyy" type="date" v-model="editedTask.task_date" :placeholder="formatDate(task.task_date)"></datepicker>
+                  </div>
 
-                      <div class="col-sm-2">
-                        <datepicker format="ddd MMM dd yyyy" type="date" v-model="editedTask.task_date" :placeholder="formatDate(task.task_date)"></datepicker>
-                      </div>
+                  <div class="col-sm-2"><button v-on:click="editTask($event, editedTask.item, editedTask.task_date, task)" class="btn btn-info" type="submit">Update Task</button>
+                  </div>
 
-                      <div class="col-sm-2"><button v-on:click="editTask($event, editedTask.item, editedTask.task_date, task)" class="btn btn-info" type="submit">Update Task</button>
-                      </div>
-
-                      <div class="col-sm-1">
-                      </div>
-
-                    </div>
-                  </form>
+                  <div class="col-sm-1">
+                  </div>
 
                 </div>
-              </div>
+              </form>
 
-            </li>
-          </ul>
-        </div>
+            </div>
+          </div>
+
+        </li>
+      </ul>
+    </div>
 
 
-      </div>
+  </div>
 
 
 </div>
@@ -288,7 +283,6 @@ export default {
 </script>
 
 <style scoped>
-
 .tasksContainer {
   margin-top: 20%;
   margin-left: 5%;
@@ -297,20 +291,20 @@ export default {
 
 
 .form-tasks {
-  margin:5%;
+  margin: 5%;
 }
 
-.buttonRow{
+.buttonRow {
   margin-bottom: 5%;
   margin-left: 1%;
 }
 
-.addButton{
+.addButton {
   margin-top: 2%;
 }
 
 .taskList {
-  margin-left:2%;
+  margin-left: 2%;
   margin-right: 2%;
 }
 
@@ -322,7 +316,7 @@ ul {
   text-decoration: line-through;
 }
 
-.hideButton{
+.hideButton {
   display: none;
 }
 
@@ -348,6 +342,7 @@ ul {
   width: 30%;
   z-index: 100;
 }
+
 .notifyBell {
   position: fixed;
   top: 2%;
@@ -357,9 +352,9 @@ ul {
   z-index: 1;
   padding-top: 1%;
 }
+
 .notifyBell:hover {
   color: #73BEDB;
   cursor: pointer;
 }
-
 </style>
