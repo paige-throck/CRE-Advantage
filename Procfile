@@ -1,1 +1,1 @@
-web: cd client && npm run dev config/index.js
+web: npm run postinstall
