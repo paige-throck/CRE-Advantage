@@ -1,1 +1,1 @@
-web: npm run dev client/config/index.js
+web: cd client && npm run dev config/index.js
