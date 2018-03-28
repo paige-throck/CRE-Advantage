@@ -1,1 +1,1 @@
-web: ./client npm run dev
+web: cd client && node postinstall
