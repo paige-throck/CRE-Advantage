@@ -1,1 +1,1 @@
-web: npm run dev
+web: ./client npm run dev
