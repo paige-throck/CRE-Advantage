@@ -55,7 +55,7 @@
 <br></br>
 
 
-# Mobile Application
+# Mobile Responsive Application
 
 <table>
 <tr>
