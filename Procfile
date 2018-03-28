@@ -1,1 +1,1 @@
-web: node client/config/index.js
+web: npm run dev
