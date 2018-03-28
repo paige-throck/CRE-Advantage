@@ -35,7 +35,7 @@ app.use(expressCors({
         'http://localhost:3000/'
     ]
 }))
-
+console.log("HEY WHAT the helll is going on?????????");
 //Setting up session
 app.use(session({
     secret: 'drinking all the wine',
