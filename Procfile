@@ -1,1 +1,1 @@
-web: npm run postinstall
+web: node client/config/index.js
