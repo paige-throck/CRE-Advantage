@@ -1,1 +1,1 @@
-web: cd client && node postinstall
+web: ./client node postinstall
