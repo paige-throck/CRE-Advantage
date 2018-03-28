@@ -1,1 +1,1 @@
-web: ./client node postinstall
+web: npm start
