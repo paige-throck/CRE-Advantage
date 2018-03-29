@@ -121,7 +121,9 @@ export default {
         }
 
         if (self.filterChosen == "All Properties") {
-          self.revertProperties()
+          console.log('hey revert properties');
+          self.getProperties()
+          //self.revertProperties()
         }
       })
       // if no properties equal the filter value then return nothing
@@ -131,9 +133,9 @@ export default {
     },
     revertProperties() {
       let self = this
-
       self.properties = []
       self.properties.push(self.originalProperties[0])
+      console.log(self.properties,' self properieadsfj');
       self.search = ''
     }
   },
