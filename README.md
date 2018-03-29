@@ -21,6 +21,9 @@
 
 https://github.com/paige-throck/CRE-Advantage-Backend
 
+# Video
+https://youtu.be/c0jQ7dTSHZg
+
 
 # Wireframe
 
