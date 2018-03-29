@@ -55,8 +55,6 @@
 <script>
 import axios from 'axios';
 import sideNav from './sideNav.vue'
-
-
 export default {
   name: 'AllProp',
   components: {
@@ -96,32 +94,28 @@ export default {
       let self = this
       let searchArr = []
       self.properties[0].forEach(function(property) {
-
         if (property.address.includes(self.search)) {
           self.properties = []
           searchArr.push(property)
           self.properties.push(searchArr)
         }
-
-
       })
     },
     filterProperties: function() {
       let self = this
       let filterArr = []
-
       // reset properties on filter change so it filters all properties and not the previously filtered
       self.revertProperties()
-
       self.properties[0].forEach(function(property) {
         if (property.prop_type == self.filterChosen ) {
           self.properties = []
           filterArr.push(property)
           self.properties.push(filterArr)
         }
-
         if (self.filterChosen == "All Properties") {
-          self.revertProperties()
+          console.log('hey revert properties');
+          self.getProperties()
+          //self.revertProperties()
         }
       })
       // if no properties equal the filter value then return nothing
@@ -131,9 +125,9 @@ export default {
     },
     revertProperties() {
       let self = this
-
       self.properties = []
       self.properties.push(self.originalProperties[0])
+      console.log(self.properties,' self properieadsfj');
       self.search = ''
     }
   },
@@ -156,17 +150,12 @@ export default {
 .card {
   width: 90%;
 }
-
-
 li:hover {
-
   box-shadow: 0px .5px .25px dimgrey;
 }
-
 a:hover {
   text-decoration: none;
 }
-
 input {
   width: 70%;
   height: 4vh;
@@ -175,10 +164,8 @@ input {
   border-radius: 2%;
   border: 1px solid gainsboro;
 }
-
 label {
   font-weight: 500;
-
 }
 select {
   height: 4.5vh;
@@ -186,9 +173,4 @@ select {
   margin-left: 3%;
   margin-bottom: 15%;
 }
-
-
-
-
-
 </style>
